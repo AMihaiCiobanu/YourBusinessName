@@ -1,47 +1,12 @@
 // Demo page shown to prospective clients. One page, four layouts: the visitor picks their kind
-// of business and the copy, colours, illustration, gallery and reviews change. `?type=` selects
-// one directly, so a link can be sent already set to the right niche.
+// of business and the copy, colours, illustration, services, hours, gallery and reviews change.
+// `?type=` selects one directly, so a link can be sent already set to the right niche.
 //
-// Services and opening hours are read live from the demo Appointments & Reports account, through
-// the same public booking link the online booking page uses (same approach as the client pages).
-// The result is cached in localStorage for 5 minutes. If the account cannot be reached, the
-// per-niche example services below are shown instead.
+// Everything here is static example content. Nothing is loaded from an account and the booking
+// buttons are inert: they only show what the real page would offer.
 
-const BOOKING_LINK_ID = '1ea9b2d4-c571-4ed0-960c-6154e8f1de60';
-const CACHE_KEY = 'ybn_data_v3';
-const CACHE_TTL_MS = 5 * 60 * 1000;
-
-const FIREBASE_VERSION = '10.14.1';
-const firebaseConfig = {
-  apiKey: 'AIzaSyDVcYMPg0lWd4tMxlfm5MLS8T6jtEXcoi8',
-  authDomain: 'appointmentssync-c680f.firebaseapp.com',
-  projectId: 'appointmentssync-c680f',
-  storageBucket: 'appointmentssync-c680f.firebasestorage.app',
-  messagingSenderId: '600609525849',
-  appId: '1:600609525849:web:6d37c54629691bf6752148'
-};
-const RECAPTCHA_SITE_KEY = '6LcieqUsAAAAAJi2J0k-aawVuqpArTNRx1iccCRr';
-
-const CURRENCY_SYMBOLS = {
-  RON: 'lei', EUR: '€', GBP: '£', USD: '$', BRL: 'R$', CHF: 'Fr', HUF: 'Ft', BGN: 'лв', PLN: 'zł',
-  INR: '₹', TRY: '₺', SEK: 'kr', NOK: 'kr', DKK: 'kr', CZK: 'Kč', AED: 'د.إ',
-  RUB: '₽', KZT: '₸', KGS: 'с', UZS: "so'm"
-};
-
-// Monday first, keys as stored in users/{uid}/setari/bookingPublic (minutes from midnight).
-const DAYS = [
-  { label: 'Monday', key: 'Luni' },
-  { label: 'Tuesday', key: 'Marti' },
-  { label: 'Wednesday', key: 'Miercuri' },
-  { label: 'Thursday', key: 'Joi' },
-  { label: 'Friday', key: 'Vineri' },
-  { label: 'Saturday', key: 'Sambata' },
-  { label: 'Sunday', key: 'Duminica' }
-];
-
-// Local preview talks to the main site served on :8080; production uses the live booking page.
-const BOOKING_ORIGIN = location.hostname === 'localhost' ? 'http://localhost:8080' : 'https://appointmentsapps.com';
-const bookingUrl = `https://appointmentsapps.com/booking/?id=${BOOKING_LINK_ID}`;
+// Monday first.
+const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
 const NICHES = {
   nails: {
@@ -51,6 +16,7 @@ const NICHES = {
     h1Em: 'an hour just for you.',
     lead: 'Careful work, quality products and a calm space, so you leave relaxed and with a look that lasts for days.',
     proof: 'Book 24/7 · No phone calls · Instant confirmation',
+    hours: [[540,1080],[540,1080],[540,1080],[540,1080],[540,1080],[600,900],null],
     whyEyebrow: 'Why clients choose us',
     whyTitle: 'Detail you can see',
     why: [
@@ -74,6 +40,7 @@ const NICHES = {
     h1Em: 'right on time.',
     lead: 'Classic technique and a clean finish. Pick your chair time online and walk in knowing it is yours.',
     proof: 'Book 24/7 · Your slot is reserved · No waiting around',
+    hours: [null,[540,1140],[540,1140],[540,1140],[540,1140],[540,1020],null],
     whyEyebrow: 'The shop',
     whyTitle: 'Old-school craft, no queue',
     why: [
@@ -97,6 +64,7 @@ const NICHES = {
     h1Em: 'like the day you bought it.',
     lead: 'Deep interior cleaning, odour removal and protection. Book your drop-off slot online and know the price up front.',
     proof: 'Book 24/7 · Clear packages · Fixed prices',
+    hours: [[480,1020],[480,1020],[480,1020],[480,1020],[480,1020],[540,780],null],
     whyEyebrow: 'The process',
     whyTitle: 'Every corner, not just the seats',
     why: [
@@ -120,6 +88,7 @@ const NICHES = {
     h1Em: 'see real progress.',
     lead: 'One-to-one sessions built around your goals. Choose a time that fits your week and book it in seconds.',
     proof: 'Book 24/7 · Easy rescheduling · Sessions that fit your week',
+    hours: [[360,1200],[360,1200],[360,1200],[360,1200],[360,1200],[480,780],null],
     whyEyebrow: 'The coaching',
     whyTitle: 'A plan made for you',
     why: [
@@ -184,13 +153,9 @@ const NICHE_EXTRAS = {
 };
 for (const key of Object.keys(NICHE_EXTRAS)) Object.assign(NICHES[key], NICHE_EXTRAS[key]);
 
-// Shown under the hours table: they are an example, set by the owner inside the app.
-const HOURS_NOTE = 'Example hours. They come from the working hours set in the Appointments & Reports app, so when you change them on your phone, this page follows.';
 
 const DEFAULT_NICHE = 'nails';
 let currentNiche = DEFAULT_NICHE;
-// Example prices follow the demo account's currency once it has loaded.
-let currency = 'USD';
 
 // ---------- helpers ----------
 
@@ -206,11 +171,6 @@ function formatDuration(minutes) {
   const h = Math.floor(minutes / 60);
   const m = minutes % 60;
   return m ? `${h} h ${m} min` : `${h} h`;
-}
-
-function formatPrice(amount) {
-  const symbol = CURRENCY_SYMBOLS[currency] || currency;
-  return symbol.length > 1 && /^[a-zA-Z]/.test(symbol) ? `${amount} ${symbol}` : `${symbol}${amount}`;
 }
 
 function formatTime(minutes) {
@@ -231,55 +191,46 @@ function nicheFromUrl() {
 
 // ---------- niche content ----------
 
-const SERVICE_GROUPS = [
-  { label: 'Services', match: s => !s.isClass && !s.isSubscription },
-  { label: 'Memberships', match: s => s.isSubscription },
-  { label: 'Classes', match: s => s.isClass }
-];
-
-// Services read from the demo account; null until loaded.
-let liveData = null;
-let liveFailed = false;
-
-function serviceCard(svc) {
-  const card = el('a', 'service');
-  card.href = svc.id ? `${bookingUrl}&service=${encodeURIComponent(svc.id)}` : bookingUrl;
-  card.dataset.serviceId = svc.id || '';
-
-  const top = el('div', 'service-top');
-  top.appendChild(el('span', 'service-name', svc.name));
-  if (svc.showPrice && svc.price > 0) top.appendChild(el('span', 'service-price', formatPrice(svc.price)));
-  card.appendChild(top);
-
-  card.appendChild(el('span', 'service-meta', formatDuration(svc.durationMinutes)));
-  if (svc.description) card.appendChild(el('p', 'service-desc', svc.description));
-  card.appendChild(el('span', 'service-cta', 'Book now →'));
-  return card;
-}
-
-function renderServices() {
+function renderServices(niche) {
   const container = document.getElementById('services-list');
   container.replaceChildren();
+  for (const svc of niche.services) {
+    const card = el('div', 'service');
 
-  if (!liveData && !liveFailed) {
-    for (let i = 0; i < 4; i++) container.appendChild(el('div', 'service-skeleton'));
-    return;
+    const top = el('div', 'service-top');
+    top.appendChild(el('span', 'service-name', svc.name));
+    top.appendChild(el('span', 'service-price', svc.price > 0 ? `$${svc.price}` : 'Free'));
+    card.appendChild(top);
+
+    card.appendChild(el('span', 'service-meta', formatDuration(svc.min)));
+    card.appendChild(el('p', 'service-desc', svc.desc));
+    container.appendChild(card);
   }
+}
 
-  const services = liveData?.services?.length
-    ? liveData.services
-    : NICHES[currentNiche].services.map(s => ({
-      id: '', name: s.name, durationMinutes: s.min, price: s.price, showPrice: true, description: s.desc
-    }));
+function renderHours(niche) {
+  const tbody = document.querySelector('#hours-table tbody');
+  const badge = document.getElementById('open-badge');
+  tbody.replaceChildren();
 
-  const groups = SERVICE_GROUPS
-    .map(g => ({ ...g, items: services.filter(g.match) }))
-    .filter(g => g.items.length);
-  const showHeadings = groups.length > 1;
-  for (const group of groups) {
-    if (showHeadings) container.appendChild(el('h3', 'service-group-title', group.label));
-    for (const svc of group.items) container.appendChild(serviceCard(svc));
-  }
+  const now = new Date();
+  const todayIndex = (now.getDay() + 6) % 7; // Monday = 0
+  DAYS.forEach((label, i) => {
+    const range = niche.hours[i];
+    const row = el('tr');
+    if (i === todayIndex) row.classList.add('today');
+    if (!range) row.classList.add('closed');
+    row.appendChild(el('td', null, label));
+    row.appendChild(el('td', null, range ? `${formatTime(range[0])} – ${formatTime(range[1])}` : 'Closed'));
+    tbody.appendChild(row);
+  });
+
+  const today = niche.hours[todayIndex];
+  const nowMinutes = now.getHours() * 60 + now.getMinutes();
+  const isOpen = !!today && nowMinutes >= today[0] && nowMinutes < today[1];
+  badge.textContent = isOpen ? `Open now · until ${formatTime(today[1])}` : 'Closed now · book online';
+  badge.classList.toggle('is-open', isOpen);
+  badge.hidden = false;
 }
 
 function renderWhy(niche) {
@@ -341,7 +292,8 @@ function applyNiche(key, { updateUrl = false } = {}) {
     if (value != null) node.textContent = value;
   }
   renderWhy(niche);
-  renderServices();
+  renderServices(niche);
+  renderHours(niche);
   renderGallery(niche);
   renderReviews(niche);
   syncThemeColor();
@@ -351,217 +303,6 @@ function applyNiche(key, { updateUrl = false } = {}) {
     url.searchParams.set('type', currentNiche);
     history.replaceState(history.state, '', url);
   }
-}
-
-// ---------- opening hours (live) ----------
-
-function readCache() {
-  try {
-    const raw = localStorage.getItem(CACHE_KEY);
-    if (!raw) return null;
-    const data = JSON.parse(raw);
-    return data && Array.isArray(data.hours) && Array.isArray(data.services) ? data : null;
-  } catch {
-    return null;
-  }
-}
-
-function writeCache(data) {
-  try {
-    localStorage.setItem(CACHE_KEY, JSON.stringify(data));
-  } catch { /* storage unavailable: page still works, just without caching */ }
-}
-
-async function fetchData() {
-  const base = `https://www.gstatic.com/firebasejs/${FIREBASE_VERSION}`;
-  const [{ initializeApp }, { initializeAppCheck, ReCaptchaV3Provider }, fs] = await Promise.all([
-    import(`${base}/firebase-app.js`),
-    import(`${base}/firebase-app-check.js`),
-    import(`${base}/firebase-firestore.js`)
-  ]);
-  const { getFirestore, doc, getDoc, collection, getDocs, query, where, Timestamp } = fs;
-
-  const app = initializeApp(firebaseConfig);
-  try {
-    initializeAppCheck(app, {
-      provider: new ReCaptchaV3Provider(RECAPTCHA_SITE_KEY),
-      isTokenAutoRefreshEnabled: true
-    });
-  } catch { /* App Check enforcement is off; never block the read on it */ }
-  const db = getFirestore(app);
-
-  const linkSnap = await getDoc(doc(db, 'bookingLinks', BOOKING_LINK_ID));
-  if (!linkSnap.exists()) throw new Error('booking link missing');
-  const link = linkSnap.data();
-  const expiresAt = link.expiresAt?.toDate?.() || null;
-  if (link.isDeleted || link.active === false || (expiresAt && expiresAt.getTime() < Date.now()) || !link.uid) {
-    throw new Error('booking link inactive');
-  }
-
-  const [publicSnap, servicesSnap] = await Promise.all([
-    getDoc(doc(db, `users/${link.uid}/setari/bookingPublic`)),
-    getDocs(collection(db, `users/${link.uid}/servicii`))
-  ]);
-  const settings = publicSnap.exists() ? publicSnap.data() : {};
-
-  let services = servicesSnap.docs
-    .map(d => ({ id: d.id, ...d.data() }))
-    .filter(s => s.isDeleted !== true && s.showService !== false)
-    .map(s => ({
-      id: s.id,
-      name: s.nume || '',
-      durationMinutes: Number(s.durataMinute || 0),
-      price: Number(s.pret || 0),
-      showPrice: s.showPrice !== false,
-      description: s.serviceDescription || '',
-      isClass: s.tipServiciu === 'CLASS',
-      isSubscription: s.tipServiciu === 'SUBSCRIPTION'
-    }))
-    .filter(s => s.name && s.durationMinutes > 0)
-    .sort((a, b) => a.name.localeCompare(b.name, 'en'));
-
-  // Same rule as the booking page: a class whose whole series has already been held cannot be
-  // booked on any date, so it is not listed. A failed read keeps every class listed.
-  if (services.some(s => s.isClass)) {
-    try {
-      const dayStart = new Date();
-      dayStart.setHours(0, 0, 0, 0);
-      const sessionsSnap = await getDocs(query(
-        collection(db, `users/${link.uid}/classSessions`),
-        where('startDate', '>=', Timestamp.fromDate(dayStart))
-      ));
-      const bookable = new Set(sessionsSnap.docs
-        .map(d => d.data())
-        .filter(row => {
-          const start = row.startDate?.toDate?.();
-          const end = row.endDate?.toDate?.();
-          return row.isDeleted !== true && start && end && end > start;
-        })
-        .map(row => row.serviceId || ''));
-      services = services.filter(s => !s.isClass || bookable.has(s.id));
-    } catch { /* keep every class listed */ }
-  }
-
-  const hours = DAYS.map(day => {
-    const start = Number(settings[`programStart${day.key}`] || 0);
-    const end = Number(settings[`programEnd${day.key}`] || 0);
-    return start >= 0 && end > start && end <= 1439 ? { start, end } : null;
-  });
-
-  return { fetchedAt: Date.now(), currency: settings.currency || 'USD', hasHours: Object.keys(settings).length > 0, services, hours };
-}
-
-function renderHours(data) {
-  if (data.currency) currency = data.currency;
-  const tbody = document.querySelector('#hours-table tbody');
-  const note = document.getElementById('hours-note');
-  const badge = document.getElementById('open-badge');
-  tbody.replaceChildren();
-
-  if (!data.hasHours) {
-    note.textContent = 'See the free times on the booking page.';
-    return;
-  }
-  note.textContent = HOURS_NOTE;
-
-  const now = new Date();
-  const todayIndex = (now.getDay() + 6) % 7; // Monday = 0
-  DAYS.forEach((day, i) => {
-    const range = data.hours[i];
-    const row = el('tr');
-    if (i === todayIndex) row.classList.add('today');
-    if (!range) row.classList.add('closed');
-    row.appendChild(el('td', null, day.label));
-    row.appendChild(el('td', null, range ? `${formatTime(range.start)} – ${formatTime(range.end)}` : 'Closed'));
-    tbody.appendChild(row);
-  });
-
-  const today = data.hours[todayIndex];
-  const nowMinutes = now.getHours() * 60 + now.getMinutes();
-  const isOpen = !!today && nowMinutes >= today.start && nowMinutes < today.end;
-  badge.textContent = isOpen ? `Open now · until ${formatTime(today.end)}` : 'Closed now · book online';
-  badge.classList.toggle('is-open', isOpen);
-  badge.hidden = false;
-}
-
-// ---------- booking dialog ----------
-
-// The booking page itself runs inside the dialog (embed=1), opened on its calendar, so visitors
-// try the booking without leaving this page. Modifier clicks still open the booking page in a
-// new tab, and without JavaScript every link goes there directly.
-
-function embeddedBookingUrl(serviceId) {
-  const params = new URLSearchParams({
-    id: BOOKING_LINK_ID,
-    embed: '1',
-    lang: 'en',
-    theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'
-  });
-  if (serviceId) params.set('service', serviceId);
-  return `${BOOKING_ORIGIN}/booking/?${params}`;
-}
-
-function setupBookingDialog() {
-  const dialog = document.getElementById('booking-dialog');
-  const body = document.getElementById('booking-dialog-body');
-  if (!dialog || typeof dialog.showModal !== 'function') return; // old browser: plain links
-
-  // A fresh iframe per opening: changing an existing iframe's src adds entries to the joint
-  // session history, which would make Back step through the iframe instead of closing.
-  let frame = null;
-  // A reload while the dialog was open lands back on its history entry; start clean.
-  if (history.state?.bookingDialog) history.replaceState(null, '');
-
-  function finishClose() {
-    if (dialog.open) dialog.close();
-    document.documentElement.classList.remove('dialog-open');
-    frame?.remove();
-    frame = null;
-  }
-
-  // Opening pushes a history entry so the phone's Back button closes the dialog
-  // instead of leaving the page.
-  function requestClose() {
-    if (history.state?.bookingDialog) history.back();
-    else finishClose();
-  }
-
-  function open(serviceId) {
-    frame?.remove();
-    frame = document.createElement('iframe');
-    frame.title = 'Book online';
-    frame.src = embeddedBookingUrl(serviceId);
-    // The booking page reports when its first screen (the calendar) has settled; until then
-    // the loader stays up. Fallback in case that message never arrives.
-    const shown = frame;
-    frame.addEventListener('load', () => setTimeout(() => reveal(shown), 8000), { once: true });
-    body.appendChild(frame);
-    document.documentElement.classList.add('dialog-open');
-    dialog.showModal();
-    history.pushState({ bookingDialog: true }, '');
-  }
-
-  function reveal(target) {
-    if (target && target === frame) frame.classList.add('is-loaded');
-  }
-
-  window.addEventListener('message', e => {
-    if (e.origin === BOOKING_ORIGIN && e.data?.type === 'booking-ready' && e.source === frame?.contentWindow) {
-      reveal(frame);
-    }
-  });
-
-  document.getElementById('booking-dialog-close').addEventListener('click', requestClose);
-  dialog.addEventListener('cancel', e => { e.preventDefault(); requestClose(); });
-  dialog.addEventListener('click', e => { if (e.target === dialog) requestClose(); });
-  window.addEventListener('popstate', () => { if (dialog.open) finishClose(); });
-
-  document.addEventListener('click', e => {
-    const link = e.target.closest('a.service, a.booking-link');
-    if (!link || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-    e.preventDefault();
-    open(link.dataset.serviceId || '');
-  });
 }
 
 // ---------- theme ----------
@@ -596,38 +337,9 @@ function setupThemeToggle() {
 
 // ---------- boot ----------
 
-async function init() {
-  setupThemeToggle();
-  setupBookingDialog();
-  document.getElementById('year').textContent = String(new Date().getFullYear());
-
-  applyNiche(nicheFromUrl());
-  document.getElementById('niche-select').addEventListener('change', e => {
-    applyNiche(e.target.value, { updateUrl: true });
-  });
-
-  const cached = readCache();
-  if (cached) {
-    liveData = cached;
-    renderHours(cached); // sets the currency first
-    renderServices();
-  }
-  if (cached && Date.now() - cached.fetchedAt < CACHE_TTL_MS) return;
-
-  try {
-    const fresh = await fetchData();
-    writeCache(fresh);
-    liveData = fresh;
-    renderHours(fresh);
-    renderServices();
-  } catch (err) {
-    console.warn('Could not load services and hours', err);
-    if (!cached) {
-      liveFailed = true;
-      renderServices();
-      document.getElementById('hours-note').textContent = 'See the free times on the booking page.';
-    }
-  }
-}
-
-init();
+setupThemeToggle();
+document.getElementById('year').textContent = String(new Date().getFullYear());
+applyNiche(nicheFromUrl());
+document.getElementById('niche-select').addEventListener('change', e => {
+  applyNiche(e.target.value, { updateUrl: true });
+});
