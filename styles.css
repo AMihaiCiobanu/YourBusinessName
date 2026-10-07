@@ -408,6 +408,53 @@ html[data-niche="barber"] .why-num { border-radius: 6px; }
   font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
 }
 
+/* "Comes live from the app" explainer */
+.sync-note {
+  display: flex; flex-direction: column; gap: 12px; align-items: flex-start;
+  margin: 0 0 24px; padding: 18px 20px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+}
+.sync-note-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  flex-shrink: 0; width: 48px; height: 48px; border-radius: 50%;
+  background: var(--accent-soft); color: var(--accent);
+}
+.sync-note-title { margin: 0 0 4px; font-weight: 700; font-size: 1.02rem; }
+.sync-note-body .muted { margin: 0; }
+.sync-flow { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 6px; margin: 14px 0 0; padding: 0; counter-reset: flow; }
+.sync-flow li {
+  counter-increment: flow;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 12px; border-radius: 999px;
+  background: var(--accent-soft); color: var(--text);
+  font-size: 0.85rem; font-weight: 700;
+}
+.sync-flow li::before {
+  content: counter(flow);
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px; border-radius: 50%;
+  background: var(--accent); color: var(--accent-ink); font-size: 0.75rem;
+}
+.sync-flow li + li::after { content: none; }
+
+.service-group-title {
+  grid-column: 1 / -1;
+  margin: 16px 0 0;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  font-size: 0.85rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted);
+}
+.service-skeleton {
+  height: 96px; border-radius: var(--radius);
+  background: linear-gradient(90deg, var(--surface) 0%, var(--accent-soft) 50%, var(--surface) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+@keyframes shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+
 /* Steps */
 .steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; counter-reset: none; }
 .steps li { padding: 22px; border-radius: var(--radius); background: var(--surface); border: 1px solid var(--line); }
@@ -502,6 +549,7 @@ html.dialog-open { overflow: hidden; }
   .hero-inner { grid-template-columns: 1.1fr 0.9fr; align-items: center; gap: 56px; }
   .hero-actions .btn { flex: 0 0 auto; }
   .section { padding: 84px 0; }
+  .sync-note { flex-direction: row; gap: 16px; }
   .why, .steps, .reviews { grid-template-columns: repeat(3, 1fr); }
   .gallery { grid-template-columns: repeat(3, 1fr); gap: 14px; }
   .photo { min-height: 190px; }
@@ -514,7 +562,7 @@ html.dialog-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .btn, .service, body { transition: none; }
-  .pole-spin, .bubbles { animation: none; }
+  .pole-spin, .bubbles, .service-skeleton { animation: none; }
   .pulse { animation: none; stroke-dashoffset: 0; }
   .booking-dialog-spinner { animation-duration: 2.4s; }
 }

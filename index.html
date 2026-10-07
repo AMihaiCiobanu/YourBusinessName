@@ -41,7 +41,7 @@
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Oswald:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
     rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css?v=2" />
+  <link rel="stylesheet" href="styles.css?v=4" />
 </head>
 
 <body>
@@ -258,9 +258,27 @@
       <div class="container">
         <div class="section-head">
           <p class="eyebrow">Services &amp; prices</p>
-          <h2>What we can do for you</h2>
-          <p class="muted">Your own list shows here, kept in sync with your agenda. Pick a service and book your slot online.</p>
+          <h2>Your list, always up to date</h2>
+          <p class="muted">Everything below is an example, so you can see how it works. Visitors see exactly what you offer, how long it takes and what it costs, and can book it on the spot.</p>
         </div>
+        <aside class="sync-note" aria-label="How the services and hours stay up to date">
+          <div class="sync-note-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="7" y="2" width="10" height="20" rx="2.5" />
+              <path d="M11 18h2" />
+              <path d="M10 8.5a2.8 2.8 0 0 1 4.6-1M14 11.5a2.8 2.8 0 0 1-4.6 1" />
+            </svg>
+          </div>
+          <div class="sync-note-body">
+            <p class="sync-note-title">These services and hours come live from the Appointments &amp; Reports app</p>
+            <p class="muted">You manage them yourself, right in the app on your phone or tablet. Add a service, change a price, hide something for a while or take a day off, and this page follows by itself. No web developer, nothing to republish.</p>
+            <ol class="sync-flow" aria-label="How it works">
+              <li>Edit in the app</li>
+              <li>Page updates automatically</li>
+              <li>Clients book the new option</li>
+            </ol>
+          </div>
+        </aside>
         <div id="services-list" class="services" aria-live="polite"></div>
         <div class="center">
           <a class="btn booking-link" href="https://appointmentsapps.com/booking/?id=1ea9b2d4-c571-4ed0-960c-6154e8f1de60">See free times</a>
@@ -358,7 +376,7 @@
           <table id="hours-table">
             <tbody></tbody>
           </table>
-          <p class="muted small" id="hours-note">Loading hours from the agenda…</p>
+          <p class="muted small" id="hours-note">Example hours. They come from the working hours set in the Appointments &amp; Reports app, so when you change them on your phone, this page follows.</p>
         </div>
       </div>
     </section>
@@ -421,7 +439,7 @@
 
   <a class="sticky-book booking-link" href="https://appointmentsapps.com/booking/?id=1ea9b2d4-c571-4ed0-960c-6154e8f1de60">Book online</a>
 
-  <script type="module" src="app.js?v=4"></script>
+  <script type="module" src="app.js?v=6"></script>
 </body>
 
 </html>

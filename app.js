@@ -1,13 +1,14 @@
 // Demo page shown to prospective clients. One page, four layouts: the visitor picks their kind
-// of business and the copy, services, colours and illustration change. `?type=` selects one
-// directly, so a link can be sent already set to the right niche.
+// of business and the copy, colours, illustration, gallery and reviews change. `?type=` selects
+// one directly, so a link can be sent already set to the right niche.
 //
-// Every niche books against the same demo account (BOOKING_LINK_ID). Opening hours are read live
-// from that account; the services shown are fixed examples per niche, because one account can
-// only hold one set of services.
+// Services and opening hours are read live from the demo Appointments & Reports account, through
+// the same public booking link the online booking page uses (same approach as the client pages).
+// The result is cached in localStorage for 5 minutes. If the account cannot be reached, the
+// per-niche example services below are shown instead.
 
 const BOOKING_LINK_ID = '1ea9b2d4-c571-4ed0-960c-6154e8f1de60';
-const CACHE_KEY = 'ybn_hours_v2';
+const CACHE_KEY = 'ybn_data_v3';
 const CACHE_TTL_MS = 5 * 60 * 1000;
 
 const FIREBASE_VERSION = '10.14.1';
@@ -183,6 +184,9 @@ const NICHE_EXTRAS = {
 };
 for (const key of Object.keys(NICHE_EXTRAS)) Object.assign(NICHES[key], NICHE_EXTRAS[key]);
 
+// Shown under the hours table: they are an example, set by the owner inside the app.
+const HOURS_NOTE = 'Example hours. They come from the working hours set in the Appointments & Reports app, so when you change them on your phone, this page follows.';
+
 const DEFAULT_NICHE = 'nails';
 let currentNiche = DEFAULT_NICHE;
 // Example prices follow the demo account's currency once it has loaded.
@@ -227,22 +231,54 @@ function nicheFromUrl() {
 
 // ---------- niche content ----------
 
-function renderServices(niche) {
+const SERVICE_GROUPS = [
+  { label: 'Services', match: s => !s.isClass && !s.isSubscription },
+  { label: 'Memberships', match: s => s.isSubscription },
+  { label: 'Classes', match: s => s.isClass }
+];
+
+// Services read from the demo account; null until loaded.
+let liveData = null;
+let liveFailed = false;
+
+function serviceCard(svc) {
+  const card = el('a', 'service');
+  card.href = svc.id ? `${bookingUrl}&service=${encodeURIComponent(svc.id)}` : bookingUrl;
+  card.dataset.serviceId = svc.id || '';
+
+  const top = el('div', 'service-top');
+  top.appendChild(el('span', 'service-name', svc.name));
+  if (svc.showPrice && svc.price > 0) top.appendChild(el('span', 'service-price', formatPrice(svc.price)));
+  card.appendChild(top);
+
+  card.appendChild(el('span', 'service-meta', formatDuration(svc.durationMinutes)));
+  if (svc.description) card.appendChild(el('p', 'service-desc', svc.description));
+  card.appendChild(el('span', 'service-cta', 'Book now →'));
+  return card;
+}
+
+function renderServices() {
   const container = document.getElementById('services-list');
   container.replaceChildren();
-  for (const svc of niche.services) {
-    const card = el('a', 'service');
-    card.href = bookingUrl;
 
-    const top = el('div', 'service-top');
-    top.appendChild(el('span', 'service-name', svc.name));
-    top.appendChild(el('span', 'service-price', svc.price > 0 ? formatPrice(svc.price) : 'Free'));
-    card.appendChild(top);
+  if (!liveData && !liveFailed) {
+    for (let i = 0; i < 4; i++) container.appendChild(el('div', 'service-skeleton'));
+    return;
+  }
 
-    card.appendChild(el('span', 'service-meta', formatDuration(svc.min)));
-    card.appendChild(el('p', 'service-desc', svc.desc));
-    card.appendChild(el('span', 'service-cta', 'Book now →'));
-    container.appendChild(card);
+  const services = liveData?.services?.length
+    ? liveData.services
+    : NICHES[currentNiche].services.map(s => ({
+      id: '', name: s.name, durationMinutes: s.min, price: s.price, showPrice: true, description: s.desc
+    }));
+
+  const groups = SERVICE_GROUPS
+    .map(g => ({ ...g, items: services.filter(g.match) }))
+    .filter(g => g.items.length);
+  const showHeadings = groups.length > 1;
+  for (const group of groups) {
+    if (showHeadings) container.appendChild(el('h3', 'service-group-title', group.label));
+    for (const svc of group.items) container.appendChild(serviceCard(svc));
   }
 }
 
@@ -305,7 +341,7 @@ function applyNiche(key, { updateUrl = false } = {}) {
     if (value != null) node.textContent = value;
   }
   renderWhy(niche);
-  renderServices(niche);
+  renderServices();
   renderGallery(niche);
   renderReviews(niche);
   syncThemeColor();
@@ -324,7 +360,7 @@ function readCache() {
     const raw = localStorage.getItem(CACHE_KEY);
     if (!raw) return null;
     const data = JSON.parse(raw);
-    return data && Array.isArray(data.hours) ? data : null;
+    return data && Array.isArray(data.hours) && Array.isArray(data.services) ? data : null;
   } catch {
     return null;
   }
@@ -336,14 +372,14 @@ function writeCache(data) {
   } catch { /* storage unavailable: page still works, just without caching */ }
 }
 
-async function fetchHours() {
+async function fetchData() {
   const base = `https://www.gstatic.com/firebasejs/${FIREBASE_VERSION}`;
   const [{ initializeApp }, { initializeAppCheck, ReCaptchaV3Provider }, fs] = await Promise.all([
     import(`${base}/firebase-app.js`),
     import(`${base}/firebase-app-check.js`),
     import(`${base}/firebase-firestore.js`)
   ]);
-  const { getFirestore, doc, getDoc } = fs;
+  const { getFirestore, doc, getDoc, collection, getDocs, query, where, Timestamp } = fs;
 
   const app = initializeApp(firebaseConfig);
   try {
@@ -362,8 +398,49 @@ async function fetchHours() {
     throw new Error('booking link inactive');
   }
 
-  const publicSnap = await getDoc(doc(db, `users/${link.uid}/setari/bookingPublic`));
+  const [publicSnap, servicesSnap] = await Promise.all([
+    getDoc(doc(db, `users/${link.uid}/setari/bookingPublic`)),
+    getDocs(collection(db, `users/${link.uid}/servicii`))
+  ]);
   const settings = publicSnap.exists() ? publicSnap.data() : {};
+
+  let services = servicesSnap.docs
+    .map(d => ({ id: d.id, ...d.data() }))
+    .filter(s => s.isDeleted !== true && s.showService !== false)
+    .map(s => ({
+      id: s.id,
+      name: s.nume || '',
+      durationMinutes: Number(s.durataMinute || 0),
+      price: Number(s.pret || 0),
+      showPrice: s.showPrice !== false,
+      description: s.serviceDescription || '',
+      isClass: s.tipServiciu === 'CLASS',
+      isSubscription: s.tipServiciu === 'SUBSCRIPTION'
+    }))
+    .filter(s => s.name && s.durationMinutes > 0)
+    .sort((a, b) => a.name.localeCompare(b.name, 'en'));
+
+  // Same rule as the booking page: a class whose whole series has already been held cannot be
+  // booked on any date, so it is not listed. A failed read keeps every class listed.
+  if (services.some(s => s.isClass)) {
+    try {
+      const dayStart = new Date();
+      dayStart.setHours(0, 0, 0, 0);
+      const sessionsSnap = await getDocs(query(
+        collection(db, `users/${link.uid}/classSessions`),
+        where('startDate', '>=', Timestamp.fromDate(dayStart))
+      ));
+      const bookable = new Set(sessionsSnap.docs
+        .map(d => d.data())
+        .filter(row => {
+          const start = row.startDate?.toDate?.();
+          const end = row.endDate?.toDate?.();
+          return row.isDeleted !== true && start && end && end > start;
+        })
+        .map(row => row.serviceId || ''));
+      services = services.filter(s => !s.isClass || bookable.has(s.id));
+    } catch { /* keep every class listed */ }
+  }
 
   const hours = DAYS.map(day => {
     const start = Number(settings[`programStart${day.key}`] || 0);
@@ -371,14 +448,11 @@ async function fetchHours() {
     return start >= 0 && end > start && end <= 1439 ? { start, end } : null;
   });
 
-  return { fetchedAt: Date.now(), currency: settings.currency || 'USD', hasHours: Object.keys(settings).length > 0, hours };
+  return { fetchedAt: Date.now(), currency: settings.currency || 'USD', hasHours: Object.keys(settings).length > 0, services, hours };
 }
 
 function renderHours(data) {
-  if (data.currency && data.currency !== currency) {
-    currency = data.currency;
-    renderServices(NICHES[currentNiche]);
-  }
+  if (data.currency) currency = data.currency;
   const tbody = document.querySelector('#hours-table tbody');
   const note = document.getElementById('hours-note');
   const badge = document.getElementById('open-badge');
@@ -388,7 +462,7 @@ function renderHours(data) {
     note.textContent = 'See the free times on the booking page.';
     return;
   }
-  note.textContent = 'Hours can vary on days off — exact times are shown when you book.';
+  note.textContent = HOURS_NOTE;
 
   const now = new Date();
   const todayIndex = (now.getDay() + 6) % 7; // Monday = 0
@@ -416,13 +490,14 @@ function renderHours(data) {
 // try the booking without leaving this page. Modifier clicks still open the booking page in a
 // new tab, and without JavaScript every link goes there directly.
 
-function embeddedBookingUrl() {
+function embeddedBookingUrl(serviceId) {
   const params = new URLSearchParams({
     id: BOOKING_LINK_ID,
     embed: '1',
     lang: 'en',
     theme: document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'
   });
+  if (serviceId) params.set('service', serviceId);
   return `${BOOKING_ORIGIN}/booking/?${params}`;
 }
 
@@ -451,11 +526,11 @@ function setupBookingDialog() {
     else finishClose();
   }
 
-  function open() {
+  function open(serviceId) {
     frame?.remove();
     frame = document.createElement('iframe');
     frame.title = 'Book online';
-    frame.src = embeddedBookingUrl();
+    frame.src = embeddedBookingUrl(serviceId);
     // The booking page reports when its first screen (the calendar) has settled; until then
     // the loader stays up. Fallback in case that message never arrives.
     const shown = frame;
@@ -485,7 +560,7 @@ function setupBookingDialog() {
     const link = e.target.closest('a.service, a.booking-link');
     if (!link || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     e.preventDefault();
-    open();
+    open(link.dataset.serviceId || '');
   });
 }
 
@@ -532,16 +607,26 @@ async function init() {
   });
 
   const cached = readCache();
-  if (cached) renderHours(cached);
+  if (cached) {
+    liveData = cached;
+    renderHours(cached); // sets the currency first
+    renderServices();
+  }
   if (cached && Date.now() - cached.fetchedAt < CACHE_TTL_MS) return;
 
   try {
-    const fresh = await fetchHours();
+    const fresh = await fetchData();
     writeCache(fresh);
+    liveData = fresh;
     renderHours(fresh);
+    renderServices();
   } catch (err) {
-    console.warn('Could not load opening hours', err);
-    if (!cached) document.getElementById('hours-note').textContent = 'See the free times on the booking page.';
+    console.warn('Could not load services and hours', err);
+    if (!cached) {
+      liveFailed = true;
+      renderServices();
+      document.getElementById('hours-note').textContent = 'See the free times on the booking page.';
+    }
   }
 }
 
