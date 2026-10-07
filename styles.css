@@ -366,6 +366,12 @@ html[data-niche="barber"] .why-num { border-radius: 6px; }
 .service-price { font-weight: 700; color: var(--accent); white-space: nowrap; }
 .service-meta { font-size: 0.88rem; color: var(--muted); }
 .service-desc { font-size: 0.92rem; color: var(--muted); margin: 0; }
+.service-book {
+  align-self: flex-start; margin-top: 4px; padding: 0;
+  background: none; border: 0; cursor: pointer;
+  font: inherit; font-size: 0.92rem; font-weight: 700; color: var(--accent);
+}
+.service-book:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 /* Gallery (placeholder photos) */
 .gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }

@@ -204,6 +204,10 @@ function renderServices(niche) {
 
     card.appendChild(el('span', 'service-meta', formatDuration(svc.min)));
     card.appendChild(el('p', 'service-desc', svc.desc));
+
+    const book = el('button', 'service-book demo-btn', 'Book now →');
+    book.type = 'button';
+    card.appendChild(book);
     container.appendChild(card);
   }
 }
