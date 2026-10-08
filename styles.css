@@ -236,6 +236,8 @@ html[data-niche="barber"] .btn { border-radius: 6px; text-transform: uppercase; 
 .demo-bar-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 48px; padding-top: 6px; padding-bottom: 6px; }
 .demo-pick { display: inline-flex; align-items: center; gap: 10px; flex-shrink: 0; white-space: nowrap; font-size: 0.9rem; font-weight: 600; }
 .demo-pick select {
+  max-width: 62vw;
+  text-overflow: ellipsis;
   min-height: 36px;
   padding: 4px 34px 4px 12px;
   border-radius: 999px;

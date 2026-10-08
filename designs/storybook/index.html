@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Business Name — Makeup &amp; lash studio · Storybook page design</title>
+  <meta name="description" content="Storybook: an editorial booking page design for makeup and lash artists, with reviews you leaf through like a guest book." />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#1c1b19" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@400;500;600&family=DM+Sans:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../shared/shared.css?v=1" />
+  <link rel="stylesheet" href="styles.css?v=2" />
+</head>
+
+<body>
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="brand" href="#">Your Business Name</a>
+      <nav class="nav" aria-label="Sections">
+        <a href="#menu">Menu</a>
+        <a href="#guestbook">Guest book</a>
+        <a href="#plates">Portfolio</a>
+        <a href="#visit">Visit</a>
+      </nav>
+      <a class="btn btn-line btn-sm" data-book href="#">Book</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Chapter one · Makeup &amp; lashes</p>
+          <h1>Your face, <em>beautifully told.</em></h1>
+          <div class="rule" aria-hidden="true"><span></span></div>
+          <p class="lead">Soft glam, bridal looks and lashes that feel like your own. One artist, one chair, one calm hour written just for you.</p>
+          <div class="actions">
+            <a class="btn btn-gold" data-book href="#">Book an appointment</a>
+            <a class="btn btn-line" href="#menu">Read the menu</a>
+          </div>
+          <p class="status" id="status" hidden></p>
+        </div>
+        <figure class="hero-plate">
+          <div class="arch">
+            <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&w=900&q=70" alt="Close-up of a soft glam eye makeup look" width="900" height="1125" />
+          </div>
+          <figcaption>Plate I — Soft glam</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="paper" id="menu">
+      <div class="wrap">
+        <header class="head">
+          <p class="eyebrow">The menu</p>
+          <h2>Contents</h2>
+          <div class="rule" aria-hidden="true"><span></span></div>
+          <p class="sub">Tap any treatment to choose a time. Prices, durations and the list itself come straight from the booking app, so this page is never out of date.</p>
+        </header>
+        <div class="tabs" id="menu-tabs" role="tablist" aria-label="Treatment types" hidden></div>
+        <ol class="toc" id="menu-list" aria-live="polite"></ol>
+        <p class="note" id="menu-note" hidden>The treatment list is in the <a data-book href="#">booking page</a>.</p>
+      </div>
+    </section>
+
+    <section class="dark" id="guestbook">
+      <div class="wrap">
+        <header class="head head-light">
+          <p class="eyebrow">Kind words</p>
+          <h2>The guest book</h2>
+          <div class="rule" aria-hidden="true"><span></span></div>
+          <p class="sub">Turn the pages: tap a page, swipe, or use the arrow keys.</p>
+        </header>
+        <div class="book-stage">
+          <div class="book" id="book" tabindex="0" role="group" aria-roledescription="book" aria-label="Guest book of client reviews"></div>
+        </div>
+        <div class="book-controls">
+          <button type="button" class="round" id="book-prev" aria-label="Previous page">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6" /></svg>
+          </button>
+          <p class="book-count" id="book-count" aria-live="polite"></p>
+          <button type="button" class="round" id="book-next" aria-label="Next page">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6" /></svg>
+          </button>
+        </div>
+        <ol class="sr-only" id="reviews-sr"></ol>
+      </div>
+    </section>
+
+    <section class="paper" id="plates">
+      <div class="wrap">
+        <header class="head">
+          <p class="eyebrow">Portfolio</p>
+          <h2>Plates</h2>
+          <div class="rule" aria-hidden="true"><span></span></div>
+          <p class="sub">Sample photos. On your page, this is your own work.</p>
+        </header>
+        <div class="plates">
+          <figure class="plate p1">
+            <img src="https://images.unsplash.com/photo-1612459284970-e8f027596582?auto=format&fit=crop&w=800&q=70" alt="Portrait with a natural, dewy makeup look" loading="lazy" width="800" height="1000" />
+            <figcaption><span>II</span> Natural glow</figcaption>
+          </figure>
+          <figure class="plate p2">
+            <img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=800&q=70" alt="Makeup brushes standing in a holder" loading="lazy" width="800" height="600" />
+            <figcaption><span>III</span> The kit</figcaption>
+          </figure>
+          <figure class="plate p3">
+            <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=800&q=70" alt="Skin prep treatment before makeup" loading="lazy" width="800" height="600" />
+            <figcaption><span>IV</span> Skin prep</figcaption>
+          </figure>
+          <figure class="plate p4">
+            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=70" alt="Towel, skincare bottle and pink tulips" loading="lazy" width="800" height="1000" />
+            <figcaption><span>V</span> The studio</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="paper paper-alt" id="how">
+      <div class="wrap">
+        <header class="head">
+          <p class="eyebrow">Booking</p>
+          <h2>Three short chapters</h2>
+          <div class="rule" aria-hidden="true"><span></span></div>
+        </header>
+        <ol class="chapters">
+          <li><span class="numeral">I</span><h3>Choose a treatment</h3><p>Every option shows how long it takes and what it costs.</p></li>
+          <li><span class="numeral">II</span><h3>Pick a free time</h3><p>Only open slots are shown, so there is never a double booking.</p></li>
+          <li><span class="numeral">III</span><h3>See you soon</h3><p>Your appointment is confirmed straight away, no phone call needed.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="dark" id="visit">
+      <div class="wrap visit">
+        <div class="card-hours">
+          <p class="eyebrow">Opening hours</p>
+          <table class="hours" id="hours"><tbody></tbody></table>
+          <p class="fine" id="hours-note">Hours come from the booking app, so a day off there is a day off here.</p>
+        </div>
+        <div class="visit-info">
+          <p class="eyebrow">Visit</p>
+          <h2>Find the studio</h2>
+          <p>Your street address, Your city<br />Your phone number<br />hello@yourbusinessname.com</p>
+          <div class="map">
+            <p>Your Google Maps embed goes here</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="wrap">
+        <p class="eyebrow">The end — for now</p>
+        <h2>Want your own page in this style?</h2>
+        <p class="sub">Your services and hours stay in sync with the Appointments &amp; Reports app, and online booking is built in.</p>
+        <div class="actions actions-center">
+          <a class="btn btn-gold" data-getpage>Get my page</a>
+          <a class="btn btn-line" href="/">See the classic page</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-inner">
+      <p>© <span data-year>2026</span> Your Business Name</p>
+      <p>Online booking by <a href="https://appointmentsapps.com/" target="_blank" rel="noopener">Appointments &amp; Reports</a></p>
+    </div>
+    <p class="footer-madeby"></p>
+  </footer>
+
+  <a class="sticky" data-book href="#">Book an appointment</a>
+
+  <script type="module" src="app.js?v=2"></script>
+</body>
+
+</html>

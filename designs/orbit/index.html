@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Business Name — Massage &amp; spa · Orbit page design</title>
+  <meta name="description" content="Orbit: a space-themed booking page design for massage and spa studios, with services as planets and hours as a mission timeline." />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#05060f" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../shared/shared.css?v=1" />
+  <link rel="stylesheet" href="styles.css?v=2" />
+</head>
+
+<body>
+  <canvas id="stars" aria-hidden="true"></canvas>
+
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="brand" href="#"><span class="brand-dot" aria-hidden="true"></span>Your Business Name</a>
+      <nav class="nav" aria-label="Sections">
+        <a href="#orbits">Treatments</a>
+        <a href="#control">Hours</a>
+        <a href="#signals">Reviews</a>
+        <a href="#landing">Find us</a>
+      </nav>
+      <a class="btn btn-glow btn-sm" data-book href="#">Book</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="nebula" aria-hidden="true"></div>
+      <div class="wrap hero-inner">
+        <div class="hero-copy">
+          <p class="status" id="status" hidden></p>
+          <h1>Leave gravity <span class="grad">at the door.</span></h1>
+          <p class="lead">Massage and spa treatments that take you somewhere quieter. Pick your orbit, choose a launch time, and float for an hour.</p>
+          <div class="actions">
+            <a class="btn btn-glow" data-book href="#">Book your launch</a>
+            <a class="btn btn-ghost" href="#orbits">Explore treatments</a>
+          </div>
+        </div>
+        <div class="planet-zone" aria-hidden="true">
+          <div class="planet">
+            <div class="planet-ring"></div>
+            <div class="moon-track"><span class="moon"></span></div>
+          </div>
+        </div>
+      </div>
+      <a class="scroll-cue" href="#orbits" aria-label="Scroll to treatments"><span></span></a>
+    </section>
+
+    <section class="section" id="orbits">
+      <div class="wrap">
+        <header class="head">
+          <p class="kicker">01 · Treatments</p>
+          <h2>Choose your orbit</h2>
+          <p class="sub">Every planet is a treatment: the bigger it is, the longer you float. The list, prices and times come live from the booking app.</p>
+        </header>
+        <div class="orbit-layout">
+          <div class="system" id="system" role="group" aria-label="Treatments shown as planets"></div>
+          <aside class="brief" id="brief" aria-live="polite"></aside>
+        </div>
+        <ul class="missions" id="missions"></ul>
+        <p class="note" id="services-note" hidden>See every treatment on the <a data-book href="#">booking page</a>.</p>
+      </div>
+    </section>
+
+    <section class="section" id="sequence">
+      <div class="wrap">
+        <header class="head">
+          <p class="kicker">02 · Booking</p>
+          <h2>Launch sequence</h2>
+        </header>
+        <ol class="countdown">
+          <li><span class="t">T–3</span><h3>Pick a treatment</h3><p>See how long it takes and what it costs, up front.</p></li>
+          <li><span class="t">T–2</span><h3>Choose a free time</h3><p>Only open slots appear, so nobody double-books your hour.</p></li>
+          <li><span class="t">T–1</span><h3>Confirmed instantly</h3><p>No phone calls. Your launch window is locked in.</p></li>
+          <li class="liftoff"><span class="t">0</span><h3>Lift-off</h3><p>Arrive, lie down, and let the world go quiet.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" id="portholes">
+      <div class="wrap">
+        <header class="head">
+          <p class="kicker">03 · The studio</p>
+          <h2>View from the portholes</h2>
+          <p class="sub">Sample photos. On your page, this is your own space.</p>
+        </header>
+        <div class="holes">
+          <figure class="hole">
+            <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=700&h=700&q=70" alt="Back massage with warm oil" loading="lazy" width="700" height="700" />
+            <figcaption>Deep tissue</figcaption>
+          </figure>
+          <figure class="hole hole-big">
+            <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=900&h=900&q=70" alt="Hot stones laid along a client's back" loading="lazy" width="900" height="900" />
+            <figcaption>Hot stones</figcaption>
+          </figure>
+          <figure class="hole">
+            <img src="https://images.unsplash.com/photo-1560750588-73207b1ef5b8?auto=format&fit=crop&w=700&h=700&q=70" alt="Calm spa lounge with a pool and plants" loading="lazy" width="700" height="700" />
+            <figcaption>The lounge</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="control">
+      <div class="wrap">
+        <header class="head">
+          <p class="kicker">04 · Hours</p>
+          <h2>Mission control</h2>
+          <p class="sub" id="hours-note">Each track is one day, midnight to midnight. The glowing part is when we are open. It follows the hours set in the booking app.</p>
+        </header>
+        <div class="console">
+          <div class="console-head">
+            <span class="led" id="led"></span>
+            <span id="console-status">Reading telemetry…</span>
+            <span class="clock" id="clock"></span>
+          </div>
+          <div class="tracks" id="tracks"></div>
+          <div class="ticks" aria-hidden="true"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="signals">
+      <div class="wrap">
+        <header class="head">
+          <p class="kicker">05 · Reviews</p>
+          <h2>Incoming transmissions</h2>
+          <p class="sub">Sample reviews for the demo. On your page, your real reviews come through here.</p>
+        </header>
+      </div>
+      <div class="marquee" id="marquee"></div>
+    </section>
+
+    <section class="section" id="landing">
+      <div class="wrap landing">
+        <div>
+          <p class="kicker">06 · Find us</p>
+          <h2>Landing site</h2>
+          <ul class="coords">
+            <li><span>Address</span>Your street address, Your city</li>
+            <li><span>Phone</span>Your phone number</li>
+            <li><span>Email</span>hello@yourbusinessname.com</li>
+          </ul>
+        </div>
+        <div class="radar" aria-hidden="true"><span class="sweep"></span><span class="blip"></span></div>
+      </div>
+    </section>
+
+    <section class="earth">
+      <div class="wrap">
+        <h2>Want your own page in orbit?</h2>
+        <p>Your services and hours stay in sync with the Appointments &amp; Reports app, and online booking is built in.</p>
+        <div class="actions actions-center">
+          <a class="btn btn-glow" data-getpage>Get my page</a>
+          <a class="btn btn-ghost" href="/">See the classic page</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-inner">
+      <p>© <span data-year>2026</span> Your Business Name</p>
+      <p>Online booking by <a href="https://appointmentsapps.com/" target="_blank" rel="noopener">Appointments &amp; Reports</a></p>
+    </div>
+    <p class="footer-madeby"></p>
+  </footer>
+
+  <a class="sticky" data-book href="#">Book your launch</a>
+
+  <script type="module" src="app.js?v=2"></script>
+</body>
+
+</html>

@@ -39,7 +39,7 @@
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Oswald:wght@500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
     rel="stylesheet" />
 
-  <link rel="stylesheet" href="styles.css?v=9" />
+  <link rel="stylesheet" href="styles.css?v=10" />
 </head>
 
 <body>
@@ -57,10 +57,12 @@
         <label class="demo-pick">
           <span class="demo-pick-label">I run a</span>
           <select id="niche-select" aria-label="Choose your type of business to preview">
-            <option value="nails">Nail &amp; hair salon</option>
-            <option value="barber">Barbershop</option>
-            <option value="detailing">Car detailing</option>
-            <option value="trainer">Personal trainer</option>
+            <optgroup label="Classic page">
+              <option value="nails">Nail &amp; hair salon</option>
+              <option value="barber">Barbershop</option>
+              <option value="detailing">Car detailing</option>
+              <option value="trainer">Personal trainer</option>
+            </optgroup>
           </select>
         </label>
         <p class="demo-url">
@@ -476,7 +478,7 @@
 
   <button type="button" class="sticky-book demo-btn">Book online</button>
 
-  <script type="module" src="app.js?v=7"></script>
+  <script type="module" src="app.js?v=8"></script>
 </body>
 
 </html>

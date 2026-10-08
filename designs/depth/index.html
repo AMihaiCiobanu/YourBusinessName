@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Business Name — Tattoo studio · Depth page design</title>
+  <meta name="description" content="Depth: a 3D booking page design for tattoo studios, with a spinning portfolio ring, flip cards and a review deck." />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#0a0a0a" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Inter:wght@400;500;600&family=DM+Sans:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../shared/shared.css?v=1" />
+  <link rel="stylesheet" href="styles.css?v=1" />
+</head>
+
+<body>
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="brand" href="#"><span class="cube-logo" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>Your Business Name</a>
+      <nav class="nav" aria-label="Sections">
+        <a href="#work">Work</a>
+        <a href="#prices">Prices</a>
+        <a href="#process">Process</a>
+        <a href="#studio">Studio</a>
+      </nav>
+      <a class="btn btn-red btn-sm" data-book href="#">Book</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="scene" id="scene">
+        <div class="layer layer-back" aria-hidden="true">
+          <img class="float f1" src="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?auto=format&fit=crop&w=500&h=650&q=70" alt="" width="500" height="650" />
+          <img class="float f2" src="https://images.unsplash.com/photo-1568515045052-f9a854d70bfd?auto=format&fit=crop&w=500&h=500&q=70" alt="" width="500" height="500" />
+        </div>
+        <div class="layer layer-mid">
+          <p class="kicker">Tattoo studio · Custom work · Walk-ins welcome</p>
+          <h1 class="extrude" data-text="INK THAT STAYS">INK THAT<br />STAYS</h1>
+          <p class="lead">Custom pieces, fine line and cover-ups, drawn for you and done in a clean, private studio.</p>
+          <div class="actions">
+            <a class="btn btn-red" data-book href="#">Book a session</a>
+            <a class="btn btn-ghost" href="#work">See the work</a>
+          </div>
+          <p class="status" id="status" hidden></p>
+        </div>
+        <div class="layer layer-front" aria-hidden="true">
+          <img class="float f3" src="https://images.unsplash.com/photo-1565058379802-bbe93b2f703a?auto=format&fit=crop&w=500&h=500&q=70" alt="" width="500" height="500" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="work">
+      <div class="wrap">
+        <header class="head">
+          <p class="kicker">01 / Work</p>
+          <h2>Spin the portfolio</h2>
+          <p class="sub">Drag or swipe the ring. Sample photos: on your page, this is your own work.</p>
+        </header>
+      </div>
+      <div class="carousel-stage">
+        <div class="carousel" id="carousel" role="group" aria-roledescription="carousel" aria-label="Portfolio"></div>
+      </div>
+      <div class="carousel-controls">
+        <button type="button" class="round" id="ring-prev" aria-label="Previous photo">←</button>
+        <button type="button" class="round" id="ring-next" aria-label="Next photo">→</button>
+      </div>
+    </section>
+
+    <section class="section section-dark" id="prices">
+      <div class="wrap">
+        <header class="head">
+          <p class="kicker">02 / Prices</p>
+          <h2>Pick your piece</h2>
+          <p class="sub">Tap a card to flip it. Sizes, times and prices come live from the booking app.</p>
+        </header>
+        <div class="flips" id="flips" aria-live="polite"></div>
+        <p class="note" id="services-note" hidden>All options are on the <a data-book href="#">booking page</a>.</p>
+      </div>
+    </section>
+
+    <section class="section" id="process">
+      <div class="wrap process">
+        <div>
+          <header class="head">
+            <p class="kicker">03 / Process</p>
+            <h2>From sketch to skin</h2>
+          </header>
+          <ol class="steps" id="steps">
+            <li data-layer="0"><span>01</span><div><h3>Book online</h3><p>Pick a consultation or a session and a free time. Confirmed instantly.</p></div></li>
+            <li data-layer="1"><span>02</span><div><h3>Talk it through</h3><p>Placement, size and style, with references you bring.</p></div></li>
+            <li data-layer="2"><span>03</span><div><h3>The drawing</h3><p>A custom design you approve before the needle comes out.</p></div></li>
+            <li data-layer="3"><span>04</span><div><h3>Ink &amp; aftercare</h3><p>A clean session and a care sheet to take home.</p></div></li>
+          </ol>
+        </div>
+        <div class="iso" id="iso" aria-hidden="true">
+          <div class="iso-stack">
+            <div class="slab s0"><b>Booking</b></div>
+            <div class="slab s1"><b>Consult</b></div>
+            <div class="slab s2"><b>Sketch</b></div>
+            <div class="slab s3"><b>Ink</b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-dark" id="reviews">
+      <div class="wrap reviews">
+        <header class="head">
+          <p class="kicker">04 / Reviews</p>
+          <h2>Off the top of the deck</h2>
+          <p class="sub">Sample reviews for the demo. Tap the deck to deal the next card.</p>
+        </header>
+        <div class="deck-wrap">
+          <div class="deck" id="deck" tabindex="0" role="button" aria-label="Show the next review"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="studio">
+      <div class="wrap studio">
+        <div class="tilt-card hours-card">
+          <p class="kicker">Hours</p>
+          <table class="hours" id="hours"><tbody></tbody></table>
+          <p class="fine" id="hours-note">Straight from the booking app. Change them there, they change here.</p>
+        </div>
+        <div class="tilt-card">
+          <p class="kicker">Studio</p>
+          <h2 class="h-small">Come by</h2>
+          <p>Your street address, Your city</p>
+          <p>Your phone number</p>
+          <p>hello@yourbusinessname.com</p>
+          <div class="map">Your Google Maps embed goes here</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="wrap">
+        <h2 class="extrude extrude-sm" data-text="WANT THIS PAGE?">WANT THIS PAGE?</h2>
+        <p>Your prices and hours stay in sync with the Appointments &amp; Reports app, and online booking is built in.</p>
+        <div class="actions actions-center">
+          <a class="btn btn-red" data-getpage>Get my page</a>
+          <a class="btn btn-ghost" href="/">See the classic page</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-inner">
+      <p>© <span data-year>2026</span> Your Business Name</p>
+      <p>Online booking by <a href="https://appointmentsapps.com/" target="_blank" rel="noopener">Appointments &amp; Reports</a></p>
+    </div>
+    <p class="footer-madeby"></p>
+  </footer>
+
+  <a class="sticky" data-book href="#">Book a session</a>
+
+  <script type="module" src="app.js?v=1"></script>
+</body>
+
+</html>

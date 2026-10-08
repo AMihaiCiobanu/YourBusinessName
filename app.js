@@ -5,6 +5,8 @@
 // Everything here is static example content. Nothing is loaded from an account and the booking
 // buttons are inert: they only show what the real page would offer.
 
+import { wirePicker } from './designs/shared/demo.js';
+
 // Monday first.
 const DAYS = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
@@ -344,6 +346,8 @@ function setupThemeToggle() {
 setupThemeToggle();
 document.getElementById('year').textContent = String(new Date().getFullYear());
 applyNiche(nicheFromUrl());
-document.getElementById('niche-select').addEventListener('change', e => {
-  applyNiche(e.target.value, { updateUrl: true });
+// The picker also lists the alternative page designs in designs/; picking one opens it.
+wirePicker(document.getElementById('niche-select'), {
+  current: currentNiche,
+  onNiche: value => applyNiche(value, { updateUrl: true })
 });

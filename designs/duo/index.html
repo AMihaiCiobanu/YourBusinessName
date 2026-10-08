@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Business Name — Salon with two specialists · Duo page design</title>
+  <meta name="description" content="Duo: a booking page design for a salon with two specialists. Each one has a tab with their own services, hours and online booking." />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#f6f4f1" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../shared/shared.css?v=1" />
+  <link rel="stylesheet" href="styles.css?v=1" />
+</head>
+
+<body data-person="ana">
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="brand" href="#"><span class="brand-pair" aria-hidden="true"><i></i><i></i></span>Your Business Name</a>
+      <nav class="nav" aria-label="Sections">
+        <a href="#team">The team</a>
+        <a href="#studio">Studio</a>
+      </nav>
+      <a class="btn btn-sm" id="top-book" data-book href="#">Book</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <p class="pill">Hair &amp; nails · One studio, two specialists</p>
+        <h1>Pick your person.<br /><span>Book their chair.</span></h1>
+        <p class="lead">Each of us has our own services, hours and calendar. Choose who you want to see and book them directly.</p>
+        <div class="people" id="people"></div>
+      </div>
+    </section>
+
+    <section class="team" id="team">
+      <div class="wrap">
+        <div class="switch" role="tablist" aria-label="Choose a specialist" id="tabs">
+          <span class="switch-glider" aria-hidden="true"></span>
+        </div>
+        <div class="panel" id="panel" role="tabpanel" tabindex="0"></div>
+      </div>
+    </section>
+
+    <section class="studio" id="studio">
+      <div class="wrap studio-grid">
+        <figure class="studio-photo">
+          <img src="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?auto=format&fit=crop&w=1200&q=70" alt="Bright salon interior with styling chairs and mirrors" loading="lazy" width="1200" height="800" />
+        </figure>
+        <div class="card studio-card">
+          <p class="label">The studio</p>
+          <h2>Same door, two calendars</h2>
+          <p>Your street address, Your city<br />Your phone number<br />hello@yourbusinessname.com</p>
+          <div class="map">Your Google Maps embed goes here</div>
+          <div class="book-both" id="book-both"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="wrap">
+        <h2>Running a salon with a team?</h2>
+        <p>Every person gets a tab with their own services, hours and booking link, each kept in sync with their Appointments &amp; Reports app.</p>
+        <div class="cta-actions">
+          <a class="btn btn-light" data-getpage>Get my page</a>
+          <a class="btn btn-outline" href="/">See the classic page</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-inner">
+      <p>© <span data-year>2026</span> Your Business Name</p>
+      <p>Online booking by <a href="https://appointmentsapps.com/" target="_blank" rel="noopener">Appointments &amp; Reports</a></p>
+    </div>
+    <p class="footer-madeby"></p>
+  </footer>
+
+  <a class="sticky" id="sticky-book" data-book href="#">Book</a>
+
+  <script type="module" src="app.js?v=1"></script>
+</body>
+
+</html>

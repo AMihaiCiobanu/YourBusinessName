@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Business Name — Barbershop · Full frame page design</title>
+  <meta name="description" content="Full frame: a simple booking page design for barbershops, one big photo behind everything that changes as you scroll." />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#0d0b09" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Libre+Franklin:wght@400;500;600;700&family=DM+Sans:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../shared/shared.css?v=1" />
+  <link rel="stylesheet" href="styles.css?v=1" />
+</head>
+
+<body>
+  <div class="backdrop" id="backdrop" aria-hidden="true">
+    <img class="is-on" src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=2000&q=70" alt="" data-caption="The shop" />
+    <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=2000&q=70" alt="" data-caption="The chair" />
+    <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=2000&q=70" alt="" data-caption="Finish & style" />
+    <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=2000&q=70" alt="" data-caption="Skin fade" />
+    <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=2000&q=70" alt="" data-caption="Clean cut" />
+  </div>
+  <div class="shade" aria-hidden="true"></div>
+
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="brand" href="#">Your Business Name</a>
+      <a class="btn btn-sm" data-book href="#">Book a chair</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="frame frame-hero" data-bg="0">
+      <div class="wrap">
+        <p class="eyebrow">Barbershop · Est. in your city</p>
+        <h1>Sharp.<br />On time.<br /><span>Every time.</span></h1>
+        <div class="hero-row">
+          <a class="btn" data-book href="#">Book a chair</a>
+          <p class="today" id="today" hidden></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="frame" id="board" data-bg="1">
+      <div class="wrap">
+        <div class="panel">
+          <p class="eyebrow">The board</p>
+          <h2>Cuts &amp; prices</h2>
+          <ul class="board" id="board-list" aria-live="polite"></ul>
+          <p class="fine" id="board-note">Live from the booking app: change a price there, it changes here.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="frame frame-quiet" data-bg="2">
+      <div class="wrap">
+        <p class="statement">No queue on the bench.<br />Your time is <em>yours.</em></p>
+      </div>
+    </section>
+
+    <section class="frame" id="word" data-bg="3">
+      <div class="wrap">
+        <figure class="quote" id="quote" aria-live="polite"></figure>
+        <div class="dots" id="dots" role="group" aria-label="Choose a review"></div>
+      </div>
+    </section>
+
+    <section class="frame" id="hours" data-bg="4">
+      <div class="wrap">
+        <div class="hours-big">
+          <p class="eyebrow">Today</p>
+          <p class="big-time" id="big-time">–</p>
+          <ul class="week" id="week"></ul>
+          <p class="fine" id="hours-note">Hours follow the booking app, so days off show up here by themselves.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="frame" id="visit" data-bg="0">
+      <div class="wrap visit">
+        <div class="panel">
+          <p class="eyebrow">Find the shop</p>
+          <h2>Pull up a chair</h2>
+          <p>Your street address, Your city<br />Your phone number<br />hello@yourbusinessname.com</p>
+          <div class="map">Your Google Maps embed goes here</div>
+        </div>
+        <div class="panel panel-cta">
+          <h2>Want this page for your shop?</h2>
+          <p>One big photo, your prices and hours live from the Appointments &amp; Reports app, booking built in.</p>
+          <a class="btn" data-getpage>Get my page</a>
+          <a class="link" href="/">See the classic page →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-inner">
+      <p>© <span data-year>2026</span> Your Business Name · Online booking by <a href="https://appointmentsapps.com/" target="_blank" rel="noopener">Appointments &amp; Reports</a></p>
+      <p class="caption" id="caption" aria-hidden="true"><span id="caption-n">01</span> / 05 · <span id="caption-t">The shop</span> · sample photo</p>
+    </div>
+    <p class="footer-madeby"></p>
+  </footer>
+
+  <a class="sticky" data-book href="#">Book a chair</a>
+
+  <script type="module" src="app.js?v=1"></script>
+</body>
+
+</html>
