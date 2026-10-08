@@ -14,7 +14,8 @@ export const DESIGNS = [
   { slug: 'orbit', label: 'Massage & spa · Orbit (space)' },
   { slug: 'depth', label: 'Tattoo studio · Depth (3D)' },
   { slug: 'fullframe', label: 'Barbershop · Full frame' },
-  { slug: 'duo', label: 'Salon, two specialists · Duo' }
+  { slug: 'duo', label: 'Salon, two specialists · Duo' },
+  { slug: 'yours', label: '✦ Your own mix or a brand-new design' }
 ];
 
 export const GET_PAGE_MAILTO = 'mailto:contact@appointmentsapps.com?subject=I%27d%20like%20my%20own%20website%20for%20my%20business&body=Hi%2C%0A%0AI%27d%20like%20more%20information%20about%20how%20I%20could%20get%20my%20own%20booking%20website.%0A%0AA%20few%20details%20about%20me%3A%0A-%20Business%20name%3A%0A-%20Type%20of%20business%20%28e.g.%20nails%2C%20hair%2C%20massage%29%3A%0A-%20City%3A%0A-%20Phone%20number%3A%0A-%20Facebook%20page%20link%3A%0A-%20Instagram%20profile%20link%3A%0A%0AI%27d%20like%20to%20know%3A%0A-%20How%20much%20it%20costs%20and%20what%20is%20included%0A-%20How%20long%20it%20takes%20to%20get%20ready%0A-%20Whether%20I%20can%20use%20my%20own%20domain%20%28e.g.%20my-business.com%29%0A-%20How%20services%20and%20opening%20hours%20stay%20in%20sync%20with%20the%20app%0A%0AI%20agree%20to%20have%20a%20meeting%20to%20discuss%20the%20project%20and%20what%20I%20want%20for%20my%20page.%0AI%27m%20available%20on%20this%20date%3A%20......%2C%20between%20these%20hours%3A%20......%0A%0AThank%20you%21';

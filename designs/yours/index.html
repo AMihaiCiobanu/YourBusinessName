@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Business Name — Your page, your way</title>
+  <meta name="description" content="Every page in this demo is a sample. Pick a design, mix sections from several, or get a brand-new layout made for your business." />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#f7f5f0" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../shared/shared.css?v=1" />
+  <link rel="stylesheet" href="styles.css?v=1" />
+</head>
+
+<body>
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow">You have seen the samples</p>
+        <h1>Everything here is just a taste.<br /><em>Your page can be anything.</em></h1>
+        <p class="lead">The pages in this demo show what we can build. They are not a fixed menu. Take one as it is, mix the parts you liked, or let us design something completely new around you and your business.</p>
+      </div>
+    </section>
+
+    <section class="paths">
+      <div class="wrap paths-grid">
+        <article class="path">
+          <span class="path-n">1</span>
+          <h2>Pick a design</h2>
+          <p>Like one of the pages as it is? We fill it with your name, photos, colours and services, and it is ready.</p>
+          <ul class="design-links" id="design-links"></ul>
+        </article>
+        <article class="path path-mix">
+          <span class="path-n">2</span>
+          <h2>Mix and match</h2>
+          <p>The guest book from one page, the hours from another, tabs for your team from a third. We put the sections you like together, in your style.</p>
+          <a class="text-link" href="#mixer">Try the mixer below ↓</a>
+        </article>
+        <article class="path path-new">
+          <span class="path-n">3</span>
+          <h2>Something brand new</h2>
+          <p>None of it feels like you? We start from a blank page and design a layout made only for your business: your brand, your mood, your ideas.</p>
+          <a class="text-link" data-getpage>Tell us about your business →</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="mixer" id="mixer">
+      <div class="wrap mixer-grid">
+        <div>
+          <p class="eyebrow">The mixer</p>
+          <h2>Build your mix</h2>
+          <p class="muted">Tap the sections you liked. Your choice goes straight into the email, so we know what you have in mind.</p>
+          <div class="chips" id="chips" role="group" aria-label="Sections to include"></div>
+        </div>
+        <div class="preview">
+          <div class="phone" aria-live="polite">
+            <div class="phone-bar"><span></span></div>
+            <ol class="stack" id="stack"></ol>
+            <p class="empty" id="empty">Your page starts here.<br />Tap a section to add it.</p>
+          </div>
+          <a class="btn" id="send-mix" data-getpage>Send me this mix</a>
+          <button type="button" class="reset" id="reset">Start over</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="always">
+      <div class="wrap">
+        <p class="eyebrow">Whatever you choose</p>
+        <h2>Always included</h2>
+        <ul class="always-list">
+          <li><strong>Services and hours from the app.</strong> Change them in Appointments &amp; Reports, the page follows.</li>
+          <li><strong>Online booking built in.</strong> Clients pick a service and a free time, no phone calls.</li>
+          <li><strong>Made for phones.</strong> Every layout works on a small screen first.</li>
+          <li><strong>Your address on the web.</strong> A subdomain like yourbusinessname.appointmentsapps.com, or your own domain.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="wrap">
+        <h2>Let us build yours.</h2>
+        <p>Write to us with your business name and what you liked. We reply with a proposal and set up a short call.</p>
+        <div class="closing-actions">
+          <a class="btn btn-light" data-getpage>Get my page</a>
+          <a class="btn btn-outline" href="/">Back to the classic page</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-inner">
+      <p>© <span data-year>2026</span> Your Business Name</p>
+      <p>Online booking by <a href="https://appointmentsapps.com/" target="_blank" rel="noopener">Appointments &amp; Reports</a></p>
+    </div>
+    <p class="footer-madeby"></p>
+  </footer>
+
+  <script type="module" src="app.js?v=2"></script>
+</body>
+
+</html>
