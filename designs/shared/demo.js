@@ -67,7 +67,8 @@ export function mountDemo(slug) {
     <label class="dm-pick"><span>Preview</span><select aria-label="Choose a page design to preview"></select></label>
     <p class="dm-note"><span>Demo · services, hours and booking come live from the app</span></p>
     <a class="dm-get" data-getpage>Get my page</a>
-  </div>`; // static markup
+  </div>
+  <p class="dm-promo"><span><strong>Free website</strong> when you buy a yearly subscription to the Appointments app, if you pick one of these demo designs.</span> <a href="https://appointmentsapps.com" target="_blank" rel="noopener">See the app</a></p>`; // static markup
   document.body.prepend(bar);
   wirePicker(bar.querySelector('select'), { current: `design:${slug}` });
 
