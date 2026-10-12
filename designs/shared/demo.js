@@ -15,6 +15,8 @@ export const DESIGNS = [
   { slug: 'depth', label: 'Tattoo studio · Depth (3D)' },
   { slug: 'fullframe', label: 'Barbershop · Full frame' },
   { slug: 'duo', label: 'Salon, two specialists · Duo' },
+  { slug: 'marketplace', label: 'Barbershop · Marketplace listing' },
+  { slug: 'listing', label: 'Barbershop · Gallery listing' },
   { slug: 'yours', label: '✦ Your own mix or a brand-new design' }
 ];
 

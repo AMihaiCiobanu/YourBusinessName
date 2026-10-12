@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Business Name — Barbershop · Marketplace page design</title>
+  <meta name="description" content="Marketplace: a booking page design for barbershops and salons, laid out like a booking-app listing with services, specialists and contact tabs." />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../shared/shared.css?v=1" />
+  <link rel="stylesheet" href="styles.css?v=1" />
+</head>
+
+<body>
+  <main class="page">
+    <header class="head">
+      <p class="crumbs">Home › Barbershop › Your city</p>
+      <div class="head-row">
+        <span class="logo" aria-hidden="true">YB</span>
+        <div>
+          <h1>Your Business Name</h1>
+          <p class="addr">Your street address, Your city</p>
+          <p class="status" id="status" hidden></p>
+        </div>
+      </div>
+    </header>
+
+    <div class="slider" id="slider" aria-label="Photos of the shop">
+      <img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=1200&q=70" alt="Barbershop interior with chairs and mirrors" width="1200" height="800" />
+      <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1200&q=70" alt="Barber working on a client" width="1200" height="800" loading="lazy" />
+      <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=1200&q=70" alt="Finished cut and style" width="1200" height="800" loading="lazy" />
+    </div>
+
+    <nav class="tabs" id="tabs" aria-label="Sections">
+      <a href="#services" class="is-on">Services</a>
+      <a href="#specialists">Specialists</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <section class="block" id="services">
+      <h2>Choose a service</h2>
+      <div id="groups" aria-live="polite"></div>
+      <p class="fine" id="services-note">Live from the booking app: change a price there, it changes here.</p>
+    </section>
+
+    <section class="block" id="specialists">
+      <h2>Choose a specialist</h2>
+      <ul class="staff" id="staff"></ul>
+    </section>
+
+    <section class="block" id="contact">
+      <h2>Contact &amp; hours</h2>
+      <div class="map">Your Google Maps embed goes here</div>
+      <p class="contact">
+        <a class="route" href="#">Get directions</a>
+        Your street address, Your city<br />
+        Your phone number<br />
+        hello@yourbusinessname.com
+      </p>
+      <ul class="week" id="week"></ul>
+      <p class="fine" id="hours-note">Hours follow the booking app, so days off show up here by themselves.</p>
+      <p class="about">A grooming experience for well-informed gentlemen: sharp cuts, clean beards and no waiting.</p>
+    </section>
+
+    <section class="cta">
+      <h2>Want this page for your shop?</h2>
+      <p>Your services, specialists and hours live from the Appointments &amp; Reports app, booking built in.</p>
+      <a class="btn" data-getpage>Get my page</a>
+      <a class="link" href="/">See the classic page →</a>
+    </section>
+
+    <footer class="foot">
+      <p>© <span data-year>2026</span> Your Business Name · Online booking by <a href="https://appointmentsapps.com/" target="_blank" rel="noopener">Appointments &amp; Reports</a></p>
+      <p class="footer-madeby"></p>
+    </footer>
+  </main>
+
+  <a class="sticky" data-book href="#">Book now</a>
+
+  <script type="module" src="app.js?v=1"></script>
+</body>
+
+</html>

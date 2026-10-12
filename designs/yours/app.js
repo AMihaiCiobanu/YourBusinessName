@@ -3,7 +3,7 @@
 
 import { mountDemo, DESIGNS, designUrl, GET_PAGE_MAILTO } from '../shared/demo.js';
 
-const COLORS = { storybook: '#c9a961', orbit: '#8b5cf6', depth: '#ff3d2e', fullframe: '#b98a45', duo: '#e8553d' };
+const COLORS = { storybook: '#c9a961', orbit: '#8b5cf6', depth: '#ff3d2e', fullframe: '#b98a45', duo: '#e8553d', marketplace: '#0e9f9a', listing: '#6950f3' };
 
 // Sections a prospect can pick, with the design they come from. `h` is the block height in the
 // phone preview, roughly how much room the section takes.

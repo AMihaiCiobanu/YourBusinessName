@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Business Name — Barbershop · Listing page design</title>
+  <meta name="description" content="Listing: a booking page design for barbershops, with a photo gallery, service categories, team, portfolio and a sticky booking card." />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#ffffff" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../shared/shared.css?v=1" />
+  <link rel="stylesheet" href="styles.css?v=1" />
+</head>
+
+<body>
+  <div class="wrap">
+    <p class="crumbs">Home › Barbershop › Your city › Your Business Name</p>
+
+    <header class="head">
+      <h1>Your Business Name</h1>
+      <p class="meta">
+        <span class="cat">Barber</span>
+        <span class="status" id="status" hidden></span>
+        <span>Your street address, Your city</span>
+      </p>
+    </header>
+
+    <div class="gallery" id="photos">
+      <img class="g-main" src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=1400&q=70" alt="Barbershop interior with chairs and mirrors" width="1400" height="900" />
+      <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=700&q=70" alt="Barber working on a client" width="700" height="450" loading="lazy" />
+      <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=700&q=70" alt="Finished cut and style" width="700" height="450" loading="lazy" />
+      <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=700&q=70" alt="Skin fade detail" width="700" height="450" loading="lazy" />
+      <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=700&q=70" alt="Clean cut" width="700" height="450" loading="lazy" />
+    </div>
+
+    <nav class="tabs" id="tabs" aria-label="Sections">
+      <a href="#about" class="is-on">About</a>
+      <a href="#services">Services</a>
+      <a href="#team">Team</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#info">Info</a>
+    </nav>
+
+    <div class="cols">
+      <div class="main">
+        <section class="block" id="about">
+          <h2>About</h2>
+          <p>A retro-inspired barbershop with classic hot-towel shaves, sharp fades and no waiting. Book your chair online and walk in on the minute.</p>
+        </section>
+
+        <section class="block" id="services">
+          <h2>Services</h2>
+          <div class="chips" id="chips" role="tablist" aria-label="Service types"></div>
+          <ul class="svc-list" id="svc-list" aria-live="polite"></ul>
+          <p class="fine" id="services-note">Live from the booking app: change a price there, it changes here.</p>
+        </section>
+
+        <section class="block" id="team">
+          <h2>Team</h2>
+          <ul class="team" id="team-list"></ul>
+        </section>
+
+        <section class="block" id="portfolio">
+          <h2>Portfolio</h2>
+          <div class="grid" id="grid"></div>
+        </section>
+
+        <section class="block" id="info">
+          <h2>Opening hours</h2>
+          <ul class="week" id="week"></ul>
+          <p class="fine" id="hours-note">Hours follow the booking app, so days off show up here by themselves.</p>
+          <h2 class="gap">Good to know</h2>
+          <ul class="features">
+            <li>Instant confirmation</li>
+            <li>Parking nearby</li>
+            <li>Public transport nearby</li>
+            <li>Kids welcome</li>
+          </ul>
+          <h2 class="gap">Location</h2>
+          <div class="map">Your Google Maps embed goes here</div>
+          <p class="addr">Your street address, Your city · Your phone number · hello@yourbusinessname.com</p>
+        </section>
+      </div>
+
+      <aside class="side">
+        <div class="card">
+          <h2>Your Business Name</h2>
+          <p class="side-status" id="side-status"></p>
+          <a class="btn" data-book href="#">Book now</a>
+          <p class="side-note">Instant confirmation · pick a service, a time and your barber</p>
+        </div>
+      </aside>
+    </div>
+
+    <section class="cta">
+      <div>
+        <h2>Want this page for your shop?</h2>
+        <p>Photos, team, services and hours live from the Appointments &amp; Reports app, booking built in.</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn" data-getpage>Get my page</a>
+        <a class="link" href="/">See the classic page →</a>
+      </div>
+    </section>
+
+    <footer class="foot">
+      <p>© <span data-year>2026</span> Your Business Name · Online booking by <a href="https://appointmentsapps.com/" target="_blank" rel="noopener">Appointments &amp; Reports</a></p>
+      <p class="footer-madeby"></p>
+    </footer>
+  </div>
+
+  <div class="bar">
+    <div><strong>Your Business Name</strong><span id="bar-status"></span></div>
+    <a class="btn" data-book href="#">Book now</a>
+  </div>
+
+  <script type="module" src="app.js?v=1"></script>
+</body>
+
+</html>
