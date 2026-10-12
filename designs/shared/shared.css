@@ -14,7 +14,7 @@
   font: 600 0.88rem/1.3 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 .dm-bar-inner {
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  display: flex; align-items: center; gap: 12px;
   max-width: 1240px; margin: 0 auto; min-height: 48px; padding: 6px 16px;
 }
 .dm-pick { display: inline-flex; align-items: center; gap: 10px; min-width: 0; }
@@ -27,20 +27,58 @@
   appearance: none; -webkit-appearance: none; text-overflow: ellipsis;
 }
 .dm-pick select option, .dm-pick select optgroup { color: #111; background: #fff; }
-.dm-note { display: none; margin: 0; font-weight: 500; opacity: 0.7; }
+.dm-perks { flex: 1; min-width: 0; display: flex; justify-content: center; }
 .dm-get {
   flex-shrink: 0; padding: 7px 14px; border-radius: 999px;
   background: #fff; color: #111; text-decoration: none; font-weight: 700; white-space: nowrap;
 }
 .dm-get:hover { background: #e9e9e9; }
-.dm-promo {
-  margin: 0; padding: 7px 16px; background: #fff; color: #111; text-align: center;
-  font: 500 0.88rem/1.35 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
+/* "What you get" pill + card (markup from demo.js) */
+.perks-pill {
+  display: inline-flex; align-items: center; gap: 7px; max-width: 100%; min-height: 36px; padding: 5px 12px;
+  border-radius: 999px; border: 1.5px solid #ff8da1; background: transparent; color: #fff;
+  font: inherit; font-weight: 700; white-space: nowrap; cursor: pointer;
 }
-.dm-promo a { margin-left: 8px; color: inherit; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
-@media (min-width: 900px) { .dm-note { display: block; } }
-@media (max-width: 420px) { .dm-pick > span { display: none; } }
+.perks-pill b { color: #ffb3c0; font-weight: 800; }
+.perks-pill:hover { background: rgba(255, 255, 255, 0.1); }
+.perks-pill:focus-visible { outline: 3px solid #ff8da1; outline-offset: 2px; }
+.perks-caret { transition: transform 0.2s; }
+.perks-pill[aria-expanded="true"] .perks-caret { transform: rotate(180deg); }
+.perks-pop {
+  position: absolute; z-index: 5; top: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+  width: min(760px, calc(100% - 32px)); padding: 8px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+  background: #fff; color: #111; border: 1px solid rgba(0, 0, 0, 0.12); border-radius: 16px;
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.3); font-weight: 500;
+}
+.perks-pop[hidden] { display: none; }
+.perks-pop > div { padding: 12px 14px; border-radius: 12px; }
+.perks-pop > div:hover { background: #f3f3f3; }
+.perks-pop > div > span { margin-right: 6px; }
+.perks-pop strong { font-size: 0.95rem; }
+.perks-pop em { display: block; margin-top: 2px; font-style: normal; color: #555; font-size: 0.86rem; }
+.perks-app { grid-column: 1 / -1; padding: 10px 14px; font-weight: 700; color: #111; text-underline-offset: 3px; }
+.perks-short { display: none; }
+@media (max-width: 420px) {
+  .perks-full { display: none; }
+  .perks-short { display: inline; }
+  .perks-caret { display: none; }
+  .perks-pill { padding-inline: 10px; gap: 5px; }
+}
+@media (max-width: 800px) {
+  .perks-long { display: none; }
+  .dm-pick select { max-width: 34vw; }
+}
+@media (max-width: 640px) {
+  .perks-pop { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .dm-bar-inner { gap: 8px; padding-inline: 12px; }
+  .dm-pick > span { display: none; }
+  .dm-pick select { max-width: 30vw; }
+  .dm-get { padding: 7px 11px; }
+}
 
 /* Booking dialog: the online booking page, embedded */
 html.lv-dialog-open { overflow: hidden; }

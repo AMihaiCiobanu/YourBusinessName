@@ -1,7 +1,7 @@
 // "Your page, your way": the closing page of the demo. The mixer lets a prospect tap the sections
 // they liked from the different designs; the choice is added to the "Get my page" email.
 
-import { mountDemo, DESIGNS, designUrl, GET_PAGE_MAILTO } from '../shared/demo.js';
+import { mountDemo, DESIGNS, designUrl, GET_PAGE_MAILTO } from '../shared/demo.js?v=4';
 
 const COLORS = { storybook: '#c9a961', orbit: '#8b5cf6', depth: '#ff3d2e', fullframe: '#b98a45', duo: '#e8553d', marketplace: '#0e9f9a', listing: '#6950f3' };
 

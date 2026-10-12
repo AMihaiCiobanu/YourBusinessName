@@ -4,7 +4,7 @@
 // standard, a subscription (isSubscription) or a class (isClass), so the page groups by those.
 
 import { setLang, loadData, setupBooking, bookButton, el, formatPrice, formatDuration, weekRows, openState, serviceGroups } from '../shared/live.js';
-import { mountDemo } from '../shared/demo.js';
+import { mountDemo } from '../shared/demo.js?v=4';
 
 // Client page: put the id of the public booking link from the Appointments & Reports app here.
 const BOOKING_LINK_ID = '';

@@ -58,6 +58,32 @@ const MADE_BY = `<a href="https://softsapps.com" target="_blank" rel="noopener" 
   </svg>
 </a>`;
 
+// The "what you get" pill in the demo bar and the card it opens. Same markup on the classic
+// page and on every design; each stylesheet gives `.perks*` its own colours.
+const PERKS = `<button type="button" class="perks-pill" aria-expanded="false" aria-controls="perks-pop">
+    <span aria-hidden="true">🎁</span><b><span class="perks-full">Free website</span><span class="perks-short">Free site</span></b><span class="perks-long"> · in any language</span>
+    <svg class="perks-caret" viewBox="0 0 12 8" width="10" height="7" aria-hidden="true"><path d="M1 1.5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <div class="perks-pop" id="perks-pop" role="region" aria-label="What you get" hidden>
+    <div><span aria-hidden="true">🌐</span><strong>Your own address</strong><em>yourbusinessname.appointmentsapps.com, or your own domain like yourbusiness.com</em></div>
+    <div><span aria-hidden="true">🎁</span><strong>Free with a yearly plan</strong><em>Free website when you buy a yearly subscription to the Appointments app, if you pick one of these demo designs.</em></div>
+    <div><span aria-hidden="true">🗣️</span><strong>In any language</strong><em>We build your site in the language your clients speak.</em></div>
+    <div><span aria-hidden="true">⚡</span><strong>Live from the app</strong><em>Services, hours and booking come straight from your Appointments app.</em></div>
+    <a class="perks-app" href="https://appointmentsapps.com" target="_blank" rel="noopener">See the app</a>
+  </div>`; // static markup
+
+// Fills `host` (an element inside the demo bar) with the pill + card and wires open/close.
+export function mountPerks(host) {
+  host.classList.add('perks');
+  host.innerHTML = PERKS;
+  const pill = host.querySelector('.perks-pill');
+  const pop = host.querySelector('.perks-pop');
+  const set = (open) => { pop.hidden = !open; pill.setAttribute('aria-expanded', String(open)); };
+  pill.addEventListener('click', (e) => { e.stopPropagation(); set(pop.hidden); });
+  document.addEventListener('click', (e) => { if (!pop.hidden && !pop.contains(e.target)) set(false); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !pop.hidden) { set(false); pill.focus(); } });
+}
+
 // Demo bar at the top of a design page, plus the shared bits: "Get my page" links
 // ([data-getpage]) and the Made by credit (.footer-madeby).
 export function mountDemo(slug) {
@@ -65,12 +91,12 @@ export function mountDemo(slug) {
   bar.className = 'dm-bar';
   bar.innerHTML = `<div class="dm-bar-inner">
     <label class="dm-pick"><span>Preview</span><select aria-label="Choose a page design to preview"></select></label>
-    <p class="dm-note"><span>Demo · services, hours and booking come live from the app</span></p>
+    <div class="dm-perks"></div>
     <a class="dm-get" data-getpage>Get my page</a>
-  </div>
-  <p class="dm-promo"><span><strong>Free website</strong> when you buy a yearly subscription to the Appointments app, if you pick one of these demo designs.</span> <a href="https://appointmentsapps.com" target="_blank" rel="noopener">See the app</a></p>`; // static markup
+  </div>`; // static markup
   document.body.prepend(bar);
   wirePicker(bar.querySelector('select'), { current: `design:${slug}` });
+  mountPerks(bar.querySelector('.dm-perks'));
 
   for (const a of document.querySelectorAll('[data-getpage]')) a.href = GET_PAGE_MAILTO;
   for (const p of document.querySelectorAll('.footer-madeby')) p.innerHTML = MADE_BY; // static markup

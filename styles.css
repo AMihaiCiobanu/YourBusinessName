@@ -255,17 +255,58 @@ html[data-niche="barber"] .btn { border-radius: 6px; text-transform: uppercase; 
 }
 .demo-pick select option { color: #111; background: #fff; }
 .demo-pick select:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-.demo-promo { background: var(--accent); color: var(--accent-ink); }
-.demo-promo-inner { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px 14px; margin: 0 auto; padding-top: 7px; padding-bottom: 7px; font-size: 0.9rem; line-height: 1.35; text-align: center; }
-.demo-promo a { color: inherit; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
-.demo-url { display: none; margin: 0; font-size: 0.85rem; opacity: 0.85; }
-.demo-url { text-align: right; line-height: 1.35; }
-.demo-url-label { margin-right: 6px; opacity: 0.75; }
-.demo-url-alt { margin-left: 8px; padding-left: 10px; border-left: 1px solid color-mix(in srgb, var(--bg) 35%, transparent); opacity: 0.85; }
-.demo-url-alt strong { color: var(--accent-soft); font-weight: 700; }
-html[data-theme="dark"] .demo-url-alt strong { color: var(--accent); }
-.demo-url strong { font-weight: 700; color: var(--accent-soft); }
-html[data-theme="dark"] .demo-url strong { color: var(--accent); }
+.demo-bar { position: relative; }
+.demo-perks { flex: 1; min-width: 0; display: flex; justify-content: center; }
+.demo-get {
+  flex-shrink: 0; padding: 7px 14px; border-radius: 999px; background: var(--bg); color: var(--text);
+  text-decoration: none; font-size: 0.9rem; font-weight: 700; white-space: nowrap;
+}
+.demo-get:hover { background: var(--accent-soft); }
+.perks-pill {
+  display: inline-flex; align-items: center; gap: 7px; max-width: 100%; min-height: 36px; padding: 5px 12px;
+  border-radius: 999px; border: 1.5px solid var(--accent); background: transparent; color: var(--bg);
+  font: inherit; font-size: 0.9rem; font-weight: 700; white-space: nowrap; cursor: pointer;
+}
+.perks-pill b { color: var(--accent-soft); font-weight: 800; }
+html[data-theme="dark"] .perks-pill b { color: var(--accent); }
+.perks-pill:hover { background: color-mix(in srgb, var(--bg) 12%, transparent); }
+.perks-pill:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.perks-caret { transition: transform 0.2s; }
+.perks-pill[aria-expanded="true"] .perks-caret { transform: rotate(180deg); }
+.perks-pop {
+  position: absolute; z-index: 5; top: calc(100% + 6px); left: 50%; transform: translateX(-50%);
+  width: min(760px, calc(100% - 32px)); padding: 8px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+  background: var(--surface); color: var(--text); border: 1px solid var(--line); border-radius: 16px;
+  box-shadow: var(--shadow); font-size: 0.92rem;
+}
+.perks-pop[hidden] { display: none; }
+.perks-pop > div { padding: 12px 14px; border-radius: 12px; }
+.perks-pop > div:hover { background: var(--accent-soft); }
+.perks-pop > div > span { margin-right: 6px; }
+.perks-pop strong { font-size: 0.95rem; }
+.perks-pop em { display: block; margin-top: 2px; font-style: normal; color: var(--muted); font-size: 0.86rem; }
+.perks-app { grid-column: 1 / -1; padding: 10px 14px; font-weight: 700; color: var(--accent); text-underline-offset: 3px; }
+.perks-short { display: none; }
+@media (max-width: 420px) {
+  .perks-full { display: none; }
+  .perks-short { display: inline; }
+  .perks-caret { display: none; }
+  .perks-pill { padding-inline: 10px; gap: 5px; }
+}
+@media (max-width: 800px) {
+  .perks-long { display: none; }
+  .demo-pick select { max-width: 34vw; }
+}
+@media (max-width: 640px) {
+  .perks-pop { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .demo-bar-inner { gap: 8px; }
+  .demo-pick-label { display: none; }
+  .demo-pick select { max-width: 30vw; }
+  .demo-get { padding: 7px 11px; }
+}
 
 .topbar {
   background: color-mix(in srgb, var(--bg) 90%, transparent);
@@ -551,7 +592,6 @@ html[data-niche="barber"] .sticky-book { border-radius: 6px; text-transform: upp
 @media (min-width: 768px) {
   body { padding-bottom: 0; }
   .sticky-book { display: none; }
-  .demo-url { display: block; }
   .topbar .btn-small { display: inline-flex; }
   .hero { padding: 56px 0 80px; }
   .hero-inner { grid-template-columns: 1.1fr 0.9fr; align-items: center; gap: 56px; }
