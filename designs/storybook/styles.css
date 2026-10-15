@@ -304,6 +304,21 @@ h3 { font-size: 1.6rem; font-weight: 400; }
 }
 @media (min-width: 960px) { .nav { display: flex; } }
 
+/* side names: the section names along the right edge (see side-names.js) */
+.side-names { display: none; }
+@media (min-width: 768px) {
+  .side-names { display: block; position: fixed; inset: 0; z-index: 37; pointer-events: none; }
+  .side-name {
+    --halo: var(--ink); position: absolute; left: 0; top: 0; pointer-events: auto; white-space: nowrap;
+    font: 500 32px/1 var(--serif); letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none;
+    color: #fff; text-shadow: 0 0 5px var(--halo), 0 0 12px var(--halo);
+    transition: color 0.35s var(--ease); will-change: transform, opacity;
+  }
+  .side-name[data-tone='light'] { --halo: var(--butter); color: var(--ink); }
+  .side-name:hover, .side-name:focus-visible { color: var(--gold-2); }
+  .side-name[data-tone='dark']:hover, .side-name[data-tone='dark']:focus-visible { color: var(--gold); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .arch img, .cover-hint { animation: none; }

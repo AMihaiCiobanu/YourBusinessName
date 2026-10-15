@@ -4,6 +4,7 @@
 
 import { setLang, loadData, setupBooking, bookButton, el, formatPrice, formatDuration, weekRows, openState, serviceGroups } from '../shared/live.js';
 import { mountDemo } from '../shared/demo.js?v=4';
+import { mountSideNames } from './side-names.js?v=1';
 
 // Client page: put the id of the public booking link from the Appointments & Reports app here.
 const BOOKING_LINK_ID = '';
@@ -39,6 +40,7 @@ const roman = n => ROMAN[n - 1] || String(n);
 
 setLang('en');
 mountDemo('storybook');
+mountSideNames();
 setupBooking({ linkId: BOOKING_LINK_ID, theme: 'light' });
 
 // ---------- menu ----------
