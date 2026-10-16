@@ -1,2 +1,5 @@
 .DS_Store
 .claude/
+# Local test output (screenshots, Lighthouse reports): not published, not committed
+docs/screenshots/
+docs/lighthouse/

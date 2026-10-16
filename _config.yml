@@ -1,0 +1,3 @@
+# GitHub Pages (Jekyll): keep the project notes in docs/ off the live site.
+exclude:
+  - docs
