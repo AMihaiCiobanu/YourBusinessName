@@ -46,7 +46,11 @@ export default {
     sendHint: 'Se deschide emailul, cu configurația deja scrisă.',
     badge: { '3d': '3D', live: 'Live', original: 'Original', new: 'Nou' },
     themeChanged: 'Temă: {name}.',
-    jump: 'Mergi la {name} pe pagină'
+    jump: 'Mergi la {name} pe pagină',
+    newTitle: 'Vrei ceva complet nou?',
+    newText: 'Secțiunile de aici sunt un punct de plecare, nu un meniu fix. Spune-ne despre afacerea ta și îți desenăm un layout doar pentru tine.',
+    newLink: 'Spune-ne ce ai în minte',
+    included: 'Mereu incluse: servicii și program live din aplicație, programare online, gândită pentru telefon, adresa ta pe internet.'
   },
 
   skins: {

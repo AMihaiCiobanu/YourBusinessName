@@ -46,7 +46,11 @@ export default {
     sendHint: 'Opens your email with this setup already written in.',
     badge: { '3d': '3D', live: 'Live', original: 'Original', new: 'New' },
     themeChanged: 'Theme: {name}.',
-    jump: 'Go to {name} on the page'
+    jump: 'Go to {name} on the page',
+    newTitle: 'Something brand new?',
+    newText: 'These sections are a starting point, not a fixed menu. Tell us about your business and we design a layout just for you.',
+    newLink: 'Tell us what you have in mind',
+    included: 'Always included: services and hours live from the app, online booking, made for phones, your own web address.'
   },
 
   skins: {

@@ -295,7 +295,12 @@ export function mountPanel({ state, change, reset, shareUrl, toast, motion, getP
       count,
       list,
       h('p', { class: 'bp-label-t bp-sub', text: t('ui.floating') }),
-      floating
+      floating,
+      h('div', { class: 'bp-new' },
+        h('p', { class: 'bp-label-t', text: t('ui.newTitle') }),
+        h('p', { class: 'bp-hint', text: t('ui.newText') }),
+        h('a', { class: 'bp-newlink', 'data-getpage': '', href: getPageHref(), text: t('ui.newLink') }),
+        h('p', { class: 'bp-hint', text: t('ui.included') }))
     );
 
     panel.replaceChildren(
