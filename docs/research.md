@@ -130,3 +130,37 @@ Ideile 1–8 și 13–14 intră în MVP (vezi `plan.md`), restul rămân în bac
 - [Awwwards — Marrufo Car Detailing (profil, fără premiu)](https://www.awwwards.com/marrufo-car-detailing-ceramic-coating/)
 - [Zarla — car detailing inspiration](https://www.zarla.com/inspiration/car-detailing)
 - [Dribbble — barber website](https://dribbble.com/search/barber-website)
+
+---
+
+## Addendum — dentiști și dermatologi (cerere ulterioară)
+
+Aceeași metodă (script de inspecție în browser). Pe baza lor s-au făcut design-urile `/designs/dental/` („Bright”) și
+`/designs/derma/` („Skin”) și nișele „Cabinet stomatologic” și „Dermatolog” din configurator.
+
+| # | Site | Nișă | Platformă / librării | Secțiuni principale | Ce impresionează | Ce lipsește / mobil |
+|---|---|---|---|---|---|---|
+| 21 | [southcliffdentalgroup.com](https://southcliffdentalgroup.com/) — **Awwwards Honorable Mention, iun. 2026** | Grup de cabinete dentare (UK) | Next.js, Three.js / WebGL (1 canvas) | Award winning practices, Who we are, Our treatments, Emergency care, Our patients (+546K), Our team, Our locations | Navigare și modele 3D, hartă animată a locațiilor | Cifra uriașă de pacienți e singura dovadă socială; programare pe paginile de tratament |
+| 22 | [beehivedental.com](https://beehivedental.com/) | Cabinet dentar (Canada) | WordPress, Swiper, 1 video | Premier dentist, 600+ 5 star reviews, Comprehensive / Emergency / Orthodontics, „A place of relaxation”, **Transparent pricing — No surprises**, Insurance, Step inside | Prețuri transparente și „fără surprize” ca argument principal | Programare pe NexHealth (alt domeniu) |
+| 23 | [reginamaria.ro/dental](https://www.reginamaria.ro/dental) (fost drleahu.ro) | Rețea dentară RO | custom, before/after | Dinți ficși, ortodonție, endodonție la microscop, pedodonție, echipa medicală (10 medici cu titluri), sedare conștientă | Piața RO: echipa cu titluri și „sedare” pentru pacienții anxioși | 96 de imagini pe homepage; formular de cerere, nu calendar |
+| 24 | [Rafaela Salvato — Dermatologie](https://ricardoseola.com/salvato/) — **Awwwards Nominee, feb. 2026** | Dermatolog (Brazilia) | Webflow, GSAP + ScrollTrigger, Lenis, 5 video | Brand personal al medicului, scroll animat | Un singur medic ca brand, ton luxury | Aproape fără informații practice (prețuri, program) |
+| 25 | [schweigerderm.com](https://www.schweigerderm.com/) | Rețea dermatologie (SUA) | WordPress, Swiper | „Seen today or tomorrow”, servicii medical / cosmetic, Find a dermatologist near you, What patients are saying | Promisiunea de programare rapidă, căutare de medic | Programare pe Zocdoc |
+| 26 | [skinlaundry.com](https://www.skinlaundry.com/) | Clinică laser / facial | Next.js, 2 video | Treatments, „Choose your skin cycle”, Correct · Prevent · Maintain, locations, gift cards | Tratamentele explicate ca un ciclu, nu ca o listă | Multe bannere promoționale sus |
+
+**Ce contează pentru clinici (față de saloane):**
+
+1. **Încredere medicală**: medici cu titluri și specialități, tehnologie (microscop, radiografie digitală, dermatoscop).
+2. **Prețuri transparente** și „planul în scris înainte să începem” (Beehive) — frica de costuri ascunse e principala barieră.
+3. **Anxietate**: „ce se întâmplă la prima vizită”, sedare, „pauză oricând ridici mâna”.
+4. **Urgențe** (dentist) / **programare rapidă** (dermatolog, Schweiger) — buton separat, vizibil.
+5. **Before / after** cu acordul pacientului (pe demo: poză de exemplu editată, marcată ca atare).
+6. Pentru dermatolog: separarea **medical / estetic** și **controlul alunițelor** ca serviciu-vedetă.
+
+**Idei aplicate în cele două design-uri:** „What brings you in?” — butoane pe probleme (durere, albire, aparat,
+implant; acnee, alunițe, pete, rozacee, păr) care filtrează lista **live** de tratamente după cuvinte din nume (merge în
+română și engleză, deci și cu datele reale din aplicație); ghid „prima vizită” / „control alunițe în 3 pași”; harta
+Google se încarcă doar la tap; bară fixă Sună / Programează pe telefon.
+
+**Alte nișe care s-ar potrivi** (propuse, neimplementate): veterinar, optică, psiholog / terapeut, kinetoterapie
+(acoperită parțial de „Kineto / cabinet privat”), studio de gene și sprâncene, pilates / yoga, pet grooming, fotograf,
+școală de șoferi.
