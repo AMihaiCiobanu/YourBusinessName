@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Business Name — Dermatology clinic · Skin page design</title>
+  <meta name="description" content="Skin: a booking page design for dermatologists, with a skin concern finder, medical and aesthetic care, mole checks, before/after and live prices." />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#f7f1ec" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" />
+  <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" />
+  <link rel="preload" as="image" fetchpriority="high" href="https://images.unsplash.com/photo-1713085085470-fba013d67e65?auto=format&fit=crop&w=1600&q=65" />
+  <link rel="stylesheet" href="../shared/shared.css?v=7" />
+  <link rel="stylesheet" href="../shared/clinic.css?v=1" />
+  <link rel="stylesheet" href="styles.css?v=1" />
+</head>
+
+<body>
+  <div class="backdrop" id="backdrop" aria-hidden="true">
+    <img class="is-on" src="https://images.unsplash.com/photo-1713085085470-fba013d67e65?auto=format&fit=crop&w=1600&q=65" alt="" data-caption="Medical facial peel" fetchpriority="high" />
+    <img data-src="https://images.unsplash.com/photo-1552693673-1bf958298935?auto=format&fit=crop&w=1600&q=65" alt="" data-caption="Skin care treatment" />
+    <img data-src="https://images.unsplash.com/photo-1676312754401-d97fe43c2c4b?auto=format&fit=crop&w=1600&q=65" alt="" data-caption="A closer look" />
+    <img data-src="https://images.unsplash.com/photo-1785861775561-c6db7da314a0?auto=format&fit=crop&w=1600&q=65" alt="" data-caption="Laser treatment" />
+    <img data-src="https://images.unsplash.com/photo-1785860855601-58107d722164?auto=format&fit=crop&w=1600&q=65" alt="" data-caption="After care" />
+    <img data-src="https://images.unsplash.com/photo-1552256031-811fa8f0a7b1?auto=format&fit=crop&w=1600&q=65" alt="" data-caption="Serum, prescribed for you" />
+  </div>
+  <div class="shade" aria-hidden="true"></div>
+
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="brand" href="#">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="4" /></svg>
+        Your Business Name
+      </a>
+      <a class="btn btn-sm" data-book href="#">Book</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="frame frame-hero" data-bg="0">
+      <div class="wrap">
+        <p class="eyebrow">Dermatology · Medical &amp; aesthetic</p>
+        <h1>Skin, looked after <em>by a doctor.</em></h1>
+        <p class="lead">From acne and moles to calm, glowing skin: a diagnosis first, then the treatment that fits you. Book online, any hour.</p>
+        <div class="hero-row">
+          <a class="btn" data-book href="#">Book a consultation</a>
+          <a class="pill" href="#moles">Mole check this week →</a>
+        </div>
+        <p class="today" id="today" hidden></p>
+      </div>
+    </section>
+
+    <section class="frame" id="care" data-bg="1">
+      <div class="wrap">
+        <p class="eyebrow">Two kinds of care</p>
+        <h2>Healthy skin, <em>then</em> beautiful skin.</h2>
+        <div class="split">
+          <article class="panel">
+            <h3>Medical</h3>
+            <p>Acne, eczema, psoriasis, rosacea, hair and nail problems, mole checks and skin cancer screening.</p>
+            <a class="link" href="#concerns">See treatments →</a>
+          </article>
+          <article class="panel">
+            <h3>Aesthetic</h3>
+            <p>Peels, laser, pigmentation, fine lines and skin quality, always planned by the doctor.</p>
+            <a class="link" href="#concerns">See treatments →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="frame" id="concerns" data-bg="2">
+      <div class="wrap">
+        <div class="panel panel-wide panel-right">
+          <p class="eyebrow">Treatments &amp; prices</p>
+          <h2>What would you like to treat?</h2>
+          <div class="chips" id="chips" role="group" aria-label="Filter treatments by skin concern"></div>
+          <ul class="board" id="board" aria-live="polite"></ul>
+          <p class="fine" id="board-note">Live from the booking app: change a price there, it changes here.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="frame" id="moles" data-bg="2">
+      <div class="wrap">
+        <p class="eyebrow">Mole check</p>
+        <h2>Twenty minutes, peace of mind.</h2>
+        <ol class="steps">
+          <li><h3>Dermatoscope</h3><p>Every mole looked at under magnification, head to toe.</p></li>
+          <li><h3>Photo map</h3><p>The ones to watch are photographed, so changes are easy to spot next time.</p></li>
+          <li><h3>A reminder</h3><p>We tell you when to come back. If anything needs a closer look, you leave with a plan.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="frame" id="doctor" data-bg="1">
+      <div class="wrap">
+        <div class="panel profile">
+          <img src="https://images.unsplash.com/photo-1706565029539-d09af5896340?auto=format&fit=crop&w=600&h=720&q=65" alt="Portrait of the dermatologist" loading="lazy" width="600" height="720" />
+          <div>
+            <p class="eyebrow">Your doctor</p>
+            <h2>Dr. Name Surname</h2>
+            <p>Dermatologist, 15 years of practice. Member of the national dermatology society, trained in dermatoscopy and laser.</p>
+            <blockquote class="motto">“I will always tell you what your skin needs, and what it doesn't.”</blockquote>
+            <p class="fine">Sample profile. On your page: your own photo, training and words.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="frame" id="results" data-bg="4">
+      <div class="wrap visit">
+        <div>
+          <p class="eyebrow">Before &amp; after</p>
+          <h2>Six weeks, three peels.</h2>
+          <p class="lead">Drag the handle to compare. Sample photo, edited to show the effect; on your page, your own cases (with your patients' consent).</p>
+        </div>
+        <div class="cmp" id="cmp">
+          <img class="before" src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=1000&h=750&q=65" alt="Before treatment: sample photo" loading="lazy" width="1000" height="750" />
+          <img class="after" src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=1000&h=750&q=65" alt="After treatment: the same skin, calmer and brighter" loading="lazy" width="1000" height="750" />
+          <span class="cmp-tag b" aria-hidden="true">Before</span><span class="cmp-tag a" aria-hidden="true">After</span>
+          <span class="cmp-line" aria-hidden="true"></span>
+          <input type="range" min="0" max="100" value="50" aria-label="Compare before and after" />
+        </div>
+      </div>
+    </section>
+
+    <section class="frame" id="reviews" data-bg="4">
+      <div class="wrap">
+        <p class="rating"><b>4.9</b> ★★★★★ · 320 reviews <span class="fine">(sample)</span></p>
+        <figure class="quote" id="quote" aria-live="polite"></figure>
+        <div class="dots" id="dots" role="group" aria-label="Choose a review"></div>
+      </div>
+    </section>
+
+    <section class="frame" id="hours" data-bg="5">
+      <div class="wrap">
+        <div class="panel">
+          <p class="eyebrow">Today</p>
+          <p class="big-time" id="big-time">–</p>
+          <ul class="week" id="week"></ul>
+          <p class="fine" id="hours-note">Hours follow the booking app, so days off show up here by themselves.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="frame" id="visit" data-bg="0">
+      <div class="wrap visit">
+        <div class="panel">
+          <p class="eyebrow">The clinic</p>
+          <h2>Come see us</h2>
+          <p>Your street address, Your city<br />Your phone number · hello@yourbusinessname.com</p>
+          <div class="map" id="map"><button type="button" class="btn btn-sm" id="map-load">Show the map</button></div>
+        </div>
+        <div class="panel panel-cta">
+          <h2>Want this page for your practice?</h2>
+          <p>Treatments and hours live from the Appointments &amp; Reports app, booking built in, in the language your patients speak.</p>
+          <a class="btn" data-getpage>Get my page</a>
+          <a class="link" href="/designs/builder/#n=derma&amp;k=luxe">Or build your own page →</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-inner">
+      <p>© <span data-year>2026</span> Your Business Name · Online booking by <a href="https://appointmentsapps.com/" target="_blank" rel="noopener">Appointments &amp; Reports</a></p>
+      <button type="button" class="caption" id="caption" data-lightbox-open="#backdrop" aria-label="View photo larger"><span data-n>01</span> / 06 · <span data-t>Medical facial peel</span> · sample photo</button>
+    </div>
+    <p class="footer-madeby"></p>
+  </footer>
+
+  <div class="sticky">
+    <button type="button" class="call" data-demo-call>Call</button>
+    <a class="book" data-book href="#">Book a consultation</a>
+  </div>
+
+  <script src="../shared/lightbox.js?v=1" defer></script>
+  <script type="module" src="app.js?v=1"></script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+/* Skin (dermatology): warm cream and clay, editorial serif, soft. Layout in ../shared/clinic.css. */
+
+:root {
+  --bg: #f7f1ec;
+  --text: #2b1d17;
+  --muted: #5e4b42;
+  --accent: #a4553a;
+  --accent-ink: #ffffff;
+  --accent-text: #8f4429;
+  --accent-soft: #f1dfd5;
+  --line: rgba(43, 29, 23, 0.12);
+  --line-strong: rgba(43, 29, 23, 0.3);
+  --glass: rgba(251, 247, 243, 0.8);
+  --glass-strong: rgba(251, 247, 243, 0.94);
+  --shade: linear-gradient(90deg, rgba(247, 241, 236, 0.97) 0%, rgba(247, 241, 236, 0.84) 50%, rgba(247, 241, 236, 0.25) 100%), linear-gradient(0deg, rgba(247, 241, 236, 0.8), transparent 45%);
+  --display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --display-weight: 400;
+  --display-spacing: -0.02em;
+  --em-style: italic;
+  --radius: 6px;
+  --radius-btn: 6px;
+  --panel-shadow: 0 30px 60px rgba(43, 29, 23, 0.1);
+  --before-filter: saturate(1.25) sepia(0.25) hue-rotate(-12deg) contrast(1.05) brightness(0.92);
+
+  --lv-surface: #fbf7f3;
+  --lv-text: var(--text);
+  --lv-muted: var(--muted);
+  --lv-line: var(--line);
+  --lv-accent: var(--accent);
+  --lv-radius: 8px;
+}
+
+h2 em { font-style: italic; color: var(--accent-text); }
+.eyebrow { letter-spacing: 0.26em; }
+.split { display: grid; gap: 16px; margin-top: 24px; }
+.split .panel { max-width: none; }
+.split h3 { font-size: 2rem; margin-bottom: 8px; }
+.profile { display: grid; gap: 24px; max-width: 980px; align-items: center; }
+.profile img { width: 100%; max-width: 360px; aspect-ratio: 5 / 6; object-fit: cover; border-radius: 4px; }
+.motto { margin: 18px 0 0; font: italic 400 1.5rem/1.35 var(--display); color: var(--text); }
+.chip { border-radius: 6px; }
+.steps li::before { border-radius: 4px; }
+@media (min-width: 768px) {
+  .split { grid-template-columns: 1fr 1fr; max-width: 980px; }
+  .profile { grid-template-columns: 360px 1fr; }
+}
+@media (max-width: 767px) {
+  .shade { background: linear-gradient(180deg, rgba(247, 241, 236, 0.72) 0%, rgba(247, 241, 236, 0.92) 45%, rgba(247, 241, 236, 0.97) 100%); }
+}

@@ -17,6 +17,8 @@ export const DESIGNS = [
   { slug: 'duo', label: 'Salon, two specialists · Duo' },
   { slug: 'marketplace', label: 'Barbershop · Marketplace listing' },
   { slug: 'listing', label: 'Barbershop · Gallery listing' },
+  { slug: 'dental', label: 'Dental clinic · Bright' },
+  { slug: 'derma', label: 'Dermatologist · Skin' },
   { slug: 'builder', label: '✦ Build your own: mix sections, theme, colour' }
 ];
 

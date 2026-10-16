@@ -1,0 +1,39 @@
+/* Bright (dental): airy white and mint, rounded, calm. Layout in ../shared/clinic.css. */
+
+:root {
+  --bg: #f4fbfa;
+  --text: #0f2a2a;
+  --muted: #3f5c5b;
+  --accent: #0f9b8e;
+  --accent-ink: #ffffff;
+  --accent-text: #0b7a70;
+  --accent-soft: #d6f2ee;
+  --line: rgba(15, 42, 42, 0.12);
+  --line-strong: rgba(15, 42, 42, 0.28);
+  --glass: rgba(255, 255, 255, 0.78);
+  --glass-strong: rgba(255, 255, 255, 0.92);
+  --shade: linear-gradient(90deg, rgba(244, 251, 250, 0.96) 0%, rgba(244, 251, 250, 0.82) 48%, rgba(244, 251, 250, 0.3) 100%), linear-gradient(0deg, rgba(244, 251, 250, 0.8), transparent 45%);
+  --display: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --body: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --display-weight: 800;
+  --display-spacing: -0.04em;
+  --radius: 28px;
+  --panel-shadow: 0 30px 60px rgba(15, 42, 42, 0.12);
+  --before-filter: saturate(0.55) sepia(0.45) brightness(0.88);
+
+  --lv-surface: #ffffff;
+  --lv-text: var(--text);
+  --lv-muted: var(--muted);
+  --lv-line: var(--line);
+  --lv-accent: var(--accent);
+  --lv-radius: 24px;
+}
+
+h1 em { display: block; }
+.pill-sos { border-color: rgba(194, 65, 12, 0.35); color: #9a3412; background: rgba(255, 247, 237, 0.9); }
+.pill-sos svg { color: #c2410c; }
+.doc .creds span { background: var(--accent-soft); color: #0b5c55; }
+.steps li { background: rgba(255, 255, 255, 0.86); }
+@media (max-width: 767px) {
+  .shade { background: linear-gradient(180deg, rgba(244, 251, 250, 0.7) 0%, rgba(244, 251, 250, 0.9) 45%, rgba(244, 251, 250, 0.97) 100%); }
+}
