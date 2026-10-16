@@ -321,6 +321,22 @@ function counter(el) {
   el.querySelector('.bk-next').disabled = i >= total - (portrait ? 1 : 2);
 }
 
+// A closed book in a spread shows one page in one half of the frame: the front cover on the right,
+// the back cover on the left. Shift it by half a page so it sits in the middle.
+function center(el, opening = false) {
+  const s = state.get(el);
+  const holder = el.querySelector('.bk-holder');
+  let shift = 0;
+  if (s.flip && !opening && s.flip.getOrientation() !== 'portrait') {
+    const i = s.flip.getCurrentPageIndex();
+    const total = s.flip.getPageCount();
+    const half = (el.querySelector('.stf__block')?.offsetWidth || 0) / 4;
+    if (i === 0) shift = -half;
+    else if (i >= total - 1 && total % 2 === 0) shift = half;
+  }
+  holder.style.setProperty('--bk-shift', `${Math.round(shift)}px`);
+}
+
 function build(el) {
   const s = state.get(el);
   const ctx = s.ctx;
@@ -343,6 +359,7 @@ function build(el) {
   s.flip?.destroy();
   s.flip = null;
   holder.replaceChildren();
+  holder.style.removeProperty('--bk-shift');
 
   if (s.PageFlip) {
     const root = h('div', { class: 'bk-root' });
@@ -366,14 +383,20 @@ function build(el) {
       });
       flip.loadFromHTML(pages);
       flip.on('flip', () => counter(el));
-      flip.on('changeOrientation', () => counter(el));
-      flip.on('changeState', e => { if (e.data === 'flipping' && s.soundOn) rustle(); });
+      flip.on('changeOrientation', () => { counter(el); center(el); });
+      flip.on('changeState', e => {
+        if (e.data === 'flipping' && s.soundOn) rustle();
+        // Any turn or corner fold opens the book, so it slides to the middle while the page turns;
+        // back at rest, a closed book moves over its one visible half again.
+        center(el, e.data !== 'read');
+      });
       // A swipe up to 0.4 s turns the page (library default 0.25 s felt too strict on phones).
       const ui = flip.getUI?.();
       if (ui && 'swipeTimeout' in ui) ui.swipeTimeout = 400;
       s.flip = flip;
       holder.classList.toggle('is-portrait', size.portrait);
       counter(el);
+      center(el);
       return;
     } catch (err) {
       console.warn('Book: flat fallback', err);

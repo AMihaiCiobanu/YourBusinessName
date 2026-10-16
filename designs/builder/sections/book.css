@@ -18,7 +18,7 @@
 :root[data-skin="clean"] .bk-stage { --paper: #ffffff; --paper-2: #f1eee8; --cover: var(--accent); --cover-ink: var(--accent-ink); --foil: var(--accent-ink); }
 :root[data-skin="bold"] .bk-stage { --paper: #ffffff; --paper-2: #fff1dc; --cover: var(--accent-3); --cover-ink: var(--text); --foil: var(--text); }
 
-.bk-holder { position: relative; margin: 0 auto; max-width: 960px; }
+.bk-holder { position: relative; margin: 0 auto; max-width: 960px; transform: translateX(var(--bk-shift, 0px)); transition: transform 0.85s var(--ease); }
 .bk-root { margin: 0 auto; }
 
 .bk-page {
