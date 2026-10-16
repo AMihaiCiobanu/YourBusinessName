@@ -90,7 +90,7 @@ export default {
     insta: { name: 'Instagram grid', desc: 'Square photo grid with a full-screen view.' },
     team: { name: 'Team', desc: 'Flip cards with specialties and booking.' },
     products: { name: 'Products', desc: 'Products you sell, added by hand.' },
-    gift: { name: 'Gift card', desc: 'A 3D card clients can design.' },
+    gift: { name: 'Gift card', desc: 'A 3D card; clients call for details.' },
     loyalty: { name: 'Loyalty card', desc: 'Stamps that fill up as you scroll.' },
     reviews: { name: 'Reviews', desc: 'A carousel of client reviews.' },
     faq: { name: 'FAQ', desc: 'Answers to common questions.' },
@@ -134,7 +134,6 @@ export default {
     demoCall: 'Demo page: on your page this button calls you.',
     demoWhatsapp: 'Demo page: on your page this opens a WhatsApp chat with you.',
     demoReserve: 'Demo page: on your page this sends you a message to reserve “{name}”.',
-    demoGift: 'Demo page: on your page this sends you the gift card request.',
     demoForm: 'Demo page: on your page this request reaches you in the Appointments app.',
     demoSocial: 'Demo page: on your page this opens your profile.'
   },
@@ -259,18 +258,10 @@ export default {
   gift: {
     eyebrow: 'Gift card',
     title: 'Give an hour of care',
-    lead: 'Pick an amount, write a name and a short message. We prepare the card for you.',
-    amount: 'Amount',
-    other: 'Other',
-    otherAria: 'Other amount',
-    to: 'For',
-    from: 'From',
-    message: 'Message',
-    toPh: 'Their name',
-    fromPh: 'Your name',
-    msgPh: 'Happy birthday!',
+    lead: 'Call us and we will tell you the amounts and how the card looks. You pay for it and pick it up here.',
+    msg: 'Happy birthday!',
     flip: 'Flip the card',
-    cta: 'Ask for this gift card',
+    cta: 'Call for more details',
     card: 'Gift card',
     valid: 'Valid for 12 months'
   },
@@ -358,7 +349,8 @@ export default {
     label: 'Quick contact',
     call: 'Call',
     whatsapp: 'WhatsApp',
-    book: 'Book'
+    book: 'Book',
+    online: 'Online'
   },
 
   footer: {

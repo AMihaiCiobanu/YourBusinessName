@@ -158,7 +158,6 @@ document.addEventListener('click', e => {
     call: t('common.demoCall'),
     whatsapp: t('common.demoWhatsapp'),
     social: t('common.demoSocial'),
-    gift: t('common.demoGift'),
     form: t('common.demoForm'),
     reserve: t('common.demoReserve', { name: node.dataset.name || '' })
   };

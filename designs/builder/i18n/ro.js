@@ -90,7 +90,7 @@ export default {
     insta: { name: 'Grilă Instagram', desc: 'Poze pătrate, cu vizualizare pe tot ecranul.' },
     team: { name: 'Echipa', desc: 'Carduri care se întorc, cu specialități și programare.' },
     products: { name: 'Produse', desc: 'Produsele pe care le vinzi, adăugate manual.' },
-    gift: { name: 'Card cadou', desc: 'Un card 3D pe care clientul îl personalizează.' },
+    gift: { name: 'Card cadou', desc: 'Un card 3D; clientul sună pentru detalii.' },
     loyalty: { name: 'Card de fidelitate', desc: 'Ștampile care se umplu la scroll.' },
     reviews: { name: 'Recenzii', desc: 'Un carusel cu păreri de la clienți.' },
     faq: { name: 'Întrebări frecvente', desc: 'Răspunsuri la întrebările des întâlnite.' },
@@ -134,7 +134,6 @@ export default {
     demoCall: 'Pagină demo: pe pagina ta, butonul acesta te sună.',
     demoWhatsapp: 'Pagină demo: pe pagina ta, aici se deschide o conversație pe WhatsApp cu tine.',
     demoReserve: 'Pagină demo: pe pagina ta, aici primești un mesaj de rezervare pentru „{name}”.',
-    demoGift: 'Pagină demo: pe pagina ta, aici primești cererea pentru cardul cadou.',
     demoForm: 'Pagină demo: pe pagina ta, cererea ajunge la tine în aplicația Appointments.',
     demoSocial: 'Pagină demo: pe pagina ta, aici se deschide profilul tău.'
   },
@@ -259,18 +258,10 @@ export default {
   gift: {
     eyebrow: 'Card cadou',
     title: 'Dăruiește o oră de răsfăț',
-    lead: 'Alegi suma, scrii un nume și un mesaj scurt. Noi pregătim cardul.',
-    amount: 'Suma',
-    other: 'Altă sumă',
-    otherAria: 'Altă sumă',
-    to: 'Pentru',
-    from: 'De la',
-    message: 'Mesaj',
-    toPh: 'Numele lui / ei',
-    fromPh: 'Numele tău',
-    msgPh: 'La mulți ani!',
+    lead: 'Sună-ne și îți spunem sumele și cum arată cardul. Îl plătești și îl ridici de la noi.',
+    msg: 'La mulți ani!',
     flip: 'Întoarce cardul',
-    cta: 'Cere acest card cadou',
+    cta: 'Sună pentru detalii',
     card: 'Card cadou',
     valid: 'Valabil 12 luni'
   },
@@ -358,7 +349,8 @@ export default {
     label: 'Contact rapid',
     call: 'Sună',
     whatsapp: 'WhatsApp',
-    book: 'Programare'
+    book: 'Programare',
+    online: 'Online'
   },
 
   footer: {

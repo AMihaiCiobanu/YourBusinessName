@@ -32,25 +32,5 @@
 .gc-msg { font: var(--display-weight) calc(1.4rem * var(--display-scale)) / 1.35 var(--font-display); }
 :root[data-skin="luxe"] .gc-msg { font-style: italic; }
 .gc-from { color: var(--muted); }
-.gc-form { display: grid; gap: 14px; }
-.gc-l { font-weight: 700; font-size: 0.92rem; }
-.gc-amounts { display: flex; flex-wrap: wrap; gap: 8px; }
-.gc-chip { position: relative; }
-.gc-chip input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-.gc-chip span {
-  display: inline-flex; align-items: center; min-height: 46px; padding: 0 18px; border: var(--border-w) solid var(--line); border-radius: 999px;
-  font-weight: 700; cursor: pointer; background: var(--surface);
-}
-.gc-chip input:checked + span { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
-.gc-chip input:focus-visible + span { outline: 3px solid var(--accent-text); outline-offset: 2px; }
-.gc-other, .gc-field input, .gc-field textarea {
-  min-height: 46px; padding: 10px 14px; border: var(--border-w) solid var(--line); border-radius: var(--radius); background: var(--bg); color: var(--text);
-}
-.gc-other { width: 9em; border-radius: 999px; }
-.gc-two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-@container page (max-width: 420px) { .gc-two { grid-template-columns: 1fr; } }
-.gc-field { display: grid; gap: 6px; }
-.gc-field label { font-weight: 700; font-size: 0.92rem; }
-.gc-field textarea { resize: vertical; }
 .reduce-motion .gc-inner, .reduce-motion .gc-card { transition: none; transform: none; }
 .reduce-motion .gc-card.is-flipped .gc-inner { transform: rotateY(180deg); }
