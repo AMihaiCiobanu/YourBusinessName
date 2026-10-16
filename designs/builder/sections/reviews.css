@@ -1,0 +1,20 @@
+.rv-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; max-width: none; }
+.rv-nav { display: flex; gap: 10px; flex-shrink: 0; }
+.rv-track {
+  display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 40px) / 3); gap: 20px;
+  margin: 0; padding: 4px 4px 18px; list-style: none; overflow-x: auto; scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain; scrollbar-width: none;
+}
+.rv-track::-webkit-scrollbar { display: none; }
+@container page (max-width: 900px) { .rv-track { grid-auto-columns: calc((100% - 20px) / 2); } }
+@container page (max-width: 600px) { .rv-track { grid-auto-columns: 88%; } .rv-nav { display: none; } }
+.rv-card { scroll-snap-align: start; display: flex; flex-direction: column; gap: 14px; padding: 28px; }
+.rv-stars { display: inline-flex; gap: 2px; color: var(--accent-text); }
+.rv-stars svg { fill: currentColor; }
+.rv-quote { margin: 0; flex: 1; font: var(--display-weight) calc(1.25rem * var(--display-scale)) / 1.4 var(--font-display); }
+:root[data-skin="luxe"] .rv-quote { font-style: italic; font-size: 1.45rem; }
+.rv-who { display: grid; gap: 2px; }
+.rv-dots { display: flex; justify-content: center; gap: 4px; margin-top: 10px; }
+.rv-dot { width: 44px; height: 44px; border: 0; background: none; cursor: pointer; position: relative; }
+.rv-dot::after { content: ''; position: absolute; top: 50%; left: 50%; width: 10px; height: 10px; margin: -5px; border-radius: 50%; background: var(--text); opacity: 0.25; transition: all 0.3s; }
+.rv-dot[aria-current="true"]::after { opacity: 1; background: var(--accent); width: 26px; margin-left: -13px; border-radius: 5px; }

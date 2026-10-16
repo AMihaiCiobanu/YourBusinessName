@@ -1,0 +1,110 @@
+/* Price book. Pages are paper whatever the theme (dark text on light paper reads best); the cover
+   and the details follow the theme. --pw is the real page width, set by book.js, so text scales
+   with the page and the measured pagination stays right. */
+
+.book-sec { overflow: hidden; }
+.bk-stage {
+  --paper: #fbf7ef;
+  --paper-2: #efe6d6;
+  --ink: #2a241c;
+  --ink-muted: #5f5649;
+  --cover: var(--surface-2);
+  --cover-ink: var(--text);
+  --foil: var(--accent-text);
+  position: relative; max-width: 980px; margin: 0 auto; padding: 8px 0 18px;
+  border-radius: var(--radius-lg); outline-offset: 6px;
+}
+:root[data-skin="luxe"] .bk-stage { --paper: #f6eedf; --paper-2: #e8dcc6; --cover: #1f1a14; --cover-ink: #f4efe7; }
+:root[data-skin="clean"] .bk-stage { --paper: #ffffff; --paper-2: #f1eee8; --cover: var(--accent); --cover-ink: var(--accent-ink); --foil: var(--accent-ink); }
+:root[data-skin="bold"] .bk-stage { --paper: #ffffff; --paper-2: #fff1dc; --cover: var(--accent-3); --cover-ink: var(--text); --foil: var(--text); }
+
+.bk-holder { position: relative; margin: 0 auto; max-width: 960px; }
+.bk-root { margin: 0 auto; }
+
+.bk-page {
+  position: relative; overflow: hidden; color: var(--ink);
+  background: linear-gradient(90deg, var(--paper-2), var(--paper) 7%, var(--paper) 93%, var(--paper-2));
+  font-size: clamp(12.5px, calc(var(--pw, 400px) * 0.036), 17px); line-height: 1.35;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+.bk-inner { height: 100%; padding: 9% 9% 12%; overflow: hidden; display: flex; flex-direction: column; }
+.bk-probe { position: absolute; left: -10000px; top: 0; visibility: hidden; }
+.bk-measure { position: relative; height: 0; overflow: hidden; }
+
+/* Covers */
+.bk-cover, .bk-back, .bk-placeholder {
+  color: var(--cover-ink);
+  background:
+    radial-gradient(120% 80% at 30% 20%, rgba(255, 255, 255, 0.12), transparent 60%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.28), transparent 6%),
+    var(--cover);
+}
+:root[data-skin="luxe"] .bk-cover, :root[data-skin="luxe"] .bk-back, :root[data-skin="luxe"] .bk-placeholder {
+  background:
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 1.5px) 0 0 / 5px 5px,
+    radial-gradient(120% 80% at 30% 20%, rgba(255, 255, 255, 0.08), transparent 60%),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.45), transparent 6%), var(--cover);
+}
+:root[data-skin="bold"] .bk-cover, :root[data-skin="bold"] .bk-back { box-shadow: inset 0 0 0 3px var(--text); }
+.bk-cover .bk-inner, .bk-back .bk-inner { justify-content: center; align-items: center; text-align: center; gap: 0.6em; border: 1px solid color-mix(in srgb, var(--foil) 55%, transparent); margin: 7%; height: 86%; padding: 8%; }
+.bk-ornament { width: 3.2em; height: 3.2em; border: 1.5px solid var(--foil); border-radius: 50%; position: relative; }
+.bk-ornament::after { content: ''; position: absolute; inset: 22%; border: 1px solid var(--foil); transform: rotate(45deg); }
+.bk-cover-name { font: var(--display-weight) 1.15em/1.2 var(--font-display); color: var(--foil); letter-spacing: 0.06em; text-transform: uppercase; }
+.bk-cover-title { font: var(--display-weight) 2.6em/1 var(--font-display); letter-spacing: var(--display-spacing); }
+:root[data-skin="luxe"] .bk-cover-title { font-style: italic; }
+.bk-cover-sub { font-size: 0.85em; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.85; }
+
+/* Inside pages */
+.bk-title { font: var(--display-weight) 2em/1.05 var(--font-display); color: var(--ink); margin-bottom: 0.5em; }
+.bk-text { color: var(--ink-muted); margin-bottom: 1.4em; }
+.bk-group {
+  margin: 0.2em 0 0.7em; padding-bottom: 0.35em; border-bottom: 1px solid color-mix(in srgb, var(--ink) 20%, transparent);
+  font: 700 0.78em/1.3 var(--font-body); letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-muted);
+}
+.bk-list { margin: 0 0 0.8em; padding: 0; list-style: none; }
+.bk-item + .bk-item { margin-top: 0.15em; }
+.bk-line {
+  display: block; width: 100%; padding: 0.42em 0.3em; margin: 0 -0.3em; border: 0; border-radius: 6px;
+  background: transparent; color: inherit; text-align: left; text-decoration: none; cursor: pointer; font: inherit;
+}
+.bk-line:hover, .bk-line:focus-visible { background: rgba(0, 0, 0, 0.05); }
+.bk-line:focus-visible { outline: 2px solid var(--ink); outline-offset: 0; }
+.bk-row { display: flex; align-items: baseline; gap: 0.4em; }
+.bk-name { font-weight: 700; color: var(--ink); }
+.bk-dots { flex: 1; min-width: 1em; border-bottom: 1.5px dotted color-mix(in srgb, var(--ink) 35%, transparent); transform: translateY(-0.25em); }
+.bk-price { font-weight: 700; white-space: nowrap; color: var(--ink); }
+.bk-meta { display: block; margin-top: 0.1em; font-size: 0.86em; color: var(--ink-muted); }
+.bk-num { position: absolute; bottom: 4.5%; left: 0; right: 0; text-align: center; font-size: 0.8em; color: var(--ink-muted); }
+.bk-toc { margin: 0; padding: 0; list-style: none; display: grid; gap: 0.5em; }
+.bk-toc li { display: flex; gap: 0.4em; align-items: baseline; font-weight: 600; }
+.bk-photo .bk-inner { padding: 0; }
+.bk-photo img { width: 100%; height: 100%; object-fit: cover; }
+.bk-hours { margin: 0 0 1.2em; padding: 0; list-style: none; display: grid; gap: 0.25em; }
+.bk-hours li { display: flex; justify-content: space-between; gap: 1em; color: var(--ink-muted); }
+.bk-hours li.is-today { color: var(--ink); font-weight: 700; }
+.bk-cta { align-self: flex-start; margin-top: auto; font-size: 0.9rem; }
+
+/* Closed book before the library arrives */
+.bk-placeholder {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;
+  width: min(100%, 420px); aspect-ratio: 1 / 1.4; margin: 0 auto; border-radius: 4px 12px 12px 4px; box-shadow: var(--shadow);
+  font-size: 15px;
+}
+.bk-placeholder .bk-cover-title { font-size: 2.4rem; }
+
+/* Controls */
+.bk-controls { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 18px; }
+.bk-count { min-width: 9em; text-align: center; font-weight: 600; color: var(--muted); font-variant-numeric: tabular-nums; }
+.bk-controls .icon-btn:disabled { opacity: 0.35; cursor: default; }
+.bk-sound { margin-left: 8px; }
+
+/* Flat fallback */
+.bk-flat {
+  display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 4px 4px 14px;
+  overscroll-behavior-x: contain; scrollbar-width: thin;
+}
+.bk-flat > .bk-page { flex: 0 0 auto; scroll-snap-align: center; border-radius: 4px; box-shadow: var(--shadow-sm); }
+
+/* StPageFlip shadows sit on top of pages; soften on light themes */
+.bk-holder .stf__item { box-shadow: none; }
+.bk-holder.is-portrait .stf__block { margin: 0 auto; }

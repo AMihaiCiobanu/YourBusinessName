@@ -1,0 +1,12 @@
+.cf-sec { overflow: hidden; }
+.cf { padding: 10px 0 46px; }
+/* Before Swiper: a simple scroll-snap row */
+.cf:not(.is-live) .swiper-wrapper { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 0 20px 12px; }
+.cf:not(.is-live) .cf-slide { flex: 0 0 auto; scroll-snap-align: center; }
+.cf .cf-slide { width: min(380px, 68cqi); margin: 0; border-radius: var(--radius-lg); overflow: hidden; background: var(--surface-2); }
+.cf-slide img { width: 100%; aspect-ratio: 3 / 4; height: auto; object-fit: cover; }
+:root[data-skin="bold"] .cf-slide { border: 2px solid var(--text); }
+.cf .swiper-pagination-bullet { width: 10px; height: 10px; background: var(--text); opacity: 0.3; }
+.cf .swiper-pagination-bullet-active { background: var(--accent); opacity: 1; }
+.cf .swiper-pagination { bottom: 6px; }
+.cf .swiper-pagination-bullet { margin: 0 6px !important; }

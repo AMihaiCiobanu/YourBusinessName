@@ -1,0 +1,34 @@
+.svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; perspective: 1000px; }
+@container page (max-width: 900px) { .svc-grid { grid-template-columns: repeat(2, 1fr); } }
+@container page (max-width: 560px) { .svc-grid { grid-template-columns: 1fr; } }
+
+.svc-card {
+  --rx: 0deg; --ry: 0deg; --gx: 50%; --gy: 0%;
+  position: relative; display: flex; flex-direction: column; gap: 10px; padding: 26px; overflow: hidden;
+  transform: rotateX(var(--rx)) rotateY(var(--ry));
+  transform-style: preserve-3d;
+  transition: transform 0.5s var(--ease), box-shadow 0.4s, border-color 0.3s, opacity 0.9s var(--ease);
+}
+.svc-card.is-tilting { transition: transform 0.08s linear, box-shadow 0.4s; box-shadow: var(--shadow); border-color: var(--accent); }
+.svc-card[data-reveal]:not(.is-in) { transform: translateY(26px); }
+.svc-glare {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 0.3s;
+  background: radial-gradient(400px circle at var(--gx) var(--gy), color-mix(in srgb, var(--accent) 22%, transparent), transparent 45%);
+}
+.svc-card.is-tilting .svc-glare { opacity: 1; }
+.svc-top { display: flex; justify-content: space-between; align-items: center; transform: translateZ(30px); }
+.svc-icon { display: inline-grid; place-items: center; width: 46px; height: 46px; border-radius: var(--radius); background: var(--accent-soft); color: var(--accent-text); }
+.svc-no { font: var(--display-weight) 1.6rem/1 var(--font-display); color: color-mix(in srgb, var(--text) 55%, var(--surface)); }
+.svc-name { font-size: calc(1.5rem * var(--display-scale)); transform: translateZ(24px); }
+.svc-meta { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); }
+.svc-meta strong { color: var(--text); font-size: 1.1rem; }
+.svc-desc { color: var(--muted); font-size: 0.95rem; flex: 1; }
+.svc-book {
+  align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px; padding: 0; margin-top: 4px;
+  border: 0; background: none; color: var(--accent-text); font-weight: 700; text-decoration: none; cursor: pointer;
+}
+.svc-book::after { content: '→'; margin-left: 8px; transition: transform 0.2s; }
+.svc-book:hover::after { transform: translateX(4px); }
+.svc-skel { min-height: 220px; gap: 16px; }
+.svc-more { margin-top: 28px; text-align: center; }
+.reduce-motion .svc-card { transform: none !important; }

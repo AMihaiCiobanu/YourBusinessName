@@ -1,0 +1,27 @@
+.bs-grid { display: grid; grid-template-columns: 1.4fr 0.8fr; gap: 24px; align-items: start; }
+@container page (max-width: 820px) { .bs-grid { grid-template-columns: 1fr; } }
+.bs-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0; padding: 0; border: 0; min-width: 0; }
+@container page (max-width: 560px) { .bs-list { grid-template-columns: 1fr; } }
+.bs-item {
+  position: relative; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; min-height: 64px;
+  padding: 12px 16px; border: var(--border-w) solid var(--line); border-radius: var(--radius); background: var(--surface); cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}
+.bs-item:hover { border-color: var(--accent); }
+.bs-item input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.bs-item:has(input:focus-visible) { outline: 3px solid var(--accent-text); outline-offset: 2px; }
+.bs-item:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+.bs-check { display: grid; place-items: center; width: 26px; height: 26px; border: 2px solid var(--line); border-radius: 8px; color: transparent; }
+.bs-item:has(input:checked) .bs-check { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.bs-name { display: grid; font-weight: 600; line-height: 1.3; }
+.bs-name small { color: var(--muted); font-weight: 500; }
+.bs-price { font-weight: 700; white-space: nowrap; }
+.bs-sum { position: sticky; top: calc(var(--top-h) + 16px); display: grid; gap: 14px; padding: 24px; }
+.bs-count { font-weight: 700; }
+.bs-totals { display: grid; gap: 10px; margin: 0; }
+.bs-totals div { display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+.bs-totals dt { color: var(--muted); }
+.bs-totals dd { margin: 0; display: inline-flex; align-items: center; gap: 6px; font-weight: 700; }
+.bs-total { font: var(--display-weight) calc(1.8rem * var(--display-scale)) / 1 var(--font-display) !important; }
+.bs-book.is-off { opacity: 0.45; pointer-events: none; }
+.bs-clear { justify-self: center; min-height: 44px; border: 0; background: none; color: var(--muted); text-decoration: underline; cursor: pointer; }

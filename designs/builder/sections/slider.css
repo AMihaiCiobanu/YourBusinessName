@@ -1,0 +1,23 @@
+.sl-sec { padding: 0; }
+.sl { position: relative; height: min(88vh, 820px); min-height: 480px; overflow: hidden; color: #fff; background: #111; }
+.sl:not(.is-live) .swiper-wrapper { display: flex; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; }
+.sl:not(.is-live) .sl-slide { flex: 0 0 100%; scroll-snap-align: start; }
+.sl-slide { position: relative; height: 100%; overflow: hidden; display: flex; align-items: flex-end; }
+.sl-bg { position: absolute; inset: -2% -8%; }
+.sl-bg img { width: 100%; height: 100%; object-fit: cover; }
+.sl-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 30%, rgba(0, 0, 0, 0.78)); }
+.sl-copy { position: relative; padding-bottom: 120px; max-width: 760px; margin-left: max(20px, (100% - 1180px) / 2); }
+.sl-copy .eyebrow { color: #fff; opacity: 0.85; }
+:root[data-skin="bold"] .sl-copy .eyebrow { color: var(--text); opacity: 1; }
+.sl-copy h2 { font-size: calc(clamp(2.4rem, 6.4cqi, 5rem) * var(--display-scale)); color: #fff; }
+:root[data-skin="luxe"] .sl-copy h2 { font-style: italic; }
+.sl-text { margin: 14px 0 26px; font-size: 1.15rem; max-width: 34rem; color: rgba(255, 255, 255, 0.9); }
+.sl-ui { position: absolute; left: 0; right: 0; bottom: 32px; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.sl-dots.swiper-pagination { position: static; width: auto; text-align: left; }
+.sl-dots .swiper-pagination-bullet { width: 34px; height: 4px; border-radius: 2px; background: #fff; opacity: 0.45; margin: 0 4px !important; }
+.sl-dots .swiper-pagination-bullet-active { opacity: 1; background: var(--accent); }
+.sl-btns { display: flex; gap: 8px; }
+.sl-btns .icon-btn { background: rgba(0, 0, 0, 0.35); color: #fff; border-color: rgba(255, 255, 255, 0.4); }
+.sl-btns .icon-btn:hover { background: rgba(0, 0, 0, 0.6); color: #fff; }
+.sl:not(.is-live) .sl-btns { display: none; }
+@container page (max-width: 600px) { .sl { height: 78vh; } .sl-copy { padding-bottom: 100px; } .sl-prev, .sl-next { display: none; } }

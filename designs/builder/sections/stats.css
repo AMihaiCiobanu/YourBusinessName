@@ -1,0 +1,17 @@
+.st-list { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 0; padding: 0; list-style: none; }
+@container page (max-width: 820px) { .st-list { grid-template-columns: repeat(2, 1fr); } }
+.st-item {
+  display: grid; gap: 8px; justify-items: center; text-align: center; padding: 30px 16px;
+  border: var(--border-w) solid var(--line); border-radius: var(--radius-lg); background: var(--surface);
+}
+:root[data-skin="bold"] .st-item { box-shadow: var(--shadow-sm); }
+:root[data-skin="bold"] .st-item:nth-child(2) { background: var(--accent-3); }
+:root[data-skin="bold"] .st-item:nth-child(3) { background: color-mix(in srgb, var(--accent-2) 18%, #fff); }
+.st-num {
+  display: inline-flex; align-items: center; gap: 4px;
+  font: var(--display-weight) calc(clamp(2.4rem, 5.5cqi, 3.6rem) * var(--display-scale)) / 1 var(--font-display);
+  font-variant-numeric: tabular-nums; color: var(--text);
+}
+.st-suf, .st-star { color: var(--accent-text); }
+.st-star { fill: currentColor; }
+.st-label { color: var(--muted); font-weight: 500; }

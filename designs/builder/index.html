@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en" data-skin="luxe">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Your Business Name — Page builder</title>
+  <meta name="description" content="Build your own booking page: pick the sections, their order, the theme and the colour, and see the page change live." />
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#0e0d0c" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <script>
+    // Before first paint: the theme (so the page does not flash in the wrong colours) and a preload
+    // of the hero photo for the chosen business type (it is the largest thing on a phone screen).
+    // Same keys as core/state.js; photo ids = the first photo of each niche in content/photos.js,
+    // URLs exactly as core/dom.js builds them so the browser reuses the download.
+    (function () {
+      var skin = 'luxe', niche = 'beauty', saved = null;
+      try { saved = JSON.parse(localStorage.getItem('builder:v1') || 'null'); } catch (_) { }
+      var hash = location.hash;
+      var k = /(?:^|[#&])k=(luxe|clean|bold)(?:&|$)/.exec(hash);
+      var n = /(?:^|[#&])n=([a-z]+)(?:&|$)/.exec(hash);
+      if (k) skin = k[1]; else if (saved && /^(luxe|clean|bold)$/.test(saved.skin)) skin = saved.skin;
+      if (n) niche = n[1]; else if (saved && saved.niche) niche = saved.niche;
+      document.documentElement.setAttribute('data-skin', skin);
+      var HERO = {
+        barber: 'photo-1503951914875-452162b0f3f1', beauty: 'photo-1633681926022-84c23e8cb2d6',
+        nails: 'photo-1632345031435-8727f6897d53', spa: 'photo-1600334129128-685c5582fd35',
+        detailing: 'photo-1607860108855-64acf2078ed9', trainer: 'photo-1758875569256-f37c438cac65',
+        clinic: 'photo-1645005512968-0c1fe99f0093', tattoo: 'photo-1565058379802-bbe93b2f703a'
+      };
+      var id = HERO[niche];
+      var heroOn = !/(?:^|[#&])s=/.test(hash) || /(?:^|[#&])s=(hero|[^&]*\.hero)(?:[.&]|$)/.test(hash);
+      if (!id || !heroOn) return;
+      var url = function (w) { return 'https://images.unsplash.com/' + id + '?auto=format&fit=crop&crop=entropy&w=' + w + '&h=' + (w * 1.25) + '&q=62'; };
+      var link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.setAttribute('imagesrcset', [320, 640, 960].map(function (w) { return url(w) + ' ' + w + 'w'; }).join(', '));
+      link.setAttribute('imagesizes', '(max-width: 700px) 60vw, 420px');
+      link.setAttribute('fetchpriority', 'high');
+      document.head.appendChild(link);
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://images.unsplash.com" />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <!-- Fonts load without blocking the first paint. -->
+  <link rel="stylesheet" media="print" onload="this.media='all'"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Space+Grotesk:wght@500;700&display=swap" />
+  <link rel="stylesheet" href="../shared/shared.css?v=7" />
+  <link rel="stylesheet" href="styles.css?v=1" />
+  <link rel="stylesheet" href="builder/panel.css?v=1" media="print" onload="this.media='all'" />
+  <link rel="preload" as="style" href="sections/hero.css?v=1" />
+  <link rel="modulepreload" href="app.js?v=1" />
+  <link rel="modulepreload" href="core/state.js" />
+  <link rel="modulepreload" href="core/registry.js" />
+  <link rel="modulepreload" href="core/i18n.js" />
+  <link rel="modulepreload" href="core/dom.js" />
+  <link rel="modulepreload" href="core/theme.js" />
+  <link rel="modulepreload" href="core/motion.js" />
+  <link rel="modulepreload" href="core/loader.js" />
+  <link rel="modulepreload" href="core/data.js" />
+  <link rel="modulepreload" href="core/page.js" />
+  <link rel="modulepreload" href="content/photos.js" />
+  <link rel="modulepreload" href="content/index.js" />
+  <link rel="modulepreload" href="content/beauty.js" />
+  <link rel="modulepreload" href="i18n/en.js" />
+  <link rel="modulepreload" href="builder/panel.js" />
+  <link rel="modulepreload" href="sections/hero.js" />
+  <link rel="modulepreload" href="../shared/live.js" />
+  <link rel="modulepreload" href="../shared/demo.js?v=5" />
+</head>
+
+<body>
+  <div class="stage" id="stage">
+    <main class="page" id="page" tabindex="-1">
+      <p class="page-loading" id="page-loading" aria-live="polite"></p>
+    </main>
+  </div>
+  <div class="overlay" id="overlay"></div>
+  <noscript>
+    <p class="noscript">The page builder needs JavaScript. You can still see the
+      <a href="/">classic demo page</a>.</p>
+  </noscript>
+
+  <script src="../shared/lightbox.js?v=1" defer></script>
+  <script type="module" src="app.js?v=1"></script>
+</body>
+
+</html>
