@@ -115,4 +115,94 @@ export function mountDemo(slug) {
   for (const a of document.querySelectorAll('[data-getpage]')) a.href = GET_PAGE_MAILTO;
   for (const p of document.querySelectorAll('.footer-madeby')) p.innerHTML = MADE_BY; // static markup
   for (const y of document.querySelectorAll('[data-year]')) y.textContent = String(new Date().getFullYear());
+  setupMailFallback();
+}
+
+// ---------- "Get my page" when no email app opens ----------
+
+// A mailto: link does nothing where no email app is set up, and the in-app browsers of Instagram
+// or Facebook often block it. If the page is still in front 1.5 s after the click (the email app
+// never took over), a small dialog offers the same message to copy, or opened in Gmail.
+const MAIL_CSS = `
+.mf{color-scheme:light;width:min(560px,calc(100vw - 24px));max-height:calc(100dvh - 24px);padding:0;border:0;border-radius:18px;background:#fff;color:#16161a;box-shadow:0 30px 80px rgba(0,0,0,.4);font:400 .95rem/1.5 'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif}
+.mf::backdrop{background:rgba(10,10,14,.55)}
+.mf-in{display:grid;gap:12px;padding:22px}
+.mf h2{margin:0;font:700 1.25rem/1.25 'DM Sans',system-ui,sans-serif}
+.mf p{margin:0;color:#4a4a55}
+.mf-to{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-weight:700}
+.mf-copy-to{min-height:44px;padding:6px 12px;border:1px solid #d9d9e0;border-radius:10px;background:#fff;color:#16161a;font:600 .85rem/1 inherit;cursor:pointer}
+.mf textarea{width:100%;min-height:180px;padding:12px;border:1px solid #d9d9e0;border-radius:12px;font:400 .85rem/1.45 ui-monospace,Menlo,monospace;color:#16161a;background:#f7f7f9;resize:vertical}
+.mf-row{display:flex;flex-wrap:wrap;gap:8px}
+.mf-row a,.mf-row button{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:8px 16px;border:1px solid #d9d9e0;border-radius:12px;background:#fff;color:#16161a;font:700 .92rem/1 inherit;text-decoration:none;cursor:pointer}
+.mf-row .mf-main{background:#16161a;border-color:#16161a;color:#fff}
+.mf-x{position:absolute;top:10px;right:10px;width:44px;height:44px;border:0;border-radius:50%;background:transparent;font-size:24px;line-height:1;cursor:pointer;color:#16161a}
+.mf :focus-visible{outline:3px solid #5b3df5;outline-offset:2px}`;
+
+let mailDialog = null;
+
+function showMailDialog(href) {
+  const url = new URL(href);
+  const to = decodeURIComponent(url.pathname);
+  const subject = url.searchParams.get('subject') || '';
+  const body = url.searchParams.get('body') || '';
+  if (!mailDialog) {
+    const style = document.createElement('style');
+    style.textContent = MAIL_CSS;
+    document.head.appendChild(style);
+    mailDialog = document.createElement('dialog');
+    mailDialog.className = 'mf';
+    mailDialog.setAttribute('aria-labelledby', 'mf-title');
+    mailDialog.innerHTML = `<div class="mf-in">
+      <button type="button" class="mf-x" aria-label="Close">×</button>
+      <h2 id="mf-title">Didn't your email app open?</h2>
+      <p>Send this message to us from any email account. We reply within one working day.</p>
+      <p class="mf-to">To: <span data-to></span> <button type="button" class="mf-copy-to">Copy address</button></p>
+      <label><span class="mf-sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Message</span><textarea readonly data-body></textarea></label>
+      <div class="mf-row">
+        <button type="button" class="mf-main mf-copy">Copy the message</button>
+        <a data-gmail target="_blank" rel="noopener">Open in Gmail</a>
+        <a data-mailto>Try the email app again</a>
+      </div>
+      <p class="mf-done" role="status"></p>
+    </div>`; // static markup; the texts below are set as text
+    document.body.appendChild(mailDialog);
+    mailDialog.querySelector('.mf-x').addEventListener('click', () => mailDialog.close());
+    mailDialog.addEventListener('click', e => { if (e.target === mailDialog) mailDialog.close(); });
+    const copy = async (text, msg) => {
+      const done = mailDialog.querySelector('.mf-done');
+      try { await navigator.clipboard.writeText(text); done.textContent = msg; }
+      catch { mailDialog.querySelector('[data-body]').select(); done.textContent = 'Select the text and copy it (Ctrl/Cmd + C).'; }
+    };
+    mailDialog.querySelector('.mf-copy').addEventListener('click', () => copy(`${mailDialog.dataset.subject}\n\n${mailDialog.querySelector('[data-body]').value}`, 'Message copied. Paste it into a new email.'));
+    mailDialog.querySelector('.mf-copy-to').addEventListener('click', () => copy(mailDialog.dataset.to, 'Address copied.'));
+  }
+  mailDialog.dataset.to = to;
+  mailDialog.dataset.subject = subject;
+  mailDialog.querySelector('[data-to]').textContent = to;
+  mailDialog.querySelector('[data-body]').value = body;
+  mailDialog.querySelector('.mf-done').textContent = '';
+  mailDialog.querySelector('[data-mailto]').href = href;
+  mailDialog.querySelector('[data-gmail]').href = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(to)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  if (!mailDialog.open) mailDialog.showModal();
+}
+
+let mailFallbackOn = false;
+export function setupMailFallback() {
+  if (mailFallbackOn) return;
+  mailFallbackOn = true;
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="mailto:contact@appointmentsapps.com"]');
+    if (!a || e.defaultPrevented || a.closest('.mf')) return;
+    let left = false;
+    const leave = () => { left = true; };
+    window.addEventListener('blur', leave, { once: true });
+    window.addEventListener('pagehide', leave, { once: true });
+    document.addEventListener('visibilitychange', leave, { once: true });
+    setTimeout(() => {
+      window.removeEventListener('blur', leave);
+      window.removeEventListener('pagehide', leave);
+      document.removeEventListener('visibilitychange', leave);
+      if (!left && document.visibilityState === 'visible') showMailDialog(a.href);
+    }, 1500);
+  });
 }
