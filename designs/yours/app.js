@@ -1,7 +1,7 @@
 // "Your page, your way": the closing page of the demo. The mixer lets a prospect tap the sections
 // they liked from the different designs; the choice is added to the "Get my page" email.
 
-import { mountDemo, DESIGNS, designUrl, GET_PAGE_MAILTO } from '../shared/demo.js?v=4';
+import { mountDemo, DESIGNS, designUrl, GET_PAGE_MAILTO, getPageMailto } from '../shared/demo.js?v=5';
 
 const COLORS = { storybook: '#c9a961', orbit: '#8b5cf6', depth: '#ff3d2e', fullframe: '#b98a45', duo: '#e8553d', marketplace: '#0e9f9a', listing: '#6950f3' };
 
@@ -71,13 +71,7 @@ for (const s of SECTIONS) {
 // questions, just before the meeting line (or at the end if the template changes).
 function mailto() {
   if (!picked.length) return GET_PAGE_MAILTO;
-  const url = new URL(GET_PAGE_MAILTO);
-  const subject = url.searchParams.get('subject') || '';
-  const body = url.searchParams.get('body') || '';
-  const mix = `For my page, I like this mix of sections from your demo:\n${picked.map(s => `- ${s.name} (from ${designName(s.from)})`).join('\n')}\n\n`;
-  const at = body.indexOf('I agree to have a meeting');
-  const full = at >= 0 ? body.slice(0, at) + mix + body.slice(at) : `${body}\n\n${mix}`;
-  return `mailto:${url.pathname}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(full)}`;
+  return getPageMailto(`For my page, I like this mix of sections from your demo:\n${picked.map(s => `- ${s.name} (from ${designName(s.from)})`).join('\n')}\n\n`);
 }
 
 function render() {

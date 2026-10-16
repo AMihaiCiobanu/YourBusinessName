@@ -17,12 +17,25 @@ export const DESIGNS = [
   { slug: 'duo', label: 'Salon, two specialists · Duo' },
   { slug: 'marketplace', label: 'Barbershop · Marketplace listing' },
   { slug: 'listing', label: 'Barbershop · Gallery listing' },
+  { slug: 'builder', label: '✦ Page builder · build it yourself' },
   { slug: 'yours', label: '✦ Your own mix or a brand-new design' }
 ];
 
 export const GET_PAGE_MAILTO = 'mailto:contact@appointmentsapps.com?subject=I%27d%20like%20my%20own%20website%20for%20my%20business&body=Hi%2C%0A%0AI%27d%20like%20more%20information%20about%20how%20I%20could%20get%20my%20own%20booking%20website.%0A%0AA%20few%20details%20about%20me%3A%0A-%20Business%20name%3A%0A-%20Type%20of%20business%20%28e.g.%20nails%2C%20hair%2C%20massage%29%3A%0A-%20City%3A%0A-%20Phone%20number%3A%0A-%20Facebook%20page%20link%3A%0A-%20Instagram%20profile%20link%3A%0A%0AI%27d%20like%20to%20know%3A%0A-%20How%20much%20it%20costs%20and%20what%20is%20included%0A-%20How%20long%20it%20takes%20to%20get%20ready%0A-%20Whether%20I%20can%20use%20my%20own%20domain%20%28e.g.%20my-business.com%29%0A-%20How%20services%20and%20opening%20hours%20stay%20in%20sync%20with%20the%20app%0A%0AI%20agree%20to%20have%20a%20meeting%20to%20discuss%20the%20project%20and%20what%20I%20want%20for%20my%20page.%0AI%27m%20available%20on%20this%20date%3A%20......%2C%20between%20these%20hours%3A%20......%0A%0AThank%20you%21';
 
 export function designUrl(slug) { return `/designs/${slug}/`; }
+
+// The "Get my page" email with `extra` text added after the questions, just before the meeting
+// line (or at the end if the template changes). Used by pages that know what the prospect picked.
+export function getPageMailto(extra) {
+  if (!extra) return GET_PAGE_MAILTO;
+  const url = new URL(GET_PAGE_MAILTO);
+  const subject = url.searchParams.get('subject') || '';
+  const body = url.searchParams.get('body') || '';
+  const at = body.indexOf('I agree to have a meeting');
+  const full = at >= 0 ? body.slice(0, at) + extra + body.slice(at) : `${body}\n\n${extra}`;
+  return `mailto:${url.pathname}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(full)}`;
+}
 
 // Adds the design options to a picker and makes choosing one navigate. Niche options either
 // stay on the classic page (onNiche) or go back to it.
@@ -47,7 +60,7 @@ export function wirePicker(select, { current, onNiche } = {}) {
   });
 }
 
-const MADE_BY = `<a href="https://softsapps.com" target="_blank" rel="noopener" aria-label="Made by SoftApps">
+export const MADE_BY = `<a href="https://softsapps.com" target="_blank" rel="noopener" aria-label="Made by SoftApps">
   <span class="madeby-label">Made by</span>
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 100" role="img" aria-label="SoftApps">
     <defs><linearGradient id="saLogo" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#22d3ee"/><stop offset="0.5" stop-color="#7c3aed"/><stop offset="1" stop-color="#ec4899"/></linearGradient></defs>

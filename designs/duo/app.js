@@ -3,7 +3,7 @@
 // person's `linkId` and their tab goes live (see ../shared/live.js); until then the samples show.
 
 import { setLang, loadData, setupBooking, bookButton, bookingUrl, el, formatPrice, formatDuration, weekRows, openState, serviceGroups } from '../shared/live.js';
-import { mountDemo } from '../shared/demo.js?v=4';
+import { mountDemo } from '../shared/demo.js?v=5';
 
 const STAFF = [
   {

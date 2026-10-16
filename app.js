@@ -5,7 +5,7 @@
 // Everything here is static example content. Nothing is loaded from an account and the booking
 // buttons are inert: they only show what the real page would offer.
 
-import { wirePicker, mountPerks } from './designs/shared/demo.js?v=4';
+import { wirePicker, mountPerks } from './designs/shared/demo.js?v=5';
 
 mountPerks(document.getElementById('demo-perks'));
 
