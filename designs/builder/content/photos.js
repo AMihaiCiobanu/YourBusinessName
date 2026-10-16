@@ -100,6 +100,30 @@ export const PHOTOS = {
     p('photo-1597852075234-fd721ac361d3', 'abject', '5t4qCgtaLGU', 'Arm with a finished tattoo', 'Braț cu un tatuaj terminat'),
     p('photo-1516008684536-605574d804ce', 'emp_creative', 'zOyOWsANHXo', 'Neon tattoo sign', 'Firmă de neon „tattoo”')
   ],
+  dental: [
+    p('photo-1629909613654-28e377c37b09', 'benyamin_bohlouli', 'modern-dental-office-with-chair-and-equipment-e7MJLM5VGjY', 'Modern dental treatment room', 'Cabinet stomatologic modern'),
+    p('photo-1606811971618-4486d14f3f99', 'carocaro1987', 'dental-exam-with-mirror-and-tool-8BkF0sTC6Uo', 'Dental check-up with a mirror', 'Control stomatologic cu oglinda'),
+    p('photo-1489278353717-f64c6ee8a4d2', 'jblesly', 'long-black-haired-woman-smiling-close-up-photography-1AhGNGKuhR0', 'Woman with a bright smile', 'Femeie cu un zâmbet luminos'),
+    p('photo-1588776814546-1ffcf47267a5', 'jonathanborba', 'dentist-examining-dental-x-ray-scans-v_2FRXEba94', 'Dentist looking at X-ray scans', 'Medic care analizează radiografiile'),
+    p('photo-1762625570087-6d98fca29531', 'amyvosters', 'modern-waiting-room-with-chairs-and-inspirational-sign-pxOQ-P97sA8', 'Calm waiting room', 'Sală de așteptare liniștită'),
+    p('photo-1598256989800-fe5f95da9787', 'atikahakhtar', 'dental-chair-in-clinical-office-XJptUS8nbhs', 'Dental chair', 'Scaun stomatologic'),
+    p('photo-1593022356769-11f762e25ed9', 'jonathanborba', 'dental-implant-model-with-teeth-W9YEY6G8LVM', 'Dental implant model', 'Model de implant dentar'),
+    p('photo-1564420228450-d9a5bc8d6565', 'candid', 'hands-holding-dental-aligners-and-whitener-WFsNCIn8OF4', 'Clear aligners and whitening kit', 'Gutiere transparente și kit de albire'),
+    p('photo-1677026010083-78ec7f1b84ed', 'teravis_sk', 'a-close-up-of-a-womans-mouth-with-white-teeth-RCQnbyQsnUg', 'Close-up of white teeth', 'Prim-plan cu dinți albi'),
+    p('photo-1777331903190-341a3dd0441b', 'harold_angus', 'dentist-talking-to-patient-in-a-modern-dental-office-Bg81yWKZlMg', 'Dentist talking to a patient', 'Medic care discută cu pacientul')
+  ],
+  derma: [
+    p('photo-1713085085470-fba013d67e65', 'lookphoto', 'a-woman-getting-a-facial-peel-from-a-doctor-HtXyytr9304', 'Doctor applying a facial peel', 'Medic care aplică un peeling facial'),
+    p('photo-1552693673-1bf958298935', 'karelysruiz', 'woman-receiving-facial-skincare-treatment-PqyzuzFiQfY', 'Facial skin treatment', 'Tratament facial'),
+    p('photo-1676312754401-d97fe43c2c4b', 'bermixstudio', 'a-close-up-of-a-person-looking-through-a-magnifying-glass-PNdOpC-6q-I', 'Close look through a magnifier', 'Examinare cu lupa'),
+    p('photo-1785861775561-c6db7da314a0', 'surprisechef', 'technician-performing-laser-hair-removal-on-a-clients-chin-iN2ObRIy5Mc', 'Laser treatment on the face', 'Tratament laser pe față'),
+    p('photo-1785860855601-58107d722164', 'surprisechef', 'a-young-woman-looks-in-a-handheld-mirror-while-sitting-Skzxaqy8KpQ', 'Patient checking her skin in a mirror', 'Pacientă care își privește pielea în oglindă'),
+    p('photo-1552256031-811fa8f0a7b1', 'amplitudemagazin', 'person-with-white-gloves-holding-drop-bottle-pointing-on-another-persons-hand-8BMr4l_2hgY', 'Serum applied with a dropper', 'Ser aplicat cu pipeta'),
+    p('photo-1706565029539-d09af5896340', 'jonathanborba', 'a-woman-wearing-a-white-jacket-and-black-shirt-uBb_ZDIrquc', 'Doctor in a white coat', 'Medic în halat alb'),
+    p('photo-1616394584738-fc6e612e71b9', 'enginakyurt', 'g-m8EDc4X6Q', 'Face cream treatment', 'Tratament facial cu cremă'),
+    p('photo-1688588162416-f7a7e726e0bf', 'anyutakejbalo', 'a-woman-in-a-white-shirt-and-purple-gloves-9vH-wWpUP3g', 'Specialist in gloves', 'Specialist cu mănuși'),
+    p('photo-1761718209835-c8586b7dcac0', 'kimick', 'Xxs9WvkUPLo', 'Treatment applied with a brush', 'Tratament aplicat cu pensula')
+  ],
   team: [
     p('photo-1573497019940-1c28c88b4f3e', 'wocintechchat', 'SJvDxw0azqw', 'Portrait of a smiling woman', 'Portretul unei femei zâmbitoare'),
     p('photo-1500648767791-00dcc994a43e', 'juricakoletic', '7YVZYZeITc8', 'Portrait of a man', 'Portretul unui bărbat'),

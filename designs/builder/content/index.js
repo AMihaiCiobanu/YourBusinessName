@@ -72,6 +72,6 @@ export async function loadContent(niche, lang, { manyServices = false } = {}) {
     reviews: text.reviews.map(([quote, name, service]) => ({ quote, name, service })),
     faq: text.faq.map(([q, a]) => ({ q, a })),
     slides: text.slides.map(([title, body], i) => ({ title, body, photo: photos[i] })),
-    compare: { caption: text.compare, photo: photos[niche === 'detailing' ? 3 : 1] }
+    compare: { caption: text.compare, photo: photos[{ detailing: 3, dental: 8, derma: 7 }[niche] ?? 1] }
   };
 }

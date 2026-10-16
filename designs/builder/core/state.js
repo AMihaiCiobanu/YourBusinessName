@@ -9,7 +9,7 @@
 
 import { SECTIONS, DEFAULT_ON, BY_ID } from './registry.js';
 
-export const NICHES = ['beauty', 'nails', 'barber', 'spa', 'detailing', 'trainer', 'clinic', 'tattoo'];
+export const NICHES = ['beauty', 'nails', 'barber', 'spa', 'detailing', 'trainer', 'dental', 'derma', 'clinic', 'tattoo'];
 export const SKINS = ['luxe', 'clean', 'bold'];
 export const LANGS = ['en', 'ro'];
 const STORE_KEY = 'builder:v1';

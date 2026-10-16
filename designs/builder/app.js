@@ -132,6 +132,7 @@ async function change(patch, kind) {
       panel.relabel();
     }
     if (!(await reloadContent())) return;
+    theme = applyTheme(state); // a ready page also sets the theme and colour
     updateTitle();
     await page.rebuild(visible(state));
   }

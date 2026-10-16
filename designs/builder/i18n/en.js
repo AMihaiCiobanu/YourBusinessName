@@ -27,6 +27,10 @@ export default {
     motion: 'Reduce motion',
     motionHint: 'Turns off 3D and animations.',
     phone: 'Phone preview',
+    presets: 'Start from a ready page',
+    presetsHint: 'One tap gives you a complete page for your kind of business. You can still change anything after.',
+    presetDone: 'Ready page applied: {name}.',
+    ownMix: 'Or pick the sections yourself',
     sectionsHint: 'Tick a section to show it. Drag the handle or use the arrows to change the order.',
     floating: 'Floating',
     moveUp: 'Move {name} up',
@@ -66,7 +70,9 @@ export default {
     spa: 'Massage & spa',
     detailing: 'Car detailing',
     trainer: 'Personal trainer',
-    clinic: 'Clinic / practice',
+    dental: 'Dental clinic',
+    derma: 'Dermatologist',
+    clinic: 'Physio / private practice',
     tattoo: 'Tattoo studio'
   },
 

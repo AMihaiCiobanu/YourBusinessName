@@ -6,7 +6,7 @@ import { tilt } from '../core/motion.js';
 import { bookButton, formatDuration } from '../../shared/live.js';
 
 const MAX = 6;
-const ICONS = { barber: 'scissors', beauty: 'sparkle', nails: 'heart', spa: 'heart', detailing: 'car', trainer: 'user', clinic: 'heart', tattoo: 'sparkle' };
+const ICONS = { barber: 'scissors', beauty: 'sparkle', nails: 'heart', spa: 'heart', detailing: 'car', trainer: 'user', dental: 'sparkle', derma: 'heart', clinic: 'heart', tattoo: 'sparkle' };
 
 export default {
   render(ctx) {

@@ -27,6 +27,10 @@ export default {
     motion: 'Reduce animațiile',
     motionHint: 'Oprește efectele 3D și animațiile.',
     phone: 'Previzualizare pe telefon',
+    presets: 'Pornește de la o pagină gata făcută',
+    presetsHint: 'O atingere și ai o pagină completă pentru tipul tău de afacere. Poți schimba orice după.',
+    presetDone: 'Pagina gata a fost aplicată: {name}.',
+    ownMix: 'Sau alege tu secțiunile',
     sectionsHint: 'Bifează o secțiune ca să apară. Trage de mâner sau folosește săgețile ca să schimbi ordinea.',
     floating: 'Plutitoare',
     moveUp: 'Mută {name} mai sus',
@@ -66,7 +70,9 @@ export default {
     spa: 'Masaj și spa',
     detailing: 'Car detailing',
     trainer: 'Antrenor personal',
-    clinic: 'Cabinet / clinică',
+    dental: 'Cabinet stomatologic',
+    derma: 'Dermatolog',
+    clinic: 'Kineto / cabinet privat',
     tattoo: 'Studio de tatuaje'
   },
 

@@ -8,6 +8,7 @@ import { NICHES, SKINS, LANGS } from '../core/state.js';
 import { ACCENT_PRESETS, SKIN_META, accentFor } from '../core/theme.js';
 import { t } from '../core/i18n.js';
 import { h, icon } from '../core/dom.js';
+import { PRESETS } from './presets.js';
 
 const OPEN_KEY = 'builder:panel';
 
@@ -290,7 +291,24 @@ export function mountPanel({ state, change, reset, shareUrl, toast, motion, getP
     resetBtn.addEventListener('click', () => { reset(); toast(t('ui.resetDone')); });
     const send = h('a', { class: 'bp-btn bp-btn-primary', 'data-getpage': '', href: getPageHref(), title: t('ui.sendHint') }, icon('send', 16), t('ui.send'));
 
+    const presets = h('div', { class: 'bp-presets', role: 'group', 'aria-labelledby': 'bp-presets-l' },
+      PRESETS.map(p => {
+        const btn = h('button', { type: 'button', class: 'bp-preset', style: `--p-accent:${p.accent || SKIN_META[p.skin].accent};--p-bg:${SKIN_META[p.skin].bg};--p-text:${SKIN_META[p.skin].text}` },
+          h('span', { class: 'bp-preset-dot', 'aria-hidden': 'true' }),
+          h('span', null, h('b', { text: t(`niches.${p.niche}`) }), h('small', { text: t(`skins.${p.skin}.name`) })));
+        btn.addEventListener('click', () => {
+          const order = [...p.sections, ...state.order.filter(id => !p.sections.includes(id))];
+          change({ niche: p.niche, skin: p.skin, accent: p.accent, order, on: [...p.sections] }, 'content');
+          announce(t('ui.presetDone', { name: `${t(`niches.${p.niche}`)} · ${t(`skins.${p.skin}.name`)}` }));
+        });
+        return btn;
+      }));
+
     sectionsTab.replaceChildren(
+      h('p', { class: 'bp-label-t', id: 'bp-presets-l', text: t('ui.presets') }),
+      h('p', { class: 'bp-hint', text: t('ui.presetsHint') }),
+      presets,
+      h('p', { class: 'bp-label-t bp-sub', text: t('ui.ownMix') }),
       h('p', { class: 'bp-hint', id: 'bp-hint', text: t('ui.sectionsHint') }),
       count,
       list,
