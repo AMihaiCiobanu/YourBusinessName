@@ -168,7 +168,10 @@ function endPage() {
   const p = page('pg-end pg-plain');
   p.appendChild(el('h3', null, 'Your page is next'));
   p.appendChild(el('p', null, 'Come in, and leave a few words of your own.'));
-  p.appendChild(bookButton('Book a visit', { linkId: BOOKING_LINK_ID, className: 'btn btn-gold' }));
+  // The book is aria-hidden (reviews-sr reads the reviews), so its button stays out of the Tab order.
+  const btn = bookButton('Book a visit', { linkId: BOOKING_LINK_ID, className: 'btn btn-gold' });
+  btn.tabIndex = -1;
+  p.appendChild(btn);
   return p;
 }
 

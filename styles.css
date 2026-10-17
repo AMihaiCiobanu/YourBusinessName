@@ -31,7 +31,7 @@ html[data-theme="dark"][data-niche="nails"] {
   --text: #f6eceb;
   --muted: #bba5a7;
   --line: #3d2e30;
-  --accent: #e8546c;
+  --accent: #e95870;
   --accent-ink: #1b1415;
   --accent-soft: #3a2427;
   --cta-bg: #3a2427;
@@ -46,7 +46,7 @@ html[data-niche="barber"] {
   --text: #1e1b18;
   --muted: #6b645b;
   --line: #ddd5c8;
-  --accent: #b4531f;
+  --accent: #a54c1c;
   --accent-ink: #ffffff;
   --accent-soft: #f1dccb;
   --cta-bg: #1e1b18;
@@ -120,7 +120,7 @@ html[data-niche="trainer"] {
   --text: #111c14;
   --muted: #566759;
   --line: #d2e0cc;
-  --accent: #1f8a3b;
+  --accent: #1b7733;
   --accent-ink: #ffffff;
   --accent-soft: #d6efd8;
   --cta-bg: #12331c;
@@ -233,7 +233,7 @@ html[data-niche="barber"] .btn { border-radius: 6px; text-transform: uppercase; 
 .site-header { position: sticky; top: 0; z-index: 20; }
 
 .demo-bar { background: var(--text); color: var(--bg); }
-.demo-bar-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 48px; padding-top: 6px; padding-bottom: 6px; }
+.demo-bar-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 48px; padding-top: 2px; padding-bottom: 2px; }
 .demo-pick { display: inline-flex; align-items: center; gap: 10px; flex-shrink: 0; white-space: nowrap; font-size: 0.9rem; font-weight: 600; }
 .demo-pick select {
   max-width: 62vw;
@@ -262,13 +262,18 @@ html[data-niche="barber"] .btn { border-radius: 6px; text-transform: uppercase; 
   text-decoration: none; font-size: 0.9rem; font-weight: 700; white-space: nowrap;
 }
 .demo-get:hover { background: var(--accent-soft); }
+/* Touch targets: the bar's controls look 36 px tall but take taps over 44 px (a transparent
+   border on the select, an invisible ::after on the link and the pill). */
+.demo-pick select { min-height: 44px; padding: 0 30px 0 10px; border: 4px solid transparent; background-clip: padding-box; box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--bg) 40%, transparent); }
+.demo-get, .perks-pill { position: relative; }
+.demo-get::after, .perks-pill::after { content: ''; position: absolute; inset: -6px -2px; }
 .perks-pill {
   display: inline-flex; align-items: center; gap: 7px; max-width: 100%; min-height: 36px; padding: 5px 12px;
   border-radius: 999px; border: 1.5px solid var(--accent); background: transparent; color: var(--bg);
   font: inherit; font-size: 0.9rem; font-weight: 700; white-space: nowrap; cursor: pointer;
 }
 .perks-pill b { color: var(--accent-soft); font-weight: 800; }
-html[data-theme="dark"] .perks-pill b { color: var(--accent); }
+html[data-theme="dark"] .perks-pill b { color: color-mix(in srgb, var(--accent) 50%, #000); }
 .perks-pill:hover { background: color-mix(in srgb, var(--bg) 12%, transparent); }
 .perks-pill:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 .perks-caret { transition: transform 0.2s; }
@@ -327,7 +332,7 @@ html[data-niche="barber"] .brand-mark { border-radius: 6px; }
 .topbar-actions { display: flex; align-items: center; gap: 10px; }
 .theme-toggle {
   display: inline-flex; align-items: center; justify-content: center;
-  width: 38px; height: 38px; padding: 0; border-radius: 50%;
+  width: 44px; height: 44px; padding: 0; border-radius: 50%;
   border: 1px solid var(--line); background: var(--surface); color: var(--text); cursor: pointer;
 }
 .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
@@ -413,7 +418,9 @@ html[data-niche="barber"] .why-num { border-radius: 6px; }
 .service-meta { font-size: 0.88rem; color: var(--muted); }
 .service-desc { font-size: 0.92rem; color: var(--muted); margin: 0; }
 .service-book {
-  align-self: flex-start; margin-top: 4px; padding: 0;
+  /* 44 px tall for touch, negative margins keep the card's spacing. */
+  display: inline-flex; align-items: center; min-height: 44px;
+  align-self: flex-start; margin: -6px 0 -10px; padding: 0;
   background: none; border: 0; cursor: pointer;
   font: inherit; font-size: 0.92rem; font-weight: 700; color: var(--accent);
 }
@@ -458,7 +465,7 @@ html[data-niche="barber"] .why-num { border-radius: 6px; }
 .review-service { color: var(--muted); }
 .review-sample {
   margin-left: auto; padding: 2px 10px; border-radius: 999px;
-  background: var(--accent-soft); color: var(--accent);
+  background: var(--accent-soft); color: color-mix(in srgb, var(--accent) 80%, var(--text));
   font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
 }
 
@@ -571,7 +578,7 @@ html[data-niche="nails"][data-theme="dark"] .btn-light { background: var(--accen
 .footer { padding: 28px 0; border-top: 1px solid var(--line); }
 .footer-inner { display: flex; flex-direction: column; gap: 4px; text-align: center; }
 .footer p { margin: 0; }
-.footer-madeby { margin-top: 20px !important; text-align: center; color: var(--muted); opacity: 0.8; }
+.footer-madeby { margin-top: 20px !important; text-align: center; color: var(--muted); }
 .footer-madeby a { display: inline-flex; align-items: center; gap: 0.45rem; color: inherit; text-decoration: none; transition: opacity 0.2s ease; }
 .footer-madeby a:hover { opacity: 0.7; }
 .footer-madeby .madeby-label { font-size: 0.85rem; }

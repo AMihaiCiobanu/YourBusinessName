@@ -130,3 +130,6 @@ h2.gap { margin-top: 30px; }
 }
 
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* Until app.js has filled in the live sections (see index.html). */
+.js-wait .main > #services, .js-wait .main > #services ~ *, .js-wait .cols ~ * { display: none; }

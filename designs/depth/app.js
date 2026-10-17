@@ -144,7 +144,6 @@ function renderFlips(data) {
 
     const front = el('button', 'side side-front');
     front.type = 'button';
-    front.setAttribute('aria-label', `${svc.name}: show details`);
     front.appendChild(el('span', 'f-num', String(i + 1).padStart(2, '0')));
     front.appendChild(el('span', 'f-name', svc.name));
     const row = el('span', 'f-row');

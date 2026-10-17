@@ -7,13 +7,19 @@
   <title>Your Business Name — Tattoo studio · Depth page design</title>
   <meta name="description" content="Depth: a 3D booking page design for tattoo studios, with a spinning portfolio ring, flip cards and a review deck." />
   <meta name="robots" content="noindex" />
+  <link rel="canonical" href="https://yourbusinessname.appointmentsapps.com/designs/depth/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Your Business Name — Tattoo studio · Depth page design" />
+  <meta property="og:description" content="Depth: a 3D booking page design for tattoo studios, with a spinning portfolio ring, flip cards and a review deck." />
+  <meta property="og:url" content="https://yourbusinessname.appointmentsapps.com/designs/depth/" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1598371839696-5c5bb00bdc28?auto=format&amp;fit=crop&amp;w=1200&amp;h=630&amp;q=70" />
   <meta name="theme-color" content="#0a0a0a" />
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Inter:wght@400;500;600&family=DM+Sans:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../shared/shared.css?v=7" />
-  <link rel="stylesheet" href="styles.css?v=1" />
+  <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&family=Inter:wght@400;500;600&family=DM+Sans:wght@500;600;700&display=swap" />
+  <link rel="stylesheet" href="../shared/shared.css?v=9" />
+  <link rel="stylesheet" href="styles.css?v=2" />
 </head>
 
 <body>
@@ -115,7 +121,7 @@
           <p class="sub">Sample reviews for the demo. Tap the deck to deal the next card.</p>
         </header>
         <div class="deck-wrap">
-          <div class="deck" id="deck" tabindex="0" role="button" aria-label="Show the next review"></div>
+          <div class="deck" id="deck" tabindex="0" role="group" aria-roledescription="card deck" aria-label="Reviews: press Enter or tap for the next one"></div>
         </div>
       </div>
     </section>
@@ -161,7 +167,7 @@
   <a class="sticky" data-book href="#">Book a session</a>
 
   <script src="../shared/lightbox.js?v=1" defer></script>
-  <script type="module" src="app.js?v=2"></script>
+  <script type="module" src="app.js?v=3"></script>
 </body>
 
 </html>

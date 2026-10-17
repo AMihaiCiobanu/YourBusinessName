@@ -9,7 +9,7 @@
   --ink-2: #3a3835;
   --muted: #6f6a61;
   --gold: #c9a961;
-  --gold-2: #a88b4a;
+  --gold-2: #7c6637;
   --gold-soft: #dcc389;
   --line: #e2dccf;
   --serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
@@ -124,7 +124,7 @@ h3 { font-size: 1.6rem; font-weight: 400; }
 .tabs { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 36px; margin: 0 auto 40px; padding-bottom: 18px; border-bottom: 1px solid var(--line); max-width: 760px; }
 .tabs[hidden] { display: none; }
 .tab {
-  position: relative; padding: 0 0 8px; border: 0; background: none; cursor: pointer;
+  position: relative; margin-top: -8px; padding: 8px 0; border: 0; background: none; cursor: pointer; /* 28 px tall target */
   font: 600 0.72rem/1 var(--sans); letter-spacing: 0.26em; text-transform: uppercase; color: var(--muted);
   transition: color 0.4s var(--ease);
 }
@@ -247,7 +247,7 @@ h3 { font-size: 1.6rem; font-weight: 400; }
 
 /* chapters */
 .chapters { list-style: none; margin: 0; padding: 0; display: grid; gap: 40px; text-align: center; }
-.numeral { display: block; font-family: var(--serif); font-style: italic; font-size: 4rem; line-height: 1; color: var(--gold); margin-bottom: 12px; }
+.numeral { display: block; font-family: var(--serif); font-style: italic; font-size: 4rem; line-height: 1; color: #9f7f36; margin-bottom: 12px; }
 .chapters p { color: var(--muted); max-width: 20rem; margin: 10px auto 0; }
 
 /* visit */
@@ -262,7 +262,7 @@ h3 { font-size: 1.6rem; font-weight: 400; }
 .hours td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
 .hours tr.today td { color: var(--gold); }
 .hours tr.today td:first-child::after { content: ' · today'; font-style: italic; font-size: 0.95rem; }
-.hours tr.closed td:last-child { color: rgba(255, 255, 255, 0.4); font-style: italic; }
+.hours tr.closed td:last-child { color: rgba(255, 255, 255, 0.55); font-style: italic; }
 .fine { margin: 18px 0 0; font-size: 0.85rem; color: rgba(255, 255, 255, 0.5); }
 .visit-info p { color: rgba(255, 255, 255, 0.7); font-size: 1.05rem; }
 .visit-info h2 { margin-bottom: 18px; }
@@ -315,8 +315,8 @@ h3 { font-size: 1.6rem; font-weight: 400; }
     transition: color 0.35s var(--ease); will-change: transform, opacity;
   }
   .side-name[data-tone='light'] { --halo: var(--butter); color: var(--ink); }
-  .side-name:hover, .side-name:focus-visible { color: var(--gold-2); }
-  .side-name[data-tone='dark']:hover, .side-name[data-tone='dark']:focus-visible { color: var(--gold); }
+  .side-name:hover, .side-name:focus-visible { color: var(--gold); }
+  .side-name[data-tone='light']:hover, .side-name[data-tone='light']:focus-visible { color: var(--gold-2); }
 }
 
 @media (prefers-reduced-motion: reduce) {

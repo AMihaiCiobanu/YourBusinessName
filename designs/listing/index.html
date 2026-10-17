@@ -7,34 +7,44 @@
   <title>Your Business Name — Barbershop · Listing page design</title>
   <meta name="description" content="Listing: a booking page design for barbershops, with a photo gallery, service categories, team, portfolio and a sticky booking card." />
   <meta name="robots" content="noindex" />
+  <link rel="canonical" href="https://yourbusinessname.appointmentsapps.com/designs/listing/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Your Business Name — Barbershop · Listing page design" />
+  <meta property="og:description" content="Listing: a booking page design for barbershops, with a photo gallery, service categories, team, portfolio and a sticky booking card." />
+  <meta property="og:url" content="https://yourbusinessname.appointmentsapps.com/designs/listing/" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&amp;fit=crop&amp;w=1200&amp;h=630&amp;q=70" />
   <meta name="theme-color" content="#ffffff" />
+  <!-- Sections filled in by app.js stay out of the layout until it has run (it removes js-wait),
+       so nothing on screen jumps when they arrive. The timeout shows them anyway if the script fails. -->
+  <script>document.documentElement.classList.add('js-wait'); setTimeout(function () { document.documentElement.classList.remove('js-wait'); }, 4000);</script>
   <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../shared/shared.css?v=7" />
-  <link rel="stylesheet" href="styles.css?v=1" />
+  <link rel="preconnect" href="https://images.unsplash.com" />
+  <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="../shared/shared.css?v=9" />
+  <link rel="stylesheet" href="styles.css?v=2" />
 </head>
 
 <body>
-  <div class="wrap">
+  <main class="wrap">
     <p class="crumbs">Home › Barbershop › Your city › Your Business Name</p>
 
     <header class="head">
       <h1>Your Business Name</h1>
       <p class="meta">
         <span class="cat">Barber</span>
-        <span class="status" id="status" hidden></span>
+        <span class="status" id="status">Checking hours…</span>
         <span>Your street address, Your city</span>
       </p>
     </header>
 
     <div class="gallery" id="photos">
-      <img class="g-main" src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=1400&q=70" alt="Barbershop interior with chairs and mirrors" width="1400" height="900" />
-      <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=700&q=70" alt="Barber working on a client" width="700" height="450" loading="lazy" />
-      <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=700&q=70" alt="Finished cut and style" width="700" height="450" loading="lazy" />
-      <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=700&q=70" alt="Skin fade detail" width="700" height="450" loading="lazy" />
-      <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=700&q=70" alt="Clean cut" width="700" height="450" loading="lazy" />
+      <img class="g-main" src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=1400&q=70" srcset="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=640&q=60 640w, https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=760&q=60 760w, https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=960&q=65 960w, https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=1400&q=70 1400w" sizes="(max-width: 639px) 100vw, 50vw" fetchpriority="high" alt="Barbershop interior with chairs and mirrors" width="1400" height="900" />
+      <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=700&q=70" srcset="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=400&q=65 400w, https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=700&q=70 700w" sizes="(max-width: 639px) 50vw, 25vw" fetchpriority="low" alt="Barber working on a client" width="700" height="450" loading="lazy" />
+      <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=700&q=70" srcset="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=400&q=65 400w, https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=700&q=70 700w" sizes="(max-width: 639px) 50vw, 25vw" fetchpriority="low" alt="Finished cut and style" width="700" height="450" loading="lazy" />
+      <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=700&q=70" srcset="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=400&q=65 400w, https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=700&q=70 700w" sizes="(max-width: 639px) 50vw, 25vw" fetchpriority="low" alt="Skin fade detail" width="700" height="450" loading="lazy" />
+      <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=700&q=70" srcset="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=400&q=65 400w, https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&w=700&q=70 700w" sizes="(max-width: 639px) 50vw, 25vw" fetchpriority="low" alt="Clean cut" width="700" height="450" loading="lazy" />
     </div>
 
     <nav class="tabs" id="tabs" aria-label="Sections">
@@ -89,7 +99,7 @@
       <aside class="side">
         <div class="card">
           <h2>Your Business Name</h2>
-          <p class="side-status" id="side-status"></p>
+          <p class="side-status" id="side-status">Checking hours…</p>
           <a class="btn" data-book href="#">Book now</a>
           <p class="side-note">Instant confirmation · pick a service, a time and your barber</p>
         </div>
@@ -111,7 +121,7 @@
       <p>© <span data-year>2026</span> Your Business Name · Online booking by <a href="https://appointmentsapps.com/" target="_blank" rel="noopener">Appointments &amp; Reports</a></p>
       <p class="footer-madeby"></p>
     </footer>
-  </div>
+  </main>
 
   <div class="bar">
     <div><strong>Your Business Name</strong><span id="bar-status"></span></div>
@@ -119,7 +129,7 @@
   </div>
 
   <script src="../shared/lightbox.js?v=1" defer></script>
-  <script type="module" src="app.js?v=2"></script>
+  <script type="module" src="app.js?v=4"></script>
 </body>
 
 </html>

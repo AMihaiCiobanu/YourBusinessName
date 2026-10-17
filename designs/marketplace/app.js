@@ -115,3 +115,7 @@ const spy = new IntersectionObserver(entries => {
   }
 }, { rootMargin: '-30% 0px -60% 0px' });
 for (const a of tabLinks) spy.observe(document.querySelector(a.getAttribute('href')));
+
+// Show the sections kept out of the layout until now (js-wait, see index.html).
+document.documentElement.classList.remove('js-wait');
+if (location.hash.length > 1) document.getElementById(location.hash.slice(1))?.scrollIntoView();

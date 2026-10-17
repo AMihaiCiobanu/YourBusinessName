@@ -7,7 +7,8 @@
   overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
 }
 
-/* Demo bar */
+/* Demo bar. Its room is kept until demo.js mounts it, so the page does not jump when it arrives. */
+body:not(:has(> .dm-bar)) { padding-top: 48px; }
 .dm-bar {
   position: relative; z-index: 60;
   background: #111; color: #f4f4f4;
@@ -15,7 +16,7 @@
 }
 .dm-bar-inner {
   display: flex; align-items: center; gap: 12px;
-  max-width: 1240px; margin: 0 auto; min-height: 48px; padding: 6px 16px;
+  max-width: 1240px; margin: 0 auto; min-height: 48px; padding: 2px 16px;
 }
 .dm-pick { display: inline-flex; align-items: center; gap: 10px; min-width: 0; }
 .dm-pick > span { opacity: 0.7; }
@@ -33,6 +34,11 @@
   background: #fff; color: #111; text-decoration: none; font-weight: 700; white-space: nowrap;
 }
 .dm-get:hover { background: #e9e9e9; }
+/* Touch targets: the bar's controls look 32-36 px tall but take taps over 44 px (a transparent
+   border on the select, an invisible ::after on the links and the pill). */
+.dm-pick select { min-height: 44px; padding: 0 28px 0 10px; border: 4px solid transparent; background-clip: padding-box; box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.35); }
+.dm-get, .perks-pill { position: relative; }
+.dm-get::after, .perks-pill::after { content: ''; position: absolute; inset: -6px -2px; }
 
 /* "What you get" pill + card (markup from demo.js) */
 .perks-pill {
@@ -134,7 +140,7 @@ html.lv-dialog-open { overflow: hidden; }
 @media (min-width: 768px) { .lv-toast { bottom: 32px; } }
 
 /* Made by SoftApps */
-.footer-madeby { margin: 20px 0 0; text-align: center; opacity: 0.8; }
+.footer-madeby { margin: 20px 0 0; text-align: center; }
 .footer-madeby a { display: inline-flex; align-items: center; gap: 0.45rem; color: inherit; text-decoration: none; transition: opacity 0.2s ease; }
 .footer-madeby a:hover { opacity: 0.7; }
 .footer-madeby .madeby-label { font-size: 0.85rem; }

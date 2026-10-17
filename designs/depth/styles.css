@@ -193,7 +193,7 @@ h3 { font-size: 1.05rem; font-weight: 700; letter-spacing: 0; }
 .deal figcaption { margin-top: auto; font-size: 0.9rem; }
 .deal figcaption strong { font-family: var(--display); font-size: 0.8rem; text-transform: uppercase; }
 .deal .sample { margin-left: 8px; padding: 2px 8px; border-radius: 999px; background: #111; color: var(--bone); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; }
-.deal .count { position: absolute; top: 24px; right: 26px; font: 700 0.8rem/1 var(--display); color: #777; }
+.deal .count { position: absolute; top: 24px; right: 26px; font: 700 0.8rem/1 var(--display); color: #666; }
 
 /* studio */
 .studio { display: grid; gap: 24px; perspective: 1400px; }

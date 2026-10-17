@@ -7,7 +7,7 @@
   --line: #e4e9ee;
   --bg: #f4f6f8;
   --card: #ffffff;
-  --accent: #0e9f9a;
+  --accent: #0b817c;
   --accent-ink: #ffffff;
   --body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
@@ -105,3 +105,6 @@ h3 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color:
 }
 
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+/* Until app.js has filled in the live sections (see index.html). */
+.js-wait .page > #services, .js-wait .page > #services ~ * { display: none; }

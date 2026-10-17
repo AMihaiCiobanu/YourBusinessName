@@ -1,5 +1,15 @@
 /* Skin (dermatology): warm cream and clay, editorial serif, soft. Layout in ../shared/clinic.css. */
 
+/* Georgia scaled to Fraunces' width, so the big heading keeps its line breaks when the web font
+   arrives (without this it shifts the page, CLS 0.13-0.2). Fraunces gets wider at small sizes
+   (optical size axis), so the scale follows the heading size: phone, tablet, desktop. */
+@font-face { font-family: 'Fraunces FB S'; src: local('Georgia'); size-adjust: 103%; }
+@font-face { font-family: 'Fraunces FB S'; font-style: italic; src: local('Georgia Italic'), local('Georgia-Italic'); size-adjust: 92.5%; }
+@font-face { font-family: 'Fraunces FB M'; src: local('Georgia'); size-adjust: 91%; }
+@font-face { font-family: 'Fraunces FB M'; font-style: italic; src: local('Georgia Italic'), local('Georgia-Italic'); size-adjust: 82%; }
+@font-face { font-family: 'Fraunces FB L'; src: local('Georgia'); size-adjust: 85%; }
+@font-face { font-family: 'Fraunces FB L'; font-style: italic; src: local('Georgia Italic'), local('Georgia-Italic'); size-adjust: 77%; }
+
 :root {
   --bg: #f7f1ec;
   --text: #2b1d17;
@@ -13,7 +23,7 @@
   --glass: rgba(251, 247, 243, 0.8);
   --glass-strong: rgba(251, 247, 243, 0.94);
   --shade: linear-gradient(90deg, rgba(247, 241, 236, 0.97) 0%, rgba(247, 241, 236, 0.84) 50%, rgba(247, 241, 236, 0.25) 100%), linear-gradient(0deg, rgba(247, 241, 236, 0.8), transparent 45%);
-  --display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --display: 'Fraunces', 'Fraunces FB S', Georgia, 'Times New Roman', serif;
   --body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --display-weight: 400;
   --display-spacing: -0.02em;
@@ -31,6 +41,10 @@
   --lv-radius: 8px;
 }
 
+@media (min-width: 600px) { :root { --display: 'Fraunces', 'Fraunces FB M', Georgia, 'Times New Roman', serif; } }
+@media (min-width: 880px) { :root { --display: 'Fraunces', 'Fraunces FB L', Georgia, 'Times New Roman', serif; } }
+/* 13ch of Fraunces, in em so the fallback font wraps the heading the same way. */
+h1 { max-width: 7.7em; }
 h2 em { font-style: italic; color: var(--accent-text); }
 .eyebrow { letter-spacing: 0.26em; }
 .split { display: grid; gap: 16px; margin-top: 24px; }

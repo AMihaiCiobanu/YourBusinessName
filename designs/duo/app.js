@@ -298,3 +298,7 @@ for (const p of STAFF) {
   });
 }
 document.fonts?.ready.then(moveGlider);
+
+// Show the sections kept out of the layout until now (js-wait, see index.html).
+document.documentElement.classList.remove('js-wait');
+if (location.hash.length > 1) document.getElementById(location.hash.slice(1))?.scrollIntoView();

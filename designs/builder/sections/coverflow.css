@@ -6,7 +6,8 @@
 .cf .cf-slide { width: min(380px, 68cqi); margin: 0; border-radius: var(--radius-lg); overflow: hidden; background: var(--surface-2); }
 .cf-slide img { width: 100%; aspect-ratio: 3 / 4; height: auto; object-fit: cover; }
 :root[data-skin="bold"] .cf-slide { border: 2px solid var(--text); }
-.cf .swiper-pagination-bullet { width: 10px; height: 10px; background: var(--text); opacity: 0.3; }
+/* 10 px dot drawn inside a 24 px hit area (WCAG target size). */
+.cf .swiper-pagination-bullet { width: 24px; height: 24px; padding: 7px; box-sizing: border-box; background: var(--text); background-clip: content-box; opacity: 0.3; }
 .cf .swiper-pagination-bullet-active { background: var(--accent); opacity: 1; }
 .cf .swiper-pagination { bottom: 6px; }
-.cf .swiper-pagination-bullet { margin: 0 6px !important; }
+.cf .swiper-pagination-bullet { margin: 0 !important; }

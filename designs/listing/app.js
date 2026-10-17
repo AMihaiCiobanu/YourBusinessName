@@ -125,8 +125,8 @@ const teamList = document.getElementById('team-list');
 for (const p of TEAM) {
   const li = el('li');
   const item = bookButton('', { linkId: p.linkId || BOOKING_LINK_ID, className: 'member' });
-  item.setAttribute('aria-label', `Book with ${p.name}`);
-  item.appendChild(el('span', 'avatar', p.name[0]));
+  item.appendChild(el('span', 'sr-only', 'Book with '));
+  item.appendChild(el('span', 'avatar', p.name[0])).setAttribute('aria-hidden', 'true');
   item.appendChild(el('span', 'm-name', p.name));
   item.appendChild(el('span', 'm-role', p.role));
   li.appendChild(item);
@@ -157,3 +157,7 @@ const spy = new IntersectionObserver(entries => {
   }
 }, { rootMargin: '-30% 0px -60% 0px' });
 for (const a of tabLinks) spy.observe(document.querySelector(a.getAttribute('href')));
+
+// Show the sections kept out of the layout until now (js-wait, see index.html).
+document.documentElement.classList.remove('js-wait');
+if (location.hash.length > 1) document.getElementById(location.hash.slice(1))?.scrollIntoView();

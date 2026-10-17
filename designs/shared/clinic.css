@@ -8,8 +8,6 @@ body {
   font-family: var(--body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased;
   padding-bottom: 84px;
 }
-/* Room for the demo bar (demo.js mounts it) so the page does not jump when it arrives. */
-body:not(:has(> .dm-bar)) { padding-top: 48px; }
 .foot .footer-madeby { opacity: 1; color: var(--text); }
 a { color: inherit; }
 img { display: block; max-width: 100%; }
