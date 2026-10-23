@@ -49,5 +49,5 @@ export const libs = {
 
 // Section stylesheets live next to their scripts.
 export function sectionStyle(id) {
-  return loadStyle(new URL(`../sections/${id}.css?v=2`, import.meta.url).href);
+  return loadStyle(new URL(`../sections/${id}.css?v=3`, import.meta.url).href);
 }

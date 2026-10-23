@@ -2,7 +2,7 @@
 // Prices "on request" are left out of the total and the summary says so. The booking page takes
 // one service, so "Book" opens it on the first service picked.
 
-import { h, icon } from '../core/dom.js';
+import { h, icon, uid } from '../core/dom.js';
 import { bookButton, formatDuration, formatPrice } from '../../shared/live.js';
 
 export default {
@@ -48,8 +48,9 @@ export default {
         cta,
         items.length ? clear : null].filter(Boolean));
     };
+    const prefix = list.dataset.p || (list.dataset.p = uid('bs')); // unique per planner on the page
     list.replaceChildren(h('legend', { class: 'sr-only', text: t('basket.title') }), ...data.services.map(s => {
-      const id = `bs-${s.id}`;
+      const id = `${prefix}-${s.id}`;
       const input = h('input', { type: 'checkbox', id, value: s.id });
       input.addEventListener('change', () => { if (input.checked) picked.add(s.id); else picked.delete(s.id); draw(); });
       return h('label', { class: 'bs-item', for: id }, input,

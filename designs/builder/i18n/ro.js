@@ -31,7 +31,7 @@ export default {
     presetsHint: 'O atingere și ai o pagină completă pentru tipul tău de afacere. Poți schimba orice după.',
     presetDone: 'Pagina gata a fost aplicată: {name}.',
     ownMix: 'Sau alege tu secțiunile',
-    sectionsHint: 'Bifează o secțiune ca să apară. Trage de mâner sau folosește săgețile ca să schimbi ordinea.',
+    sectionsHint: 'Bifează o secțiune ca să apară și alege-i tipul. Trage de mâner sau folosește săgețile ca să schimbi ordinea.',
     floating: 'Plutitoare',
     moveUp: 'Mută {name} mai sus',
     moveDown: 'Mută {name} mai jos',
@@ -40,6 +40,10 @@ export default {
     moved: '{name} e acum pe poziția {pos} din {total}.',
     added: '{name} a fost adăugată pe pagină.',
     removed: '{name} a fost scoasă de pe pagină.',
+    type: 'Tip',
+    typeChanged: '{name}: {type}.',
+    removeCopy: 'Șterge {name}',
+    addCopy: 'Încă una',
     count: '{on} din {total} secțiuni pe pagină',
     copy: 'Copiază linkul',
     copied: 'Link copiat. Oricine îl deschide vede pagina asta.',
@@ -83,21 +87,54 @@ export default {
     book: { name: 'Carte de prețuri', desc: 'Lista de prețuri ca o carte cu pagini care se întorc.' },
     prices: { name: 'Listă de prețuri', desc: 'O listă simplă, pe grupe.' },
     basket: { name: 'Planificator de vizită', desc: 'Bifezi servicii, vezi timpul și prețul total.' },
-    compare: { name: 'Înainte și după', desc: 'Tragi de mâner ca să compari două poze.' },
-    stats: { name: 'Cifre', desc: 'Clienți, ani și rating care cresc animat.' },
+    compare: { name: 'Cu mâner de tras', desc: 'Tragi de mâner ca să compari două poze.' },
+    stats: { name: 'Cifre animate', desc: 'Clienți, ani și rating care cresc animat.' },
     coverflow: { name: 'Galerie 3D', desc: 'Poze într-un carusel coverflow.' },
     filmstrip: { name: 'Filmstrip', desc: 'Poză mare cu o bandă de miniaturi.' },
     insta: { name: 'Grilă Instagram', desc: 'Poze pătrate, cu vizualizare pe tot ecranul.' },
-    team: { name: 'Echipa', desc: 'Carduri care se întorc, cu specialități și programare.' },
-    products: { name: 'Produse', desc: 'Produsele pe care le vinzi, adăugate manual.' },
-    gift: { name: 'Card cadou', desc: 'Un card 3D; clientul sună pentru detalii.' },
-    loyalty: { name: 'Card de fidelitate', desc: 'Ștampile care se umplu la scroll.' },
-    reviews: { name: 'Recenzii', desc: 'Un carusel cu păreri de la clienți.' },
-    faq: { name: 'Întrebări frecvente', desc: 'Răspunsuri la întrebările des întâlnite.' },
-    hours: { name: 'Program', desc: '„Deschis acum” live și banda zilei de azi.' },
-    map: { name: 'Hartă', desc: 'Hartă stilizată; Google Maps se încarcă la atingere.' },
+    team: { name: 'Carduri care se întorc', desc: 'Carduri care se întorc, cu specialități și programare.' },
+    products: { name: 'Carduri de produse', desc: 'Produsele pe care le vinzi, adăugate manual.' },
+    gift: { name: 'Card cadou 3D', desc: 'Un card 3D; clientul sună pentru detalii.' },
+    loyalty: { name: 'Card cu ștampile', desc: 'Ștampile care se umplu la scroll.' },
+    reviews: { name: 'Carusel de recenzii', desc: 'Un carusel cu păreri de la clienți.' },
+    reviewbook: { name: 'Carte de oaspeți', desc: 'Păreri de la clienți într-o carte cu pagini care se întorc.' },
+    faq: { name: 'Acordeon', desc: 'Răspunsuri la întrebările des întâlnite.' },
+    hours: { name: 'Bandă live a zilei', desc: '„Deschis acum” live și banda zilei de azi.' },
+    map: { name: 'Hartă cu detalii', desc: 'Hartă stilizată; Google Maps se încarcă la atingere.' },
     booking: { name: 'Formular de programare', desc: 'Serviciu, dată și oră din programul tău.' },
-    contactbar: { name: 'Bară de contact', desc: 'Sună, WhatsApp și Programare, mereu la îndemână.' }
+    contactbar: { name: 'Bară jos', desc: 'Sună, WhatsApp și Programare, mereu la îndemână.' },
+    herosplit: { name: 'Text și poză mare', desc: 'Titlul lângă o poză mare. Cel mai rapid prim ecran.' },
+    compareduo: { name: 'Una lângă alta', desc: 'Pozele înainte și după, alăturate.' },
+    statsband: { name: 'Bandă cu cifre', desc: 'O bandă colorată cu cifrele tale.' },
+    statsticker: { name: 'Bandă care se mișcă', desc: 'Cifrele trec de la dreapta la stânga, fără oprire.' },
+    teamgrid: { name: 'Carduri de profil', desc: 'Poze rotunde, specialități și buton de programare.' },
+    productlist: { name: 'Listă de produse', desc: 'O listă compactă, cu poze și prețuri.' },
+    giftbanner: { name: 'Banner cadou', desc: 'Un banner lat, cu sumele cele mai alese.' },
+    loyaltyline: { name: 'Linie de progres', desc: 'Vizitele pe o linie; ultima e gratuită.' },
+    faqgrid: { name: 'Carduri cu întrebări', desc: 'Toate răspunsurile la vedere, într-o grilă.' },
+    hourscard: { name: 'Card cu programul', desc: '„Deschis acum” și toată săptămâna într-un card.' },
+    mapwide: { name: 'Hartă lată', desc: 'Hartă pe toată lățimea, cu adresa deasupra.' },
+    contactfab: { name: 'Butoane rotunde', desc: 'WhatsApp și apel, în colțul ecranului.' },
+    masonry: { name: 'Masonry', desc: 'Poze de forme diferite, în coloane, ca pe Pinterest.' },
+    carousel: { name: 'Carusel cu swipe', desc: 'Un rând de poze pe care le derulezi lateral.' }
+  },
+
+  // Rândurile cu mai multe tipuri poartă numele grupului.
+  grp: {
+    hero: { name: 'Hero' },
+    compare: { name: 'Înainte și după' },
+    stats: { name: 'Cifre' },
+    team: { name: 'Echipa' },
+    products: { name: 'Produse' },
+    gift: { name: 'Card cadou' },
+    loyalty: { name: 'Card de fidelitate' },
+    faq: { name: 'Întrebări frecvente' },
+    hours: { name: 'Program' },
+    map: { name: 'Hartă' },
+    contactbar: { name: 'Butoane de contact' },
+    gallery: { name: 'Galerie foto', add: 'Încă o galerie' },
+    prices: { name: 'Prețuri', add: 'Încă o secțiune' },
+    reviews: { name: 'Recenzii' }
   },
 
   nav: {
@@ -230,6 +267,18 @@ export default {
     thumbs: 'Alege o poză'
   },
 
+  masonry: {
+    eyebrow: 'Galerie',
+    title: 'Momente din studio',
+    lead: 'Poze de toate formele, ca într-un feed. Atinge una ca s-o vezi mare.'
+  },
+
+  carousel: {
+    eyebrow: 'Lucrările noastre',
+    title: 'Răsfoiește lucrările noastre',
+    label: 'Carusel de poze. Derulează lateral sau folosește butoanele.'
+  },
+
   insta: {
     eyebrow: 'Instagram',
     title: '@afacereata',
@@ -266,6 +315,10 @@ export default {
     valid: 'Valabil 12 luni'
   },
 
+  giftbanner: {
+    amounts: 'Cele mai alese sume'
+  },
+
   loyalty: {
     eyebrow: 'Card de fidelitate',
     title: 'A 6-a vizită e din partea casei',
@@ -282,6 +335,18 @@ export default {
     sample: 'Recenzie de exemplu',
     goto: 'Arată recenzia {n}',
     label: 'Recenziile clienților'
+  },
+
+  reviewbook: {
+    eyebrow: 'Recenzii',
+    title: 'Cartea noastră de oaspeți',
+    lead: 'Întoarce paginile ca să citești ce au scris clienții despre noi.',
+    label: 'Cartea cu recenziile clienților. Folosește săgețile ca să întorci paginile.',
+    coverTitle: 'Carte de oaspeți',
+    coverSub: 'Recenzii de la clienți',
+    introTitle: 'Mulțumim pentru fiecare cuvânt',
+    closingTitle: 'E rândul tău',
+    closingText: 'Vino să vezi cu ochii tăi, apoi spune-ne cum a fost.'
   },
 
   faq: {

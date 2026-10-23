@@ -4,7 +4,7 @@
 
 import { h, icon, svgEl } from '../core/dom.js';
 
-function mapArt() {
+export function mapArt() {
   const svg = svgEl('svg', { viewBox: '0 0 800 500', class: 'mp-art', 'aria-hidden': 'true', preserveAspectRatio: 'xMidYMid slice' });
   // Seeded so the map is the same on every visit.
   let seed = 7;

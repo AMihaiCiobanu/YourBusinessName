@@ -1,0 +1,10 @@
+.cd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(8px, 2cqi, 20px); max-width: 980px; margin: 0 auto; }
+.cd-fig { position: relative; margin: 0; overflow: hidden; border-radius: var(--radius-lg); background: var(--surface-2); }
+.cd-fig img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
+.cd-b img { filter: grayscale(0.85) brightness(0.72) contrast(0.85) blur(0.6px); }
+:root[data-skin="bold"] .cd-fig { border: 2px solid var(--text); }
+.cd-tag {
+  position: absolute; left: 12px; bottom: 12px; padding: 5px 12px; border-radius: 999px;
+  background: rgba(0, 0, 0, 0.66); color: #fff; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+}
+.cd-a .cd-tag { background: var(--accent); color: var(--accent-ink); }

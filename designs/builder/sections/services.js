@@ -44,8 +44,8 @@ export default {
       card.querySelector('.svc-book').appendChild(h('span', { class: 'sr-only', text: `: ${svc.name}` }));
       return card;
     }));
-    const target = ctx.isOn('book') ? 'book' : ctx.isOn('prices') ? 'prices' : '';
-    more.replaceChildren(data.services.length > MAX && target ? h('a', { class: 'btn btn-ghost', href: `#s-${target}`, text: t('common.seeAll', { n: data.services.length }) }) : '');
+    const target = ctx.isOn('book') || ctx.isOn('prices') ? ctx.anchor('book', 'prices') : '';
+    more.replaceChildren(data.services.length > MAX && target ? h('a', { class: 'btn btn-ghost', href: target, text: t('common.seeAll', { n: data.services.length }) }) : '');
     // Cards added after mount need the reveal + tilt wiring again.
     el.dispatchEvent(new CustomEvent('bx:content', { bubbles: false }));
   },

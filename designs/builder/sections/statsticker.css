@@ -1,0 +1,24 @@
+.tk-sec { padding: clamp(28px, 5cqi, 56px) 0; overflow: hidden; }
+.tk-band { position: relative; overflow: hidden; background: var(--text); color: var(--bg); }
+:root[data-skin="bold"] .tk-band { background: var(--accent); color: var(--accent-ink); border-block: 2px solid var(--text); }
+.tk-track { display: flex; width: max-content; animation: tk-slide 36s linear infinite; }
+.tk-band:hover .tk-track, .tk-band:focus-within .tk-track, .tk-band.is-paused .tk-track { animation-play-state: paused; }
+@keyframes tk-slide { to { transform: translateX(-50%); } }
+.tk-list { display: flex; flex-shrink: 0; margin: 0; padding: 0; list-style: none; }
+.tk-item { display: flex; align-items: baseline; gap: 10px; padding: clamp(16px, 2.6cqi, 26px) 0 clamp(16px, 2.6cqi, 26px) clamp(24px, 4cqi, 44px); white-space: nowrap; }
+.tk-num { font: var(--display-weight) calc(clamp(1.6rem, 3.6cqi, 2.4rem) * var(--display-scale)) / 1 var(--font-display); font-variant-numeric: tabular-nums; }
+.tk-num { display: inline-flex; align-items: center; gap: 4px; }
+.tk-star { fill: currentColor; }
+.tk-label { font-weight: 600; opacity: 0.8; }
+.tk-sep { align-self: center; margin-left: clamp(14px, 3cqi, 34px); color: var(--accent); }
+:root[data-skin="bold"] .tk-sep { color: var(--text); }
+.tk-pause { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: var(--bg); color: var(--text); }
+/* Reduced motion: one still row that wraps, no copies. */
+.reduce-motion .tk-track { animation: none; width: auto; flex-wrap: wrap; justify-content: center; }
+.reduce-motion .tk-list + .tk-list, .reduce-motion .tk-item:nth-child(n + 5) { display: none; }
+.reduce-motion .tk-list { flex-wrap: wrap; justify-content: center; }
+@media (prefers-reduced-motion: reduce) {
+  .tk-track { animation: none; width: auto; flex-wrap: wrap; justify-content: center; }
+  .tk-list + .tk-list, .tk-item:nth-child(n + 5) { display: none; }
+  .tk-list { flex-wrap: wrap; justify-content: center; }
+}

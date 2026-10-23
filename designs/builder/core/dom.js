@@ -44,6 +44,7 @@ const PATHS = {
   arrowDown: 'M12 5v14M19 12l-7 7-7-7',
   chevronDown: 'M6 9l6 6 6-6',
   close: 'M18 6 6 18M6 6l12 12',
+  plus: 'M12 5v14M5 12h14',
   grip: 'M9 5h.01M15 5h.01M9 12h.01M15 12h.01M9 19h.01M15 19h.01',
   check: 'M20 6 9 17l-5-5',
   play: 'M6 4l14 8-14 8z',

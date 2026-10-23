@@ -1,0 +1,14 @@
+.pd-wrap { max-width: 820px; }
+.pd-list { margin: 0; padding: 6px 18px; list-style: none; }
+.pd-row { display: grid; grid-template-columns: 80px minmax(0, 1fr) auto auto; align-items: center; gap: 14px; padding: 14px 0; }
+.pd-row + .pd-row { border-top: 1px solid var(--line); }
+.pd-photo { width: 80px; height: 80px; border-radius: var(--radius); object-fit: cover; background: var(--surface-2); }
+.pd-name { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 1.05rem; }
+.pd-badge { font-size: 0.72rem; }
+.pd-price { font-size: 1.1rem; white-space: nowrap; }
+@container page (max-width: 480px) {
+  .pd-row { grid-template-columns: 64px minmax(0, 1fr) auto; }
+  .pd-photo { width: 64px; height: 64px; }
+  .pd-price { grid-column: 2; }
+  .pd-buy { grid-row: 1 / span 2; grid-column: 3; }
+}

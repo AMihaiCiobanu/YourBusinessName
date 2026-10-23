@@ -22,7 +22,7 @@
     // URLs exactly as core/dom.js builds them so the browser reuses the download.
     (function () {
       var skin = 'luxe', niche = 'beauty', saved = null;
-      try { saved = JSON.parse(localStorage.getItem('builder:v1') || 'null'); } catch (_) { }
+      try { saved = JSON.parse(localStorage.getItem('builder:v2') || localStorage.getItem('builder:v1') || 'null'); } catch (_) { }
       var hash = location.hash;
       var k = /(?:^|[#&])k=(luxe|clean|bold)(?:&|$)/.exec(hash);
       var n = /(?:^|[#&])n=([a-z]+)(?:&|$)/.exec(hash);
@@ -37,7 +37,8 @@
         clinic: 'photo-1645005512968-0c1fe99f0093', tattoo: 'photo-1565058379802-bbe93b2f703a'
       };
       var id = HERO[niche];
-      var heroOn = !/(?:^|[#&])s=/.test(hash) || /(?:^|[#&])s=(hero|[^&]*\.hero)(?:[.&]|$)/.test(hash);
+      // `hero`, `hero-3d` or `hero-split` anywhere in the visible list (both types show this photo).
+      var heroOn = !/(?:^|[#&])s=/.test(hash) || /(?:^|[#&])s=(?:[^&]*\.)?hero(?:-(?:3d|split))?(?:[.&]|$)/.test(hash);
       if (!id || !heroOn) return;
       var url = function (w) { return 'https://images.unsplash.com/' + id + '?auto=format&fit=crop&crop=entropy&w=' + w + '&h=' + (w * 1.25) + '&q=62'; };
       var link = document.createElement('link');
@@ -58,9 +59,9 @@
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Space+Grotesk:wght@500;700&display=swap" />
   <link rel="stylesheet" href="../shared/shared.css?v=9" />
   <link rel="stylesheet" href="styles.css?v=1" />
-  <link rel="stylesheet" href="builder/panel.css?v=1" media="print" onload="this.media='all'" />
-  <link rel="preload" as="style" href="sections/hero.css?v=2" />
-  <link rel="modulepreload" href="app.js?v=1" />
+  <link rel="stylesheet" href="builder/panel.css?v=2" media="print" onload="this.media='all'" />
+  <link rel="preload" as="style" href="sections/hero.css?v=3" />
+  <link rel="modulepreload" href="app.js?v=2" />
   <link rel="modulepreload" href="core/state.js" />
   <link rel="modulepreload" href="core/registry.js" />
   <link rel="modulepreload" href="core/i18n.js" />
@@ -75,7 +76,7 @@
   <link rel="modulepreload" href="content/beauty.js" />
   <link rel="modulepreload" href="i18n/en.js" />
   <link rel="modulepreload" href="builder/panel.js" />
-  <link rel="modulepreload" href="sections/hero.js" />
+  <link rel="modulepreload" href="sections/hero.js?v=4" />
   <link rel="modulepreload" href="../shared/live.js" />
   <link rel="modulepreload" href="../shared/demo.js?v=5" />
 </head>
@@ -93,7 +94,7 @@
   </noscript>
 
   <script src="../shared/lightbox.js?v=1" defer></script>
-  <script type="module" src="app.js?v=1"></script>
+  <script type="module" src="app.js?v=2"></script>
 </body>
 
 </html>

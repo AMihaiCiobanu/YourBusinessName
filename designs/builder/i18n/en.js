@@ -31,7 +31,7 @@ export default {
     presetsHint: 'One tap gives you a complete page for your kind of business. You can still change anything after.',
     presetDone: 'Ready page applied: {name}.',
     ownMix: 'Or pick the sections yourself',
-    sectionsHint: 'Tick a section to show it. Drag the handle or use the arrows to change the order.',
+    sectionsHint: 'Tick a section to show it and pick its type. Drag the handle or use the arrows to change the order.',
     floating: 'Floating',
     moveUp: 'Move {name} up',
     moveDown: 'Move {name} down',
@@ -40,6 +40,10 @@ export default {
     moved: '{name} moved to position {pos} of {total}.',
     added: '{name} added to the page.',
     removed: '{name} removed from the page.',
+    type: 'Type',
+    typeChanged: '{name}: {type}.',
+    removeCopy: 'Remove {name}',
+    addCopy: 'Add another',
     count: '{on} of {total} sections on the page',
     copy: 'Copy link',
     copied: 'Link copied. Anyone who opens it sees this page.',
@@ -83,21 +87,54 @@ export default {
     book: { name: 'Price book', desc: 'Your price list as a book with turning pages.' },
     prices: { name: 'Price list', desc: 'A simple, grouped list of prices.' },
     basket: { name: 'Visit planner', desc: 'Tick services, see total time and price.' },
-    compare: { name: 'Before & after', desc: 'Drag the handle to compare two photos.' },
-    stats: { name: 'Counters', desc: 'Clients, years and rating that count up.' },
+    compare: { name: 'Drag slider', desc: 'Drag the handle to compare two photos.' },
+    stats: { name: 'Animated counters', desc: 'Clients, years and rating that count up.' },
     coverflow: { name: '3D gallery', desc: 'Photos in a coverflow carousel.' },
     filmstrip: { name: 'Filmstrip', desc: 'Big photo with a strip of thumbnails.' },
     insta: { name: 'Instagram grid', desc: 'Square photo grid with a full-screen view.' },
-    team: { name: 'Team', desc: 'Flip cards with specialties and booking.' },
-    products: { name: 'Products', desc: 'Products you sell, added by hand.' },
-    gift: { name: 'Gift card', desc: 'A 3D card; clients call for details.' },
-    loyalty: { name: 'Loyalty card', desc: 'Stamps that fill up as you scroll.' },
-    reviews: { name: 'Reviews', desc: 'A carousel of client reviews.' },
-    faq: { name: 'FAQ', desc: 'Answers to common questions.' },
-    hours: { name: 'Hours', desc: 'Live “open now” and today’s timeline.' },
-    map: { name: 'Map', desc: 'A styled map; Google Maps loads on tap.' },
+    team: { name: 'Flip cards', desc: 'Flip cards with specialties and booking.' },
+    products: { name: 'Product cards', desc: 'Products you sell, added by hand.' },
+    gift: { name: '3D gift card', desc: 'A 3D card; clients call for details.' },
+    loyalty: { name: 'Stamp card', desc: 'Stamps that fill up as you scroll.' },
+    reviews: { name: 'Reviews carousel', desc: 'A carousel of client reviews.' },
+    reviewbook: { name: 'Guest book', desc: 'Client reviews in a book with turning pages.' },
+    faq: { name: 'Accordion', desc: 'Answers to common questions.' },
+    hours: { name: 'Live timeline', desc: 'Live “open now” and today’s timeline.' },
+    map: { name: 'Map with details', desc: 'A styled map; Google Maps loads on tap.' },
     booking: { name: 'Booking form', desc: 'Service, date and time from your hours.' },
-    contactbar: { name: 'Contact bar', desc: 'Call, WhatsApp and Book, always at hand.' }
+    contactbar: { name: 'Bottom bar', desc: 'Call, WhatsApp and Book, always at hand.' },
+    herosplit: { name: 'Text and big photo', desc: 'The headline next to one big photo. The lightest first screen.' },
+    compareduo: { name: 'Side by side', desc: 'Before and after photos next to each other.' },
+    statsband: { name: 'Number strip', desc: 'A coloured strip with your numbers.' },
+    statsticker: { name: 'Moving strip', desc: 'Your numbers slide from right to left, non-stop.' },
+    teamgrid: { name: 'Profile cards', desc: 'Round photos, specialties and a booking button.' },
+    productlist: { name: 'Product list', desc: 'A compact list with photos and prices.' },
+    giftbanner: { name: 'Gift banner', desc: 'A wide banner with the most chosen amounts.' },
+    loyaltyline: { name: 'Progress line', desc: 'Visits on a line; the last one is free.' },
+    faqgrid: { name: 'Question cards', desc: 'All answers visible, in a grid.' },
+    hourscard: { name: 'Hours card', desc: 'Open now and the whole week in one card.' },
+    mapwide: { name: 'Wide map', desc: 'A full-width map with the address on top.' },
+    contactfab: { name: 'Round buttons', desc: 'WhatsApp and call bubbles in the corner.' },
+    masonry: { name: 'Masonry grid', desc: 'Photos of mixed shapes in columns, Pinterest style.' },
+    carousel: { name: 'Swipe carousel', desc: 'A row of photo cards you swipe sideways.' }
+  },
+
+  // Rows with several types are named after the group.
+  grp: {
+    hero: { name: 'Hero' },
+    compare: { name: 'Before & after' },
+    stats: { name: 'Numbers' },
+    team: { name: 'Team' },
+    products: { name: 'Products' },
+    gift: { name: 'Gift card' },
+    loyalty: { name: 'Loyalty card' },
+    faq: { name: 'FAQ' },
+    hours: { name: 'Hours' },
+    map: { name: 'Map' },
+    contactbar: { name: 'Contact buttons' },
+    gallery: { name: 'Photo gallery', add: 'Add another gallery' },
+    prices: { name: 'Prices', add: 'Add another' },
+    reviews: { name: 'Reviews' }
   },
 
   nav: {
@@ -230,6 +267,18 @@ export default {
     thumbs: 'Choose a photo'
   },
 
+  masonry: {
+    eyebrow: 'Gallery',
+    title: 'Moments from the studio',
+    lead: 'A mix of shapes, like a real feed. Tap a photo to see it big.'
+  },
+
+  carousel: {
+    eyebrow: 'Our work',
+    title: 'Swipe through our work',
+    label: 'Photo carousel. Scroll sideways or use the buttons.'
+  },
+
   insta: {
     eyebrow: 'Instagram',
     title: '@yourbusiness',
@@ -266,6 +315,10 @@ export default {
     valid: 'Valid for 12 months'
   },
 
+  giftbanner: {
+    amounts: 'Most chosen amounts'
+  },
+
   loyalty: {
     eyebrow: 'Loyalty card',
     title: 'Every 6th visit is on us',
@@ -282,6 +335,18 @@ export default {
     sample: 'Sample review',
     goto: 'Show review {n}',
     label: 'Client reviews'
+  },
+
+  reviewbook: {
+    eyebrow: 'Reviews',
+    title: 'Our guest book',
+    lead: 'Turn the pages to read what clients wrote about us.',
+    label: 'Book of client reviews. Use the arrow keys to turn the pages.',
+    coverTitle: 'Guest book',
+    coverSub: 'Client reviews',
+    introTitle: 'Thank you for every word',
+    closingTitle: 'Your turn',
+    closingText: 'Come and see for yourself, then tell us how it went.'
   },
 
   faq: {

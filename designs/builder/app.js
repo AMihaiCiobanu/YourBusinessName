@@ -6,7 +6,7 @@
 // with ?link=<booking link id> to preview a real account's prices, or ?sample=many for a long list.
 
 import { loadState, saveState, shareUrl, encodeHash, visible, linkFromUrl, query, defaults } from './core/state.js';
-import { BY_ID } from './core/registry.js';
+import { GROUP, typeOf } from './core/registry.js';
 import { loadLang, t, tEn } from './core/i18n.js';
 import { applyTheme, accentFor } from './core/theme.js';
 import { motion } from './core/motion.js';
@@ -29,9 +29,17 @@ let theme = null;
 
 const displayName = () => state.name || t('brandDefault');
 
-function anchor(...ids) {
-  const id = ids.find(x => state.on.includes(x));
-  return id ? `#s-${id}` : '#page';
+// A key names a section type (its file: 'book', 'prices') or a whole group ('gallery').
+const matches = key => it => typeOf(it).mod === key || it.group === key;
+const shownBy = key => { const shown = visible(state); return shown.find(it => typeOf(it).mod === key) || shown.find(matches(key)); };
+
+// Link to the first visible section of the first key that is on the page.
+function anchor(...keys) {
+  for (const key of keys) {
+    const item = shownBy(key);
+    if (item) return `#s-${item.id}`;
+  }
+  return '#page';
 }
 
 let toastTimer = 0;
@@ -61,13 +69,16 @@ const ctx = () => ({
   anchor,
   toast,
   priceText: s => priceText(s, data?.currency || ''),
-  isOn: id => state.on.includes(id)
+  isOn: key => visible(state).some(matches(key))
 });
 
 // ---------- "Get my page" ----------
 
 function setupText() {
-  const sections = visible(state).map(id => BY_ID[id].label);
+  const sections = visible(state).map(it => {
+    const g = GROUP[it.group];
+    return g.types.length > 1 ? `${g.label}: ${typeOf(it).label}` : typeOf(it).label;
+  });
   return [
     'My page setup from the page builder:',
     `- Type of business: ${tEn(`niches.${state.niche}`)}`,
@@ -124,7 +135,7 @@ async function change(patch, kind) {
     page.renderHeader();
     page.renderFooter();
     clearTimeout(nameTimer);
-    nameTimer = setTimeout(() => page.refresh(['book', 'gift', 'map']), 400);
+    nameTimer = setTimeout(() => page.refresh(['book', 'reviewbook', 'gift', 'map', 'mapwide']), 400);
   } else if (kind === 'content') {
     if (langChanged) {
       await loadLang(state.lang);

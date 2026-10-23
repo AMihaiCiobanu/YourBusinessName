@@ -1,0 +1,13 @@
+@import url("map.css?v=3");
+
+.mc-sec { position: relative; overflow: hidden; padding: 0; min-height: 480px; display: flex; align-items: center; }
+.mc-map { position: absolute; inset: 0; }
+.mc-map .mp-art { width: 100%; height: 100%; display: block; }
+.mc-wrap { position: relative; padding: clamp(40px, 7cqi, 80px) 0; }
+.mc-card { max-width: 380px; padding: 26px; box-shadow: var(--shadow); }
+.mc-card h2 { margin: 4px 0 14px; font-size: calc(clamp(1.7rem, 3.4cqi, 2.4rem) * var(--display-scale)); }
+.mc-list { display: grid; gap: 12px; margin: 0 0 20px; padding: 0; list-style: none; }
+.mc-list li { display: flex; gap: 10px; align-items: flex-start; }
+.mc-list svg { flex-shrink: 0; color: var(--accent-text); }
+.mc-link { padding: 0; border: 0; background: none; color: inherit; font: inherit; text-decoration: underline; cursor: pointer; }
+@container page (max-width: 560px) { .mc-sec { min-height: 0; } .mc-wrap { padding-top: 220px; } }

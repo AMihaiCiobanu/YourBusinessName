@@ -1,10 +1,11 @@
 // The builder panel: a side panel on wide screens, a bottom sheet on phones. Two tabs:
-// Sections (tick to show, drag the handle / arrows / Alt+arrows to reorder) and Style (business,
+// Sections (tick to show, pick the type, add another gallery, drag the handle / arrows / Alt+arrows
+// to reorder) and Style (business,
 // name, theme, accent, language, motion, phone preview). Every control calls change(patch, kind);
 // app.js applies it to the page.
 
-import { SECTIONS, BY_ID } from '../core/registry.js';
-import { NICHES, SKINS, LANGS } from '../core/state.js';
+import { GROUP, typeOf } from '../core/registry.js';
+import { NICHES, SKINS, LANGS, itemsFrom, nextId } from '../core/state.js';
 import { ACCENT_PRESETS, SKIN_META, accentFor } from '../core/theme.js';
 import { t } from '../core/i18n.js';
 import { h, icon } from '../core/dom.js';
@@ -24,7 +25,6 @@ export function mountPanel({ state, change, reset, shareUrl, toast, motion, getP
   const wide = window.matchMedia('(min-width: 1100px)');
 
   const announce = msg => { live.textContent = ''; requestAnimationFrame(() => { live.textContent = msg; }); };
-  const secName = id => t(`sec.${id}.name`);
 
   // ---------- open / close ----------
 
@@ -51,41 +51,79 @@ export function mountPanel({ state, change, reset, shareUrl, toast, motion, getP
   const floating = h('ul', { class: 'bp-list bp-list-fixed' });
   const count = h('p', { class: 'bp-count', 'aria-live': 'polite' });
 
-  function badges(id) {
+  const itemOf = id => state.items.find(it => it.id === id);
+  const typeName = type => t(`sec.${type.mod}.name`);
+  // A group with several types is named after the group ("Photo gallery"), a single-type one after
+  // its type. Copies of a group are numbered in page order: "Photo gallery 2".
+  function secName(id) {
+    const item = itemOf(id);
+    if (!item) return '';
+    const g = GROUP[item.group];
+    const base = g.types.length > 1 ? t(`grp.${g.id}.name`) : typeName(typeOf(item));
+    const same = state.items.filter(it => it.group === item.group);
+    return same.length > 1 ? `${base} ${same.indexOf(item) + 1}` : base;
+  }
+
+  function badges(type) {
     const wrap = h('span', { class: 'bp-badges' });
-    for (const b of BY_ID[id].badges) wrap.appendChild(h('span', { class: `bp-badge bp-badge-${b}`, text: t(`ui.badge.${b}`) }));
+    for (const b of type.badges) wrap.appendChild(h('span', { class: `bp-badge bp-badge-${b}`, text: t(`ui.badge.${b}`) }));
     return wrap;
   }
 
-  function row(id, { fixed = false } = {}) {
-    const on = state.on.includes(id);
+  // Under the name: the type select and, for a group that can repeat, add / remove a copy.
+  function extras(item) {
+    const g = GROUP[item.group];
+    if (g.types.length < 2 && !g.multi) return null;
+    const wrap = h('div', { class: 'bp-extra' });
+    if (g.types.length > 1) {
+      const selectId = `bp-type-${item.id}`;
+      wrap.appendChild(h('label', { class: 'bp-type-l', for: selectId }, t('ui.type'), h('span', { class: 'sr-only', text: ` · ${secName(item.id)}` })));
+      wrap.appendChild(h('select', { class: 'bp-select bp-type', id: selectId },
+        g.types.map(ty => h('option', { value: ty.id, text: typeName(ty), selected: ty.id === typeOf(item).id }))));
+    }
+    if (g.multi) {
+      // Another copy only makes sense next to one that is on the page.
+      if (item.on) wrap.appendChild(h('button', { type: 'button', class: 'bp-mini bp-add', id: `bp-add-${item.id}` }, icon('plus', 14), t(`grp.${g.id}.add`) === `grp.${g.id}.add` ? t('ui.addCopy') : t(`grp.${g.id}.add`)));
+      if (state.items.filter(it => it.group === item.group).length > 1) {
+        wrap.appendChild(h('button', { type: 'button', class: 'bp-mini bp-remove', id: `bp-rm-${item.id}`, 'aria-label': t('ui.removeCopy', { name: secName(item.id) }) }, icon('close', 14)));
+      }
+    }
+    return wrap;
+  }
+
+  function row(item, { fixed = false } = {}) {
+    const { id } = item;
+    const type = typeOf(item);
     const checkId = `bp-on-${id}`;
-    const li = h('li', { class: `bp-row${on ? ' is-on' : ''}`, dataset: { id } });
+    const li = h('li', { class: `bp-row${item.on ? ' is-on' : ''}`, dataset: { id } });
     if (!fixed) {
       li.appendChild(h('button', { type: 'button', class: 'bp-grip', id: `bp-grip-${id}`, 'aria-label': t('ui.drag', { name: secName(id) }) }, icon('grip', 18)));
     }
-    li.appendChild(h('input', { type: 'checkbox', id: checkId, class: 'bp-toggle', checked: on, 'aria-describedby': `${checkId}-d` }));
+    li.appendChild(h('input', { type: 'checkbox', id: checkId, class: 'bp-toggle', checked: item.on, 'aria-describedby': `${checkId}-d` }));
     li.appendChild(h('label', { for: checkId, class: 'bp-label' },
-      h('span', { class: 'bp-name' }, secName(id), badges(id)),
-      h('span', { class: 'bp-desc', id: `${checkId}-d`, text: t(`sec.${id}.desc`) })));
+      h('span', { class: 'bp-name' }, secName(id), badges(type)),
+      h('span', { class: 'bp-desc', id: `${checkId}-d`, text: t(`sec.${type.mod}.desc`) })));
     if (!fixed) {
       li.appendChild(h('span', { class: 'bp-move' },
         h('button', { type: 'button', class: 'bp-arrow', id: `bp-up-${id}`, 'data-dir': '-1', 'aria-label': t('ui.moveUp', { name: secName(id) }) }, icon('arrowUp', 16)),
         h('button', { type: 'button', class: 'bp-arrow', id: `bp-down-${id}`, 'data-dir': '1', 'aria-label': t('ui.moveDown', { name: secName(id) }) }, icon('arrowDown', 16))));
     }
+    const more = extras(item);
+    if (more) li.appendChild(more);
     return li;
   }
 
-  const movable = () => state.order.filter(id => !BY_ID[id].fixed);
+  const isFixed = item => !!GROUP[item.group].fixed;
+  const movable = () => state.items.filter(it => !isFixed(it)).map(it => it.id);
 
   function renderList() {
-    list.replaceChildren(...movable().map(id => row(id)));
-    floating.replaceChildren(...SECTIONS.filter(s => s.fixed).map(s => row(s.id, { fixed: true })));
+    list.replaceChildren(...state.items.filter(it => !isFixed(it)).map(it => row(it)));
+    floating.replaceChildren(...state.items.filter(isFixed).map(it => row(it, { fixed: true })));
     updateCount();
   }
 
   function updateCount() {
-    count.textContent = t('ui.count', { on: state.on.length, total: SECTIONS.length });
+    count.textContent = t('ui.count', { on: state.items.filter(it => it.on).length, total: state.items.length });
     const ids = movable();
     list.querySelectorAll('.bp-row').forEach((li, i) => {
       const [up, down] = li.querySelectorAll('.bp-arrow');
@@ -94,11 +132,47 @@ export function mountPanel({ state, change, reset, shareUrl, toast, motion, getP
     });
   }
 
+  const setItems = items => change({ items }, 'sections');
+  const jumpSoon = id => setTimeout(() => { if (!wide.matches) return; jump(id); }, 350);
+
   function toggle(id, on) {
-    const next = on ? state.order.filter(x => x === id || state.on.includes(x)) : state.on.filter(x => x !== id);
-    change({ on: next }, 'sections');
+    setItems(state.items.map(it => (it.id === id ? { ...it, on } : it)));
     announce(t(on ? 'ui.added' : 'ui.removed', { name: secName(id) }));
-    if (on) setTimeout(() => { if (!wide.matches) return; jump(id); }, 350);
+    if (on) jumpSoon(id);
+  }
+
+  function setType(id, type) {
+    const item = itemOf(id);
+    setItems(state.items.map(it => (it.id === id ? { ...it, type } : it)));
+    announce(t('ui.typeChanged', { name: secName(id), type: typeName(typeOf({ group: item.group, type })) }));
+    if (item.on) jumpSoon(id);
+  }
+
+  // A new copy goes right after this one, on, with a type not on the page yet when there is one.
+  function addCopy(id) {
+    const item = itemOf(id);
+    const g = GROUP[item.group];
+    const used = state.items.filter(it => it.group === g.id && it.on).map(it => it.type);
+    const type = (g.types.find(ty => !used.includes(ty.id)) || typeOf(item)).id;
+    const copy = { id: nextId(state.items, g.id), group: g.id, type, on: true };
+    const items = [...state.items];
+    items.splice(items.indexOf(item) + 1, 0, copy);
+    setItems(items);
+    renderList();
+    list.querySelector(`#bp-type-${copy.id}`)?.focus();
+    announce(t('ui.added', { name: secName(copy.id) }));
+    jumpSoon(copy.id);
+  }
+
+  function removeCopy(id) {
+    const name = secName(id);
+    const item = itemOf(id);
+    const items = state.items.filter(it => it.id !== id);
+    setItems(items);
+    renderList();
+    const sibling = items.find(it => it.group === item.group);
+    (list.querySelector(`#bp-add-${sibling?.id}`) || list.querySelector(`#bp-on-${sibling?.id}`))?.focus();
+    announce(t('ui.removed', { name }));
   }
 
   function move(id, to) {
@@ -106,9 +180,7 @@ export function mountPanel({ state, change, reset, shareUrl, toast, motion, getP
     const from = ids.indexOf(id);
     if (from < 0 || to < 0 || to >= ids.length || to === from) return;
     ids.splice(to, 0, ids.splice(from, 1)[0]);
-    const fixed = state.order.filter(x => BY_ID[x].fixed);
-    const order = [...ids, ...fixed];
-    change({ order, on: order.filter(x => state.on.includes(x)) }, 'sections');
+    setItems([...ids.map(itemOf), ...state.items.filter(isFixed)]);
     renderList();
     list.querySelector(`[data-id="${id}"] .bp-grip`)?.focus();
     announce(t('ui.moved', { name: secName(id), pos: to + 1, total: ids.length }));
@@ -116,6 +188,8 @@ export function mountPanel({ state, change, reset, shareUrl, toast, motion, getP
 
   for (const host of [list, floating]) {
     host.addEventListener('change', e => {
+      const select = e.target.closest('.bp-type');
+      if (select) { setType(select.closest('.bp-row').dataset.id, select.value); return; }
       const input = e.target.closest('.bp-toggle');
       if (!input) return;
       const li = input.closest('.bp-row');
@@ -125,6 +199,12 @@ export function mountPanel({ state, change, reset, shareUrl, toast, motion, getP
   }
 
   list.addEventListener('click', e => {
+    const mini = e.target.closest('.bp-add, .bp-remove');
+    if (mini) {
+      const id = mini.closest('.bp-row').dataset.id;
+      if (mini.classList.contains('bp-add')) addCopy(id); else removeCopy(id);
+      return;
+    }
     const arrow = e.target.closest('.bp-arrow');
     if (!arrow) return;
     const id = arrow.closest('.bp-row').dataset.id;
@@ -297,8 +377,7 @@ export function mountPanel({ state, change, reset, shareUrl, toast, motion, getP
           h('span', { class: 'bp-preset-dot', 'aria-hidden': 'true' }),
           h('span', null, h('b', { text: t(`niches.${p.niche}`) }), h('small', { text: t(`skins.${p.skin}.name`) })));
         btn.addEventListener('click', () => {
-          const order = [...p.sections, ...state.order.filter(id => !p.sections.includes(id))];
-          change({ niche: p.niche, skin: p.skin, accent: p.accent, order, on: [...p.sections] }, 'content');
+          change({ niche: p.niche, skin: p.skin, accent: p.accent, items: itemsFrom(p.sections, state.items) }, 'content');
           announce(t('ui.presetDone', { name: `${t(`niches.${p.niche}`)} · ${t(`skins.${p.skin}.name`)}` }));
         });
         return btn;

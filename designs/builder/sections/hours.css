@@ -14,7 +14,7 @@
 .hr-past { position: absolute; left: 0; top: 0; bottom: 0; border-radius: inherit; background: repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.18) 0 4px, transparent 4px 8px); }
 .hr-needle { position: absolute; top: -10px; bottom: -10px; width: 3px; margin-left: -1.5px; border-radius: 2px; background: var(--text); transition: left 1s var(--ease); }
 .hr-needle span {
-  position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(-50%); white-space: nowrap;
+  position: absolute; bottom: calc(100% + 6px); left: 50%; transform: translateX(calc(var(--f, 0.5) * -100%)); white-space: nowrap;
   padding: 3px 8px; border-radius: 6px; background: var(--text); color: var(--bg); font-size: 0.78rem; font-weight: 700;
 }
 .hr-ticks { position: relative; height: 26px; margin-top: 8px; color: var(--muted); font-size: 0.82rem; }

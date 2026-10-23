@@ -8,6 +8,8 @@
 // "(continued)". The book is rebuilt when fresh data arrives or the width changes.
 //
 // Reduced motion, or the library failing to load: the same pages in a flat, swipeable row.
+//
+// makeBook(cfg) is the book itself, whatever is printed in it; reviewbook.js uses it for reviews.
 
 import { h, icon, photo } from '../core/dom.js';
 import { libs } from '../core/loader.js';
@@ -63,7 +65,7 @@ function serviceLine(svc, ctx) {
   return h('li', { class: 'bk-item' }, line);
 }
 
-function page(kind, kids, { hard = false } = {}) {
+export function page(kind, kids, { hard = false } = {}) {
   return h('div', { class: `bk-page bk-${kind}`, 'data-density': hard ? 'hard' : 'soft' },
     h('div', { class: 'bk-inner' }, kids));
 }
@@ -176,106 +178,121 @@ function buildPages(ctx, size, measureHost) {
 
 const state = new WeakMap();
 
-export default {
-  render(ctx) {
-    const { t } = ctx;
-    const holder = h('div', { class: 'bk-holder' });
-    const stage = h('div', { class: 'bk-stage', tabindex: '0', role: 'region', 'aria-roledescription': 'book', 'aria-label': t('book.label') }, holder);
-    const count = h('p', { class: 'bk-count', 'aria-live': 'polite' });
-    const prev = h('button', { type: 'button', class: 'icon-btn bk-prev', 'aria-label': t('book.prevPage') }, icon('arrowLeft', 20));
-    const next = h('button', { type: 'button', class: 'icon-btn bk-next', 'aria-label': t('book.nextPage') }, icon('arrowRight', 20));
-    const sound = h('button', { type: 'button', class: 'icon-btn bk-sound', 'aria-pressed': 'false', 'aria-label': t('book.soundOn') }, icon('mute', 18));
-    const section = h('section', { class: 'sec book-sec' },
-      h('div', { class: 'wrap' },
-        h('header', { class: 'sec-head center' },
-          h('p', { class: 'eyebrow', text: t('book.eyebrow') }),
-          h('h2', { 'data-split': '', text: t('book.title') }),
-          h('p', { class: 'lead', text: t('book.lead') })),
-        stage,
-        h('div', { class: 'bk-controls' }, prev, count, next, sound),
-        h('div', { class: 'bk-measure', 'aria-hidden': 'true' })));
-    // Before the library loads: a closed book with skeleton lines.
-    holder.appendChild(h('div', { class: 'bk-placeholder', 'aria-hidden': 'true' },
-      h('span', { class: 'bk-ornament' }), h('p', { class: 'bk-cover-name', text: ctx.name }), h('p', { class: 'bk-cover-title', text: t('book.coverTitle') })));
-    state.set(section, { flip: null, soundOn: false, ready: false, width: 0, startPage: 0, ctx });
-    return section;
-  },
+// cfg.key    i18n group with eyebrow, title, lead, label, coverTitle (the page controls use book.*)
+// cfg.pages  (ctx, size, measureHost) → page elements, covers included
+// cfg.check  ctx → 'wait' (keep the closed book), an element to show instead, or null
+export function makeBook(cfg) {
+  return {
+    render(ctx) {
+      const { t } = ctx;
+      const holder = h('div', { class: 'bk-holder' });
+      const stage = h('div', { class: 'bk-stage', tabindex: '0', role: 'region', 'aria-roledescription': 'book', 'aria-label': t(`${cfg.key}.label`) }, holder);
+      const count = h('p', { class: 'bk-count', 'aria-live': 'polite' });
+      const prev = h('button', { type: 'button', class: 'icon-btn bk-prev', 'aria-label': t('book.prevPage') }, icon('arrowLeft', 20));
+      const next = h('button', { type: 'button', class: 'icon-btn bk-next', 'aria-label': t('book.nextPage') }, icon('arrowRight', 20));
+      const sound = h('button', { type: 'button', class: 'icon-btn bk-sound', 'aria-pressed': 'false', 'aria-label': t('book.soundOn') }, icon('mute', 18));
+      const section = h('section', { class: cfg.key === 'book' ? 'sec book-sec' : `sec book-sec ${cfg.key}-sec` },
+        h('div', { class: 'wrap' },
+          h('header', { class: 'sec-head center' },
+            h('p', { class: 'eyebrow', text: t(`${cfg.key}.eyebrow`) }),
+            h('h2', { 'data-split': '', text: t(`${cfg.key}.title`) }),
+            h('p', { class: 'lead', text: t(`${cfg.key}.lead`) })),
+          stage,
+          h('div', { class: 'bk-controls' }, prev, count, next, sound),
+          h('div', { class: 'bk-measure', 'aria-hidden': 'true' })));
+      // Before the library loads: a closed book with skeleton lines.
+      holder.appendChild(h('div', { class: 'bk-placeholder', 'aria-hidden': 'true' },
+        h('span', { class: 'bk-ornament' }), h('p', { class: 'bk-cover-name', text: ctx.name }), h('p', { class: 'bk-cover-title', text: t(`${cfg.key}.coverTitle`) })));
+      state.set(section, { flip: null, soundOn: false, ready: false, width: 0, startPage: 0, ctx, cfg });
+      return section;
+    },
 
-  update(el, ctx) {
-    const s = state.get(el);
-    s.ctx = ctx;
-    if (s.ready) build(el);
-  },
+    update(el, ctx) {
+      const s = state.get(el);
+      s.ctx = ctx;
+      if (s.ready) build(el);
+    },
 
-  activate(el, ctx) {
-    const s = state.get(el);
-    s.ctx = ctx;
-    const stage = el.querySelector('.bk-stage');
-    const sound = el.querySelector('.bk-sound');
+    activate(el, ctx) {
+      const s = state.get(el);
+      s.ctx = ctx;
+      const stage = el.querySelector('.bk-stage');
+      const sound = el.querySelector('.bk-sound');
 
-    sound.addEventListener('click', () => {
-      s.soundOn = !s.soundOn;
-      sound.setAttribute('aria-pressed', String(s.soundOn));
-      sound.setAttribute('aria-label', s.ctx.t(s.soundOn ? 'book.soundOff' : 'book.soundOn'));
-      sound.replaceChildren(icon(s.soundOn ? 'volume' : 'mute', 18));
-      if (s.soundOn) rustle();
-    });
-    el.querySelector('.bk-prev').addEventListener('click', () => turn(el, -1));
-    el.querySelector('.bk-next').addEventListener('click', () => turn(el, 1));
-    stage.addEventListener('keydown', e => {
-      const keys = { ArrowLeft: -1, ArrowRight: 1, PageUp: -1, PageDown: 1 };
-      if (keys[e.key]) { e.preventDefault(); turn(el, keys[e.key]); }
-      if (e.key === 'Home' || e.key === 'End') { e.preventDefault(); goTo(el, e.key === 'Home' ? 0 : Infinity); }
-    });
+      sound.addEventListener('click', () => {
+        s.soundOn = !s.soundOn;
+        sound.setAttribute('aria-pressed', String(s.soundOn));
+        sound.setAttribute('aria-label', s.ctx.t(s.soundOn ? 'book.soundOff' : 'book.soundOn'));
+        sound.replaceChildren(icon(s.soundOn ? 'volume' : 'mute', 18));
+        if (s.soundOn) rustle();
+      });
+      el.querySelector('.bk-prev').addEventListener('click', () => turn(el, -1));
+      el.querySelector('.bk-next').addEventListener('click', () => turn(el, 1));
+      stage.addEventListener('keydown', e => {
+        const keys = { ArrowLeft: -1, ArrowRight: 1, PageUp: -1, PageDown: 1 };
+        if (keys[e.key]) { e.preventDefault(); turn(el, keys[e.key]); }
+        if (e.key === 'Home' || e.key === 'End') { e.preventDefault(); goTo(el, e.key === 'Home' ? 0 : Infinity); }
+      });
 
-    // Touch: a mostly horizontal drag belongs to the book, a vertical one scrolls the page. Without
-    // this the browser claims the gesture as a scroll after the first move and slow page drags stop.
-    let touch = null;
-    stage.addEventListener('touchstart', e => {
-      const p = e.touches[0];
-      touch = p ? { x: p.clientX, y: p.clientY, dir: '' } : null;
-    }, { passive: true });
-    stage.addEventListener('touchmove', e => {
-      const p = e.touches[0];
-      if (!touch || !p || !s.flip) return;
-      if (!touch.dir) {
-        const dx = Math.abs(p.clientX - touch.x);
-        const dy = Math.abs(p.clientY - touch.y);
-        if (dx > 4 || dy > 4) touch.dir = dx >= dy ? 'h' : 'v';
-        // A scroll must not end in a page turn: StPageFlip would treat the release as a tap.
-        if (touch.dir === 'v') {
-          const ui = s.flip.getUI?.();
-          if (ui) ui.touchPoint = null;
-          s.flip.isUserTouch = false;
+      // Touch: a mostly horizontal drag belongs to the book, a vertical one scrolls the page. Without
+      // this the browser claims the gesture as a scroll after the first move and slow page drags stop.
+      let touch = null;
+      stage.addEventListener('touchstart', e => {
+        const p = e.touches[0];
+        touch = p ? { x: p.clientX, y: p.clientY, dir: '' } : null;
+      }, { passive: true });
+      stage.addEventListener('touchmove', e => {
+        const p = e.touches[0];
+        if (!touch || !p || !s.flip) return;
+        if (!touch.dir) {
+          const dx = Math.abs(p.clientX - touch.x);
+          const dy = Math.abs(p.clientY - touch.y);
+          if (dx > 4 || dy > 4) touch.dir = dx >= dy ? 'h' : 'v';
+          // A scroll must not end in a page turn: StPageFlip would treat the release as a tap.
+          if (touch.dir === 'v') {
+            const ui = s.flip.getUI?.();
+            if (ui) ui.touchPoint = null;
+            s.flip.isUserTouch = false;
+          }
         }
-      }
-      if (touch.dir === 'h' && e.cancelable) e.preventDefault();
-    }, { passive: false });
+        if (touch.dir === 'h' && e.cancelable) e.preventDefault();
+      }, { passive: false });
 
-    let timer = 0;
-    const ro = new ResizeObserver(() => {
-      clearTimeout(timer);
-      timer = setTimeout(() => {
-        const width = el.querySelector('.bk-stage').clientWidth;
-        if (s.ready && Math.abs(width - s.width) > 24) build(el);
-      }, 250);
-    });
-    ro.observe(stage);
+      let timer = 0;
+      const ro = new ResizeObserver(() => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          const width = el.querySelector('.bk-stage').clientWidth;
+          if (s.ready && Math.abs(width - s.width) > 24) build(el);
+        }, 250);
+      });
+      ro.observe(stage);
 
-    const useLib = !motion.reduced;
-    (useLib ? libs.pageFlip() : Promise.reject(new Error('reduced motion')))
-      .then(PageFlip => { s.PageFlip = PageFlip; })
-      .catch(err => { if (useLib) console.warn('Book: flat fallback', err.message); s.PageFlip = null; })
-      .finally(() => { s.ready = true; build(el); });
+      const useLib = !motion.reduced;
+      (useLib ? libs.pageFlip() : Promise.reject(new Error('reduced motion')))
+        .then(PageFlip => { s.PageFlip = PageFlip; })
+        .catch(err => { if (useLib) console.warn('Book: flat fallback', err.message); s.PageFlip = null; })
+        .finally(() => { s.ready = true; build(el); });
 
-    return () => {
-      ro.disconnect();
-      clearTimeout(timer);
-      s.flip?.destroy();
-      s.flip = null;
-    };
+      return () => {
+        ro.disconnect();
+        clearTimeout(timer);
+        s.flip?.destroy();
+        s.flip = null;
+      };
+    }
+  };
+}
+
+export default makeBook({
+  key: 'book',
+  pages: buildPages,
+  check: ctx => {
+    if (!ctx.data) return 'wait'; // still loading
+    if (ctx.data.failed || !ctx.data.services.length) return h('div', { class: 'data-error' }, ctx.t('common.failed'), h('br'), bookButton(ctx.t('common.failedLink'), { linkId: ctx.linkId, className: 'link' }));
+    return null;
   }
-};
+});
 
 function current(el) {
   const s = state.get(el);
@@ -342,19 +359,19 @@ function build(el) {
   const ctx = s.ctx;
   const stage = el.querySelector('.bk-stage');
   const holder = el.querySelector('.bk-holder');
-  if (!ctx.data) return; // still loading: keep the closed-book placeholder
-
-  if (ctx.data.failed || !ctx.data.services.length) {
+  const status = s.cfg.check(ctx);
+  if (status === 'wait') return; // keep the closed-book placeholder
+  if (status) {
     s.flip?.destroy();
     s.flip = null;
-    holder.replaceChildren(h('div', { class: 'data-error' }, ctx.t('common.failed'), h('br'), bookButton(ctx.t('common.failedLink'), { linkId: ctx.linkId, className: 'link' })));
+    holder.replaceChildren(status);
     return;
   }
 
   const startPage = s.flip ? s.flip.getCurrentPageIndex() : current(el);
   s.width = stage.clientWidth;
   const size = pageSize(s.width);
-  const pages = buildPages(ctx, size, el.querySelector('.bk-measure'));
+  const pages = s.cfg.pages(ctx, size, el.querySelector('.bk-measure'));
 
   s.flip?.destroy();
   s.flip = null;

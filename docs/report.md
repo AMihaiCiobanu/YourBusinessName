@@ -137,8 +137,22 @@ design-urilor (builder-ul are RO/EN).
 
 ## Cum adaug o secțiune nouă în builder
 
-1. `designs/builder/core/registry.js` — o linie în `SECTIONS`: `{ id: 'video', label: 'Video hero', badges: ['new'], nav: 'gallery', data: false }`.
-2. `designs/builder/sections/video.js` — un modul care exportă:
+Secțiunile sunt **grupuri** (un rând în builder: „Galerie foto”, „Prețuri”, „Recenzii”…), fiecare cu unul sau mai multe
+**tipuri** alese dintr-un select. Orice grup cu select poate apărea de mai multe ori („+ Încă una”, vizibil doar când
+rândul e bifat), în afară de Hero (un singur `<h1>` pe pagină) și butoanele de contact (plutesc fix pe ecran). De aceea
+o secțiune nu folosește id-uri fixe: formularul și planificatorul își fac id-uri unice cu `uid()` din `core/dom.js`. În URL o secțiune e `grup-tip` (`gallery-masonry`, `prices-book`) sau doar
+`grup` când are un singur tip; linkurile vechi cu id-urile de dinainte (`coverflow`, `book`, `services`, `booking`) se
+convertesc singure (`LEGACY` în `core/registry.js`). Starea se salvează în `localStorage` `builder:v2` (cea veche, `v1`,
+se migrează la prima încărcare).
+
+Un tip nou într-un grup existent (exemplu: o galerie video):
+
+1. `designs/builder/core/registry.js` — în `types` al grupului: `type('video', 'Video gallery', ['new'], { mod: 'galleryvideo' })`
+   (`mod` = numele fișierului din `sections/`; `nav` pe tip doar când diferă de al grupului, ex. cardurile de servicii din „Prețuri”).
+   Modulele secțiunilor se încarcă cu `?v=` (`VERSION` în `core/registry.js`); crește-l când un modul își schimbă
+   exporturile, și la fel în importurile dintre secțiuni (`reviewbook.js` → `book.js`, `mapwide.js` → `map.js`), altfel un
+   browser cu fișierul vechi în cache nu încarcă secțiunea.
+2. `designs/builder/sections/galleryvideo.js` — un modul care exportă:
    ```js
    export default {
      render(ctx) { return h('section', { class: 'sec vd-sec' }, …); }, // obligatoriu
@@ -149,10 +163,19 @@ design-urilor (builder-ul are RO/EN).
    ```
    `ctx` are `t()` (texte), `content` (conținutul nișei), `data`, `linkId`, `priceText()`, `toast()`, `reduced`.
    Librării: `libs.swiper()` / `libs.pageFlip()` din `core/loader.js` (se încarcă o singură dată, doar la nevoie).
-3. `designs/builder/sections/video.css` — stilurile secțiunii; folosește variabilele temei (`--bg`, `--text`, `--accent`,
+3. `designs/builder/sections/galleryvideo.css` — stilurile secțiunii, cu un prefix de clase propriu (verifică să nu fie
+   folosit de altă secțiune: toate pot sta pe aceeași pagină); folosește variabilele temei (`--bg`, `--text`, `--accent`,
    `--accent-text` …) și `@container page (…)` în loc de `@media`.
-4. `i18n/en.js` și `i18n/ro.js` — `sec.video.name`, `sec.video.desc` și textele secțiunii.
-5. Opțional: în `DEFAULT_ON` sau într-un model din `builder/presets.js`.
+4. `i18n/en.js` și `i18n/ro.js` — `sec.galleryvideo.name` (apare în select), `sec.galleryvideo.desc` și textele
+   secțiunii. Un grup nou cu mai multe tipuri are nevoie și de `grp.<grup>.name` (și `.add` dacă e `multi`).
+5. Opțional: în `DEFAULT_ON` sau într-un model din `builder/presets.js` (tot ca `grup-tip`).
+
+Tipuri azi (14 grupuri, 36 de tipuri): Hero (3D, text + poză mare) · Galerie (coverflow 3D, slider, filmstrip, grilă
+Instagram, masonry, carusel) · Prețuri (carte 3D, listă, carduri de servicii, planificator, formular de programare) ·
+Înainte și după (mâner, alăturate) · Cifre (animate, bandă, bandă care se mișcă de la dreapta la stânga, cu pauză) · Echipa (carduri care se întorc, carduri de profil) ·
+Produse (carduri, listă) · Card cadou (3D, banner) · Fidelitate (ștampile, linie de progres) · Recenzii (carusel, carte
+de oaspeți) · Întrebări (acordeon, carduri) · Program (bandă live, card) · Hartă (cu detalii, lată) · Contact (bară jos,
+butoane rotunde). Cartea de oaspeți refolosește motorul cărții de prețuri: `makeBook(cfg)` din `sections/book.js`.
 
 O nișă nouă: `content/<nișă>.js` (după modelul `barber.js`), pozele în `content/photos.js`, numele în `NICHES`
 (`core/state.js`) și în `niches` din i18n, poza hero în harta `HERO` din `index.html`.

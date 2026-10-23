@@ -1,0 +1,13 @@
+@import url("book.css?v=3");
+
+/* Review pages of the guest book (the book itself is book.css). */
+.bk-review .bk-inner { justify-content: center; gap: 1em; }
+.bk-stars { display: inline-flex; gap: 0.2em; color: #a87412; } /* gold that reads on every paper */
+.bk-stars svg { fill: currentColor; }
+.bk-intro .bk-stars { margin-bottom: 1em; }
+.bk-rating { margin-bottom: 0.25em; font: var(--display-weight) 4em/1 var(--font-display); color: var(--ink); }
+.bk-quote { margin: 0; font: var(--display-weight) 1.45em/1.3 var(--font-display); color: var(--ink); }
+:root[data-skin="luxe"] .bk-quote { font-style: italic; }
+.bk-who { display: grid; gap: 0.15em; color: var(--ink-muted); }
+.bk-who strong { color: var(--ink); }
+.bk-sample { align-self: flex-start; padding: 0.15em 0.6em; border-radius: 999px; background: var(--paper-2); color: var(--ink-muted); font-size: 0.75em; }

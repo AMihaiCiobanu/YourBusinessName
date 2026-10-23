@@ -1,13 +1,13 @@
 // The live page: header, the visible sections in order, footer. Sections are mounted, moved and
-// removed as the builder changes; each one gets a context (texts, content, live data, helpers) and
-// may define:
+// removed as the builder changes. The page shows items ({ id, group, type }, see core/state.js);
+// each item's type module gets a context (texts, content, live data, helpers) and may define:
 //   render(ctx)          → the <section> element (required)
 //   activate(el, ctx)    → runs once the section is near the screen; returns a cleanup function
 //   update(el, ctx)      → services / hours changed (sections marked `data` in the registry)
 //   onTheme(el, ctx)     → skin or accent changed
 //   destroy(el)          → extra cleanup when removed
 
-import { BY_ID, NAV_GROUPS, loadSection } from './registry.js';
+import { GROUP, NAV_GROUPS, loadSection, typeOf, navOf } from './registry.js';
 import { sectionStyle } from './loader.js';
 import { reveal, parallax, onVisible } from './motion.js';
 import { h, icon } from './dom.js';
@@ -16,8 +16,8 @@ import { bookButton } from '../../shared/live.js';
 import { MADE_BY } from '../../shared/demo.js?v=5';
 
 export function createPage({ main, overlay, ctx }) {
-  const mounted = new Map(); // id → { el, mod, cleanups }
-  let order = [];
+  const mounted = new Map(); // item id → { el, mod, type, cleanups }
+  let order = []; // items
 
   const header = h('header', { class: 'top', id: 'top' });
   const sectionsHost = h('div', { class: 'sections', id: 'sections' });
@@ -33,10 +33,10 @@ export function createPage({ main, overlay, ctx }) {
     const nav = h('nav', { class: 'top-nav', 'aria-label': t('nav.label') });
     const seen = new Set();
     for (const group of NAV_GROUPS) {
-      const id = order.find(sid => BY_ID[sid]?.nav === group && mounted.has(sid));
-      if (!id || seen.has(group)) continue;
+      const item = order.find(it => navOf(it) === group && mounted.has(it.id));
+      if (!item || seen.has(group)) continue;
       seen.add(group);
-      nav.appendChild(h('a', { href: `#s-${id}`, text: t(`nav.${group}`) }));
+      nav.appendChild(h('a', { href: `#s-${item.id}`, text: t(`nav.${group}`) }));
     }
     header.replaceChildren(h('div', { class: 'wrap top-inner' },
       h('a', { class: 'brand', href: '#page' }, h('span', { class: 'brand-mark', 'aria-hidden': 'true', text: initials }), h('span', { class: 'brand-name', text: name })),
@@ -73,12 +73,15 @@ export function createPage({ main, overlay, ctx }) {
 
   // ---------- sections ----------
 
-  async function prepare(id) {
-    const [mod] = await Promise.all([loadSection(id), sectionStyle(id).catch(() => null)]);
+  async function prepare(item) {
+    const file = typeOf(item).mod;
+    const [mod] = await Promise.all([loadSection(file), sectionStyle(file).catch(() => null)]);
     return mod;
   }
 
-  function build(id, mod) {
+  function build(item, mod) {
+    const { id } = item;
+    const type = typeOf(item);
     const c = ctx();
     let el;
     try {
@@ -89,8 +92,8 @@ export function createPage({ main, overlay, ctx }) {
     }
     el.id = `s-${id}`;
     el.dataset.section = id;
-    el.setAttribute('aria-label', el.getAttribute('aria-label') || t(`sec.${id}.name`));
-    const rec = { el, mod, cleanups: [] };
+    el.setAttribute('aria-label', el.getAttribute('aria-label') || t(`sec.${type.mod}.name`));
+    const rec = { el, mod, type: type.mod, cleanups: [] };
     if (mod.update && c.data) safe(() => mod.update(el, c));
     return rec;
   }
@@ -120,35 +123,39 @@ export function createPage({ main, overlay, ctx }) {
     mounted.delete(id);
   }
 
-  function host(id) { return BY_ID[id]?.fixed ? overlay : sectionsHost; }
+  function host(item) { return GROUP[item.group].fixed ? overlay : sectionsHost; }
 
   function place() {
-    for (const id of order) {
-      const rec = mounted.get(id);
-      if (rec) host(id).appendChild(rec.el); // appendChild moves nodes already in place
+    for (const item of order) {
+      const rec = mounted.get(item.id);
+      if (rec) host(item).appendChild(rec.el); // appendChild moves nodes already in place
     }
   }
 
-  // Shows exactly `ids`, in that order. Only changed sections are touched.
-  async function sync(ids) {
-    order = ids;
-    for (const id of [...mounted.keys()]) if (!ids.includes(id)) unmount(id);
-    const missing = ids.filter(id => !mounted.has(id));
+  // Shows exactly `items`, in that order. Only changed sections are touched; a section whose type
+  // changed is mounted again.
+  async function sync(items) {
+    order = items;
+    for (const [id, rec] of [...mounted]) {
+      const item = items.find(it => it.id === id);
+      if (!item || typeOf(item).mod !== rec.type) unmount(id);
+    }
+    const missing = items.filter(it => !mounted.has(it.id));
     // The first section is what the visitor sees first: show it as soon as it is ready, then the rest.
     const first = mounted.size === 0 ? missing.slice(0, 1) : [];
-    const rest = missing.filter(id => !first.includes(id));
+    const rest = missing.filter(it => !first.includes(it));
     for (const batch of [first, rest]) {
       if (!batch.length) continue;
-      if (batch === rest && first.length) await firstPaint(mounted.get(first[0])?.el);
-      const mods = await Promise.all(batch.map(id => prepare(id).catch(err => { console.error(err); return null; })));
-      if (order !== ids) return; // a newer change won
-      batch.forEach((id, i) => {
-        if (!mods[i] || mounted.has(id)) return;
-        const rec = build(id, mods[i]);
-        if (rec) mounted.set(id, rec);
+      if (batch === rest && first.length) await firstPaint(mounted.get(first[0].id)?.el);
+      const mods = await Promise.all(batch.map(it => prepare(it).catch(err => { console.error(err); return null; })));
+      if (order !== items) return; // a newer change won
+      batch.forEach((item, i) => {
+        if (!mods[i] || mounted.has(item.id)) return;
+        const rec = build(item, mods[i]);
+        if (rec) mounted.set(item.id, rec);
       });
       place();
-      batch.forEach(id => { const rec = mounted.get(id); if (rec) activate(id, rec); });
+      batch.forEach(item => { const rec = mounted.get(item.id); if (rec) activate(item.id, rec); });
       renderHeader();
     }
     // Pure reorder or removal: nothing was missing, but the order and the header still change.
@@ -159,10 +166,10 @@ export function createPage({ main, overlay, ctx }) {
   }
 
   // Niche, language or name changed: every section is rebuilt from scratch.
-  async function rebuild(ids) {
+  async function rebuild(items) {
     for (const id of [...mounted.keys()]) unmount(id);
     renderFooter();
-    await sync(ids);
+    await sync(items);
   }
 
   function dataChanged() {
@@ -175,9 +182,9 @@ export function createPage({ main, overlay, ctx }) {
     for (const [id, rec] of mounted) if (rec.mod.onTheme) safe(() => rec.mod.onTheme(rec.el, c), id);
   }
 
-  // Re-renders only the given sections (e.g. the ones that print the business name).
-  async function refresh(ids) {
-    const hit = ids.filter(id => mounted.has(id));
+  // Re-renders only the sections of the given types (e.g. the ones that print the business name).
+  async function refresh(mods) {
+    const hit = [...mounted].filter(([, rec]) => mods.includes(rec.type)).map(([id]) => id);
     for (const id of hit) unmount(id);
     if (hit.length) await sync(order);
   }

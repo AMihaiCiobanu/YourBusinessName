@@ -126,6 +126,16 @@
 .bp-arrow:hover:not(:disabled) { background: var(--ui-bg-2); color: var(--ui-text); }
 .bp-arrow:disabled { opacity: 0.25; cursor: default; }
 @media (pointer: coarse) { .bp-arrow { height: 44px; } .bp-move { flex-direction: row; } }
+/* Under the name: the type select and add / remove a copy of the section */
+.bp-extra { grid-column: 3 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; padding: 0 0 6px; }
+.bp-type-l { color: var(--ui-muted); font-size: 0.78rem; font-weight: 700; }
+.bp-extra .bp-type { flex: 1 1 140px; width: auto; min-width: 0; min-height: 40px; padding-block: 6px; font-size: 0.86rem; }
+.bp-mini {
+  display: inline-flex; align-items: center; gap: 5px; min-height: 40px; padding: 0 12px; border: 1px dashed var(--ui-line);
+  border-radius: 10px; background: transparent; color: var(--ui-text); font: inherit; font-size: 0.8rem; font-weight: 700; cursor: pointer;
+}
+.bp-mini:hover { background: var(--ui-bg-2); }
+.bp-remove { width: 40px; padding: 0; justify-content: center; border-style: solid; color: var(--ui-muted); }
 
 /* Style tab */
 .bp-field { display: grid; gap: 8px; margin-bottom: 20px; }

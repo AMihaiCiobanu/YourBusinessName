@@ -96,7 +96,8 @@ function paint(el, ctx) {
     h('div', { class: 'hr-bar', 'aria-hidden': 'true' },
       h('span', { class: 'hr-open', style: `left:${pos(today.start)};width:calc(${pos(today.end)} - ${pos(today.start)})` }),
       h('span', { class: 'hr-past', style: `width:${pos(nowPos)}` }),
-      h('span', { class: 'hr-needle', style: `left:${pos(nowPos)}` }, h('span', { text: `${t('hours.now')} ${formatTime(minutes)}` }))),
+      // --f (0 → 1) slides the label from left-aligned to right-aligned so it never leaves the bar.
+      h('span', { class: 'hr-needle', style: `left:${pos(nowPos)};--f:${((nowPos - from) / (to - from)).toFixed(3)}` }, h('span', { text: `${t('hours.now')} ${formatTime(minutes)}` }))),
     h('div', { class: 'hr-ticks', 'aria-hidden': 'true' },
       h('span', { style: `left:${pos(today.start)}`, text: formatTime(today.start) }),
       h('span', { style: `left:${pos(today.end)}`, text: formatTime(today.end) })));

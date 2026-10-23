@@ -3,7 +3,7 @@
 // Nothing is sent anywhere: on the demo it explains what would happen; on a page with a booking
 // link it opens the real booking calendar on the chosen service (where the client confirms).
 
-import { h } from '../core/dom.js';
+import { h, uid } from '../core/dom.js';
 import { bookButton, formatDuration, formatTime } from '../../shared/live.js';
 
 const STEP = 30;
@@ -35,17 +35,18 @@ export default {
     const { t } = ctx;
     const today = isoDay(new Date());
     const max = isoDay(new Date(Date.now() + 60 * 864e5));
+    const p = uid('bf'); // ids are unique per form: the form can be on the page more than once
     const field = (id, label, control) => h('div', { class: 'bf-field' }, h('label', { for: id, text: label }), control);
     const form = h('form', { class: 'bf-form card', novalidate: true },
-      field('bf-service', t('booking.service'), h('select', { id: 'bf-service', name: 'service', required: true }, h('option', { value: '', text: t('common.loading') }))),
+      field(`${p}-service`, t('booking.service'), h('select', { id: `${p}-service`, name: 'service', required: true }, h('option', { value: '', text: t('common.loading') }))),
       h('div', { class: 'bf-row' },
-        field('bf-date', t('booking.date'), h('input', { id: 'bf-date', name: 'date', type: 'date', min: today, max, required: true })),
-        field('bf-time', t('booking.time'), h('select', { id: 'bf-time', name: 'time', required: true, disabled: true }, h('option', { value: '', text: t('booking.pickDate') })))),
+        field(`${p}-date`, t('booking.date'), h('input', { id: `${p}-date`, name: 'date', type: 'date', min: today, max, required: true })),
+        field(`${p}-time`, t('booking.time'), h('select', { id: `${p}-time`, name: 'time', required: true, disabled: true }, h('option', { value: '', text: t('booking.pickDate') })))),
       h('p', { class: 'bf-day-note', 'aria-live': 'polite' }),
       h('div', { class: 'bf-row' },
-        field('bf-name', t('booking.name'), h('input', { id: 'bf-name', name: 'name', type: 'text', autocomplete: 'name', required: true, maxlength: '60' })),
-        field('bf-phone', t('booking.phone'), h('input', { id: 'bf-phone', name: 'phone', type: 'tel', autocomplete: 'tel', inputmode: 'tel', required: true, maxlength: '20' }))),
-      field('bf-note', t('booking.note'), h('textarea', { id: 'bf-note', name: 'note', rows: '3', maxlength: '300' })),
+        field(`${p}-name`, t('booking.name'), h('input', { id: `${p}-name`, name: 'name', type: 'text', autocomplete: 'name', required: true, maxlength: '60' })),
+        field(`${p}-phone`, t('booking.phone'), h('input', { id: `${p}-phone`, name: 'phone', type: 'tel', autocomplete: 'tel', inputmode: 'tel', required: true, maxlength: '20' }))),
+      field(`${p}-note`, t('booking.note'), h('textarea', { id: `${p}-note`, name: 'note', rows: '3', maxlength: '300' })),
       h('p', { class: 'bf-error', role: 'alert' }),
       h('button', { type: 'submit', class: 'btn bf-submit', text: t('booking.submit') }));
 
@@ -58,15 +59,15 @@ export default {
         form));
 
     const $ = sel => form.querySelector(sel);
-    const service = () => ctx.data?.services.find(s => s.id === $('#bf-service').value);
+    const service = () => ctx.data?.services.find(s => s.id === $('[name="service"]').value);
     const refreshTimes = () => {
-      const list = ctx.data ? slots(ctx.data, service(), $('#bf-date').value) : null;
-      const select = $('#bf-time');
+      const list = ctx.data ? slots(ctx.data, service(), $('[name="date"]').value) : null;
+      const select = $('[name="time"]');
       const note = $('.bf-day-note');
       note.textContent = '';
       if (!list) { select.replaceChildren(h('option', { value: '', text: t('booking.pickDate') })); select.disabled = true; return; }
       if (!list.length) {
-        note.textContent = ctx.data.hours[(new Date(`${$('#bf-date').value}T12:00`).getDay() + 6) % 7] ? t('booking.noSlots') : t('booking.closedDay');
+        note.textContent = ctx.data.hours[(new Date(`${$('[name="date"]').value}T12:00`).getDay() + 6) % 7] ? t('booking.noSlots') : t('booking.closedDay');
         select.replaceChildren(h('option', { value: '', text: '—' }));
         select.disabled = true;
         return;
@@ -75,14 +76,14 @@ export default {
       select.replaceChildren(h('option', { value: '', text: t('booking.choose') }), ...list.map(m => h('option', { value: String(m), text: formatTime(m), selected: String(m) === keep })));
       select.disabled = false;
     };
-    $('#bf-service').addEventListener('change', refreshTimes);
-    $('#bf-date').addEventListener('change', refreshTimes);
+    $('[name="service"]').addEventListener('change', refreshTimes);
+    $('[name="date"]').addEventListener('change', refreshTimes);
     section._refreshTimes = refreshTimes;
 
     form.addEventListener('submit', e => {
       e.preventDefault();
       const missing = [];
-      for (const [sel, key] of [['#bf-service', 'service'], ['#bf-date', 'date'], ['#bf-time', 'time'], ['#bf-name', 'name'], ['#bf-phone', 'phone']]) {
+      for (const [sel, key] of [['[name="service"]', 'service'], ['[name="date"]', 'date'], ['[name="time"]', 'time'], ['[name="name"]', 'name'], ['[name="phone"]', 'phone']]) {
         const input = $(sel);
         const bad = !input.value.trim();
         input.setAttribute('aria-invalid', String(bad));
@@ -112,7 +113,7 @@ export default {
 
   update(el, ctx) {
     const { t, data } = ctx;
-    const select = el.querySelector('#bf-service');
+    const select = el.querySelector('[name="service"]');
     const keep = select.value;
     select.replaceChildren(h('option', { value: '', text: t('booking.choose') }),
       ...data.services.map(s => h('option', { value: s.id, text: `${s.name} · ${formatDuration(s.durationMinutes)} · ${ctx.priceText(s)}`, selected: s.id === keep })));

@@ -3,22 +3,81 @@
 // storage; anything missing or invalid falls back to the defaults.
 //
 // Hash format, kept short so it fits in the "Get my page" email:
-//   #n=barber&k=luxe&a=c9a961&l=ro&b=Studio%20Ana&s=hero.book.team
+//   #n=barber&k=luxe&a=c9a961&l=ro&b=Studio%20Ana&s=hero.prices-book.gallery-insta.team
 // n niche · k skin · a accent (hex, empty = theme default) · l language · b business name ·
-// s visible sections in order. `?link=<id>` and `?sample=many` stay in the query string (preview only).
+// s visible sections in order, `group-type` (just `group` when it has one type). Old links that name
+// sections by their former ids (`coverflow`, `book`) still work. `?link=<id>` and `?sample=many`
+// stay in the query string (preview only).
+//
+// items: every row of the builder, in page order: { id, group, type, on }. `id` is unique on the
+// page (`gallery`, `gallery2`) and names the section element (`#s-gallery2`).
 
-import { SECTIONS, DEFAULT_ON, BY_ID } from './registry.js';
+import { GROUPS, GROUP, LEGACY, DEFAULT_ON, typeOf } from './registry.js';
 
 export const NICHES = ['beauty', 'nails', 'barber', 'spa', 'detailing', 'trainer', 'dental', 'derma', 'clinic', 'tattoo'];
 export const SKINS = ['luxe', 'clean', 'bold'];
 export const LANGS = ['en', 'ro'];
-const STORE_KEY = 'builder:v1';
+const STORE_KEY = 'builder:v2';
+const OLD_STORE_KEY = 'builder:v1';
 const NAME_MAX = 40;
-
-const ALL_IDS = SECTIONS.map(s => s.id);
 
 function defaultLang() {
   try { return (navigator.language || '').toLowerCase().startsWith('ro') ? 'ro' : 'en'; } catch { return 'en'; }
+}
+
+// ---------- items ----------
+
+// `gallery-insta`, `hero`, or an old section id → { group, type }, or null.
+export function parseToken(token) {
+  if (LEGACY[token]) { const [group, type] = LEGACY[token]; return { group, type }; }
+  const [group, type] = String(token).split('-', 2);
+  const g = GROUP[group];
+  if (!g) return null;
+  if (type === undefined) return { group, type: g.types[0].id };
+  return g.types.some(ty => ty.id === type) ? { group, type } : null;
+}
+
+export function itemToken(item) {
+  return GROUP[item.group].types.length > 1 ? `${item.group}-${typeOf(item).id}` : item.group;
+}
+
+export function nextId(items, group) {
+  if (!items.some(it => it.id === group)) return group;
+  let n = 2;
+  while (items.some(it => it.id === `${group}${n}`)) n++;
+  return `${group}${n}`;
+}
+
+// Any list of { group, type, on } → valid items: unknown entries dropped, a single-use group kept
+// once (its first visible copy, else its first), every group present (missing ones appended, off),
+// fresh ids. `prune` also drops hidden copies of a multi group that has a visible one, so a link,
+// a ready page or an old save does not leave stray unticked galleries in the list.
+function normalize(list, { prune = false } = {}) {
+  const valid = (Array.isArray(list) ? list : [])
+    .filter(it => it && GROUP[it.group])
+    .map(it => ({ group: it.group, type: typeOf(it).id, on: !!it.on }));
+  const keep = new Set();
+  for (const g of GROUPS) {
+    const mine = valid.filter(it => it.group === g.id);
+    if (!mine.length) continue;
+    let kept;
+    if (!g.multi) kept = [mine.find(it => it.on) || mine[0]];
+    else if (prune && mine.some(it => it.on)) kept = mine.filter(it => it.on);
+    else if (prune) kept = mine.slice(0, 1);
+    else kept = mine;
+    kept.forEach(it => keep.add(it));
+  }
+  const out = valid.filter(it => keep.has(it));
+  for (const g of GROUPS) if (!out.some(it => it.group === g.id)) out.push({ group: g.id, type: g.types[0].id, on: false });
+  const withIds = [];
+  for (const it of out) withIds.push({ id: nextId(withIds, it.group), ...it });
+  return withIds;
+}
+
+// Visible tokens first, then the rows of `rest` (turned off), e.g. the visitor's current list.
+export function itemsFrom(tokens, rest = []) {
+  const on = tokens.map(parseToken).filter(Boolean).map(it => ({ ...it, on: true }));
+  return normalize([...on, ...rest.map(it => ({ ...it, on: false }))], { prune: true });
 }
 
 export function defaults() {
@@ -28,8 +87,7 @@ export function defaults() {
     accent: '',
     lang: defaultLang(),
     name: '',
-    order: [...DEFAULT_ON, ...ALL_IDS.filter(id => !DEFAULT_ON.includes(id))],
-    on: [...DEFAULT_ON]
+    items: itemsFrom(DEFAULT_ON)
   };
 }
 
@@ -44,11 +102,7 @@ function sanitize(raw, base) {
   if (raw.accent === '' || isHex(raw.accent)) s.accent = raw.accent.toLowerCase();
   if (LANGS.includes(raw.lang)) s.lang = raw.lang;
   if (typeof raw.name === 'string') s.name = raw.name.replace(/\s+/g, ' ').trim().slice(0, NAME_MAX);
-  if (Array.isArray(raw.order)) {
-    const known = raw.order.filter(id => BY_ID[id]);
-    s.order = [...new Set([...known, ...ALL_IDS])];
-  }
-  if (Array.isArray(raw.on)) s.on = [...new Set(raw.on.filter(id => BY_ID[id]))];
+  if (Array.isArray(raw.items)) s.items = normalize(raw.items);
   return s;
 }
 
@@ -61,11 +115,7 @@ export function decodeHash(hash) {
   if (params.has('a')) { const a = params.get('a'); out.accent = a ? `#${a}` : ''; }
   if (params.has('l')) out.lang = params.get('l');
   if (params.has('b')) out.name = params.get('b');
-  if (params.has('s')) {
-    const on = params.get('s').split('.').filter(Boolean);
-    out.on = on;
-    out.order = on; // hidden sections are appended by sanitize()
-  }
+  if (params.has('s')) out.tokens = params.get('s').split('.').filter(Boolean);
   return out;
 }
 
@@ -76,12 +126,20 @@ export function encodeHash(s) {
   if (s.accent) params.set('a', s.accent.slice(1));
   params.set('l', s.lang);
   if (s.name) params.set('b', s.name);
-  params.set('s', s.order.filter(id => s.on.includes(id)).join('.'));
+  params.set('s', visible(s).map(itemToken).join('.'));
   return `#${params.toString()}`;
 }
 
 function readStore() {
-  try { return JSON.parse(localStorage.getItem(STORE_KEY) || 'null'); } catch { return null; }
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
+    if (saved) return saved;
+    // A save from before groups: { order: [ids], on: [ids] } with the old section ids.
+    const old = JSON.parse(localStorage.getItem(OLD_STORE_KEY) || 'null');
+    if (!old || !Array.isArray(old.order) || !Array.isArray(old.on)) return old;
+    const rows = old.order.map(id => { const it = parseToken(id); return it && { ...it, on: old.on.includes(id) }; });
+    return { ...old, items: normalize(rows, { prune: true }) };
+  } catch { return null; }
 }
 
 export function loadState() {
@@ -89,14 +147,16 @@ export function loadState() {
   const stored = sanitize(readStore(), base);
   const fromHash = decodeHash(location.hash);
   if (!fromHash) return stored;
-  // A shared link sets what it names; the visitor's own order for hidden sections is kept.
+  // A shared link sets what it names; the visitor's own hidden rows are kept, after it.
   const merged = sanitize(fromHash, stored);
-  if (fromHash.order) merged.order = [...new Set([...fromHash.order.filter(id => BY_ID[id]), ...stored.order])];
+  if (fromHash.tokens) merged.items = itemsFrom(fromHash.tokens, stored.items);
   return merged;
 }
 
 export function saveState(s) {
-  try { localStorage.setItem(STORE_KEY, JSON.stringify(s)); } catch { /* private mode: the URL still carries the page */ }
+  const { items, ...rest } = s;
+  const save = { ...rest, items: items.map(({ group, type, on }) => ({ group, type, on })) };
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(save)); } catch { /* private mode: the URL still carries the page */ }
   try { history.replaceState(history.state, '', `${location.pathname}${location.search}${encodeHash(s)}`); } catch { /* ignore */ }
 }
 
@@ -114,4 +174,4 @@ export function linkFromUrl() {
   return /^[A-Za-z0-9_-]{6,64}$/.test(id) ? id : '';
 }
 
-export const visible = s => s.order.filter(id => s.on.includes(id));
+export const visible = s => s.items.filter(it => it.on);

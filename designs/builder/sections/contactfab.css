@@ -1,0 +1,9 @@
+.fab { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; padding: 0 16px calc(16px + env(safe-area-inset-bottom)); }
+.fab-btn {
+  pointer-events: auto; display: grid; place-items: center; width: 56px; height: 56px; border: 0; border-radius: 50%;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.3); cursor: pointer; transition: transform 0.2s var(--ease);
+}
+.fab-btn:hover { transform: scale(1.06); }
+.fab-call { width: 48px; height: 48px; background: var(--surface); color: var(--text); border: var(--border-w) solid var(--line); }
+.fab-wa { background: #1f8f4e; color: #fff; }
+.reduce-motion .fab-btn { transition: none; }

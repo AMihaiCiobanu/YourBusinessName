@@ -50,7 +50,7 @@ Chromium, 1440 px și 390 px (plus 360 px pentru scroll orizontal), pentru fieca
 
 - 0 erori în consolă, 0 request-uri eșuate (în afară de cele externe blocate intenționat);
 - 0 px scroll orizontal la 360 și 390 px;
-- toate secțiunile se montează (builder: toate cele 21, în toate temele, RO și EN);
+- toate secțiunile se montează (builder: toate cele 36 de tipuri din cele 14 grupuri, în toate temele, RO și EN);
 - interacțiunile paginii merg cu mouse, touch și tastatură (slider, carte, before/after, filtre, tab-uri, lightbox,
   formular cu validare, Get my page = mailto);
 - `prefers-reduced-motion: reduce`: fără autoplay, fără WebGL, animații scurte;
@@ -78,8 +78,11 @@ Data = ultimul audit complet. „—” = neauditat.
 | Pagină | Lighthouse mobil (P / A / BP / SEO) | Lighthouse desktop | Playwright | axe | Data | Note |
 |---|---|---|---|---|---|---|
 | `/` (demo principal, indexat) | 100 / 100 / 100 / 100 | 99 / 100 / 100 / 100 | da (1440/390/360, 4 tipuri × light/dark) | 0 | 2026-10-17 | LCP 1.2 s, CLS 0.009 mobil / 0.081 desktop. JSON-LD `WebPage` (demo, nu firmă reală) |
-| `/designs/builder/` implicit | 95 / 100 / 100 / 69* | 100 / 100 / 100 / 69* | da (3 teme × RO/EN × 1440/390/360) | 0 | 2026-10-17 | LCP mobil 2.7–2.9 s (> 2.5 s): hero-ul e montat din JS; 4 rulări: 80, 95, 96, 95 |
-| `/designs/builder/` toate 21 secțiunile | 92 / 100 / 100 / 69* | 99 / 100 / 100 / 69* | da (toate 21, 3 teme × RO/EN) | 0 | 2026-10-17 | LCP mobil 3.3 s (limita pentru „toate secțiunile”) |
+| `/designs/builder/` implicit | 95 / 100 / 100 / 69* | 77 / 100 / 100 / 69* (local) | da (375/1280; 10 nișe × 3 teme × RO/EN) | 0 | 2026-10-23 | Desktop local: și versiunea dinainte iese 76 pe aceeași mașină, deci nu e regresie; de confirmat pe live |
+| `/designs/builder/` toate tipurile vechi (22 secțiuni, 6 galerii) | 91 / 100 / 100 / 69* | 73 / 100 / 100 / 69* (local) | da (10 nișe × 3 teme × RO/EN, 375 + 1280) | 0 | 2026-10-23 | Reparat: 35–69 px scroll orizontal pe mobil (ștampila Loyalty, „14.000+” din Cifre, eticheta „Acum” din Program spre ora închiderii); coverflow fără Swiper accesibil cu tastatura |
+| `/designs/builder/` fiecare secțiune repetabilă de 2 ori (27 secțiuni) | 91 / 100 / 100 / 69* | — | da (10 nișe × 3 teme × RO/EN, 375 + 1280) | 0 | 2026-10-23 | Formularul și planificatorul de două ori: id-uri unice per copie, fără duplicate |
+| `/designs/builder/` bandă de cifre care se mișcă | 97 / 100 / 100 / 69* | — | da (375 + 1280, pauză, mișcare redusă) | 0 | 2026-10-23 | Pauză la hover, focus și buton (WCAG 2.2.2); cu mișcare redusă stă pe loc |
+| `/designs/builder/` toate tipurile noi (15 secțiuni) | 98 / 100 / 100 / 69* | 82 / 100 / 100 / 69* (local) | da (10 nișe × 3 teme × RO/EN, 375 + 1280) | 0 | 2026-10-23 | Hero „text + poză”, masonry, carusel, carte de oaspeți, bandă cifre, carduri echipă/FAQ, listă produse, banner cadou, linie fidelitate, card program, hartă lată, butoane rotunde |
 | `/designs/dental/` | 100 / 100 / 100 / 69* | 100 / 100 / 100 / 69* | da (1440/390/360) | 0 | 2026-10-17 | |
 | `/designs/derma/` | 100 / 100 / 100 / 69* | 100 / 100 / 100 / 69* | da (1440/390/360) | 0 | 2026-10-17 | CLS desktop era 0.13–0.25 la încărcarea fontului Fraunces; acum 0.02 (fallback Georgia scalat) |
 | `/designs/storybook/` | 99 / 100 / 100 / 69* | 100 / 100 / 100 / 69* | da (1440/390/360) | 0 reale† | 2026-10-17 | |

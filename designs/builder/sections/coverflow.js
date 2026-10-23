@@ -19,7 +19,8 @@ export default {
           h('p', { class: 'eyebrow', text: t('coverflow.eyebrow') }),
           h('h2', { 'data-split': '', text: t('coverflow.title') }))),
       h('div', { class: 'swiper cf gallery', role: 'region', 'aria-label': t('coverflow.label') },
-        h('div', { class: 'swiper-wrapper' }, slides),
+        // Before Swiper the row scrolls on its own, so it must be reachable with the keyboard.
+        h('div', { class: 'swiper-wrapper', tabindex: '0' }, slides),
         h('div', { class: 'swiper-pagination' })),
       h('p', { class: 'note center', text: t('common.sampleNote') }));
   },
@@ -31,6 +32,7 @@ export default {
     if (!el.isConnected) return null;
     const node = el.querySelector('.cf');
     node.classList.add('is-live');
+    node.querySelector('.swiper-wrapper').removeAttribute('tabindex');
     const swiper = new Swiper(node, {
       effect: 'coverflow',
       grabCursor: true,

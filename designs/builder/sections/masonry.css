@@ -1,0 +1,7 @@
+.ms-grid { columns: 3 220px; column-gap: 12px; margin: 0; padding: 0; list-style: none; }
+.ms-cell { break-inside: avoid; margin-bottom: 12px; }
+.ms-fig { margin: 0; overflow: hidden; border-radius: var(--radius); background: var(--surface-2); cursor: zoom-in; }
+.ms-fig img { display: block; width: 100%; height: auto; transition: transform 0.6s var(--ease); }
+.ms-fig:hover img { transform: scale(1.04); }
+:root[data-skin="bold"] .ms-fig { border: 2px solid var(--text); }
+@container page (max-width: 560px) { .ms-grid { columns: 2; column-gap: 8px; } .ms-cell { margin-bottom: 8px; } }
