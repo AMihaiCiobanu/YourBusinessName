@@ -1,0 +1,34 @@
+/* Frame shared by the CSS 3D heroes (herocopy.js). @imported by heroring.css, herocube.css, herofloat.css. */
+.hx-sec { overflow: hidden; padding: clamp(48px, 7cqi, 96px) 0 clamp(64px, 8cqi, 110px); min-height: min(88vh, 860px); display: flex; align-items: center; isolation: isolate; }
+.hx-bg {
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    radial-gradient(55% 55% at 78% 45%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%),
+    radial-gradient(40% 40% at 8% 92%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 70%);
+}
+:root[data-skin="bold"] .hx-bg {
+  background:
+    radial-gradient(40% 45% at 82% 30%, color-mix(in srgb, var(--accent-3) 70%, transparent), transparent 70%),
+    radial-gradient(35% 40% at 70% 90%, color-mix(in srgb, var(--accent-2) 28%, transparent), transparent 70%);
+}
+.hx-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(32px, 5cqi, 72px); }
+.hx-sec h1 { font-size: calc(clamp(2.5rem, 6.8cqi, 5.2rem) * var(--display-scale)); line-height: 0.98; }
+.hx-l1, .hx-l2 { display: block; }
+.hx-l2 { color: var(--accent-text); }
+:root[data-skin="luxe"] .hx-l2 { font-style: italic; }
+:root[data-skin="bold"] .hx-l2 { color: var(--text); }
+:root[data-skin="bold"] .hx-l2 .w > span { background: linear-gradient(transparent 58%, var(--accent) 58% 92%, transparent 92%); }
+.hx-lead { max-width: 34rem; margin: 22px 0 30px; font-size: clamp(1.05rem, 1.8cqi, 1.22rem); color: var(--muted); }
+.hx-status {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; padding: 8px 14px;
+  border: var(--border-w) solid var(--line); border-radius: 999px; background: color-mix(in srgb, var(--surface) 70%, transparent);
+  font-size: 0.9rem; font-weight: 600;
+}
+.hx-status::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #c2410c; }
+.hx-status.is-open::before { background: #16a34a; box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.2); }
+.hx-visual { position: relative; min-width: 0; }
+
+@container page (max-width: 820px) {
+  .hx-sec { min-height: 0; }
+  .hx-grid { grid-template-columns: 1fr; }
+}

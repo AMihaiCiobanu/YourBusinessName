@@ -37,8 +37,9 @@
         clinic: 'photo-1645005512968-0c1fe99f0093', tattoo: 'photo-1565058379802-bbe93b2f703a'
       };
       var id = HERO[niche];
-      // `hero`, `hero-3d` or `hero-split` anywhere in the visible list (both types show this photo).
-      var heroOn = !/(?:^|[#&])s=/.test(hash) || /(?:^|[#&])s=(?:[^&]*\.)?hero(?:-(?:3d|split))?(?:[.&]|$)/.test(hash);
+      // `hero`, `hero-3d`, `hero-split` or `hero-float` anywhere in the visible list (these types show
+      // this photo at this size; the ring and the cube show smaller ones and preload nothing).
+      var heroOn = !/(?:^|[#&])s=/.test(hash) || /(?:^|[#&])s=(?:[^&]*\.)?hero(?:-(?:3d|split|float))?(?:[.&]|$)/.test(hash);
       if (!id || !heroOn) return;
       var url = function (w) { return 'https://images.unsplash.com/' + id + '?auto=format&fit=crop&crop=entropy&w=' + w + '&h=' + (w * 1.25) + '&q=62'; };
       var link = document.createElement('link');

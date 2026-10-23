@@ -170,7 +170,7 @@ Un tip nou într-un grup existent (exemplu: o galerie video):
    secțiunii. Un grup nou cu mai multe tipuri are nevoie și de `grp.<grup>.name` (și `.add` dacă e `multi`).
 5. Opțional: în `DEFAULT_ON` sau într-un model din `builder/presets.js` (tot ca `grup-tip`).
 
-Tipuri azi (14 grupuri, 36 de tipuri): Hero (3D, text + poză mare) · Galerie (coverflow 3D, slider, filmstrip, grilă
+Tipuri azi (14 grupuri, 39 de tipuri): Hero (3D, text + poză mare, inel de poze 3D, cub de poze 3D, carduri plutitoare 3D) · Galerie (coverflow 3D, slider, filmstrip, grilă
 Instagram, masonry, carusel) · Prețuri (carte 3D, listă, carduri de servicii, planificator, formular de programare) ·
 Înainte și după (mâner, alăturate) · Cifre (animate, bandă, bandă care se mișcă de la dreapta la stânga, cu pauză) · Echipa (carduri care se întorc, carduri de profil) ·
 Produse (carduri, listă) · Card cadou (3D, banner) · Fidelitate (ștampile, linie de progres) · Recenzii (carusel, carte

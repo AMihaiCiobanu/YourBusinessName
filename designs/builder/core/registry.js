@@ -23,7 +23,10 @@ export const GROUPS = [
   {
     id: 'hero', label: 'Hero', types: [
       type('3d', '3D hero', ['3d'], { mod: 'hero' }),
-      type('split', 'Split hero with one photo', ['new'], { mod: 'herosplit' })
+      type('split', 'Split hero with one photo', ['new'], { mod: 'herosplit' }),
+      type('ring', '3D photo ring hero', ['3d', 'new'], { mod: 'heroring' }),
+      type('cube', '3D photo cube hero', ['3d', 'new'], { mod: 'herocube' }),
+      type('float', 'Hero with floating 3D cards', ['3d', 'new'], { mod: 'herofloat' })
     ]
   },
   {
