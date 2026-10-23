@@ -529,7 +529,7 @@ html[data-niche="barber"] .why-num { border-radius: 6px; }
 html[data-niche="barber"] .step-n { border-radius: 6px; }
 
 /* Contact */
-.contact { display: grid; gap: 32px; }
+.contact { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; }
 .contact-list { list-style: none; padding: 0; margin: 0 0 16px; display: grid; gap: 12px; }
 .contact-list li { display: flex; align-items: center; gap: 12px; font-weight: 500; }
 .contact-list svg { color: var(--accent); flex-shrink: 0; }
@@ -546,6 +546,9 @@ html[data-niche="barber"] .social-link { border-radius: 6px; }
 .map { grid-column: 1 / -1; }
 .map-frame {
   position: relative; overflow: hidden; min-height: 300px; aspect-ratio: 16 / 9; max-height: 420px;
+  /* With aspect-ratio and an auto width, min-height also set the width (300 × 16/9 = 533px) and the page
+     scrolled sideways on phones. A definite width (and minmax(0, …) columns on .contact) keeps it inside. */
+  width: 100%;
   border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
 }
 .map-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
@@ -610,7 +613,7 @@ html[data-niche="barber"] .sticky-book { border-radius: 6px; text-transform: upp
   .photo { min-height: 190px; }
   .photo-main { grid-column: span 2; grid-row: span 2; min-height: 394px; }
   .services { grid-template-columns: repeat(2, 1fr); }
-  .contact { grid-template-columns: 1fr 1fr; align-items: start; }
+  .contact { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
   .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; }
 }
 
