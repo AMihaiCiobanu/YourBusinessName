@@ -20,6 +20,9 @@ export default {
     name: 'Numele afacerii',
     namePh: 'Numele Afacerii Tale',
     theme: 'Temă',
+    season: 'Temă de sezon',
+    seasonHint: 'Culori și decorațiuni de sărbătoare peste pagină, cu un personaj care scoate un sunet când îl atingi. Automat schimbă tema după data de azi.',
+    seasonAuto: 'Automat după dată (acum: {name})',
     accent: 'Culoare de accent',
     customColor: 'Alege orice culoare',
     accentReset: 'Culoarea temei',
@@ -65,6 +68,20 @@ export default {
     luxe: { name: 'Lux întunecat', desc: 'Negru profund, titluri serif, detalii aurii.' },
     clean: { name: 'Luminos și curat', desc: 'Alb aerisit, umbre fine, calm.' },
     bold: { name: 'Îndrăzneț și colorat', desc: 'Culori vii, contururi puternice, jucăuș.' }
+  },
+
+  // Seasonal themes (core/season.js, season/decor.js). bubbles: what the mascot says, | between lines.
+  season: {
+    sound: 'Sunet personaj',
+    none: { name: 'Fără' },
+    halloween: { name: 'Halloween', greet: 'Halloween fericit! Programează-te pentru sezonul înfricoșător.', mascot: 'Sperietoare de Halloween — apasă ca să o auzi', bubbles: 'Bhuuu!|Hihihi!|Hei, ai grijă!|Buu!' },
+    blackfriday: { name: 'Black Friday', greet: 'A venit Black Friday: programează-te acum și prinde ofertele săptămânii.', mascot: 'Sacoșă de Black Friday — apasă ca să o auzi', bubbles: 'Cha-ching!|Oferte!|Nu rata!' },
+    christmas: { name: 'Crăciun', greet: 'Crăciun fericit! Răsfață-te pe tine sau pe cineva drag de sărbători.', mascot: 'Om de zăpadă — apasă ca să-l auzi', bubbles: 'Ho ho ho!|Clopoței, clopoței!|Crăciun fericit!' },
+    newyear: { name: 'Anul Nou', greet: 'La mulți ani {year}! Începe anul arătând cât mai bine.', mascot: 'Șampanie de Anul Nou — apasă ca să o auzi', bubbles: 'Noroc!|La mulți ani {year}!|Pac!' },
+    valentine: { name: 'Valentine\'s Day', greet: 'Valentine\'s Day fericit! Răsfață persoana iubită sau răsfață-te pe tine.', mascot: 'Inimioară — apasă ca să o auzi', bubbles: 'Te iubesc!|Pup!|Fii a mea!' },
+    spring: { name: 'Primăvară · 1 și 8 Martie', greet: 'A venit primăvara! Mărțișor, flori și un look proaspăt.', mascot: 'Lalele de primăvară — apasă ca să le auzi', bubbles: 'Cip-cirip!|Bună, primăvară!|La mulți ani!' },
+    easter: { name: 'Paște', greet: 'Paște fericit! Programează-te din timp, înainte de sărbători.', mascot: 'Iepuraș de Paște — apasă ca să-l auzi', bubbles: 'Hristos a înviat!|Hop, hop!|Am găsit un ou!' },
+    summer: { name: 'Vară', greet: 'Bună, vară! Pregătește-te pentru zilele însorite.', mascot: 'Soare de vară — apasă ca să-l auzi', bubbles: 'Bună, vară!|Pleosc!|Ce soare!' }
   },
 
   niches: {

@@ -87,8 +87,8 @@ function startGL(section) {
   gl.enable(gl.BLEND);
 
   function colors() {
-    const dark = document.documentElement.dataset.skin === 'luxe';
     const css = getComputedStyle(document.documentElement);
+    const dark = css.colorScheme === 'dark'; // the luxe skin or a dark seasonal theme
     gl.uniform3fv(U.c1, glColor(css.getPropertyValue('--accent').trim() || '#c9a961'));
     gl.uniform3fv(U.c2, glColor(css.getPropertyValue('--text').trim() || '#ffffff'));
     gl.uniform1f(U.alpha, dark ? 0.9 : 0.75);

@@ -1,12 +1,13 @@
 // The builder panel: a side panel on wide screens, a bottom sheet on phones. Two tabs:
 // Sections (language first, then tick to show, pick the type, add another gallery, drag the handle /
 // arrows / Alt+arrows to reorder) and Style (business,
-// name, theme, accent, motion, phone preview). Every control calls change(patch, kind);
+// name, theme, seasonal theme, accent, motion, phone preview). Every control calls change(patch, kind);
 // app.js applies it to the page.
 
 import { GROUP, typeOf } from '../core/registry.js';
 import { NICHES, SKINS, LANGS, itemsFrom, nextId } from '../core/state.js';
 import { ACCENT_PRESETS, SKIN_META, accentFor } from '../core/theme.js';
+import { SEASON_CHOICES, resolveSeason } from '../core/season.js';
 import { t, langName } from '../core/i18n.js';
 import { h, icon } from '../core/dom.js';
 import { PRESETS } from './presets.js';
@@ -289,6 +290,17 @@ export function mountPanel({ state, change, reset, shareUrl, toast, motion, getP
         h('span', { class: 'bp-skin-desc', text: t(`skins.${s}.desc`) })));
     }
 
+    // Seasonal theme: a holiday look over the page. 'Automatic' says which season today gives.
+    const nowSeason = resolveSeason('auto', state.lang);
+    const seasonSelect = h('select', { id: 'bp-season', class: 'bp-select', 'aria-describedby': 'bp-season-h' },
+      SEASON_CHOICES.map(s => h('option', { value: s, selected: s === state.season,
+        text: s === 'auto' ? t('ui.seasonAuto', { name: t(`season.${nowSeason || 'none'}.name`) }) : t(`season.${s}.name`) })));
+    seasonSelect.addEventListener('change', () => {
+      change({ season: seasonSelect.value }, 'theme');
+      announce(t('ui.themeChanged', { name: seasonSelect.selectedOptions[0].text }));
+    });
+
+    const season = resolveSeason(state.season, state.lang);
     const swatches = h('div', { class: 'bp-swatches', role: 'radiogroup', 'aria-labelledby': 'bp-accent-l' });
     const current = state.accent || '';
     const addSwatch = (value, label, color) => {
@@ -297,9 +309,9 @@ export function mountPanel({ state, change, reset, shareUrl, toast, motion, getP
       input.addEventListener('change', () => change({ accent: value }, 'theme'));
       swatches.appendChild(h('label', { class: `bp-swatch${value ? '' : ' bp-swatch-theme'}`, for: id, title: label, style: `--sw:${color}` }, input, h('span', { class: 'sr-only', text: label })));
     };
-    addSwatch('', t('ui.accentReset'), SKIN_META[state.skin].accent);
+    addSwatch('', t('ui.accentReset'), accentFor(state.skin, '', season));
     for (const c of ACCENT_PRESETS) addSwatch(c, c, c);
-    const picker = h('input', { type: 'color', id: 'bp-color', class: 'bp-color', value: accentFor(state.skin, state.accent), 'aria-label': t('ui.customColor') });
+    const picker = h('input', { type: 'color', id: 'bp-color', class: 'bp-color', value: accentFor(state.skin, state.accent, season), 'aria-label': t('ui.customColor') });
     let colorTimer = 0;
     picker.addEventListener('input', () => {
       clearTimeout(colorTimer);
@@ -325,6 +337,7 @@ export function mountPanel({ state, change, reset, shareUrl, toast, motion, getP
       field(h('label', { for: 'bp-niche', class: 'bp-label-t', text: t('ui.business') }), nicheSelect),
       field(h('label', { for: 'bp-name', class: 'bp-label-t', text: t('ui.name') }), nameInput),
       field(h('p', { id: 'bp-skin-l', class: 'bp-label-t', text: t('ui.theme') }), skins),
+      h('div', { class: 'bp-field' }, h('label', { for: 'bp-season', class: 'bp-label-t', text: t('ui.season') }), seasonSelect, h('p', { class: 'bp-hint', id: 'bp-season-h', text: t('ui.seasonHint') })),
       field(h('p', { id: 'bp-accent-l', class: 'bp-label-t', text: t('ui.accent') }), h('div', { class: 'bp-accent' }, swatches, h('label', { class: 'bp-color-wrap', for: 'bp-color' }, picker, h('span', { text: t('ui.customColor') })))),
       h('div', { class: 'bp-field bp-field-row' }, motionInput, h('label', { for: 'bp-motion' }, h('span', { class: 'bp-label-t', text: t('ui.motion') }), h('span', { class: 'bp-hint', text: t('ui.motionHint') }))),
       h('div', { class: 'bp-field bp-field-row bp-desktop-only' }, phoneInput, h('label', { for: 'bp-phone', class: 'bp-label-t', text: t('ui.phone') }))
@@ -426,7 +439,7 @@ export function mountPanel({ state, change, reset, shareUrl, toast, motion, getP
     // State changed elsewhere (reset, link): bring the controls back in line.
     refresh(kind = '', patch = {}) {
       // Typing a name or dragging the colour picker must not rebuild the control in use.
-      if (kind === 'name' || (kind === 'theme' && !('skin' in patch))) return;
+      if (kind === 'name' || (kind === 'theme' && !('skin' in patch) && !('season' in patch))) return;
       const scroll = panel.querySelector('.bp-body')?.scrollTop || 0;
       const focusedId = document.activeElement?.id;
       renderList();

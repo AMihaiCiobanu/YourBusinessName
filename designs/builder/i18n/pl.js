@@ -20,6 +20,9 @@ export default {
     name: 'Nazwa firmy',
     namePh: 'Nazwa Twojej firmy',
     theme: 'Motyw',
+    season: 'Motyw sezonowy',
+    seasonHint: 'Świąteczne kolory i dekoracje na stronie, z maskotką, która wydaje dźwięk po dotknięciu. Automatyczny zmienia się według dzisiejszej daty.',
+    seasonAuto: 'Automatycznie wg daty (teraz: {name})',
     accent: 'Kolor akcentu',
     customColor: 'Wybierz dowolny kolor',
     accentReset: 'Kolor motywu',
@@ -65,6 +68,20 @@ export default {
     luxe: { name: 'Ciemny luksus', desc: 'Głęboka czerń, szeryfowe tytuły, złote detale.' },
     clean: { name: 'Jasny i czysty', desc: 'Przestronna biel, miękkie cienie, spokój.' },
     bold: { name: 'Odważny i kolorowy', desc: 'Żywe kolory, mocne obramowania, zabawa.' }
+  },
+
+  // Seasonal themes (core/season.js, season/decor.js). bubbles: what the mascot says, | between lines.
+  season: {
+    sound: 'Dźwięk maskotki',
+    none: { name: 'Brak' },
+    halloween: { name: 'Halloween', greet: 'Wesołego Halloween! Zarezerwuj wizytę na straszny sezon.', mascot: 'Strach na wróble — dotknij, by usłyszeć', bubbles: 'Buu!|Hi hi hi!|Uważaj!' },
+    blackfriday: { name: 'Black Friday', greet: 'Nadszedł Black Friday: zarezerwuj teraz i złap oferty tygodnia.', mascot: 'Torba zakupowa Black Friday — dotknij, by usłyszeć', bubbles: 'Dzyń-dzyń!|Promocje!|Nie przegap!' },
+    christmas: { name: 'Boże Narodzenie', greet: 'Wesołych Świąt! Zrób przyjemność sobie albo komuś bliskiemu.', mascot: 'Bałwanek — dotknij, by usłyszeć', bubbles: 'Ho ho ho!|Dzwoneczki!|Wesołych Świąt!' },
+    newyear: { name: 'Nowy Rok', greet: 'Szczęśliwego Nowego Roku {year}! Zacznij rok w najlepszej formie.', mascot: 'Szampan noworoczny — dotknij, by usłyszeć', bubbles: 'Na zdrowie!|Szczęśliwego {year}!|Pyk!' },
+    valentine: { name: 'Walentynki', greet: 'Szczęśliwych Walentynek! Rozpieść ukochaną osobę albo siebie.', mascot: 'Walentynkowe serce — dotknij, by usłyszeć', bubbles: 'Kocham cię!|Cmok!|Bądź moja!' },
+    spring: { name: 'Wiosna', greet: 'Przyszła wiosna! Świeże kwiaty, świeży wygląd.', mascot: 'Wiosenne tulipany — dotknij, by usłyszeć', bubbles: 'Ćwir ćwir!|Witaj, wiosno!|Kwitniemy!' },
+    easter: { name: 'Wielkanoc', greet: 'Wesołych Świąt Wielkanocnych! Zarezerwuj przed świętami.', mascot: 'Zajączek wielkanocny — dotknij, by usłyszeć', bubbles: 'Wesołych Świąt!|Hop, hop!|Mam jajko!' },
+    summer: { name: 'Lato', greet: 'Witaj, lato! Przygotuj się na słoneczne dni.', mascot: 'Letnie słońce — dotknij, by usłyszeć', bubbles: 'Witaj, lato!|Plusk!|Ale słońce!' }
   },
 
   niches: {

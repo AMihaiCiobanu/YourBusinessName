@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Your Business Name — Page builder</title>
-  <meta name="description" content="Build your own booking page: pick the sections, their order, the theme and the colour, and see the page change live." />
+  <meta name="description" content="Build your own booking page: pick the sections, their order, the theme, a holiday look and the colour, and see the page change live." />
   <meta name="robots" content="noindex" />
   <link rel="canonical" href="https://yourbusinessname.appointmentsapps.com/designs/builder/" />
   <meta property="og:type" content="website" />
@@ -25,6 +25,10 @@
       try { saved = JSON.parse(localStorage.getItem('builder:v2') || localStorage.getItem('builder:v1') || 'null'); } catch (_) { }
       var hash = location.hash;
       var k = /(?:^|[#&])k=(luxe|clean|bold)(?:&|$)/.exec(hash);
+      // Seasonal theme chosen by name (core/season.js); 'auto' is resolved by app.js once it starts.
+      var f = /(?:^|[#&])f=([a-z]+)(?:&|$)/.exec(hash);
+      var season = f ? f[1] : (saved && saved.season) || '';
+      if (/^(halloween|blackfriday|christmas|newyear|valentine|spring|easter|summer)$/.test(season)) document.documentElement.setAttribute('data-season', season);
       var n = /(?:^|[#&])n=([a-z]+)(?:&|$)/.exec(hash);
       if (k) skin = k[1]; else if (saved && /^(luxe|clean|bold)$/.test(saved.skin)) skin = saved.skin;
       if (n) niche = n[1]; else if (saved && saved.niche) niche = saved.niche;
@@ -60,14 +64,16 @@
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Space+Grotesk:wght@500;700&display=swap" />
   <link rel="stylesheet" href="../shared/shared.css?v=9" />
   <link rel="stylesheet" href="styles.css?v=1" />
+  <link rel="stylesheet" href="season/palettes.css?v=2" />
   <link rel="stylesheet" href="builder/panel.css?v=2" media="print" onload="this.media='all'" />
   <link rel="preload" as="style" href="sections/hero.css?v=3" />
-  <link rel="modulepreload" href="app.js?v=2" />
+  <link rel="modulepreload" href="app.js?v=3" />
   <link rel="modulepreload" href="core/state.js" />
   <link rel="modulepreload" href="core/registry.js" />
   <link rel="modulepreload" href="core/i18n.js" />
   <link rel="modulepreload" href="core/dom.js" />
   <link rel="modulepreload" href="core/theme.js" />
+  <link rel="modulepreload" href="core/season.js" />
   <link rel="modulepreload" href="core/motion.js" />
   <link rel="modulepreload" href="core/loader.js" />
   <link rel="modulepreload" href="core/data.js" />
@@ -95,7 +101,7 @@
   </noscript>
 
   <script src="../shared/lightbox.js?v=1" defer></script>
-  <script type="module" src="app.js?v=2"></script>
+  <script type="module" src="app.js?v=3"></script>
 </body>
 
 </html>

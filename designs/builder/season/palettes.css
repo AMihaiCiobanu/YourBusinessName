@@ -1,0 +1,58 @@
+/* Seasonal palettes (core/season.js). While a season is on (<html data-season="…">, set by the head
+   script and core/theme.js) its colours replace the skin's; the skin keeps its fonts, radii and
+   shadows. Accent maths for these colours: SEASON_META in core/theme.js (keep the two in sync).
+   The decorations are in decor.css, loaded only when a season is on. */
+
+:root[data-season="halloween"] {
+  color-scheme: dark;
+  --bg: #150f1f; --bg-2: #1d1429; --surface: #251a35; --surface-2: #2e2042;
+  --text: #f4ecff; --muted: #c4b6da; --line: rgba(244, 236, 255, 0.16);
+}
+:root[data-season="blackfriday"] {
+  color-scheme: dark;
+  --bg: #0a0a0a; --bg-2: #121212; --surface: #1a1a1a; --surface-2: #232323;
+  --text: #fafafa; --muted: #c2c2c2; --line: rgba(250, 250, 250, 0.16);
+}
+:root[data-season="christmas"] {
+  color-scheme: dark;
+  --bg: #0f1f17; --bg-2: #132a1f; --surface: #183326; --surface-2: #1e3d2e;
+  --text: #f5f1e8; --muted: #c5d0c4; --line: rgba(245, 241, 232, 0.16);
+}
+:root[data-season="newyear"] {
+  color-scheme: dark;
+  --bg: #0b1026; --bg-2: #10173a; --surface: #161e47; --surface-2: #1d2654;
+  --text: #f3f1ff; --muted: #bcc0e0; --line: rgba(243, 241, 255, 0.16);
+}
+:root[data-season="valentine"] {
+  color-scheme: light;
+  --bg: #fff3f6; --bg-2: #ffe8ef; --surface: #ffffff; --surface-2: #fff8fa;
+  --text: #3a0f1f; --muted: #714252; --line: #f2ccd8;
+}
+:root[data-season="spring"] {
+  color-scheme: light;
+  --bg: #fbfcf7; --bg-2: #f0f6ea; --surface: #ffffff; --surface-2: #f8fbf4;
+  --text: #1f2a1c; --muted: #4f5b4b; --line: #dfe8d6;
+}
+:root[data-season="easter"] {
+  color-scheme: light;
+  --bg: #fdfaf2; --bg-2: #f4efff; --surface: #ffffff; --surface-2: #fbf8ef;
+  --text: #2b2540; --muted: #59536b; --line: #e8e1d2;
+}
+:root[data-season="summer"] {
+  color-scheme: light;
+  --bg: #f2fbfc; --bg-2: #e2f4f6; --surface: #ffffff; --surface-2: #f5fcfd;
+  --text: #0f2a33; --muted: #3e5961; --line: #cfe6ea;
+}
+/* The bold skin draws its borders and offset shadows in the text colour. */
+:root[data-skin="bold"][data-season] { --line: var(--text); }
+/* The seasonal glow at the top of the page, whatever the skin. */
+:root[data-season] { --page-glow: radial-gradient(1000px 520px at 80% -10%, color-mix(in srgb, var(--accent) 18%, transparent), transparent 70%); }
+/* Form error text in the booking form: readable on the season's background. */
+:root:is([data-season="halloween"], [data-season="blackfriday"], [data-season="christmas"], [data-season="newyear"]) .bf-error { color: #fca5a5; }
+:root:is([data-season="valentine"], [data-season="spring"], [data-season="easter"], [data-season="summer"]) .bf-error { color: #b91c1c; }
+/* The bold skin's yellow highlight (eyebrows, badges, stats) carries text in --text: on a dark season
+   that text is light, so the highlight turns into a deep shade of the season. */
+:root[data-skin="bold"][data-season="halloween"] { --accent-3: #5d2b7c; }
+:root[data-skin="bold"][data-season="blackfriday"] { --accent-3: #3a3a3a; }
+:root[data-skin="bold"][data-season="christmas"] { --accent-3: #1f6d42; }
+:root[data-skin="bold"][data-season="newyear"] { --accent-3: #2f3b8f; }

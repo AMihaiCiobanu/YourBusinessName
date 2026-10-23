@@ -20,6 +20,9 @@ export default {
     name: 'Nom de l’entreprise',
     namePh: 'Nom de votre entreprise',
     theme: 'Thème',
+    season: 'Thème de saison',
+    seasonHint: 'Couleurs et décorations de fête sur la page, avec une mascotte qui fait un son quand on la touche. Automatique change selon la date du jour.',
+    seasonAuto: 'Automatique selon la date (maintenant : {name})',
     accent: 'Couleur d’accent',
     customColor: 'Choisir une couleur',
     accentReset: 'Couleur du thème',
@@ -65,6 +68,20 @@ export default {
     luxe: { name: 'Luxe sombre', desc: 'Noir profond, titres à empattements, détails dorés.' },
     clean: { name: 'Clair et épuré', desc: 'Blanc aéré, ombres douces, calme.' },
     bold: { name: 'Audacieux et coloré', desc: 'Couleurs vives, bordures marquées, ludique.' }
+  },
+
+  // Seasonal themes (core/season.js, season/decor.js). bubbles: what the mascot says, | between lines.
+  season: {
+    sound: 'Son de la mascotte',
+    none: { name: 'Aucun' },
+    halloween: { name: 'Halloween', greet: 'Joyeux Halloween ! Réservez votre rendez-vous pour la saison qui fait peur.', mascot: 'Épouvantail d\'Halloween — touchez pour l\'entendre', bubbles: 'Bouh !|Hi hi hi !|Attention !' },
+    blackfriday: { name: 'Black Friday', greet: 'C\'est le Black Friday : réservez maintenant et profitez des offres de la semaine.', mascot: 'Sac de shopping Black Friday — touchez pour l\'entendre', bubbles: 'Ka-tching !|Des offres !|À ne pas manquer !' },
+    christmas: { name: 'Noël', greet: 'Joyeux Noël ! Faites-vous plaisir, ou faites plaisir à un proche.', mascot: 'Bonhomme de neige — touchez pour l\'entendre', bubbles: 'Ho ho ho !|Vive le vent !|Joyeux Noël !' },
+    newyear: { name: 'Nouvel An', greet: 'Bonne année {year} ! Commencez l\'année au meilleur de vous-même.', mascot: 'Champagne du Nouvel An — touchez pour l\'entendre', bubbles: 'Santé !|Bonne année {year} !|Pop !' },
+    valentine: { name: 'Saint-Valentin', greet: 'Joyeuse Saint-Valentin ! Gâtez l\'être aimé, ou gâtez-vous.', mascot: 'Cœur de la Saint-Valentin — touchez pour l\'entendre', bubbles: 'Je t\'aime !|Bisou !|Sois à moi !' },
+    spring: { name: 'Printemps', greet: 'Le printemps est là ! Des fleurs fraîches, un look frais.', mascot: 'Tulipes de printemps — touchez pour les entendre', bubbles: 'Cui-cui !|Bonjour, printemps !|Ça fleurit !' },
+    easter: { name: 'Pâques', greet: 'Joyeuses Pâques ! Réservez avant les fêtes.', mascot: 'Lapin de Pâques — touchez pour l\'entendre', bubbles: 'Joyeuses Pâques !|Hop hop !|Un œuf !' },
+    summer: { name: 'Été', greet: 'Bonjour l\'été ! Préparez-vous pour les beaux jours.', mascot: 'Soleil d\'été — touchez pour l\'entendre', bubbles: 'Bonjour l\'été !|Plouf !|Quel soleil !' }
   },
 
   niches: {

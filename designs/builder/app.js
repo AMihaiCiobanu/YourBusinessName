@@ -9,6 +9,8 @@ import { loadState, saveState, shareUrl, encodeHash, visible, linkFromUrl, query
 import { GROUP, typeOf } from './core/registry.js';
 import { loadLang, t, tEn, langNameEn } from './core/i18n.js';
 import { applyTheme, accentFor } from './core/theme.js';
+import { resolveSeason } from './core/season.js';
+import { loadStyle } from './core/loader.js';
 import { motion } from './core/motion.js';
 import { startData, setDataLang, priceText } from './core/data.js';
 import { createPage } from './core/page.js';
@@ -26,6 +28,28 @@ const MOTION_KEY = 'builder:motion';
 let content = null;
 let data = null;
 let theme = null;
+
+// ---------- seasonal theme (core/season.js) ----------
+// The palette comes with applyTheme(); the decorations (season/decor.js) load only when a season is on.
+
+const seasonNow = () => resolveSeason(state.season, state.lang);
+const setTheme = () => { theme = applyTheme(state, seasonNow()); };
+let decor = { season: '', remove: () => {} };
+let decorJob = 0;
+
+async function updateDecor({ force = false } = {}) {
+  const season = seasonNow();
+  if (!force && season === decor.season) return;
+  const job = ++decorJob;
+  decor.remove();
+  decor = { season: '', remove: () => {} };
+  if (!season) return;
+  try {
+    const [{ mountDecor }] = await Promise.all([import('./season/decor.js'), loadStyle(new URL('./season/decor.css', import.meta.url).href)]);
+    if (job !== decorJob) return;
+    decor = { season, remove: mountDecor({ season, main: document.getElementById('page'), t, reduced: motion.reduced }) };
+  } catch (err) { console.error('Seasonal theme failed to load', err); }
+}
 
 const displayName = () => state.name || t('brandDefault');
 
@@ -83,7 +107,8 @@ function setupText() {
     'My page setup from the page builder:',
     `- Type of business: ${tEn(`niches.${state.niche}`)}`,
     state.name ? `- Name on the page: ${state.name}` : null,
-    `- Theme: ${tEn(`skins.${state.skin}.name`)}, accent colour ${accentFor(state.skin, state.accent)}`,
+    `- Theme: ${tEn(`skins.${state.skin}.name`)}, accent colour ${accentFor(state.skin, state.accent, seasonNow())}`,
+    state.season !== 'none' ? `- Seasonal theme: ${state.season === 'auto' ? `automatic by date (now: ${tEn(`season.${seasonNow() || 'none'}.name`)})` : tEn(`season.${state.season}.name`)}` : null,
     `- Page language: ${langNameEn(state.lang)}`,
     `- Sections, in order: ${sections.join(', ')}`,
     `- Link to this setup: ${shareUrl(state)}`,
@@ -126,8 +151,9 @@ async function change(patch, kind) {
   updateGetPage();
 
   if (kind === 'theme') {
-    theme = applyTheme(state);
+    setTheme();
     page.themeChanged();
+    if ('season' in patch) updateDecor();
   } else if (kind === 'sections') {
     await page.sync(visible(state));
   } else if (kind === 'name') {
@@ -142,8 +168,9 @@ async function change(patch, kind) {
       setDataLang(state.lang);
       panel.relabel();
     }
+    updateDecor({ force: langChanged }); // texts in the new language; 'auto' may pick another Easter
     if (!(await reloadContent())) return;
-    theme = applyTheme(state); // a ready page also sets the theme and colour
+    setTheme(); // a ready page also sets the theme and colour
     updateTitle();
     await page.rebuild(visible(state));
   }
@@ -154,7 +181,7 @@ function resetAll() {
   const fresh = defaults();
   fresh.lang = state.lang;
   Object.assign(state, fresh);
-  theme = applyTheme(state);
+  setTheme();
   change({}, 'content');
 }
 
@@ -183,7 +210,7 @@ async function boot() {
 
   await loadLang(state.lang);
   setDataLang(state.lang);
-  theme = applyTheme(state);
+  setTheme();
   mountDemo('builder');
 
   const main = document.getElementById('page');
@@ -191,6 +218,7 @@ async function boot() {
   await reloadContent();
   page = createPage({ main, overlay, ctx });
   updateTitle();
+  await updateDecor(); // before the sections, so the greeting ribbon never pushes them down
 
   // The panel first, so the page is laid out with it from the very first paint.
   panel = mountPanel({
@@ -206,13 +234,14 @@ async function boot() {
         motion.force(value);
         try { localStorage.setItem(MOTION_KEY, value ? '1' : '0'); } catch { /* ignore */ }
         page.rebuild(visible(state));
+        updateDecor({ force: true });
       }
     },
     getPageHref: () => getPageMailto(setupText()),
     jump: id => page.element(id)?.scrollIntoView({ behavior: motion.reduced ? 'auto' : 'smooth', block: 'start' })
   });
 
-  setupBooking({ linkId, theme: () => (state.skin === 'luxe' ? 'dark' : 'light') });
+  setupBooking({ linkId, theme: () => (theme.dark ? 'dark' : 'light') });
   await page.sync(visible(state));
   page.renderFooter();
   updateGetPage();

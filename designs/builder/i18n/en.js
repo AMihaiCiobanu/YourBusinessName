@@ -20,6 +20,9 @@ export default {
     name: 'Business name',
     namePh: 'Your Business Name',
     theme: 'Theme',
+    season: 'Seasonal theme',
+    seasonHint: 'Holiday colours and decorations over the page, with a mascot that plays a sound when tapped. Automatic switches by today\'s date.',
+    seasonAuto: 'Automatic by date (now: {name})',
     accent: 'Accent colour',
     customColor: 'Pick any colour',
     accentReset: 'Theme colour',
@@ -65,6 +68,20 @@ export default {
     luxe: { name: 'Dark luxury', desc: 'Deep black, serif titles, gold details.' },
     clean: { name: 'Light & clean', desc: 'Airy white, soft shadows, calm.' },
     bold: { name: 'Bold & colourful', desc: 'Bright colours, strong borders, playful.' }
+  },
+
+  // Seasonal themes (core/season.js, season/decor.js). bubbles: what the mascot says, | between lines.
+  season: {
+    sound: 'Mascot sound',
+    none: { name: 'None' },
+    halloween: { name: 'Halloween', greet: 'Happy Halloween! Book your appointment for the spooky season.', mascot: 'Halloween scarecrow — tap to hear it', bubbles: 'Boo!|Hee hee hee!|Watch out!|Bhuuu!' },
+    blackfriday: { name: 'Black Friday', greet: 'Black Friday is here: book now and catch this week\'s offers.', mascot: 'Black Friday shopping bag — tap to hear it', bubbles: 'Cha-ching!|Deals inside!|Don\'t miss it!' },
+    christmas: { name: 'Christmas', greet: 'Merry Christmas! Give yourself, or someone dear, a treat this season.', mascot: 'Christmas snowman — tap to hear it', bubbles: 'Ho ho ho!|Jingle bells!|Merry Christmas!' },
+    newyear: { name: 'New Year', greet: 'Happy New Year {year}! Start the year looking your best.', mascot: 'New Year champagne — tap to hear it', bubbles: 'Cheers!|Happy {year}!|Pop!' },
+    valentine: { name: 'Valentine\'s Day', greet: 'Happy Valentine\'s Day! Treat the one you love, or treat yourself.', mascot: 'Valentine\'s heart — tap to hear it', bubbles: 'Love you!|Mwah!|Be mine!' },
+    spring: { name: 'Spring', greet: 'Spring is here! Fresh flowers, fresh look.', mascot: 'Spring tulips — tap to hear them', bubbles: 'Tweet tweet!|Hello, spring!|Bloom!' },
+    easter: { name: 'Easter', greet: 'Happy Easter! Book your appointment before the holiday.', mascot: 'Easter bunny — tap to hear it', bubbles: 'Happy Easter!|Hop hop!|Found an egg!' },
+    summer: { name: 'Summer', greet: 'Hello, summer! Get ready for the sunny days.', mascot: 'Summer sun — tap to hear it', bubbles: 'Hello, summer!|Splash!|Sunny day!' }
   },
 
   niches: {

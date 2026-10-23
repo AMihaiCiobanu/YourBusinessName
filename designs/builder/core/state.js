@@ -3,8 +3,9 @@
 // storage; anything missing or invalid falls back to the defaults.
 //
 // Hash format, kept short so it fits in the "Get my page" email:
-//   #n=barber&k=luxe&a=c9a961&l=ro&b=Studio%20Ana&s=hero.prices-book.gallery-insta.team
+//   #n=barber&k=luxe&a=c9a961&l=ro&b=Studio%20Ana&f=halloween&s=hero.prices-book.gallery-insta.team
 // n niche · k skin · a accent (hex, empty = theme default) · l language · b business name ·
+// f seasonal theme (core/season.js; left out when 'none') ·
 // s visible sections in order, `group-type` (just `group` when it has one type). Old links that name
 // sections by their former ids (`coverflow`, `book`) still work. `?link=<id>` and `?sample=many`
 // stay in the query string (preview only).
@@ -13,6 +14,7 @@
 // page (`gallery`, `gallery2`) and names the section element (`#s-gallery2`).
 
 import { GROUPS, GROUP, LEGACY, DEFAULT_ON, typeOf } from './registry.js';
+import { SEASON_CHOICES } from './season.js';
 
 export const NICHES = ['beauty', 'nails', 'barber', 'spa', 'detailing', 'trainer', 'dental', 'derma', 'clinic', 'tattoo'];
 export const SKINS = ['luxe', 'clean', 'bold'];
@@ -87,6 +89,7 @@ export function defaults() {
     accent: '',
     lang: defaultLang(),
     name: '',
+    season: 'none',
     items: itemsFrom(DEFAULT_ON)
   };
 }
@@ -101,6 +104,7 @@ function sanitize(raw, base) {
   if (SKINS.includes(raw.skin)) s.skin = raw.skin;
   if (raw.accent === '' || isHex(raw.accent)) s.accent = raw.accent.toLowerCase();
   if (LANGS.includes(raw.lang)) s.lang = raw.lang;
+  if (SEASON_CHOICES.includes(raw.season)) s.season = raw.season;
   if (typeof raw.name === 'string') s.name = raw.name.replace(/\s+/g, ' ').trim().slice(0, NAME_MAX);
   if (Array.isArray(raw.items)) s.items = normalize(raw.items);
   return s;
@@ -115,6 +119,7 @@ export function decodeHash(hash) {
   if (params.has('a')) { const a = params.get('a'); out.accent = a ? `#${a}` : ''; }
   if (params.has('l')) out.lang = params.get('l');
   if (params.has('b')) out.name = params.get('b');
+  if (params.has('f')) out.season = params.get('f');
   if (params.has('s')) out.tokens = params.get('s').split('.').filter(Boolean);
   return out;
 }
@@ -126,6 +131,7 @@ export function encodeHash(s) {
   if (s.accent) params.set('a', s.accent.slice(1));
   params.set('l', s.lang);
   if (s.name) params.set('b', s.name);
+  if (s.season && s.season !== 'none') params.set('f', s.season);
   params.set('s', visible(s).map(itemToken).join('.'));
   return `#${params.toString()}`;
 }

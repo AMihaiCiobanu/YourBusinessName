@@ -12,6 +12,19 @@ export const SKIN_META = {
   bold: { accent: '#ff4d6d', bg: '#fff4e6', surface: '#ffffff', text: '#17112e', dark: false }
 };
 
+// Seasonal palettes (core/season.js): they replace the skin's colours while a season is on, the skin
+// keeps its fonts and shapes. Same values as season/palettes.css (that file paints the first frame).
+export const SEASON_META = {
+  halloween: { accent: '#ff7a1a', bg: '#150f1f', bg2: '#1d1429', surface: '#251a35', text: '#f4ecff', dark: true },
+  blackfriday: { accent: '#ffd60a', bg: '#0a0a0a', bg2: '#121212', surface: '#1a1a1a', text: '#fafafa', dark: true },
+  christmas: { accent: '#ef4444', bg: '#0f1f17', bg2: '#132a1f', surface: '#183326', text: '#f5f1e8', dark: true },
+  newyear: { accent: '#f5c542', bg: '#0b1026', bg2: '#10173a', surface: '#161e47', text: '#f3f1ff', dark: true },
+  valentine: { accent: '#e0245e', bg: '#fff3f6', bg2: '#ffe8ef', surface: '#ffffff', text: '#3a0f1f', dark: false },
+  spring: { accent: '#e5486b', bg: '#fbfcf7', bg2: '#f0f6ea', surface: '#ffffff', text: '#1f2a1c', dark: false },
+  easter: { accent: '#7cb342', bg: '#fdfaf2', bg2: '#f4efff', surface: '#ffffff', text: '#2b2540', dark: false },
+  summer: { accent: '#ff8a3d', bg: '#f2fbfc', bg2: '#e2f4f6', surface: '#ffffff', text: '#0f2a33', dark: false }
+};
+
 export const ACCENT_PRESETS = ['#c9a961', '#b87333', '#e8553d', '#ff4d6d', '#d46aa6', '#8b5cf6', '#4361ee', '#2f6f62', '#0e9f9a', '#5c8a3a'];
 
 function rgb(hex) {
@@ -44,17 +57,23 @@ function readable(color, target, backgrounds, ratio = 4.5) {
   return target;
 }
 
-export function accentFor(skin, accent) {
-  return /^#[0-9a-f]{6}$/i.test(accent || '') ? accent.toLowerCase() : SKIN_META[skin].accent;
+const metaFor = (skin, season) => SEASON_META[season] || SKIN_META[skin] || SKIN_META.luxe;
+
+// The colour the visitor picked, else the season's, else the skin's.
+export function accentFor(skin, accent, season = '') {
+  return /^#[0-9a-f]{6}$/i.test(accent || '') ? accent.toLowerCase() : metaFor(skin, season).accent;
 }
 
-export function applyTheme({ skin, accent }) {
-  const meta = SKIN_META[skin] || SKIN_META.luxe;
-  const base = accentFor(skin, accent);
+// `season` is the resolved season ('' for none), see core/season.js.
+export function applyTheme({ skin, accent }, season = '') {
+  const meta = metaFor(skin, season);
+  const base = accentFor(skin, accent, season);
   const root = document.documentElement;
   root.dataset.skin = skin;
+  if (season) root.dataset.season = season; else delete root.dataset.season;
   const ink = contrast(base, '#ffffff') >= contrast(base, '#111111') ? '#ffffff' : '#111111';
-  const text = readable(base, meta.text, [meta.bg, meta.surface]);
+  // Seasons also check their tinted section background (--bg-2), which is further from white / black.
+  const text = readable(base, meta.text, [meta.bg, meta.surface, meta.bg2 || meta.bg]);
   const vars = {
     '--accent': base,
     '--accent-ink': ink,

@@ -17,15 +17,25 @@ O pagină nouă de demo, în picker sub „More page designs” → „✦ Build
   - **Stil**: tipul afacerii (10), numele afacerii (apare live pe pagină și în email), tema (Lux întunecat / Luminos /
     Îndrăzneț), culoare de accent (10 presetări + orice culoare, corectată automat pentru contrast AA), limba RO/EN,
     „Reduce animațiile”, previzualizare pe telefon (desktop).
+  - **Temă de sezon** (sub temă): Fără, Automat după dată, Halloween, Black Friday, Crăciun, Anul Nou, Valentine's Day,
+    Primăvară (1 și 8 Martie), Paște, Vară. Peste orice temă pune culorile sezonului (`season/palettes.css`, păstrează
+    fonturile și formele temei) și decorul, făcut ca Halloween-ul de pe NailsByClemi (`season/decor.js`, `art.js`,
+    `sounds.js`, încărcate doar când e un sezon ales): banda de salut sub header, ghirlandă / colț / lilieci / artificii
+    pe primul ecran, forme care cad sau urcă (Halloween: păianjeni, unul pe fir), personaj jos în stânga care sare, spune
+    ceva și scoate un sunet (Web Audio, doar la atingere) + buton de sunet. Cu mișcare redusă rămân doar piesele fixe.
+    „Automat” alege după dată (`core/season.js`): Halloween 15 oct – 2 nov, Black Friday 20–30 nov, Crăciun 1–26 dec,
+    Anul Nou 27 dec – 7 ian, Valentine 7–15 feb, Primăvară 1–10 mar, Paște cu 10 zile înainte până a doua zi (ortodox pe
+    RO și EL), Vară 15 iun – 31 aug. În URL `f=<sezon>`; apare și în emailul „Get my page”.
   - **Copiază linkul**, **Resetează**, **Trimite-mi pagina asta** (emailul „Get my page” existent + configurația).
   - Nota „Vrei ceva complet nou?” și „Mereu incluse”, preluate din pagina `yours`.
-- **Starea**: JSON `{niche, skin, accent, lang, name, order, on}` în URL (`#n=…&k=…&s=hero.book…`) și în `localStorage`
+- **Starea**: JSON `{niche, skin, accent, lang, name, season, order, on}` în URL (`#n=…&k=…&f=…&s=hero.book…`) și în `localStorage`
   (cu try/catch). Linkul reproduce pagina exact.
 - **Emailul „Get my page”** primește, înainte de rândul cu întâlnirea, un bloc în engleză:
   ```
   My page setup from the page builder:
   - Type of business: Barbershop
   - Theme: Dark luxury, accent colour #b87333
+  - Seasonal theme: Christmas            (doar când e ales un sezon)
   - Page language: Romanian
   - Sections, in order: 3D hero, Price menu as a 3D book, …
   - Link to this setup: https://yourbusinessname.appointmentsapps.com/designs/builder/#…

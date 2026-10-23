@@ -1,0 +1,170 @@
+/* Seasonal decorations (season/decor.js). Colours of the page itself: palettes.css.
+   Layers: first-screen decor (.sz-top, inside the page, under the header), falling shapes and
+   spiders (fixed, z 44–45, under the contact bar and the builder panel), mascot (fixed, z 46). */
+
+/* ---------- greeting ribbon ---------- */
+
+.sz-ribbon {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 9px 16px; text-align: center;
+  background: var(--accent-soft); color: var(--text);
+  border-bottom: var(--border-w) solid var(--line);
+  font-size: 0.92rem; font-weight: 600; line-height: 1.35;
+}
+.sz-emoji { font-size: 1.15rem; line-height: 1; }
+
+/* ---------- first screen ---------- */
+
+.sz-top { position: relative; z-index: 5; height: 0; pointer-events: none; }
+.sz-area { position: absolute; left: 0; right: 0; top: 0; height: min(92vh, 860px); overflow: hidden; }
+.sz-corner { position: absolute; right: 14px; bottom: 18px; width: 64px; height: auto; }
+.sz-halloween .sz-corner { filter: drop-shadow(0 0 14px rgba(255, 122, 26, 0.55)); }
+.sz-christmas .sz-corner { filter: drop-shadow(0 0 12px rgba(245, 197, 66, 0.35)); }
+.sz-web { position: absolute; top: 0; left: 0; width: 120px; height: 120px; color: #cfc2e6; opacity: 0.35; }
+.sz-branch { position: absolute; top: -6px; left: -10px; width: 200px; height: auto; opacity: 0.95; }
+.sz-bounce { animation: sz-bounce 2.4s cubic-bezier(.3, 0, .5, 1) infinite; transform-origin: 50% 100%; }
+
+.sz-bat { position: absolute; top: 8%; left: -60px; width: 40px; height: auto; color: #8a5cc0; fill: currentColor; opacity: 0.85; animation: sz-fly 14s linear infinite; }
+.sz-bat:nth-of-type(2) { top: 18%; width: 30px; animation-duration: 19s; animation-delay: -6s; }
+.sz-bat:nth-of-type(3) { top: 52%; width: 36px; animation-duration: 16s; animation-delay: -11s; }
+.sz-bat .wing { transform-box: fill-box; transform-origin: center bottom; animation: sz-flap 0.35s ease-in-out infinite alternate; }
+
+/* Black Friday sash */
+.sz-sash { position: absolute; top: 22px; right: -54px; width: 220px; transform: rotate(38deg); background: #ffd60a; color: #0a0a0a; text-align: center; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5); }
+.sz-sash span { display: block; padding: 6px 0; border-block: 2px dashed rgba(0, 0, 0, 0.35); margin: 3px 0; font: 800 0.8rem/1 var(--font-body); letter-spacing: 0.18em; }
+
+/* Garland: a wire in three sags and what hangs from it */
+.sz-garland { position: absolute; left: 0; right: 0; top: 0; height: 64px; }
+.sz-wire { position: absolute; inset: 0 0 auto; width: 100%; height: 40px; color: color-mix(in srgb, var(--text) 45%, transparent); }
+.sz-gi { position: absolute; transform: translateX(-50%); transform-origin: 50% 0; animation: sz-swing 3s ease-in-out infinite alternate; animation-delay: calc(var(--i) * -1s); }
+.sz-g-bulb .sz-gi { width: 10px; height: 15px; margin-top: 3px; border-radius: 50% 50% 45% 45% / 40% 40% 60% 60%; background: var(--c); box-shadow: 0 0 10px 2px var(--c); animation: sz-glow 1.6s ease-in-out infinite alternate; animation-delay: calc(var(--i) * -0.55s); }
+.sz-g-bulb .sz-gi::before { content: ''; position: absolute; left: 2px; top: -4px; width: 6px; height: 5px; border-radius: 1px; background: #4a4a4a; }
+.sz-g-heart .sz-gi { width: 18px; margin-top: 2px; }
+.sz-g-heart .sz-gi svg { display: block; width: 100%; height: auto; }
+.sz-g-flag .sz-gi { width: 20px; height: 24px; background: var(--c); clip-path: polygon(0 0, 100% 0, 50% 100%); }
+
+/* New Year fireworks: twelve sparks flying out of a point, again and again */
+.sz-fw { position: absolute; width: 0; height: 0; }
+.sz-fw i { position: absolute; left: -3px; top: -3px; width: 6px; height: 6px; border-radius: 50%; background: var(--c); box-shadow: 0 0 8px var(--c); opacity: 0; animation: sz-spark 3.6s ease-out infinite; }
+
+/* ---------- falling / floating shapes ---------- */
+
+.sz-fall, .sz-burst { position: fixed; inset: 0; z-index: 44; pointer-events: none; overflow: hidden; }
+.sz-p { position: absolute; top: -40px; left: var(--x); width: var(--s); opacity: var(--o); animation: sz-fall var(--d) linear var(--delay) infinite; will-change: transform; }
+.sz-up .sz-p { top: auto; bottom: -40px; animation-name: sz-rise; }
+.sz-p svg { display: block; width: 100%; height: auto; animation: sz-sway calc(var(--d) / 4) ease-in-out infinite alternate; }
+.sz-bp { position: absolute; width: 20px; }
+.sz-bp svg { display: block; width: 100%; height: auto; }
+
+/* ---------- Halloween spiders ---------- */
+
+.sz-spiders { position: fixed; inset: 0; z-index: 45; pointer-events: none; overflow: hidden; }
+.sz-spider { position: absolute; top: 0; left: 0; width: 60px; height: 60px; margin: -30px 0 0 -30px; will-change: transform; }
+.sz-spider svg { display: block; width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 0 6px rgba(150, 110, 230, 0.45)) drop-shadow(3px 8px 4px rgba(0, 0, 0, 0.6)); }
+.sz-leg { transform-box: view-box; }
+.walking .sz-leg { animation: sz-leg 0.2s ease-in-out infinite alternate; }
+.walking .sz-leg.b { animation-delay: -0.2s; animation-direction: alternate-reverse; }
+.sz-dangler { position: absolute; top: -520px; width: 60px; height: 520px; }
+.sz-thread { position: absolute; left: 30px; top: 0; width: 1px; height: 496px; background: linear-gradient(#8a7aa3, #cfc2e6); opacity: 0.7; }
+.sz-dangler .sz-spider { top: 496px; left: 30px; transform: rotate(3.1416rad); }
+
+/* ---------- mascot ---------- */
+
+.sz-mascot-wrap {
+  position: fixed; z-index: 46; left: 10px; bottom: calc(88px + env(safe-area-inset-bottom));
+  width: 66px;
+}
+.sz-mascot {
+  display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: pointer;
+  transform-origin: 50% 100%; animation: sz-sway-m 5s ease-in-out infinite;
+  -webkit-tap-highlight-color: transparent;
+}
+.sz-mascot svg { display: block; width: 100%; height: auto; overflow: visible; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.35)); }
+.sz-mascot:focus-visible { outline: 3px solid var(--accent-text); outline-offset: 4px; border-radius: 12px; }
+.sz-mascot .eye { fill: #2b2b2b; transition: fill 0.1s; }
+.sz-halloween .sz-mascot .eye { fill: #1a0f00; }
+.sz-blackfriday .sz-mascot .eye { fill: #ffd60a; }
+.sz-newyear .sz-mascot .eye { fill: #3b2a0a; }
+.sz-valentine .sz-mascot .eye { fill: #3a0f1f; }
+.sz-mascot.is-scared { animation: sz-jump 0.7s cubic-bezier(.3, 1.6, .5, 1); }
+.sz-mascot.is-scared .eye { fill: var(--accent); filter: drop-shadow(0 0 4px var(--accent)); }
+.sz-mascot.is-scared .mouth { transform: scaleY(1.7); transform-box: fill-box; transform-origin: center; }
+.sz-mascot .cork { transform-box: fill-box; transform-origin: center; }
+.sz-mascot.is-scared .cork { animation: sz-cork 1.2s ease-out; }
+.sz-mascot .rays { transform-origin: 60px 66px; animation: sz-spin 24s linear infinite; }
+.sz-mascot.is-scared .rays { animation-duration: 2s; }
+.sz-mascot .fizz { animation: sz-fizz 1.6s ease-in infinite; }
+.sz-mascot .fizz:nth-of-type(2n) { animation-delay: -0.6s; }
+.sz-bubble {
+  position: absolute; left: 50%; bottom: 100%; margin-bottom: 4px; padding: 6px 12px;
+  border-radius: 14px; background: #fff; color: #1d1530; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  font: 700 0.92rem/1.2 var(--font-body); white-space: nowrap;
+  opacity: 0; transform: translate(-30%, 6px) scale(0.8); transition: opacity 0.15s, transform 0.15s; pointer-events: none;
+}
+.sz-mascot.is-scared .sz-bubble { opacity: 1; transform: translate(-30%, 0) scale(1); }
+.sz-sound {
+  position: absolute; top: -6px; right: -26px; display: grid; place-items: center;
+  width: 32px; height: 32px; padding: 0; border-radius: 50%;
+  border: 1px solid var(--line); background: var(--surface); color: var(--text); cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+.sz-sound:hover { border-color: var(--accent); color: var(--accent-text); }
+.sz-sound .off, .sz-sound[aria-pressed="false"] .on { display: none; }
+.sz-sound[aria-pressed="false"] .off { display: block; }
+/* The phone sheet of the builder covers the bottom of the screen: the mascot steps aside. */
+body.bp-open .sz-mascot-wrap { visibility: hidden; }
+
+@media (min-width: 768px) {
+  .sz-web { width: 170px; height: 170px; }
+  .sz-corner { width: 90px; right: 24px; bottom: 28px; }
+  .sz-branch { width: 300px; }
+  .sz-bat { width: 52px; }
+  .sz-spider { width: 80px; height: 80px; margin: -40px 0 0 -40px; }
+  .sz-dangler { width: 80px; }
+  .sz-thread { left: 40px; }
+  .sz-dangler .sz-spider { left: 40px; }
+  .sz-g-bulb .sz-gi { width: 12px; height: 18px; }
+  .sz-g-heart .sz-gi { width: 22px; }
+}
+@media (min-width: 1100px) {
+  .sz-mascot-wrap { left: 18px; bottom: 16px; width: 92px; }
+  body.bp-open .sz-mascot-wrap { visibility: visible; }
+}
+
+/* ---------- motion ---------- */
+
+@keyframes sz-fall { to { transform: translate3d(var(--drift), calc(100vh + 80px), 0) rotate(var(--r)); } }
+@keyframes sz-rise { to { transform: translate3d(var(--drift), calc(-100vh - 80px), 0) rotate(var(--r)); } }
+@keyframes sz-sway { from { transform: translateX(-10px); } to { transform: translateX(10px); } }
+@keyframes sz-swing { from { transform: translateX(-50%) rotate(-6deg); } to { transform: translateX(-50%) rotate(6deg); } }
+@keyframes sz-glow { from { opacity: 0.55; box-shadow: 0 0 4px 0 var(--c); } to { opacity: 1; box-shadow: 0 0 14px 3px var(--c); } }
+@keyframes sz-fly { from { transform: translate(0, 0); } 50% { transform: translate(55vw, 30px); } to { transform: translate(115vw, -10px); } }
+@keyframes sz-flap { from { transform: scaleY(1); } to { transform: scaleY(0.45); } }
+@keyframes sz-bounce { 0%, 100% { transform: translateY(0) scale(1.04, 0.96); } 45% { transform: translateY(-46px) rotate(120deg); } 90% { transform: translateY(0) rotate(240deg); } }
+@keyframes sz-spark {
+  0% { opacity: 0; transform: rotate(var(--a)) translateX(0) scale(1); }
+  8% { opacity: 1; }
+  40% { opacity: 1; transform: rotate(var(--a)) translateX(58px) scale(0.9); }
+  60%, 100% { opacity: 0; transform: rotate(var(--a)) translate(64px, 18px) scale(0.3); }
+}
+@keyframes sz-leg { from { transform: rotate(-11deg); } to { transform: rotate(11deg); } }
+@keyframes sz-sway-m { 0%, 100% { transform: rotate(-1.8deg); } 50% { transform: rotate(1.8deg); } }
+@keyframes sz-jump {
+  0% { transform: translateY(0) rotate(0); }
+  25% { transform: translateY(-34px) rotate(-8deg) scale(1.08); }
+  50% { transform: translateY(0) rotate(6deg); }
+  70% { transform: translateY(-10px) rotate(-4deg); }
+  100% { transform: translateY(0) rotate(0); }
+}
+@keyframes sz-cork { 0% { transform: none; } 30% { transform: translate(-8px, -60px) rotate(-200deg); opacity: 1; } 60% { opacity: 0; } 61% { transform: none; opacity: 0; } 100% { opacity: 1; } }
+@keyframes sz-spin { to { transform: rotate(360deg); } }
+@keyframes sz-fizz { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-16px); opacity: 0; } }
+
+.reduce-motion .sz-mascot, .reduce-motion .sz-mascot.is-scared, .reduce-motion .sz-mascot *,
+.reduce-motion .sz-gi, .reduce-motion .sz-bounce, .reduce-motion .sz-blink { animation: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  .sz-mascot, .sz-mascot.is-scared, .sz-mascot *, .sz-gi, .sz-bounce, .sz-blink { animation: none !important; }
+}
+.sz-blink circle { animation: sz-twinkle 1.4s ease-in-out infinite alternate; }
+.sz-blink.b circle { animation-delay: -0.7s; }
+@keyframes sz-twinkle { from { opacity: 0.35; } to { opacity: 1; } }
