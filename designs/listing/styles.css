@@ -72,7 +72,7 @@ h2.gap { margin-top: 30px; }
 
 .team { list-style: none; padding: 0; display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
 .team::-webkit-scrollbar { display: none; }
-.member { display: flex; flex-direction: column; align-items: center; gap: 2px; width: 110px; padding: 10px 6px; border: 0; background: none; color: inherit; font: inherit; text-decoration: none; cursor: pointer; }
+.member { position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; width: 110px; padding: 10px 6px; border: 0; background: none; color: inherit; font: inherit; text-decoration: none; cursor: pointer; }
 .avatar { display: grid; place-items: center; width: 76px; height: 76px; margin-bottom: 8px; border-radius: 50%; background: var(--soft); border: 1px solid var(--line); font-size: 1.6rem; font-weight: 700; }
 .member:hover .avatar { border-color: var(--ink); }
 .m-name { font-weight: 600; }
