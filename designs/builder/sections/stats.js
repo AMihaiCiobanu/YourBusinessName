@@ -3,9 +3,10 @@
 
 import { h, icon } from '../core/dom.js';
 import { countUp } from '../core/motion.js';
+import { localeOf } from '../core/i18n.js';
 
 function formatter(lang, decimals) {
-  const nf = new Intl.NumberFormat(lang === 'ro' ? 'ro-RO' : 'en-GB', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+  const nf = new Intl.NumberFormat(localeOf(lang), { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
   return v => nf.format(decimals ? v : Math.round(v));
 }
 

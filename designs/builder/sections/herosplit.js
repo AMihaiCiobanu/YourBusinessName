@@ -5,6 +5,7 @@
 import { h, photo, icon } from '../core/dom.js';
 import { altOf } from '../content/photos.js';
 import { bookButton, openState } from '../../shared/live.js';
+import { localeOf } from '../core/i18n.js';
 
 export default {
   render(ctx) {
@@ -12,8 +13,8 @@ export default {
     const [l1, l2] = content.h1;
     const shot = content.photos[0];
     const [clients, , rating] = content.stats;
-    const nf = new Intl.NumberFormat(lang === 'ro' ? 'ro-RO' : 'en-GB');
-    const nf1 = new Intl.NumberFormat(lang === 'ro' ? 'ro-RO' : 'en-GB', { minimumFractionDigits: 1 });
+    const nf = new Intl.NumberFormat(localeOf(lang));
+    const nf1 = new Intl.NumberFormat(localeOf(lang), { minimumFractionDigits: 1 });
     return h('section', { class: 'sec hs-sec' },
       h('div', { class: 'wrap hs-grid' },
         h('div', { class: 'hs-copy' },

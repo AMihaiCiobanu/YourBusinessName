@@ -7,7 +7,7 @@
 
 import { loadState, saveState, shareUrl, encodeHash, visible, linkFromUrl, query, defaults } from './core/state.js';
 import { GROUP, typeOf } from './core/registry.js';
-import { loadLang, t, tEn } from './core/i18n.js';
+import { loadLang, t, tEn, langNameEn } from './core/i18n.js';
 import { applyTheme, accentFor } from './core/theme.js';
 import { motion } from './core/motion.js';
 import { startData, setDataLang, priceText } from './core/data.js';
@@ -84,7 +84,7 @@ function setupText() {
     `- Type of business: ${tEn(`niches.${state.niche}`)}`,
     state.name ? `- Name on the page: ${state.name}` : null,
     `- Theme: ${tEn(`skins.${state.skin}.name`)}, accent colour ${accentFor(state.skin, state.accent)}`,
-    `- Page language: ${state.lang === 'ro' ? 'Romanian' : 'English'}`,
+    `- Page language: ${langNameEn(state.lang)}`,
     `- Sections, in order: ${sections.join(', ')}`,
     `- Link to this setup: ${shareUrl(state)}`,
     '', ''

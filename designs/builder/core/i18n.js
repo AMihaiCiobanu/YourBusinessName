@@ -34,3 +34,21 @@ export function tEn(key) {
 }
 
 export const getLang = () => lang;
+
+// Number format, currency of the sample prices (content/index.js converts them) and the language's
+// own name (the selector) and English name (the "Get my page" email).
+const LANG_META = {
+  en: { locale: 'en-GB', currency: 'EUR', name: 'English', en: 'English' },
+  ro: { locale: 'ro-RO', currency: 'RON', name: 'Română', en: 'Romanian' },
+  fr: { locale: 'fr-FR', currency: 'EUR', name: 'Français', en: 'French' },
+  es: { locale: 'es-ES', currency: 'EUR', name: 'Español', en: 'Spanish' },
+  pt: { locale: 'pt-PT', currency: 'EUR', name: 'Português', en: 'Portuguese' },
+  pl: { locale: 'pl-PL', currency: 'PLN', name: 'Polski', en: 'Polish' },
+  it: { locale: 'it-IT', currency: 'EUR', name: 'Italiano', en: 'Italian' },
+  el: { locale: 'el-GR', currency: 'EUR', name: 'Ελληνικά', en: 'Greek' }
+};
+const metaOf = code => LANG_META[code] || LANG_META.en;
+export const localeOf = code => metaOf(code).locale;
+export const currencyOf = code => metaOf(code).currency;
+export const langName = code => metaOf(code).name;
+export const langNameEn = code => metaOf(code).en;

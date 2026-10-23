@@ -2,10 +2,12 @@
 // in the same shape as a live read from the app (designs/shared/live.js), so the sections cannot
 // tell the sample from real data.
 //
-// The Romanian page shows prices in lei (×5, rounded to 5), the English one in euro, which also
+// The Romanian page shows prices in lei (×5, rounded to 5), the Polish one in złoty (×4.3, rounded
+// to 5), the others in euro, which also
 // shows that the currency comes from the data and is never hardcoded in a section.
 
 import { photosFor, PHOTOS } from './photos.js';
+import { currencyOf } from '../core/i18n.js';
 
 const files = new Map();
 function file(niche) {
@@ -16,7 +18,8 @@ function file(niche) {
 const KIND = { p: 'isSubscription', c: 'isClass' };
 
 function price(eur, lang) {
-  return lang === 'ro' ? Math.round((eur * 5) / 5) * 5 : eur;
+  const rate = { RON: 5, PLN: 4.3 }[currencyOf(lang)];
+  return rate ? Math.round((eur * rate) / 5) * 5 : eur;
 }
 
 // ?sample=many: a long list (packages and classes included) to check how the book paginates.
@@ -56,7 +59,7 @@ export async function loadContent(niche, lang, { manyServices = false } = {}) {
     h1: text.h1,
     lead: text.lead,
     sample: {
-      currency: lang === 'ro' ? 'RON' : 'EUR',
+      currency: currencyOf(lang),
       hasHours: true,
       hours: src.hours.map(r => (r ? { start: r[0], end: r[1] } : null)),
       services

@@ -5,13 +5,14 @@
 import { h, icon } from '../core/dom.js';
 import { tilt } from '../core/motion.js';
 import { formatPrice } from '../../shared/live.js';
+import { currencyOf } from '../core/i18n.js';
 
-const AMOUNT = { EUR: 100, RON: 500 };
+const AMOUNT = { EUR: 100, RON: 500, PLN: 400 };
 
 export default {
   render(ctx) {
     const { t, lang, name } = ctx;
-    const currency = lang === 'ro' ? 'RON' : 'EUR';
+    const currency = currencyOf(lang);
     const card = h('div', { class: 'gc-card' },
       h('div', { class: 'gc-inner' },
         h('div', { class: 'gc-face gc-front' },

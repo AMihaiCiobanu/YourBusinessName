@@ -4,11 +4,12 @@
 import { h, photo, icon } from '../core/dom.js';
 import { altOf } from '../content/photos.js';
 import { formatPrice } from '../../shared/live.js';
+import { currencyOf } from '../core/i18n.js';
 
 export default {
   render(ctx) {
     const { t, content, lang } = ctx;
-    const currency = lang === 'ro' ? 'RON' : 'EUR';
+    const currency = currencyOf(lang);
     return h('section', { class: 'sec pd-sec' },
       h('div', { class: 'wrap pd-wrap' },
         h('header', { class: 'sec-head' },

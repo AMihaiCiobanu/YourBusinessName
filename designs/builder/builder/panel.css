@@ -150,7 +150,7 @@
   position: relative; display: grid; grid-template-columns: 64px 1fr; grid-template-rows: auto auto; column-gap: 12px;
   padding: 10px; border: 2px solid var(--ui-line); border-radius: 14px; cursor: pointer;
 }
-.bp-skin input, .bp-swatch input, .bp-seg input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.bp-skin input, .bp-swatch input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .bp-skin:has(input:checked) { border-color: var(--ui-accent); background: color-mix(in srgb, var(--ui-accent) 6%, var(--ui-bg)); }
 .bp-skin:has(input:focus-visible) { outline: 3px solid var(--ui-accent); outline-offset: 2px; }
 .bp-skin-preview {
@@ -175,11 +175,6 @@
 .bp-swatch:has(input:focus-visible) { outline: 3px solid var(--ui-accent); outline-offset: 4px; }
 .bp-color-wrap { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; cursor: pointer; font-weight: 600; }
 .bp-color { width: 44px; height: 44px; padding: 0; border: 1px solid var(--ui-line); border-radius: 12px; background: none; cursor: pointer; }
-.bp-seg { display: inline-flex; padding: 4px; border-radius: 14px; background: var(--ui-bg-2); }
-.bp-seg label { position: relative; }
-.bp-seg span { display: inline-flex; align-items: center; min-height: 40px; padding: 0 18px; border-radius: 10px; font-weight: 700; cursor: pointer; color: var(--ui-muted); }
-.bp-seg input:checked + span { background: var(--ui-bg); color: var(--ui-text); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12); }
-.bp-seg input:focus-visible + span { outline: 3px solid var(--ui-accent); }
 .bp-field-row { grid-template-columns: auto 1fr; align-items: center; gap: 12px; }
 .bp-field-row label { display: grid; gap: 2px; cursor: pointer; }
 .bp-switch {

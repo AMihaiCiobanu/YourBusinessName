@@ -5,12 +5,13 @@
 
 import { h, icon } from '../core/dom.js';
 import { motion } from '../core/motion.js';
+import { localeOf } from '../core/i18n.js';
 
 export default {
   render(ctx) {
     const { t, content, lang } = ctx;
     const items = content.stats.map(s => {
-      const nf = new Intl.NumberFormat(lang === 'ro' ? 'ro-RO' : 'en-GB', { minimumFractionDigits: s.decimals || 0, maximumFractionDigits: s.decimals || 0 });
+      const nf = new Intl.NumberFormat(localeOf(lang), { minimumFractionDigits: s.decimals || 0, maximumFractionDigits: s.decimals || 0 });
       return { value: `${nf.format(s.value)}${s.suffix || ''}`, star: s.key === 'rating', label: s.label || t(`stats.${s.key}`) };
     });
     // Each moving list holds the items twice, so one list is always wider than the band and the

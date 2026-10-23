@@ -1,13 +1,13 @@
 // The builder panel: a side panel on wide screens, a bottom sheet on phones. Two tabs:
-// Sections (tick to show, pick the type, add another gallery, drag the handle / arrows / Alt+arrows
-// to reorder) and Style (business,
-// name, theme, accent, language, motion, phone preview). Every control calls change(patch, kind);
+// Sections (language first, then tick to show, pick the type, add another gallery, drag the handle /
+// arrows / Alt+arrows to reorder) and Style (business,
+// name, theme, accent, motion, phone preview). Every control calls change(patch, kind);
 // app.js applies it to the page.
 
 import { GROUP, typeOf } from '../core/registry.js';
 import { NICHES, SKINS, LANGS, itemsFrom, nextId } from '../core/state.js';
 import { ACCENT_PRESETS, SKIN_META, accentFor } from '../core/theme.js';
-import { t } from '../core/i18n.js';
+import { t, langName } from '../core/i18n.js';
 import { h, icon } from '../core/dom.js';
 import { PRESETS } from './presets.js';
 
@@ -306,12 +306,11 @@ export function mountPanel({ state, change, reset, shareUrl, toast, motion, getP
       colorTimer = setTimeout(() => change({ accent: picker.value.toLowerCase() }, 'theme'), 60);
     });
 
-    const langs = h('div', { class: 'bp-seg', role: 'radiogroup', 'aria-labelledby': 'bp-lang-l' });
-    for (const code of LANGS) {
-      const input = h('input', { type: 'radio', name: 'bp-lang', id: `bp-lang-${code}`, value: code, checked: code === state.lang });
-      input.addEventListener('change', () => change({ lang: code }, 'content'));
-      langs.appendChild(h('label', { for: `bp-lang-${code}` }, input, h('span', { text: code === 'ro' ? 'Română' : 'English', lang: code })));
-    }
+    // Each language in its own name. It sits first in the sections tab, not here.
+    const langSelect = h('select', { id: 'bp-lang', class: 'bp-select' },
+      LANGS.map(code => h('option', { value: code, lang: code, text: langName(code), selected: code === state.lang })));
+    langSelect.addEventListener('change', () => change({ lang: langSelect.value }, 'content'));
+    langSlot.replaceChildren(h('label', { for: 'bp-lang', class: 'bp-label-t', text: t('ui.lang') }), langSelect);
 
     const motionInput = h('input', { type: 'checkbox', id: 'bp-motion', class: 'bp-switch', checked: motion.get(), disabled: motion.system() });
     motionInput.addEventListener('change', () => motion.set(motionInput.checked));
@@ -327,7 +326,6 @@ export function mountPanel({ state, change, reset, shareUrl, toast, motion, getP
       field(h('label', { for: 'bp-name', class: 'bp-label-t', text: t('ui.name') }), nameInput),
       field(h('p', { id: 'bp-skin-l', class: 'bp-label-t', text: t('ui.theme') }), skins),
       field(h('p', { id: 'bp-accent-l', class: 'bp-label-t', text: t('ui.accent') }), h('div', { class: 'bp-accent' }, swatches, h('label', { class: 'bp-color-wrap', for: 'bp-color' }, picker, h('span', { text: t('ui.customColor') })))),
-      field(h('p', { id: 'bp-lang-l', class: 'bp-label-t', text: t('ui.lang') }), langs),
       h('div', { class: 'bp-field bp-field-row' }, motionInput, h('label', { for: 'bp-motion' }, h('span', { class: 'bp-label-t', text: t('ui.motion') }), h('span', { class: 'bp-hint', text: t('ui.motionHint') }))),
       h('div', { class: 'bp-field bp-field-row bp-desktop-only' }, phoneInput, h('label', { for: 'bp-phone', class: 'bp-label-t', text: t('ui.phone') }))
     );
@@ -337,6 +335,7 @@ export function mountPanel({ state, change, reset, shareUrl, toast, motion, getP
 
   const sectionsTab = h('div', { class: 'bp-tab', id: 'bp-tab-sections', role: 'tabpanel', 'aria-labelledby': 'bp-t-sections' });
   const styleTab = h('div', { class: 'bp-tab', id: 'bp-tab-style', role: 'tabpanel', 'aria-labelledby': 'bp-t-style' });
+  const langSlot = h('div', { class: 'bp-field' });
 
   function tabButton(key, label) {
     const btn = h('button', { type: 'button', role: 'tab', id: `bp-t-${key}`, 'aria-controls': `bp-tab-${key}`, class: 'bp-tabbtn' }, icon(key === 'sections' ? 'layers' : 'sliders', 16), label);
@@ -384,6 +383,7 @@ export function mountPanel({ state, change, reset, shareUrl, toast, motion, getP
       }));
 
     sectionsTab.replaceChildren(
+      langSlot,
       h('p', { class: 'bp-label-t', id: 'bp-presets-l', text: t('ui.presets') }),
       h('p', { class: 'bp-hint', text: t('ui.presetsHint') }),
       presets,
@@ -439,7 +439,7 @@ export function mountPanel({ state, change, reset, shareUrl, toast, motion, getP
       const scroll = panel.querySelector('.bp-body')?.scrollTop || 0;
       renderFrame();
       panel.querySelector('.bp-body').scrollTop = scroll;
-      panel.querySelector(`#bp-lang-${state.lang}`)?.focus();
+      panel.querySelector('#bp-lang')?.focus();
     }
   };
 }

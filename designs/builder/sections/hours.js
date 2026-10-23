@@ -10,7 +10,7 @@ function nextOpening(data, ctx) {
   const now = new Date();
   const today = (now.getDay() + 6) % 7;
   const minutes = now.getHours() * 60 + now.getMinutes();
-  const days = weekRows(data).map(r => (ctx.lang === 'ro' ? r.label.toLowerCase() : r.label));
+  const days = weekRows(data).map(r => (ctx.lang === 'en' || ctx.lang === 'el' ? r.label : r.label.toLowerCase()));
   for (let k = 0; k < 7; k++) {
     const d = (today + k) % 7;
     const r = data.hours[d];

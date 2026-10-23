@@ -16,13 +16,13 @@ import { GROUPS, GROUP, LEGACY, DEFAULT_ON, typeOf } from './registry.js';
 
 export const NICHES = ['beauty', 'nails', 'barber', 'spa', 'detailing', 'trainer', 'dental', 'derma', 'clinic', 'tattoo'];
 export const SKINS = ['luxe', 'clean', 'bold'];
-export const LANGS = ['en', 'ro'];
+export const LANGS = ['en', 'ro', 'fr', 'es', 'pt', 'pl', 'it', 'el'];
 const STORE_KEY = 'builder:v2';
 const OLD_STORE_KEY = 'builder:v1';
 const NAME_MAX = 40;
 
 function defaultLang() {
-  try { return (navigator.language || '').toLowerCase().startsWith('ro') ? 'ro' : 'en'; } catch { return 'en'; }
+  try { const code = (navigator.language || '').toLowerCase().slice(0, 2); return LANGS.includes(code) ? code : 'en'; } catch { return 'en'; }
 }
 
 // ---------- items ----------

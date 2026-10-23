@@ -3,13 +3,14 @@
 
 import { h, icon } from '../core/dom.js';
 import { formatPrice } from '../../shared/live.js';
+import { currencyOf } from '../core/i18n.js';
 
-const AMOUNTS = { EUR: [50, 100, 200], RON: [250, 500, 1000] };
+const AMOUNTS = { EUR: [50, 100, 200], RON: [250, 500, 1000], PLN: [200, 400, 800] };
 
 export default {
   render(ctx) {
     const { t, lang } = ctx;
-    const currency = lang === 'ro' ? 'RON' : 'EUR';
+    const currency = currencyOf(lang);
     return h('section', { class: 'sec gb-sec' },
       h('div', { class: 'wrap' },
         h('div', { class: 'gb-banner', 'data-reveal': '' },

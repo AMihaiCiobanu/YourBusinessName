@@ -5,11 +5,12 @@ import { h, icon, photo } from '../core/dom.js';
 import { altOf } from '../content/photos.js';
 import { bookButton } from '../../shared/live.js';
 import { makeBook, page } from './book.js?v=4'; // same ?v= as VERSION in core/registry.js
+import { localeOf } from '../core/i18n.js';
 
 function buildPages(ctx, size) {
   const { t, content, lang, name } = ctx;
   const shots = content.photos;
-  const rating = new Intl.NumberFormat(lang === 'ro' ? 'ro-RO' : 'en-GB', { minimumFractionDigits: 1 }).format(content.stats[2].value);
+  const rating = new Intl.NumberFormat(localeOf(lang), { minimumFractionDigits: 1 }).format(content.stats[2].value);
   const stars = () => h('span', { class: 'bk-stars', role: 'img', 'aria-label': '5/5' }, Array.from({ length: 5 }, () => icon('star', 16)));
   const out = [];
 

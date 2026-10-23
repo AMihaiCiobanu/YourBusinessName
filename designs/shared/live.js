@@ -50,6 +50,84 @@ const TEXT = {
     demo: name => name
       ? `Pagină demo: pe pagina ta, aici se deschide calendarul de programare pentru „${name}”.`
       : 'Pagină demo: pe pagina ta, aici se deschide calendarul de programare online.'
+  },
+  fr: {
+    days: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
+    short: ['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'],
+    closed: 'Fermé',
+    free: 'Gratuit',
+    groups: ['Prestations', 'Forfaits', 'Cours'],
+    dialogTitle: 'Réserver en ligne',
+    close: 'Fermer',
+    loading: 'Chargement du calendrier…',
+    demo: name => name
+      ? `Page de démo : sur votre page, ce bouton ouvre le calendrier de réservation pour « ${name} ».`
+      : 'Page de démo : sur votre page, ce bouton ouvre votre calendrier de réservation en ligne.'
+  },
+  es: {
+    days: ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
+    short: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'],
+    closed: 'Cerrado',
+    free: 'Gratis',
+    groups: ['Servicios', 'Bonos', 'Clases'],
+    dialogTitle: 'Reservar online',
+    close: 'Cerrar',
+    loading: 'Cargando el calendario…',
+    demo: name => name
+      ? `Página de demostración: en tu página, aquí se abre el calendario de reservas para «${name}».`
+      : 'Página de demostración: en tu página, aquí se abre tu calendario de reservas online.'
+  },
+  pt: {
+    days: ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado', 'Domingo'],
+    short: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+    closed: 'Fechado',
+    free: 'Grátis',
+    groups: ['Serviços', 'Pacotes', 'Aulas'],
+    dialogTitle: 'Marcar online',
+    close: 'Fechar',
+    loading: 'A carregar o calendário…',
+    demo: name => name
+      ? `Página de demonstração: na sua página, aqui abre o calendário de marcações para «${name}».`
+      : 'Página de demonstração: na sua página, aqui abre o seu calendário de marcações online.'
+  },
+  pl: {
+    days: ['Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota', 'Niedziela'],
+    short: ['Pon', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob', 'Nd'],
+    closed: 'Zamknięte',
+    free: 'Bezpłatnie',
+    groups: ['Usługi', 'Karnety', 'Zajęcia'],
+    dialogTitle: 'Rezerwacja online',
+    close: 'Zamknij',
+    loading: 'Ładowanie kalendarza…',
+    demo: name => name
+      ? `Strona demo: na Twojej stronie tu otworzy się kalendarz rezerwacji dla „${name}”.`
+      : 'Strona demo: na Twojej stronie tu otworzy się Twój kalendarz rezerwacji online.'
+  },
+  it: {
+    days: ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica'],
+    short: ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'],
+    closed: 'Chiuso',
+    free: 'Gratis',
+    groups: ['Servizi', 'Pacchetti', 'Corsi'],
+    dialogTitle: 'Prenota online',
+    close: 'Chiudi',
+    loading: 'Caricamento del calendario…',
+    demo: name => name
+      ? `Pagina demo: sulla tua pagina, qui si apre il calendario delle prenotazioni per «${name}».`
+      : 'Pagina demo: sulla tua pagina, qui si apre il tuo calendario di prenotazione online.'
+  },
+  el: {
+    days: ['Δευτέρα', 'Τρίτη', 'Τετάρτη', 'Πέμπτη', 'Παρασκευή', 'Σάββατο', 'Κυριακή'],
+    short: ['Δευ', 'Τρί', 'Τετ', 'Πέμ', 'Παρ', 'Σάβ', 'Κυρ'],
+    closed: 'Κλειστά',
+    free: 'Δωρεάν',
+    groups: ['Υπηρεσίες', 'Πακέτα', 'Μαθήματα'],
+    dialogTitle: 'Κράτηση online',
+    close: 'Κλείσιμο',
+    loading: 'Φόρτωση ημερολογίου…',
+    demo: name => name
+      ? `Σελίδα επίδειξης: στη σελίδα σας, εδώ ανοίγει το ημερολόγιο κρατήσεων για «${name}».`
+      : 'Σελίδα επίδειξης: στη σελίδα σας, εδώ ανοίγει το online ημερολόγιο κρατήσεών σας.'
   }
 };
 
@@ -80,7 +158,7 @@ export function formatDuration(minutes) {
   return m ? `${h} h ${m} min` : `${h} h`;
 }
 
-// English pages use 12-hour time, Romanian pages 24-hour.
+// English pages use 12-hour time, every other language 24-hour.
 export function formatTime(minutes) {
   const h24 = Math.floor(minutes / 60);
   const m = String(minutes % 60).padStart(2, '0');
