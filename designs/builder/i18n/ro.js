@@ -135,6 +135,9 @@ export default {
     hourscard: { name: 'Card cu programul', desc: '„Deschis acum” și toată săptămâna într-un card.' },
     mapwide: { name: 'Hartă lată', desc: 'Hartă pe toată lățimea, cu adresa deasupra.' },
     contactfab: { name: 'Butoane rotunde', desc: 'WhatsApp și apel, în colțul ecranului.' },
+    contactdock: { name: 'Bară dock', desc: 'Sună, WhatsApp și Programare într-o pastilă; Sună arată deschis sau închis.' },
+    contactbookfirst: { name: 'Programarea în față', desc: 'Un buton mare de programare, cu Sună și WhatsApp rotunde alături.' },
+    contactstatus: { name: 'Bară de stare', desc: 'O bară lipită jos: Sună cu programul de azi, WhatsApp și Programare.' },
     masonry: { name: 'Masonry', desc: 'Poze de forme diferite, în coloane, ca pe Pinterest.' },
     carousel: { name: 'Carusel cu swipe', desc: 'Un rând de poze pe care le derulezi lateral.' }
   },

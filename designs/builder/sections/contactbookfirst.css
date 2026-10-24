@@ -1,0 +1,24 @@
+@import url('./contactshared.css');
+.cx-bookfirst { padding: 0 12px calc(14px + env(safe-area-inset-bottom)); }
+.cx-bookfirst .cx-inner { display: flex; align-items: center; gap: 10px; }
+.cx-bookfirst .cx-round {
+  position: relative; flex-shrink: 0; width: 60px; height: 60px; min-height: 0; padding: 0; border-radius: 50%;
+  background: var(--surface); border: var(--border-w) solid var(--line); box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4);
+}
+.cx-bookfirst .cx-round:hover { background: var(--surface); filter: brightness(1.08); }
+:root[data-skin="bold"] .cx-bookfirst .cx-round { border-color: var(--text); box-shadow: 3px 3px 0 var(--text); }
+/* Open / closed dot on the Call button */
+.cx-pip {
+  position: absolute; top: 4px; right: 4px; width: 14px; height: 14px; border-radius: 50%; background: #e0703a;
+  border: 2px solid var(--surface); display: none;
+}
+.cx-call.has-state .cx-pip { display: block; }
+.cx-call.is-open .cx-pip { background: #22c55e; }
+.cx-bookfirst .cx-book {
+  flex: 1; min-width: 0; justify-content: flex-start; gap: 12px; min-height: 60px; padding: 0 20px; border-radius: 30px;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4);
+}
+:root[data-skin="bold"] .cx-bookfirst .cx-book { border: var(--border-w) solid var(--text); box-shadow: 3px 3px 0 var(--text); }
+.cx-bookfirst .cx-book .cx-text > span { font-size: 1.05rem; }
+.cx-bookfirst .cx-book .cx-online::before { box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.55); }
+@media (min-width: 1100px) { .cx-bookfirst .cx-inner { max-width: 460px; } }

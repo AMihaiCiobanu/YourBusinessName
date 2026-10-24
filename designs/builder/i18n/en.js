@@ -135,6 +135,9 @@ export default {
     hourscard: { name: 'Hours card', desc: 'Open now and the whole week in one card.' },
     mapwide: { name: 'Wide map', desc: 'A full-width map with the address on top.' },
     contactfab: { name: 'Round buttons', desc: 'WhatsApp and call bubbles in the corner.' },
+    contactdock: { name: 'Dock bar', desc: 'Call, WhatsApp and Book in one pill; Call shows open or closed.' },
+    contactbookfirst: { name: 'Book first', desc: 'A wide Book button with round Call and WhatsApp beside it.' },
+    contactstatus: { name: 'Status bar', desc: 'A bar on the bottom edge: Call with today’s hours, WhatsApp and Book.' },
     masonry: { name: 'Masonry grid', desc: 'Photos of mixed shapes in columns, Pinterest style.' },
     carousel: { name: 'Swipe carousel', desc: 'A row of photo cards you swipe sideways.' }
   },

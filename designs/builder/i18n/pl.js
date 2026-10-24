@@ -135,6 +135,9 @@ export default {
     hourscard: { name: 'Karta godzin', desc: 'Teraz otwarte i cały tydzień na jednej karcie.' },
     mapwide: { name: 'Szeroka mapa', desc: 'Mapa na całą szerokość z adresem na wierzchu.' },
     contactfab: { name: 'Okrągłe przyciski', desc: 'Dymki WhatsApp i połączenia w rogu.' },
+    contactdock: { name: 'Pasek dock', desc: 'Zadzwoń, WhatsApp i Zarezerwuj w jednej pigułce; Zadzwoń pokazuje otwarte lub zamknięte.' },
+    contactbookfirst: { name: 'Rezerwacja na pierwszym planie', desc: 'Duży przycisk rezerwacji, a obok okrągłe Zadzwoń i WhatsApp.' },
+    contactstatus: { name: 'Pasek stanu', desc: 'Pasek przy dolnej krawędzi: Zadzwoń z dzisiejszymi godzinami, WhatsApp i Zarezerwuj.' },
     masonry: { name: 'Siatka mozaikowa', desc: 'Zdjęcia o różnych kształtach w kolumnach, w stylu Pinterest.' },
     carousel: { name: 'Karuzela do przesuwania', desc: 'Rząd kart ze zdjęciami przesuwanych na boki.' }
   },

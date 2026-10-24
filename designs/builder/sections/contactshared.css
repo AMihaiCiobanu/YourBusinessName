@@ -1,0 +1,27 @@
+/* Shared by the contact bar variants: dock, book first, status bar. */
+.overlay { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; pointer-events: none; }
+.cx { pointer-events: auto; transition: transform 0.35s var(--ease), opacity 0.3s; }
+.cx.is-hidden { transform: translateY(120%); opacity: 0; }
+.cx-inner { max-width: 520px; margin: 0 auto; }
+.cx-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 6px 12px;
+  border: 0; border-radius: 16px; background: transparent; color: var(--text); font: inherit; font-weight: 700; text-decoration: none; cursor: pointer;
+}
+.cx-btn:hover { background: var(--accent-soft); }
+.cx-wa svg { color: #1fa855; }
+.cx-book { background: var(--accent); color: var(--accent-ink); }
+.cx-book:hover { background: var(--accent); filter: brightness(1.06); }
+.cx-text { display: grid; line-height: 1.15; text-align: left; }
+.cx-text small, .cx-state, .cx-hours { font-size: 0.72rem; font-weight: 600; }
+/* Call: open / closed, only once the hours are known */
+.cx-state:empty, .cx-hours:empty { display: none; }
+.cx-state { opacity: 0.9; white-space: nowrap; }
+.cx-state::before { content: ''; display: inline-block; width: 8px; height: 8px; margin-right: 5px; border-radius: 50%; background: #e0703a; }
+.cx-call.is-open .cx-state::before { background: #22c55e; }
+/* Book: always online */
+.cx-online { display: inline-flex; align-items: center; gap: 5px; }
+.cx-online::before {
+  content: ''; width: 8px; height: 8px; border-radius: 50%; background: #22c55e;
+  box-shadow: 0 0 0 2px color-mix(in srgb, #fff 70%, transparent);
+}
+.reduce-motion .cx { transition: none; }

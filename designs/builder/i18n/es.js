@@ -135,6 +135,9 @@ export default {
     hourscard: { name: 'Tarjeta de horario', desc: 'Abierto ahora y toda la semana en una tarjeta.' },
     mapwide: { name: 'Mapa ancho', desc: 'Un mapa a todo el ancho con la dirección encima.' },
     contactfab: { name: 'Botones redondos', desc: 'Burbujas de WhatsApp y llamada en la esquina.' },
+    contactdock: { name: 'Barra dock', desc: 'Llamar, WhatsApp y Reservar en una píldora; Llamar indica abierto o cerrado.' },
+    contactbookfirst: { name: 'Reservar primero', desc: 'Un botón grande de Reservar, con Llamar y WhatsApp redondos al lado.' },
+    contactstatus: { name: 'Barra de estado', desc: 'Una barra pegada abajo: Llamar con el horario de hoy, WhatsApp y Reservar.' },
     masonry: { name: 'Cuadrícula mosaico', desc: 'Fotos de formas variadas en columnas, estilo Pinterest.' },
     carousel: { name: 'Carrusel deslizable', desc: 'Una fila de tarjetas de fotos que se deslizan de lado.' }
   },

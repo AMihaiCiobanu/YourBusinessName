@@ -135,6 +135,9 @@ export default {
     hourscard: { name: 'Cartão de horário', desc: 'Aberto agora e a semana inteira num cartão.' },
     mapwide: { name: 'Mapa largo', desc: 'Um mapa em toda a largura com a morada por cima.' },
     contactfab: { name: 'Botões redondos', desc: 'Bolhas de WhatsApp e chamada no canto.' },
+    contactdock: { name: 'Barra dock', desc: 'Ligar, WhatsApp e Marcar numa pílula; Ligar mostra aberto ou fechado.' },
+    contactbookfirst: { name: 'Marcar primeiro', desc: 'Um botão grande de Marcar, com Ligar e WhatsApp redondos ao lado.' },
+    contactstatus: { name: 'Barra de estado', desc: 'Uma barra colada em baixo: Ligar com o horário de hoje, WhatsApp e Marcar.' },
     masonry: { name: 'Grelha mosaico', desc: 'Fotos de formatos variados em colunas, estilo Pinterest.' },
     carousel: { name: 'Carrossel deslizante', desc: 'Uma fila de cartões de fotos que desliza para o lado.' }
   },

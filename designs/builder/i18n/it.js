@@ -135,6 +135,9 @@ export default {
     hourscard: { name: 'Scheda orari', desc: 'Aperto ora e tutta la settimana in una scheda.' },
     mapwide: { name: 'Mappa larga', desc: 'Una mappa a tutta larghezza con l’indirizzo sopra.' },
     contactfab: { name: 'Pulsanti rotondi', desc: 'Bolle di WhatsApp e chiamata nell’angolo.' },
+    contactdock: { name: 'Barra dock', desc: 'Chiama, WhatsApp e Prenota in una pillola; Chiama mostra aperto o chiuso.' },
+    contactbookfirst: { name: 'Prenota in primo piano', desc: 'Un grande pulsante Prenota, con Chiama e WhatsApp rotondi accanto.' },
+    contactstatus: { name: 'Barra di stato', desc: 'Una barra sul bordo inferiore: Chiama con gli orari di oggi, WhatsApp e Prenota.' },
     masonry: { name: 'Griglia a mosaico', desc: 'Foto di forme diverse in colonne, stile Pinterest.' },
     carousel: { name: 'Carosello a scorrimento', desc: 'Una fila di schede foto da scorrere di lato.' }
   },

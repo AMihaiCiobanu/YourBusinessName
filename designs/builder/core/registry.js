@@ -113,6 +113,9 @@ export const GROUPS = [
   {
     id: 'contactbar', label: 'Contact buttons', fixed: true, types: [
       type('bar', 'Sticky WhatsApp / phone bar', [], { mod: 'contactbar', data: true }),
+      type('dock', 'Dock bar: icons over labels', ['new'], { mod: 'contactdock', data: true }),
+      type('bookfirst', 'Wide Book button with round Call / WhatsApp', ['new'], { mod: 'contactbookfirst', data: true }),
+      type('status', 'Status bar on the bottom edge', ['new'], { mod: 'contactstatus', data: true }),
       type('bubbles', 'Round WhatsApp / phone buttons', ['new'], { mod: 'contactfab' })
     ]
   }

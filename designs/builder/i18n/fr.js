@@ -135,6 +135,9 @@ export default {
     hourscard: { name: 'Carte des horaires', desc: 'Ouvert maintenant et toute la semaine dans une carte.' },
     mapwide: { name: 'Carte large', desc: 'Une carte pleine largeur avec l’adresse par-dessus.' },
     contactfab: { name: 'Boutons ronds', desc: 'Bulles WhatsApp et appel dans le coin.' },
+    contactdock: { name: 'Barre dock', desc: 'Appel, WhatsApp et Réserver dans une pilule ; Appel indique ouvert ou fermé.' },
+    contactbookfirst: { name: 'Réserver d’abord', desc: 'Un grand bouton Réserver, avec Appel et WhatsApp ronds à côté.' },
+    contactstatus: { name: 'Barre d’état', desc: 'Une barre collée en bas : Appel avec les horaires du jour, WhatsApp et Réserver.' },
     masonry: { name: 'Grille mosaïque', desc: 'Des photos de formats variés en colonnes, style Pinterest.' },
     carousel: { name: 'Carrousel à balayer', desc: 'Une rangée de cartes photo à faire défiler de côté.' }
   },
