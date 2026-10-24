@@ -89,7 +89,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--top-h) + 12px); }
+html { overflow-x: clip; -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--top-h) + 12px); }
 html:not(.reduce-motion) { scroll-behavior: smooth; }
 body {
   margin: 0;
