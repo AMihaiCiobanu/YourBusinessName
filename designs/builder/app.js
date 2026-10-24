@@ -16,7 +16,7 @@ import { startData, setDataLang, priceText } from './core/data.js';
 import { createPage } from './core/page.js';
 import { h } from './core/dom.js';
 import { loadContent } from './content/index.js';
-import { mountPanel } from './builder/panel.js';
+import { mountPanel } from './builder/panel.js?v=2';
 import { setupBooking } from '../shared/live.js';
 import { mountDemo, getPageMailto } from '../shared/demo.js?v=5';
 

@@ -92,7 +92,6 @@
   padding: 6px 6px 6px 2px; border: 1px solid var(--ui-line); border-radius: 14px; background: var(--ui-bg);
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s;
 }
-.bp-list-fixed .bp-row { grid-template-columns: auto 1fr; padding-left: 10px; }
 .bp-row:not(.is-on) .bp-name, .bp-row:not(.is-on) .bp-desc { opacity: 0.62; }
 .bp-row.is-on { background: color-mix(in srgb, var(--ui-accent) 7%, var(--ui-bg)); border-color: color-mix(in srgb, var(--ui-accent) 35%, var(--ui-line)); }
 .bp-row.is-dragging { z-index: 2; box-shadow: var(--ui-shadow); transition: none; background: var(--ui-bg); }
@@ -135,16 +134,28 @@
 .bp-arrow:hover:not(:disabled) { background: var(--ui-bg-2); color: var(--ui-text); }
 .bp-arrow:disabled { opacity: 0.25; cursor: default; }
 @media (pointer: coarse) { .bp-arrow { height: 44px; } .bp-move { flex-direction: row; } }
-/* Under the name: the type select and add / remove a copy of the section */
-.bp-extra { grid-column: 3 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; padding: 0 0 6px; }
-.bp-type-l { color: var(--ui-muted); font-size: 0.78rem; font-weight: 700; }
-.bp-extra .bp-type { flex: 1 1 140px; width: auto; min-width: 0; min-height: 40px; padding-block: 6px; font-size: 0.86rem; }
+/* Tools bar and type select: only while the section is on the page */
+.bp-type-wrap { display: grid; gap: 4px; padding: 4px 0 0; }
+.bp-row:not(.is-on) .bp-type-wrap, .bp-row:not(.is-on) .bp-bar { display: none; }
+.bp-type-l { color: var(--ui-muted); font-size: 0.74rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; }
+.bp-type-wrap .bp-type { min-width: 0; min-height: 44px; padding-block: 6px; font-size: 0.9rem; background-color: var(--ui-bg-2); }
 .bp-mini {
   display: inline-flex; align-items: center; gap: 5px; min-height: 40px; padding: 0 12px; border: 1px dashed var(--ui-line);
   border-radius: 10px; background: transparent; color: var(--ui-text); font: inherit; font-size: 0.8rem; font-weight: 700; cursor: pointer;
 }
 .bp-mini:hover { background: var(--ui-bg-2); }
 .bp-remove { width: 40px; padding: 0; justify-content: center; border-style: solid; color: var(--ui-muted); }
+
+/* Row: check + name on top. Under it one line of tools (grip under the check, arrows, add / remove a
+   copy), then the type select. Both only show while the check is on. */
+.bp-row, .bp-list-fixed .bp-row { grid-template-columns: 44px minmax(0, 1fr); gap: 2px 10px; padding: 10px 12px 10px 6px; }
+.bp-toggle { grid-column: 1; grid-row: 1; justify-self: center; margin: 0; }
+.bp-label { grid-column: 2; grid-row: 1; padding: 2px 0; }
+.bp-bar { grid-column: 1 / -1; display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; }
+.bp-move { flex-direction: row; }
+.bp-arrow { height: 44px; }
+.bp-add { margin-left: auto; }
+.bp-type-wrap { grid-column: 2; }
 
 /* Style tab */
 .bp-field { display: grid; gap: 8px; margin-bottom: 20px; }

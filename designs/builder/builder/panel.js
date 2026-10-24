@@ -71,25 +71,26 @@ export function mountPanel({ state, change, reset, shareUrl, toast, motion, getP
     return wrap;
   }
 
-  // Under the name: the type select and, for a group that can repeat, add / remove a copy.
-  function extras(item) {
+  // Under the name, only while the section is on: the type select on its own line.
+  function typeField(item) {
     const g = GROUP[item.group];
-    if (g.types.length < 2 && !g.multi) return null;
-    const wrap = h('div', { class: 'bp-extra' });
-    if (g.types.length > 1) {
-      const selectId = `bp-type-${item.id}`;
-      wrap.appendChild(h('label', { class: 'bp-type-l', for: selectId }, t('ui.type'), h('span', { class: 'sr-only', text: ` · ${secName(item.id)}` })));
-      wrap.appendChild(h('select', { class: 'bp-select bp-type', id: selectId },
+    if (g.types.length < 2) return null;
+    const selectId = `bp-type-${item.id}`;
+    return h('div', { class: 'bp-type-wrap' },
+      h('label', { class: 'bp-type-l', for: selectId }, t('ui.type'), h('span', { class: 'sr-only', text: ` · ${secName(item.id)}` })),
+      h('select', { class: 'bp-select bp-type', id: selectId },
         g.types.map(ty => h('option', { value: ty.id, text: typeName(ty), selected: ty.id === typeOf(item).id }))));
+  }
+
+  // For a group that can repeat: add / remove a copy. The add button is hidden by CSS while the section is off.
+  function copyButtons(item) {
+    const g = GROUP[item.group];
+    if (!g.multi) return [];
+    const out = [h('button', { type: 'button', class: 'bp-mini bp-add', id: `bp-add-${item.id}` }, icon('plus', 14), t(`grp.${g.id}.add`) === `grp.${g.id}.add` ? t('ui.addCopy') : t(`grp.${g.id}.add`))];
+    if (state.items.filter(it => it.group === item.group).length > 1) {
+      out.push(h('button', { type: 'button', class: 'bp-mini bp-remove', id: `bp-rm-${item.id}`, 'aria-label': t('ui.removeCopy', { name: secName(item.id) }) }, icon('close', 14)));
     }
-    if (g.multi) {
-      // Another copy only makes sense next to one that is on the page.
-      if (item.on) wrap.appendChild(h('button', { type: 'button', class: 'bp-mini bp-add', id: `bp-add-${item.id}` }, icon('plus', 14), t(`grp.${g.id}.add`) === `grp.${g.id}.add` ? t('ui.addCopy') : t(`grp.${g.id}.add`)));
-      if (state.items.filter(it => it.group === item.group).length > 1) {
-        wrap.appendChild(h('button', { type: 'button', class: 'bp-mini bp-remove', id: `bp-rm-${item.id}`, 'aria-label': t('ui.removeCopy', { name: secName(item.id) }) }, icon('close', 14)));
-      }
-    }
-    return wrap;
+    return out;
   }
 
   function row(item, { fixed = false } = {}) {
@@ -97,20 +98,22 @@ export function mountPanel({ state, change, reset, shareUrl, toast, motion, getP
     const type = typeOf(item);
     const checkId = `bp-on-${id}`;
     const li = h('li', { class: `bp-row${item.on ? ' is-on' : ''}`, dataset: { id } });
-    if (!fixed) {
-      li.appendChild(h('button', { type: 'button', class: 'bp-grip', id: `bp-grip-${id}`, 'aria-label': t('ui.drag', { name: secName(id) }) }, icon('grip', 18)));
-    }
     li.appendChild(h('input', { type: 'checkbox', id: checkId, class: 'bp-toggle', checked: item.on, 'aria-describedby': `${checkId}-d` }));
     li.appendChild(h('label', { for: checkId, class: 'bp-label' },
       h('span', { class: 'bp-name' }, secName(id), badges(type)),
       h('span', { class: 'bp-desc', id: `${checkId}-d`, text: t(`sec.${type.mod}.desc`) })));
+    // One line of tools: grip, arrows, add / remove a copy.
+    const bar = h('div', { class: 'bp-bar' });
     if (!fixed) {
-      li.appendChild(h('span', { class: 'bp-move' },
+      bar.appendChild(h('button', { type: 'button', class: 'bp-grip', id: `bp-grip-${id}`, 'aria-label': t('ui.drag', { name: secName(id) }) }, icon('grip', 18)));
+      bar.appendChild(h('span', { class: 'bp-move' },
         h('button', { type: 'button', class: 'bp-arrow', id: `bp-up-${id}`, 'data-dir': '-1', 'aria-label': t('ui.moveUp', { name: secName(id) }) }, icon('arrowUp', 16)),
         h('button', { type: 'button', class: 'bp-arrow', id: `bp-down-${id}`, 'data-dir': '1', 'aria-label': t('ui.moveDown', { name: secName(id) }) }, icon('arrowDown', 16))));
     }
-    const more = extras(item);
-    if (more) li.appendChild(more);
+    for (const btn of copyButtons(item)) bar.appendChild(btn);
+    if (bar.children.length) li.appendChild(bar);
+    const typeBox = typeField(item);
+    if (typeBox) li.appendChild(typeBox);
     return li;
   }
 
