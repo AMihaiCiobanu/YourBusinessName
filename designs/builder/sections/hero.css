@@ -35,6 +35,8 @@
 .hero-tilt { margin: 16px 0 0 12px; min-height: 44px; padding: 8px 14px; border: 0; cursor: pointer; }
 
 .hero-visual { perspective: 1200px; }
+/* The first photo is the LCP on phones: it slides in but is never transparent. */
+.hero-stack[data-reveal] { opacity: 1; }
 .hero-stack {
   --sx: 0; --sy: 0;
   position: relative; aspect-ratio: 4 / 4.4; max-width: 520px; margin-inline: auto;
