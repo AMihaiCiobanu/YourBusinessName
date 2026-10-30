@@ -193,7 +193,7 @@ export default {
     demoCall: 'Pagina demo: sulla tua pagina questo pulsante ti chiama.',
     demoWhatsapp: 'Pagina demo: sulla tua pagina questo pulsante apre una chat WhatsApp con te.',
     demoReserve: 'Pagina demo: sulla tua pagina questo pulsante ti manda un messaggio per prenotare «{name}».',
-    demoForm: 'Pagina demo: sulla tua pagina questa richiesta ti arriva nell’app Appointments.',
+    demoForm: 'Pagina demo: sulla tua pagina questa richiesta ti arriva nell’app Appointments & Reports.',
     demoSocial: 'Pagina demo: sulla tua pagina questo pulsante apre il tuo profilo.'
   },
 
@@ -228,7 +228,7 @@ export default {
     introText: 'Ogni servizio, quanto dura e quanto costa. Tocca una riga per prenotarlo.',
     contents: 'Indice',
     closingTitle: 'A presto',
-    closingText: 'Prenota online quando vuoi. Ricevi subito la conferma.',
+    closingText: 'Prenota online quando vuoi. Invia la richiesta e te la confermiamo al più presto.',
     hours: 'Orari di apertura',
     page: 'Pagina {n} di {total}',
     prevPage: 'Pagina precedente',
@@ -375,8 +375,8 @@ export default {
     eyebrow: 'FAQ',
     title: 'Buono a sapersi',
     common: [
-      ['Come prenoto?', 'Tocca «Prenota online», scegli un servizio e un orario libero. Ricevi subito la conferma.'],
-      ['Posso annullare o spostare l’appuntamento?', 'Sì, dal link nella conferma, fino a 24 ore prima.'],
+      ['Come prenoto?', 'Tocca «Prenota online», scegli un servizio e un orario libero. Invia la richiesta e te la confermiamo al più presto.'],
+      ['Posso annullare o spostare l’appuntamento?', 'Sì. Chiamaci o scrivici per annullare o spostare l’appuntamento.'],
       ['Come posso pagare?', 'In contanti o con carta in studio. Accettiamo anche le gift card.'],
       ['Dove posso parcheggiare?', 'C’è parcheggio in strada proprio davanti e un parcheggio pubblico a due minuti.']
     ]
@@ -395,7 +395,7 @@ export default {
     now: 'Ora',
     timeline: 'Orari di oggi, con l’ora attuale indicata',
     closedToday: 'Chiuso oggi',
-    note: 'Sulla tua pagina, gli orari arrivano in diretta dall’app Appointments.',
+    note: 'Sulla tua pagina, gli orari arrivano in diretta dall’app Appointments & Reports.',
     noHours: 'Vedi gli orari disponibili sulla pagina di prenotazione.',
     badgeOpen: 'Aperto ora · fino alle {time}',
     badgeClosed: 'Chiuso ora · prenota online'

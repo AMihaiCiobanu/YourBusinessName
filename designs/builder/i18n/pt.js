@@ -193,7 +193,7 @@ export default {
     demoCall: 'Página de demonstração: na sua página, este botão liga-lhe.',
     demoWhatsapp: 'Página de demonstração: na sua página, este botão abre uma conversa de WhatsApp consigo.',
     demoReserve: 'Página de demonstração: na sua página, este botão envia-lhe uma mensagem para reservar «{name}».',
-    demoForm: 'Página de demonstração: na sua página, este pedido chega-lhe na app Appointments.',
+    demoForm: 'Página de demonstração: na sua página, este pedido chega-lhe na app Appointments & Reports.',
     demoSocial: 'Página de demonstração: na sua página, este botão abre o seu perfil.'
   },
 
@@ -228,7 +228,7 @@ export default {
     introText: 'Cada serviço, quanto tempo demora e quanto custa. Toque numa linha para marcar.',
     contents: 'Índice',
     closingTitle: 'Até breve',
-    closingText: 'Marque online a qualquer hora. Recebe a confirmação de imediato.',
+    closingText: 'Marque online a qualquer hora. Envie o seu pedido e confirmamos em breve.',
     hours: 'Horário de funcionamento',
     page: 'Página {n} de {total}',
     prevPage: 'Página anterior',
@@ -375,8 +375,8 @@ export default {
     eyebrow: 'Perguntas frequentes',
     title: 'É bom saber',
     common: [
-      ['Como faço uma marcação?', 'Toque em «Marcar online», escolha um serviço e uma hora livre. Recebe a confirmação de imediato.'],
-      ['Posso cancelar ou mudar a marcação?', 'Sim, a partir do link na confirmação, até 24 horas antes.'],
+      ['Como faço uma marcação?', 'Toque em «Marcar online», escolha um serviço e uma hora livre. Envie o seu pedido e confirmamos em breve.'],
+      ['Posso cancelar ou mudar a marcação?', 'Sim. Ligue-nos ou envie-nos uma mensagem para cancelar ou mudar a marcação.'],
       ['Como posso pagar?', 'Em dinheiro ou com cartão no estúdio. Também aceitamos cartões-presente.'],
       ['Onde posso estacionar?', 'Há estacionamento na rua mesmo à porta e um parque público a dois minutos.']
     ]
@@ -395,7 +395,7 @@ export default {
     now: 'Agora',
     timeline: 'Horário de hoje, com a hora atual marcada',
     closedToday: 'Fechado hoje',
-    note: 'Na sua página, o horário chega ao vivo da app Appointments.',
+    note: 'Na sua página, o horário chega ao vivo da app Appointments & Reports.',
     noHours: 'Veja as horas disponíveis na página de marcações.',
     badgeOpen: 'Aberto agora · até às {time}',
     badgeClosed: 'Fechado agora · marque online'

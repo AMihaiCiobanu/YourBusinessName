@@ -193,7 +193,7 @@ export default {
     demoCall: 'Página de demostración: en tu página, este botón te llama.',
     demoWhatsapp: 'Página de demostración: en tu página, este botón abre un chat de WhatsApp contigo.',
     demoReserve: 'Página de demostración: en tu página, este botón te envía un mensaje para reservar «{name}».',
-    demoForm: 'Página de demostración: en tu página, esta solicitud te llega en la app Appointments.',
+    demoForm: 'Página de demostración: en tu página, esta solicitud te llega en la app Appointments & Reports.',
     demoSocial: 'Página de demostración: en tu página, este botón abre tu perfil.'
   },
 
@@ -228,7 +228,7 @@ export default {
     introText: 'Cada servicio, cuánto dura y cuánto cuesta. Toca una línea para reservarlo.',
     contents: 'Índice',
     closingTitle: 'Hasta pronto',
-    closingText: 'Reserva online cuando quieras. Recibes la confirmación al momento.',
+    closingText: 'Reserva online cuando quieras. Envía tu solicitud y te la confirmamos lo antes posible.',
     hours: 'Horario de apertura',
     page: 'Página {n} de {total}',
     prevPage: 'Página anterior',
@@ -375,8 +375,8 @@ export default {
     eyebrow: 'Preguntas frecuentes',
     title: 'Bueno saberlo',
     common: [
-      ['¿Cómo reservo?', 'Toca «Reservar online», elige un servicio y una hora libre. Recibes la confirmación al momento.'],
-      ['¿Puedo cancelar o cambiar mi cita?', 'Sí, desde el enlace de tu confirmación, hasta 24 horas antes.'],
+      ['¿Cómo reservo?', 'Toca «Reservar online», elige un servicio y una hora libre. Envía tu solicitud y te la confirmamos lo antes posible.'],
+      ['¿Puedo cancelar o cambiar mi cita?', 'Sí. Llámanos o escríbenos para cancelar o cambiar tu cita.'],
       ['¿Cómo puedo pagar?', 'En efectivo o con tarjeta en el estudio. También aceptamos tarjetas regalo.'],
       ['¿Dónde puedo aparcar?', 'Hay aparcamiento en la calle justo delante y un parking público a dos minutos.']
     ]
@@ -395,7 +395,7 @@ export default {
     now: 'Ahora',
     timeline: 'Horario de hoy, con la hora actual marcada',
     closedToday: 'Cerrado hoy',
-    note: 'En tu página, el horario llega en vivo desde la app Appointments.',
+    note: 'En tu página, el horario llega en vivo desde la app Appointments & Reports.',
     noHours: 'Consulta las horas disponibles en la página de reservas.',
     badgeOpen: 'Abierto ahora · hasta las {time}',
     badgeClosed: 'Cerrado ahora · reserva online'

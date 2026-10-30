@@ -194,7 +194,7 @@ export default {
     demoCall: 'Demo page: on your page this button calls you.',
     demoWhatsapp: 'Demo page: on your page this opens a WhatsApp chat with you.',
     demoReserve: 'Demo page: on your page this sends you a message to reserve “{name}”.',
-    demoForm: 'Demo page: on your page this request reaches you in the Appointments app.',
+    demoForm: 'Demo page: on your page this request reaches you in the Appointments & Reports app.',
     demoSocial: 'Demo page: on your page this opens your profile.'
   },
 
@@ -229,7 +229,7 @@ export default {
     introText: 'Every service, how long it takes and what it costs. Tap a line to book it.',
     contents: 'Contents',
     closingTitle: 'See you soon',
-    closingText: 'Book online any time. You get a confirmation straight away.',
+    closingText: 'Book online any time. Send your request, we confirm it soon.',
     hours: 'Opening hours',
     page: 'Page {n} of {total}',
     prevPage: 'Previous page',
@@ -376,8 +376,8 @@ export default {
     eyebrow: 'FAQ',
     title: 'Good to know',
     common: [
-      ['How do I book?', 'Tap “Book online”, pick a service and a free time. You get a confirmation straight away.'],
-      ['Can I cancel or move my appointment?', 'Yes, from the link in your confirmation, up to 24 hours before.'],
+      ['How do I book?', 'Tap “Book online”, pick a service and a free time. Send your request, we confirm it soon.'],
+      ['Can I cancel or move my appointment?', 'Yes. Call or message us to cancel or move your appointment.'],
       ['How can I pay?', 'Cash or card at the studio. Gift cards are accepted too.'],
       ['Where can I park?', 'There is street parking right outside and a public car park two minutes away.']
     ]
@@ -396,7 +396,7 @@ export default {
     now: 'Now',
     timeline: 'Today’s opening hours, with the current time marked',
     closedToday: 'Closed today',
-    note: 'On your page, hours come live from the Appointments app.',
+    note: 'On your page, hours come live from the Appointments & Reports app.',
     noHours: 'See the available times on the booking page.',
     badgeOpen: 'Open now · until {time}',
     badgeClosed: 'Closed now · book online'

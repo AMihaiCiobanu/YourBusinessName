@@ -80,9 +80,9 @@ const PERKS = `<button type="button" class="perks-pill" aria-expanded="false" ar
   </button>
   <div class="perks-pop" id="perks-pop" role="region" aria-label="What you get" hidden>
     <div><span aria-hidden="true">🌐</span><strong>Your own address</strong><em>yourbusinessname.appointmentsapps.com, or your own domain like yourbusiness.com</em></div>
-    <div><span aria-hidden="true">🎁</span><strong>Free with a yearly plan</strong><em>Free website when you buy a yearly subscription to the Appointments app, if you pick one of these demo designs.</em></div>
+    <div><span aria-hidden="true">🎁</span><strong>Free with a yearly plan</strong><em>Free website when you buy a yearly subscription to the Appointments &amp; Reports app, if you pick one of these demo designs.</em></div>
     <div><span aria-hidden="true">🗣️</span><strong>In any language</strong><em>We build your site in the language your clients speak.</em></div>
-    <div><span aria-hidden="true">⚡</span><strong>Live from the app</strong><em>Services, hours and booking come straight from your Appointments app.</em></div>
+    <div><span aria-hidden="true">⚡</span><strong>Live from the app</strong><em>Services, hours and booking come straight from your Appointments &amp; Reports app.</em></div>
     <a class="perks-app" href="https://appointmentsapps.com" target="_blank" rel="noopener">See the app</a>
   </div>`; // static markup
 

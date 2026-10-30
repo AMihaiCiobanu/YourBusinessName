@@ -193,7 +193,7 @@ export default {
     demoCall: 'Page de démo : sur votre page, ce bouton vous appelle.',
     demoWhatsapp: 'Page de démo : sur votre page, ce bouton ouvre une conversation WhatsApp avec vous.',
     demoReserve: 'Page de démo : sur votre page, ce bouton vous envoie un message pour réserver « {name} ».',
-    demoForm: 'Page de démo : sur votre page, cette demande vous arrive dans l’application Appointments.',
+    demoForm: 'Page de démo : sur votre page, cette demande vous arrive dans l’application Appointments & Reports.',
     demoSocial: 'Page de démo : sur votre page, ce bouton ouvre votre profil.'
   },
 
@@ -228,7 +228,7 @@ export default {
     introText: 'Chaque prestation, sa durée et son prix. Touchez une ligne pour la réserver.',
     contents: 'Sommaire',
     closingTitle: 'À bientôt',
-    closingText: 'Réservez en ligne à tout moment. Vous recevez une confirmation immédiate.',
+    closingText: 'Réservez en ligne à tout moment. Envoyez votre demande, nous la confirmons rapidement.',
     hours: 'Horaires d’ouverture',
     page: 'Page {n} sur {total}',
     prevPage: 'Page précédente',
@@ -375,8 +375,8 @@ export default {
     eyebrow: 'FAQ',
     title: 'Bon à savoir',
     common: [
-      ['Comment réserver ?', 'Touchez « Réserver en ligne », choisissez une prestation et un créneau libre. Vous recevez une confirmation immédiate.'],
-      ['Puis-je annuler ou déplacer mon rendez-vous ?', 'Oui, depuis le lien de votre confirmation, jusqu’à 24 heures avant.'],
+      ['Comment réserver ?', 'Touchez « Réserver en ligne », choisissez une prestation et un créneau libre. Envoyez votre demande, nous la confirmons rapidement.'],
+      ['Puis-je annuler ou déplacer mon rendez-vous ?', 'Oui. Appelez-nous ou écrivez-nous pour annuler ou déplacer votre rendez-vous.'],
       ['Comment puis-je payer ?', 'En espèces ou par carte au studio. Les cartes cadeaux sont aussi acceptées.'],
       ['Où me garer ?', 'Il y a du stationnement dans la rue juste devant et un parking public à deux minutes.']
     ]
@@ -395,7 +395,7 @@ export default {
     now: 'Maintenant',
     timeline: 'Horaires d’aujourd’hui, avec l’heure actuelle indiquée',
     closedToday: 'Fermé aujourd’hui',
-    note: 'Sur votre page, les horaires arrivent en direct de l’application Appointments.',
+    note: 'Sur votre page, les horaires arrivent en direct de l’application Appointments & Reports.',
     noHours: 'Voir les créneaux disponibles sur la page de réservation.',
     badgeOpen: 'Ouvert maintenant · jusqu’à {time}',
     badgeClosed: 'Fermé maintenant · réservez en ligne'

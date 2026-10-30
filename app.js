@@ -21,7 +21,7 @@ const NICHES = {
     h1Pre: 'Beautiful nails, ',
     h1Em: 'an hour just for you.',
     lead: 'Careful work, quality products and a calm space, so you leave relaxed and with a look that lasts for days.',
-    proof: 'Book 24/7 · No phone calls · Instant confirmation',
+    proof: 'Book 24/7 · No phone calls · We confirm soon',
     hours: [[540,1080],[540,1080],[540,1080],[540,1080],[540,1080],[600,900],null],
     whyEyebrow: 'Why clients choose us',
     whyTitle: 'Detail you can see',

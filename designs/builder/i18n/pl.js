@@ -193,7 +193,7 @@ export default {
     demoCall: 'Strona demo: na Twojej stronie ten przycisk dzwoni do Ciebie.',
     demoWhatsapp: 'Strona demo: na Twojej stronie ten przycisk otwiera czat WhatsApp z Tobą.',
     demoReserve: 'Strona demo: na Twojej stronie ten przycisk wysyła Ci wiadomość, by zarezerwować „{name}”.',
-    demoForm: 'Strona demo: na Twojej stronie ta prośba trafia do Ciebie w aplikacji Appointments.',
+    demoForm: 'Strona demo: na Twojej stronie ta prośba trafia do Ciebie w aplikacji Appointments & Reports.',
     demoSocial: 'Strona demo: na Twojej stronie ten przycisk otwiera Twój profil.'
   },
 
@@ -228,7 +228,7 @@ export default {
     introText: 'Każda usługa, ile trwa i ile kosztuje. Dotknij wiersza, aby ją zarezerwować.',
     contents: 'Spis treści',
     closingTitle: 'Do zobaczenia',
-    closingText: 'Rezerwuj online o każdej porze. Potwierdzenie dostajesz od razu.',
+    closingText: 'Rezerwuj online o każdej porze. Wyślij prośbę, a wkrótce ją potwierdzimy.',
     hours: 'Godziny otwarcia',
     page: 'Strona {n} z {total}',
     prevPage: 'Poprzednia strona',
@@ -375,8 +375,8 @@ export default {
     eyebrow: 'FAQ',
     title: 'Warto wiedzieć',
     common: [
-      ['Jak się zapisać?', 'Dotknij „Rezerwuj online”, wybierz usługę i wolny termin. Potwierdzenie dostajesz od razu.'],
-      ['Czy mogę odwołać lub przełożyć wizytę?', 'Tak, przez link w potwierdzeniu, do 24 godzin wcześniej.'],
+      ['Jak się zapisać?', 'Dotknij „Rezerwuj online”, wybierz usługę i wolny termin. Wyślij prośbę, a wkrótce ją potwierdzimy.'],
+      ['Czy mogę odwołać lub przełożyć wizytę?', 'Tak. Zadzwoń lub napisz do nas, aby odwołać lub przełożyć wizytę.'],
       ['Jak mogę zapłacić?', 'Gotówką lub kartą w studiu. Przyjmujemy też karty podarunkowe.'],
       ['Gdzie mogę zaparkować?', 'Tuż przed wejściem jest parkowanie przy ulicy, a dwie minuty dalej parking publiczny.']
     ]
@@ -395,7 +395,7 @@ export default {
     now: 'Teraz',
     timeline: 'Dzisiejsze godziny otwarcia z zaznaczoną bieżącą godziną',
     closedToday: 'Dziś zamknięte',
-    note: 'Na Twojej stronie godziny przychodzą na żywo z aplikacji Appointments.',
+    note: 'Na Twojej stronie godziny przychodzą na żywo z aplikacji Appointments & Reports.',
     noHours: 'Zobacz dostępne terminy na stronie rezerwacji.',
     badgeOpen: 'Teraz otwarte · do {time}',
     badgeClosed: 'Teraz zamknięte · rezerwuj online'

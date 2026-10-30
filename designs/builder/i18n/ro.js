@@ -194,7 +194,7 @@ export default {
     demoCall: 'Pagină demo: pe pagina ta, butonul acesta te sună.',
     demoWhatsapp: 'Pagină demo: pe pagina ta, aici se deschide o conversație pe WhatsApp cu tine.',
     demoReserve: 'Pagină demo: pe pagina ta, aici primești un mesaj de rezervare pentru „{name}”.',
-    demoForm: 'Pagină demo: pe pagina ta, cererea ajunge la tine în aplicația Appointments.',
+    demoForm: 'Pagină demo: pe pagina ta, cererea ajunge la tine în aplicația Appointments & Reports.',
     demoSocial: 'Pagină demo: pe pagina ta, aici se deschide profilul tău.'
   },
 
@@ -229,7 +229,7 @@ export default {
     introText: 'Fiecare serviciu, cât durează și cât costă. Atinge un rând ca să te programezi.',
     contents: 'Cuprins',
     closingTitle: 'Te așteptăm',
-    closingText: 'Te programezi online oricând. Confirmarea vine imediat.',
+    closingText: 'Te programezi online oricând. Trimiți cererea, iar noi o confirmăm cât mai repede.',
     hours: 'Program',
     page: 'Pagina {n} din {total}',
     prevPage: 'Pagina anterioară',
@@ -376,8 +376,8 @@ export default {
     eyebrow: 'Întrebări frecvente',
     title: 'Bine de știut',
     common: [
-      ['Cum mă programez?', 'Apeși „Programează-te”, alegi serviciul și o oră liberă. Confirmarea vine imediat.'],
-      ['Pot anula sau muta programarea?', 'Da, din linkul din confirmare, cu cel puțin 24 de ore înainte.'],
+      ['Cum mă programez?', 'Apeși „Programează-te”, alegi serviciul și o oră liberă. Trimiți cererea, iar noi o confirmăm cât mai repede.'],
+      ['Pot anula sau muta programarea?', 'Da. Ne suni sau ne scrii ca să anulezi sau să muți programarea.'],
       ['Cum pot plăti?', 'Cash sau card, la studio. Acceptăm și carduri cadou.'],
       ['Unde pot parca?', 'Există locuri pe stradă chiar în față și o parcare publică la două minute.']
     ]
@@ -396,7 +396,7 @@ export default {
     now: 'Acum',
     timeline: 'Programul de azi, cu ora curentă marcată',
     closedToday: 'Azi e închis',
-    note: 'Pe pagina ta, programul vine live din aplicația Appointments.',
+    note: 'Pe pagina ta, programul vine live din aplicația Appointments & Reports.',
     noHours: 'Vezi orele libere pe pagina de programare.',
     badgeOpen: 'Deschis acum · până la {time}',
     badgeClosed: 'Închis acum · programează-te online'
