@@ -45,7 +45,7 @@ const NICHES = {
     h1Pre: 'Sharp cuts, ',
     h1Em: 'right on time.',
     lead: 'Classic technique and a clean finish. Pick your chair time online and walk in knowing it is yours.',
-    proof: 'Book 24/7 · Your slot is reserved · No waiting around',
+    proof: 'Book 24/7 · Pick your time online · No waiting around',
     hours: [null,[540,1140],[540,1140],[540,1140],[540,1140],[540,1020],null],
     whyEyebrow: 'The shop',
     whyTitle: 'Old-school craft, no queue',
@@ -122,7 +122,7 @@ const NICHE_EXTRAS = {
     gallery: ['Gel manicure', 'Nail art', 'French tips', 'Spa pedicure', 'Seasonal colours'],
     reviews: [
       { q: 'Careful, clean and calm. My gel set looked perfect for three weeks.', n: 'Client name', s: 'Gel manicure' },
-      { q: 'Booking took ten seconds and I got my slot right away. Love the nail art!', n: 'Client name', s: 'Nail art' },
+      { q: 'Booking online took ten seconds, no phone call needed. Love the nail art!', n: 'Client name', s: 'Nail art' },
       { q: 'The most relaxing hour of my week. I always leave with a smile.', n: 'Client name', s: 'Spa pedicure' }
     ]
   },

@@ -32,7 +32,7 @@ export default {
       ['Proper hot towel shave and a good chat. Worth every minute.', 'Mark D.', 'Hot towel shave'],
       ['Took my son for his first real haircut. Patient and fun, he wants to come back.', 'Elena S.', 'Kids cut']
     ],
-    faq: [['Do you take walk-ins?', 'Yes, when a chair is free. Booking online guarantees your time.']],
+    faq: [['Do you take walk-ins?', 'Yes, when a chair is free. Send your request online and we confirm your time soon.']],
     slides: [['The chair is ready', 'Book a time and skip the queue.'], ['Fades with a razor finish', 'Clean lines that grow out well.'], ['Beards, shaped properly', 'Hot towel, oil and a sharp edge.']],
     compare: 'Grown-out to a sharp skin fade in 45 minutes.'
   },
@@ -63,7 +63,7 @@ export default {
       ['Ras ca la carte, cu prosop cald, și o discuție bună. Merită fiecare minut.', 'Mihai D.', 'Ras cu prosop cald'],
       ['L-am adus pe băiat la prima tunsoare adevărată. Răbdători și haioși, vrea să revină.', 'Elena S.', 'Tuns copii']
     ],
-    faq: [['Primiți și fără programare?', 'Da, dacă e un scaun liber. Programarea online îți garantează ora.']],
+    faq: [['Primiți și fără programare?', 'Da, dacă e un scaun liber. Trimiți cererea online, iar noi îți confirmăm ora cât mai repede.']],
     slides: [['Scaunul te așteaptă', 'Programează-te și sari peste coadă.'], ['Fade cu finisaj de brici', 'Linii curate care cresc frumos.'], ['Barbă aranjată ca lumea', 'Prosop cald, ulei și contur precis.']],
     compare: 'De la crescut la un skin fade curat, în 45 de minute.'
   },
@@ -94,7 +94,7 @@ export default {
       ['Un vrai rasage à la serviette chaude et une bonne discussion. Chaque minute en vaut la peine.', 'Mark D.', 'Rasage serviette chaude'],
       ['J’ai emmené mon fils pour sa première vraie coupe. Patients et drôles, il veut revenir.', 'Elena S.', 'Coupe enfant']
     ],
-    faq: [['Prenez-vous sans rendez-vous ?', 'Oui, quand un fauteuil est libre. Réserver en ligne vous garantit votre horaire.']],
+    faq: [['Prenez-vous sans rendez-vous ?', 'Oui, quand un fauteuil est libre. Envoyez votre demande en ligne, nous confirmons votre horaire rapidement.']],
     slides: [['Le fauteuil est prêt', 'Réservez un horaire et évitez la file.'], ['Des dégradés finis au rasoir', 'Des lignes nettes qui repoussent bien.'], ['Des barbes bien taillées', 'Serviette chaude, huile et contour net.']],
     compare: 'De cheveux trop longs à un dégradé net en 45 minutes.'
   },
@@ -125,7 +125,7 @@ export default {
       ['Un afeitado con toalla caliente de verdad y buena charla. Vale cada minuto.', 'Mark D.', 'Afeitado con toalla caliente'],
       ['Llevé a mi hijo a su primer corte de verdad. Pacientes y divertidos, quiere volver.', 'Elena S.', 'Corte infantil']
     ],
-    faq: [['¿Atendéis sin cita?', 'Sí, cuando hay un sillón libre. Reservar online te garantiza tu hora.']],
+    faq: [['¿Atendéis sin cita?', 'Sí, cuando hay un sillón libre. Envía tu solicitud online y te confirmamos la hora lo antes posible.']],
     slides: [['El sillón está listo', 'Reserva hora y sáltate la cola.'], ['Degradados con acabado a navaja', 'Líneas limpias que crecen bien.'], ['Barbas bien perfiladas', 'Toalla caliente, aceite y un borde preciso.']],
     compare: 'De pelo crecido a un skin fade preciso en 45 minutos.'
   },
@@ -156,7 +156,7 @@ export default {
       ['Um barbear com toalha quente a sério e boa conversa. Vale cada minuto.', 'Mark D.', 'Barbear com toalha quente'],
       ['Levei o meu filho ao primeiro corte a sério. Pacientes e divertidos, ele quer voltar.', 'Elena S.', 'Corte criança']
     ],
-    faq: [['Atendem sem marcação?', 'Sim, quando há uma cadeira livre. Marcar online garante a sua hora.']],
+    faq: [['Atendem sem marcação?', 'Sim, quando há uma cadeira livre. Envie o seu pedido online e confirmamos a sua hora em breve.']],
     slides: [['A cadeira está pronta', 'Marque a hora e evite a fila.'], ['Degradês com acabamento à navalha', 'Linhas limpas que crescem bem.'], ['Barbas bem desenhadas', 'Toalha quente, óleo e um contorno preciso.']],
     compare: 'De cabelo crescido a um skin fade preciso em 45 minutos.'
   },
@@ -187,7 +187,7 @@ export default {
       ['Porządne golenie z gorącym ręcznikiem i dobra rozmowa. Warte każdej minuty.', 'Mark D.', 'Golenie z ręcznikiem'],
       ['Zabrałam syna na pierwsze prawdziwe strzyżenie. Cierpliwie i wesoło, chce wrócić.', 'Elena S.', 'Strzyżenie dziecięce']
     ],
-    faq: [['Czy przyjmujecie bez zapisów?', 'Tak, gdy fotel jest wolny. Rezerwacja online gwarantuje Twoją godzinę.']],
+    faq: [['Czy przyjmujecie bez zapisów?', 'Tak, gdy fotel jest wolny. Wyślij prośbę online, a wkrótce potwierdzimy Twoją godzinę.']],
     slides: [['Fotel czeka', 'Zarezerwuj godzinę i omiń kolejkę.'], ['Fade wykończony brzytwą', 'Czyste linie, które ładnie odrastają.'], ['Brody we właściwym kształcie', 'Gorący ręcznik, olejek i ostry kontur.']],
     compare: 'Z zarośniętej głowy w ostry skin fade w 45 minut.'
   },
@@ -218,7 +218,7 @@ export default {
       ['Una vera rasatura con panno caldo e una bella chiacchierata. Vale ogni minuto.', 'Mark D.', 'Rasatura con panno caldo'],
       ['Ho portato mio figlio al suo primo vero taglio. Pazienti e simpatici, vuole tornare.', 'Elena S.', 'Taglio bambino']
     ],
-    faq: [['Accettate clienti senza appuntamento?', 'Sì, quando c’è una poltrona libera. Prenotare online ti garantisce l’orario.']],
+    faq: [['Accettate clienti senza appuntamento?', 'Sì, quando c’è una poltrona libera. Invia la richiesta online e ti confermiamo l’orario al più presto.']],
     slides: [['La poltrona è pronta', 'Prenota un orario e salta la fila.'], ['Sfumature rifinite a rasoio', 'Linee pulite che ricrescono bene.'], ['Barbe curate come si deve', 'Panno caldo, olio e un contorno netto.']],
     compare: 'Da capelli cresciuti a una sfumatura netta in 45 minuti.'
   },
@@ -249,7 +249,7 @@ export default {
       ['Σωστό ξύρισμα με ζεστή πετσέτα και ωραία κουβέντα. Αξίζει κάθε λεπτό.', 'Mark D.', 'Ξύρισμα με ζεστή πετσέτα'],
       ['Πήγα τον γιο μου στο πρώτο του κανονικό κούρεμα. Υπομονή και κέφι, θέλει να ξαναπάει.', 'Elena S.', 'Παιδικό κούρεμα']
     ],
-    faq: [['Δέχεστε χωρίς ραντεβού;', 'Ναι, όταν υπάρχει ελεύθερη καρέκλα. Η κράτηση online σας εξασφαλίζει την ώρα σας.']],
+    faq: [['Δέχεστε χωρίς ραντεβού;', 'Ναι, όταν υπάρχει ελεύθερη καρέκλα. Στείλτε το αίτημά σας online και θα επιβεβαιώσουμε την ώρα σας σύντομα.']],
     slides: [['Η καρέκλα είναι έτοιμη', 'Κλείστε ώρα και γλιτώστε την ουρά.'], ['Fade με φινίρισμα ξυραφιού', 'Καθαρές γραμμές που μεγαλώνουν όμορφα.'], ['Γένια με σωστό σχήμα', 'Ζεστή πετσέτα, λάδι και καθαρό περίγραμμα.']],
     compare: 'Από μεγαλωμένα μαλλιά σε καθαρό skin fade σε 45 λεπτά.'
   }
