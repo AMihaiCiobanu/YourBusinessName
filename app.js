@@ -5,7 +5,7 @@
 // Everything here is static example content. Nothing is loaded from an account and the booking
 // buttons are inert: they only show what the real page would offer.
 
-import { wirePicker, mountPerks, setupMailFallback } from './designs/shared/demo.js?v=5';
+import { wirePicker, mountPerks, setupMailFallback } from './designs/shared/demo.js?v=6';
 
 setupMailFallback();
 

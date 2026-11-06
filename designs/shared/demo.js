@@ -14,6 +14,7 @@ export const DESIGNS = [
   { slug: 'orbit', label: 'Massage & spa · Orbit (space)' },
   { slug: 'depth', label: 'Tattoo studio · Depth (3D)' },
   { slug: 'fullframe', label: 'Barbershop · Full frame' },
+  { slug: 'parallax', label: 'Hair salon · Parallax (layers on scroll)' },
   { slug: 'duo', label: 'Salon, two specialists · Duo' },
   { slug: 'marketplace', label: 'Barbershop · Marketplace listing' },
   { slug: 'listing', label: 'Barbershop · Gallery listing' },

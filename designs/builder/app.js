@@ -18,7 +18,7 @@ import { h } from './core/dom.js';
 import { loadContent } from './content/index.js';
 import { mountPanel } from './builder/panel.js?v=2';
 import { setupBooking } from '../shared/live.js';
-import { mountDemo, getPageMailto } from '../shared/demo.js?v=5';
+import { mountDemo, getPageMailto } from '../shared/demo.js?v=6';
 
 const state = loadState();
 const linkId = linkFromUrl();

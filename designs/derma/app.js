@@ -3,7 +3,7 @@
 // Doctor profile, reviews and photos are samples.
 
 import { setLang, loadData, setupBooking, el } from '../shared/live.js';
-import { mountDemo } from '../shared/demo.js?v=5';
+import { mountDemo } from '../shared/demo.js?v=6';
 import { setupBackdrop, solidHeader, treatmentBoard, compare, reviews, hours } from '../shared/clinic.js?v=1';
 
 // Client page: put the id of the public booking link from the Appointments & Reports app here.

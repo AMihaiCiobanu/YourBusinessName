@@ -13,7 +13,7 @@ import { reveal, parallax, onVisible } from './motion.js';
 import { h, icon } from './dom.js';
 import { t } from './i18n.js';
 import { bookButton } from '../../shared/live.js';
-import { MADE_BY } from '../../shared/demo.js?v=5';
+import { MADE_BY } from '../../shared/demo.js?v=6';
 
 export function createPage({ main, overlay, ctx }) {
   const mounted = new Map(); // item id → { el, mod, type, cleanups }

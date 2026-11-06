@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Business Name — Hair salon · Parallax page design</title>
+  <meta name="description" content="Parallax: a booking page design for hair salons. Photos move in layers as you scroll and every section arrives with its own effect." />
+  <meta name="robots" content="noindex" />
+  <link rel="canonical" href="https://yourbusinessname.appointmentsapps.com/designs/parallax/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Your Business Name — Hair salon · Parallax page design" />
+  <meta property="og:description" content="Parallax: a booking page design for hair salons. Photos move in layers as you scroll and every section arrives with its own effect." />
+  <meta property="og:url" content="https://yourbusinessname.appointmentsapps.com/designs/parallax/" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?auto=format&amp;fit=crop&amp;w=1200&amp;h=630&amp;q=70" />
+  <meta name="theme-color" content="#1b1410" />
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+  <link rel="preconnect" href="https://images.unsplash.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preload" as="image" fetchpriority="high"
+    imagesrcset="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?auto=format&amp;fit=crop&amp;w=800&amp;h=1200&amp;q=60 800w, https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?auto=format&amp;fit=crop&amp;w=1600&amp;h=1100&amp;q=50 1600w"
+    imagesizes="100vw" />
+  <link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Manrope:wght@400;500;700&family=DM+Sans:wght@500;600;700&display=swap" />
+  <link rel="stylesheet" href="../shared/shared.css?v=9" />
+  <link rel="stylesheet" href="styles.css?v=2" />
+  <script>
+    // Scroll effects only when motion is welcome; without this class everything is simply shown.
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('fx');
+  </script>
+</head>
+
+<body>
+  <header class="top" id="top">
+    <div class="wrap top-inner">
+      <a class="brand" href="#">Your Business Name</a>
+      <nav class="nav" aria-label="Sections">
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#visit">Visit</a>
+      </nav>
+      <a class="btn btn-sm" data-book href="#">Book</a>
+    </div>
+    <div class="progress" aria-hidden="true"><i id="progress"></i></div>
+  </header>
+
+  <main>
+    <!-- 1. Hero: three layers moving at three speeds -->
+    <section class="hero" id="hero">
+      <div class="hero-bg" data-speed="0.45" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?auto=format&fit=crop&w=1600&h=1100&q=50"
+          srcset="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?auto=format&fit=crop&w=800&h=1200&q=60 800w, https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?auto=format&fit=crop&w=1600&h=1100&q=50 1600w"
+          sizes="100vw" width="1600" height="1100" alt="" fetchpriority="high" />
+      </div>
+      <p class="hero-word" data-speed="0.2" aria-hidden="true">Layers</p>
+      <div class="hero-card hc-1" data-speed="-0.25" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=360&h=460&q=60" width="360" height="460" alt="" />
+      </div>
+      <div class="hero-card hc-2" data-speed="-0.45" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1560869713-7d0a29430803?auto=format&fit=crop&w=320&h=320&q=60" width="320" height="320" alt="" />
+      </div>
+      <div class="wrap hero-text" data-fade>
+        <p class="eyebrow">Hair salon · Cut, colour, styling</p>
+        <h1>Hair with <em>depth.</em></h1>
+        <p class="lead">Cuts that grow out well, colour built in layers, and a chair that’s ready when you are.</p>
+        <div class="actions">
+          <a class="btn" data-book href="#">Book a visit</a>
+          <a class="btn btn-ghost" href="#services">See services</a>
+        </div>
+        <p class="status" id="status" hidden></p>
+      </div>
+      <a class="scroll-hint" href="#intro"><span>Scroll</span><i aria-hidden="true"></i></a>
+    </section>
+
+    <!-- 2. Statement: words light up as you scroll past -->
+    <section class="intro" id="intro">
+      <div class="wrap">
+        <p class="statement" data-words>We listen first, cut second, and send you home with hair you can style yourself on a Tuesday morning.</p>
+      </div>
+    </section>
+
+    <!-- 3. Services: list slides in, the photo drifts inside its frame -->
+    <section class="services" id="services">
+      <div class="wrap services-grid">
+        <figure class="frame frame-tall" data-reveal="wipe">
+          <img data-speed="0.12" src="https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?auto=format&fit=crop&w=760&h=1100&q=65" width="760" height="1100" alt="Stylist cutting a client’s hair" loading="lazy" />
+        </figure>
+        <div>
+          <p class="eyebrow" data-reveal="rise">Services &amp; prices</p>
+          <h2 data-reveal="rise">The menu</h2>
+          <ul class="menu" id="menu" aria-live="polite"></ul>
+          <p class="fine" id="menu-note">Live from the booking app: change a price there, it changes here.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Gallery: the page scrolls down, the photos travel sideways -->
+    <section class="reel" id="work" aria-label="Our work">
+      <div class="reel-pin">
+        <div class="reel-head wrap">
+          <p class="eyebrow">Our work</p>
+          <h2>Scroll down, <em>slide across.</em></h2>
+        </div>
+        <ol class="reel-track" id="reel-track">
+          <li><figure><img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=640&h=800&q=60" width="640" height="800" alt="Stylist at work in front of a mirror" loading="lazy" /><figcaption>Soft layers</figcaption></figure></li>
+          <li><figure><img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=640&h=800&q=60" width="640" height="800" alt="Stylist holding a hair dryer" loading="lazy" /><figcaption>Blow-dry &amp; finish</figcaption></figure></li>
+          <li><figure><img src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?auto=format&fit=crop&w=640&h=800&q=60" width="640" height="800" alt="Salon chairs facing round mirrors" loading="lazy" /><figcaption>The studio</figcaption></figure></li>
+          <li><figure><img src="https://images.unsplash.com/photo-1761839256791-6a93f89fb8b0?auto=format&fit=crop&w=640&h=800&q=60" width="640" height="800" alt="Stylist placing a cape on a client" loading="lazy" /><figcaption>Ready to start</figcaption></figure></li>
+          <li><figure><img src="https://images.unsplash.com/photo-1521590832167-7bcbfaa6381f?auto=format&fit=crop&w=640&h=800&q=60" width="640" height="800" alt="Salon chairs along a white counter" loading="lazy" /><figcaption>Bright stations</figcaption></figure></li>
+        </ol>
+        <p class="fine reel-note wrap">Sample photos. Your own work goes here.</p>
+      </div>
+    </section>
+
+    <!-- 5. A visit, in steps: each card stacks on top of the last -->
+    <section class="steps" id="steps">
+      <div class="wrap">
+        <p class="eyebrow" data-reveal="rise">Your visit</p>
+        <h2 data-reveal="rise">Four steps, no surprises</h2>
+        <ol class="stack">
+          <li class="card"><span class="num">01</span><h3>Book online</h3><p>Pick the service and a free time. You get a reminder the day before.</p></li>
+          <li class="card"><span class="num">02</span><h3>Talk it through</h3><p>Ten minutes at the mirror: photos, your routine, what your hair actually does.</p></li>
+          <li class="card"><span class="num">03</span><h3>Cut &amp; colour</h3><p>Shaped in layers, checked dry, adjusted until it sits right.</p></li>
+          <li class="card"><span class="num">04</span><h3>Take it home</h3><p>We show you how to style it, so it looks this good after the first wash too.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 6. Reviews: a photo window opens behind the quote -->
+    <section class="word" id="reviews">
+      <div class="word-bg" data-reveal="curtain" aria-hidden="true">
+        <img data-speed="0.3" src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=1600&h=1000&q=55" width="1600" height="1000" alt="" loading="lazy" />
+      </div>
+      <div class="wrap word-inner">
+        <figure class="quote" data-reveal="zoom">
+          <blockquote id="quote-text">I’ve never had a cut grow out this well. Three months later it still has shape.</blockquote>
+          <figcaption><span id="quote-who">Client name · Long layers</span> <span class="tag">Sample review</span></figcaption>
+        </figure>
+        <div class="dots" id="dots" role="group" aria-label="Choose a review"></div>
+      </div>
+    </section>
+
+    <!-- 7. Hours and visit: panels rise over a slow background -->
+    <section class="visit" id="visit">
+      <div class="visit-bg" data-speed="0.35" aria-hidden="true">
+        <img src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?auto=format&fit=crop&w=1600&h=1100&q=55" width="1600" height="1100" alt="" loading="lazy" />
+      </div>
+      <div class="wrap visit-grid">
+        <div class="panel" data-reveal="left">
+          <p class="eyebrow">Opening hours</p>
+          <p class="big-time" id="big-time">–</p>
+          <ul class="week" id="week"></ul>
+          <p class="fine" id="hours-note">Hours follow the booking app, so days off show up here by themselves.</p>
+        </div>
+        <div class="panel" data-reveal="right">
+          <p class="eyebrow">Find us</p>
+          <h2>Come in</h2>
+          <p>Your street address, Your city<br />Your phone number<br />hello@yourbusinessname.com</p>
+          <div class="map">Your Google Maps embed goes here</div>
+          <a class="btn" data-book href="#">Book a visit</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="wrap" data-reveal="rise">
+        <h2>Want this page for your salon?</h2>
+        <p>Your photos in layers, your prices and hours live from the Appointments &amp; Reports app, booking built in.</p>
+        <a class="btn" data-getpage>Get my page</a>
+        <a class="link" href="/">See the classic page →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-inner">
+      <p>© <span data-year>2026</span> Your Business Name · Online booking by <a href="https://appointmentsapps.com/" target="_blank" rel="noopener">Appointments &amp; Reports</a></p>
+      <p>Sample photos from Unsplash</p>
+    </div>
+    <p class="footer-madeby"></p>
+  </footer>
+
+  <a class="sticky" data-book href="#">Book a visit</a>
+
+  <script type="module" src="app.js?v=2"></script>
+</body>
+
+</html>
