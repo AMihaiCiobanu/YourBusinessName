@@ -1,7 +1,8 @@
 // Seasonal decorations over the page, in the spirit of NailsByClemi's Halloween: a greeting ribbon
 // under the header, a garland / corner piece / bats / fireworks over the first screen, shapes falling
 // or floating over the page (Halloween: spiders crawling, one on a silk thread), and a mascot bottom
-// left that jumps, says something and plays a sound when tapped, with a sound on/off button.
+// left that jumps, says something and plays a sound when tapped (Christmas: NailsByClemi's snowman,
+// who talks on his own and admires his red nails), with a sound on/off button.
 // Nothing here takes clicks except the mascot and its sound button. With reduced motion only the
 // still pieces stay. Loaded on demand by app.js; mountDecor() returns the function that removes it all.
 
@@ -47,7 +48,8 @@ export function mountDecor({ season, main, t, reduced }) {
   if (document.readyState === 'complete') document.fonts.ready.then(hang);
   else window.addEventListener('load', () => document.fonts.ready.then(hang), { once: true });
 
-  if (art.garland) area.appendChild(garland(art.garland));
+  if (art.garland === 'tinsel') area.appendChild(el('div', 'sz-tinsel'));
+  else if (art.garland) area.appendChild(garland(art.garland));
   if (art.extra) area.insertAdjacentHTML('beforeend', art.extra);
   if (art.corner) area.insertAdjacentHTML('beforeend', art.corner);
   if (art.bats && !reduced) {
@@ -114,21 +116,60 @@ export function mountDecor({ season, main, t, reduced }) {
   });
 
   const lines = String(t(`season.${season}.bubbles`, { year })).split('|');
+  const label = t(`season.${season}.mascot`);
   let timer = 0;
-  mascot.addEventListener('click', () => {
-    bubble.textContent = lines[Math.floor(Math.random() * lines.length)];
-    mascot.classList.remove('is-scared');
-    void mascot.offsetWidth; // restart the animation on rapid taps
-    mascot.classList.add('is-scared');
-    clearTimeout(timer);
-    timer = setTimeout(() => mascot.classList.remove('is-scared'), 1600);
-    if (soundOn) {
-      if (navigator.vibrate) navigator.vibrate(60);
-      playSeason(season);
-    }
-    if (!reduced) burst(mascot, BURST[season]);
-  });
-  cleanups.push(() => clearTimeout(timer));
+
+  if (art.talk) {
+    // NailsByClemi's snowman: says his lines in order on his own, 5 s each with 3 s between (waits
+    // while the tab is hidden), and looks at his nails each time. A tap jumps to the next line and
+    // restarts the cycle. Sound only on a tap. The visible line is part of the button's name.
+    const SHOW = 5000, GAP = 3000;
+    let ix = -1, armTimer = 0, talkTimer = 0;
+    const talk = () => {
+      ix = (ix + 1) % lines.length;
+      bubble.textContent = lines[ix];
+      mascot.setAttribute('aria-label', `${label.split(' — ')[0]}: ${lines[ix]}`);
+      mascot.classList.add('is-talking');
+      mascot.classList.remove('is-admiring');
+      void mascot.offsetWidth; // restart the animation on rapid taps
+      mascot.classList.add('is-admiring');
+      clearTimeout(armTimer); clearTimeout(talkTimer); clearTimeout(timer);
+      armTimer = setTimeout(() => mascot.classList.remove('is-admiring'), 3200);
+      talkTimer = setTimeout(() => {
+        mascot.classList.remove('is-talking');
+        mascot.setAttribute('aria-label', label);
+      }, SHOW);
+      timer = setTimeout(function next() {
+        if (document.hidden) { timer = setTimeout(next, GAP); return; }
+        talk();
+      }, SHOW + GAP);
+    };
+    mascot.addEventListener('click', () => {
+      talk();
+      if (soundOn) {
+        if (navigator.vibrate) navigator.vibrate(60);
+        playSeason(season);
+      }
+      if (!reduced) burst(mascot, BURST[season]);
+    });
+    timer = setTimeout(talk, GAP);
+    cleanups.push(() => { clearTimeout(timer); clearTimeout(armTimer); clearTimeout(talkTimer); });
+  } else {
+    mascot.addEventListener('click', () => {
+      bubble.textContent = lines[Math.floor(Math.random() * lines.length)];
+      mascot.classList.remove('is-scared');
+      void mascot.offsetWidth; // restart the animation on rapid taps
+      mascot.classList.add('is-scared');
+      clearTimeout(timer);
+      timer = setTimeout(() => mascot.classList.remove('is-scared'), 1600);
+      if (soundOn) {
+        if (navigator.vibrate) navigator.vibrate(60);
+        playSeason(season);
+      }
+      if (!reduced) burst(mascot, BURST[season]);
+    });
+    cleanups.push(() => clearTimeout(timer));
+  }
 
   wrap.append(mascot, sound);
   document.body.appendChild(wrap);
@@ -136,7 +177,7 @@ export function mountDecor({ season, main, t, reduced }) {
   return () => { while (cleanups.length) cleanups.pop()(); };
 }
 
-// A string across the top of the page in three sags: bulbs, hearts or bunting flags.
+// A string across the top of the page in three sags: hearts or bunting flags.
 function garland(kind) {
   const items = GARLAND[kind];
   const wrap = el('div', `sz-garland sz-g-${kind}`,

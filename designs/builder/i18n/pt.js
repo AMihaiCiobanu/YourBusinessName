@@ -76,7 +76,7 @@ export default {
     none: { name: 'Nenhum' },
     halloween: { name: 'Halloween', greet: 'Feliz Halloween! Marque a sua visita para a época mais assustadora.', mascot: 'Espantalho de Halloween — toque para o ouvir', bubbles: 'Buu!|Hi hi hi!|Cuidado!' },
     blackfriday: { name: 'Black Friday', greet: 'Chegou a Black Friday: marque já e aproveite as ofertas da semana.', mascot: 'Saco de compras Black Friday — toque para o ouvir', bubbles: 'Tchim-tchim!|Ofertas!|Não perca!' },
-    christmas: { name: 'Natal', greet: 'Feliz Natal! Mime-se, ou mime alguém especial.', mascot: 'Boneco de neve — toque para o ouvir', bubbles: 'Ho ho ho!|Sinos de Natal!|Feliz Natal!' },
+    christmas: { name: 'Natal', greet: 'Feliz Natal! Mime-se, ou mime alguém especial.', mascot: 'Boneco de neve de unhas vermelhas — toque para o ouvir', bubbles: 'Olha que unhas! 💅|Vermelho de Natal ❤️|Nem sequer derretem!|Feliz Natal!' },
     newyear: { name: 'Ano Novo', greet: 'Feliz Ano Novo {year}! Comece o ano no seu melhor.', mascot: 'Champanhe de Ano Novo — toque para o ouvir', bubbles: 'Saúde!|Feliz {year}!|Pop!' },
     valentine: { name: 'Dia dos Namorados', greet: 'Feliz Dia dos Namorados! Mime quem ama, ou mime-se a si.', mascot: 'Coração dos Namorados — toque para o ouvir', bubbles: 'Amo-te!|Beijinho!|Sê meu!' },
     spring: { name: 'Primavera', greet: 'Chegou a primavera! Flores frescas, visual fresco.', mascot: 'Túlipas da primavera — toque para as ouvir', bubbles: 'Piu piu!|Olá, primavera!|A florir!' },

@@ -76,7 +76,7 @@ export default {
     none: { name: 'Ninguno' },
     halloween: { name: 'Halloween', greet: '¡Feliz Halloween! Reserva tu cita para la temporada más terrorífica.', mascot: 'Espantapájaros de Halloween — tócalo para oírlo', bubbles: '¡Bu!|¡Ji ji ji!|¡Cuidado!' },
     blackfriday: { name: 'Black Friday', greet: 'Llega el Black Friday: reserva ahora y aprovecha las ofertas de la semana.', mascot: 'Bolsa de Black Friday — tócala para oírla', bubbles: '¡Cha-ching!|¡Ofertas!|¡No te lo pierdas!' },
-    christmas: { name: 'Navidad', greet: '¡Feliz Navidad! Date un capricho, o regálaselo a alguien especial.', mascot: 'Muñeco de nieve — tócalo para oírlo', bubbles: '¡Jo jo jo!|¡Navidad, Navidad!|¡Feliz Navidad!' },
+    christmas: { name: 'Navidad', greet: '¡Feliz Navidad! Date un capricho, o regálaselo a alguien especial.', mascot: 'Muñeco de nieve con uñas rojas — tócalo para oírlo', bubbles: '¡Mira qué uñas! 💅|Rojo navideño ❤️|¡Ni siquiera se derriten!|¡Feliz Navidad!' },
     newyear: { name: 'Año Nuevo', greet: '¡Feliz Año Nuevo {year}! Empieza el año luciendo genial.', mascot: 'Champán de Año Nuevo — tócalo para oírlo', bubbles: '¡Salud!|¡Feliz {year}!|¡Pop!' },
     valentine: { name: 'San Valentín', greet: '¡Feliz San Valentín! Mima a quien quieres, o mímate tú.', mascot: 'Corazón de San Valentín — tócalo para oírlo', bubbles: '¡Te quiero!|¡Muac!|¡Sé mía!' },
     spring: { name: 'Primavera', greet: '¡Llegó la primavera! Flores frescas, look fresco.', mascot: 'Tulipanes de primavera — tócalos para oírlos', bubbles: '¡Pío pío!|¡Hola, primavera!|¡A florecer!' },

@@ -1,7 +1,7 @@
 // Drawings for the seasonal themes (inline SVG, no files): one mascot per season (a button bottom
 // left that reacts and makes a sound when tapped), small shapes that fall or float over the page,
 // and the corner pieces. Mascot parts with class `eye` / `mouth` react when it is tapped.
-// The Halloween pieces are the ones from NailsByClemi (halloween.js there).
+// The Halloween and Christmas pieces are the ones from NailsByClemi (halloween.js, christmas.js there).
 
 export const BAT = '<path class="wing" d="M20 14c-3-6-9-9-18-8 4 2 5 5 5 8-2 0-4 1-5 3 4-1 7 0 9 3 1-3 4-4 9-4z"/>'
   + '<path class="wing" d="M20 14c3-6 9-9 18-8-4 2-5 5-5 8 2 0 4 1 5 3-4-1-7 0-9 3-1-3-4-4-9-4z"/>'
@@ -18,12 +18,19 @@ const PUMPKIN = '<svg class="sz-corner" viewBox="0 0 80 70" aria-hidden="true">'
   + '<path d="M26 34l7 10-14 0zM54 34l7 10-14 0z" fill="#2a0f4d"/>'
   + '<path d="M24 52q16 14 32 0l-4-2-4 4-4-4-4 4-4-4-4 4-4-4z" fill="#2a0f4d"/></svg>';
 
-const TREE = '<svg class="sz-corner" viewBox="0 0 80 100" aria-hidden="true">'
-  + '<rect x="34" y="82" width="12" height="14" rx="2" fill="#6b4529"/>'
-  + '<path d="M40 10L64 44H16z" fill="#2f9a5f"/><path d="M40 28L70 66H10z" fill="#278350"/><path d="M40 48L76 88H4z" fill="#1f6d42"/>'
-  + '<path d="M40 2l2.6 5.4 5.9.8-4.3 4.1 1 5.9L40 15.4l-5.2 2.8 1-5.9-4.3-4.1 5.9-.8z" fill="#f5c542"/>'
-  + '<g class="sz-blink"><circle cx="34" cy="38" r="3" fill="#e23b3b"/><circle cx="50" cy="56" r="3" fill="#f5c542"/><circle cx="26" cy="72" r="3" fill="#4cc9f0"/><circle cx="56" cy="80" r="3" fill="#e23b3b"/></g>'
-  + '<g class="sz-blink b"><circle cx="46" cy="36" r="3" fill="#4cc9f0"/><circle cx="30" cy="56" r="3" fill="#e23b3b"/><circle cx="44" cy="74" r="3" fill="#f5c542"/></g></svg>';
+// NailsByClemi's Christmas tree: tinsel, twinkling lights, a glowing star and a gift.
+const TREE = '<svg class="sz-corner sz-tree" viewBox="0 0 100 132" aria-hidden="true">'
+  + '<rect x="43" y="108" width="14" height="16" rx="2" fill="#7a4b2a"/>'
+  + '<path d="M50 14L14 62h14L8 92h18L2 116h96L74 92h18L72 62h14z" fill="#1f6b45"/>'
+  + '<path d="M50 14L14 62h14L8 92h18L2 116h48z" fill="#2a8456"/>'
+  + '<g fill="none" stroke="#e2b443" stroke-width="2.2" stroke-linecap="round"><path d="M30 52q20 8 36-4M20 82q30 12 58-6M12 108q40 12 76-6"/></g>'
+  + '<g class="sz-lights"><circle cx="40" cy="44" r="3.4" fill="#ff5a6e"/><circle cx="60" cy="58" r="3.4" fill="#ffd25a"/>'
+  + '<circle cx="32" cy="72" r="3.6" fill="#7fd0ff"/><circle cx="66" cy="80" r="3.6" fill="#ff5a6e"/>'
+  + '<circle cx="48" cy="90" r="3.6" fill="#ffd25a"/><circle cx="22" cy="104" r="3.8" fill="#ff5a6e"/>'
+  + '<circle cx="56" cy="110" r="3.8" fill="#7fd0ff"/><circle cx="80" cy="104" r="3.8" fill="#ffd25a"/></g>'
+  + '<path class="sz-star" d="M50 0l4.1 8.6 9.4 1.2-6.9 6.5 1.8 9.3L50 21l-8.4 4.6 1.8-9.3-6.9-6.5 9.4-1.2z" fill="#f5c84b" stroke="#c9952a" stroke-width="1"/>'
+  + '<rect x="70" y="112" width="22" height="18" rx="2" fill="#c2233f"/><rect x="79" y="112" width="4" height="18" fill="#f5c84b"/>'
+  + '<path d="M81 112c-6-7-11-2-6 0zM81 112c6-7 11-2 6 0z" fill="#f5c84b"/></svg>';
 
 const BASKET = '<svg class="sz-corner" viewBox="0 0 90 72" aria-hidden="true">'
   + '<path d="M14 36q31-42 62 0" stroke="#a8742a" stroke-width="4" fill="none"/>'
@@ -50,7 +57,12 @@ const SASH = '<div class="sz-sash" aria-hidden="true"><span>BLACK FRIDAY</span><
 
 // ---------- small falling / floating shapes ----------
 
-const SNOW = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"><path d="M12 2v20M3.3 7l17.4 10M3.3 17L20.7 7M12 5l-2-2M12 5l2-2M12 19l-2 2M12 19l2 2"/></svg>';
+const ARM = 'M0 0V-44M0-16L-9-25M0-16L9-25M0-30L-7-37M0-30L7-37';
+const ARMS = Array.from({ length: 6 }, (_, i) => `<path d="${ARM}" transform="rotate(${i * 60})"/>`).join('');
+// NailsByClemi's snowflake: a soft blue-grey outline under a white stroke, so it shows on light pages too.
+const SNOW = '<svg viewBox="-50 -50 100 100"><g fill="none" stroke-linecap="round" stroke-linejoin="round">'
+  + `<g stroke="#9fb6d1" stroke-width="11" opacity=".55">${ARMS}</g>`
+  + `<g stroke="#fff" stroke-width="6">${ARMS}<circle r="6" fill="#fff"/></g></g></svg>`;
 const heart = c => `<svg viewBox="0 0 24 22"><path d="M12 21C5 16 1 12 1 7a5.5 5.5 0 0 1 11-1 5.5 5.5 0 0 1 11 1c0 5-4 9-11 14z" fill="${c}"/></svg>`;
 const petal = c => `<svg viewBox="0 0 20 24"><path d="M10 1C4 7 2 13 5 19c2 4 8 4 10 0 3-6 1-12-5-18z" fill="${c}"/></svg>`;
 const confetti = c => `<svg viewBox="0 0 10 16"><rect width="10" height="16" rx="2" fill="${c}"/></svg>`;
@@ -82,18 +94,35 @@ const SCARECROW = '<svg viewBox="0 0 120 200" aria-hidden="true">'
   + '<rect x="40" y="30" width="40" height="8" fill="#ff7a1a"/>'
   + '<circle cx="76" cy="30" r="5" fill="#f4ecff"/><circle cx="76" cy="30" r="2" fill="#e8620c"/></svg>';
 
-const SNOWMAN = '<svg viewBox="0 0 120 172" aria-hidden="true">'
-  + '<ellipse cx="60" cy="164" rx="44" ry="7" fill="#000" opacity=".2"/>'
-  + '<path d="M38 112L12 94M20 99l-7-9M82 112l26-18M100 99l6-10" stroke="#6b4529" stroke-width="4" stroke-linecap="round"/>'
-  + '<circle cx="60" cy="126" r="38" fill="#f7fbff" stroke="#c9dcec" stroke-width="2"/>'
-  + '<circle cx="60" cy="72" r="27" fill="#f7fbff" stroke="#c9dcec" stroke-width="2"/>'
-  + '<circle cx="60" cy="112" r="3.6" fill="#2b2b2b"/><circle cx="60" cy="128" r="3.6" fill="#2b2b2b"/><circle cx="60" cy="144" r="3.6" fill="#2b2b2b"/>'
-  + '<path d="M35 92q25 12 50 0v9q-25 12-50 0z" fill="#d6213f"/><path d="M66 100l12 2-2 24-10-2z" fill="#b81b35"/>'
-  + '<circle class="eye" cx="51" cy="66" r="3.2"/><circle class="eye" cx="69" cy="66" r="3.2"/>'
-  + '<path d="M60 72l18 4-18 4z" fill="#ff7a1a"/>'
-  + '<path class="mouth" d="M49 84q11 8 22 0" stroke="#2b2b2b" stroke-width="2.6" stroke-linecap="round" fill="none"/>'
-  + '<ellipse cx="60" cy="47" rx="30" ry="5" fill="#1d1d1d"/><rect x="44" y="16" width="32" height="31" rx="2" fill="#2b2b2b"/>'
-  + '<rect x="44" y="37" width="32" height="6" fill="#d6213f"/><circle cx="71" cy="37" r="3" fill="#2f9a5f"/><circle cx="74" cy="40" r="2.4" fill="#e23b3b"/></svg>';
+// NailsByClemi's snowman with red nails. While he talks (.is-admiring) the right arm (.sz-arm) lifts the
+// hand beside his face, head and eyes turn to it and the nails sparkle (decor.css).
+const FINGERS = '<g stroke="#6b4529" stroke-width="3" stroke-linecap="round" fill="none"><path d="M124 118l9-6M124 118l11 1M124 118l8 8"/></g>'
+  + '<g class="sz-nails" fill="#d6213f"><ellipse cx="134" cy="111.4" rx="2.6" ry="2" transform="rotate(-34 134 111.4)"/>'
+  + '<ellipse cx="136.3" cy="119" rx="2.6" ry="2"/><ellipse cx="133" cy="127" rx="2.6" ry="2" transform="rotate(45 133 127)"/></g>';
+const SNOWMAN = '<svg viewBox="0 0 150 200" aria-hidden="true">'
+  + '<ellipse cx="70" cy="190" rx="44" ry="7" fill="#9fb6d1" opacity=".35"/>'
+  + '<g class="sz-arm-l"><path d="M50 98L16 80M27 86l-6-10M27 86l-11 1" stroke="#6b4529" stroke-width="3.2" stroke-linecap="round" fill="none"/>'
+  + '<g fill="#d6213f"><ellipse cx="14.6" cy="79.2" rx="2.6" ry="2"/><ellipse cx="20.4" cy="75" rx="2" ry="2.6"/><ellipse cx="15" cy="87" rx="2.6" ry="2"/></g></g>'
+  + '<circle cx="70" cy="152" r="36" fill="#fff" stroke="#c9d7e6" stroke-width="2"/>'
+  + '<path d="M44 168q26 18 54 0" stroke="#e3ecf5" stroke-width="6" fill="none" stroke-linecap="round"/>'
+  + '<circle cx="70" cy="100" r="25" fill="#fff" stroke="#c9d7e6" stroke-width="2"/>'
+  + '<g fill="#2b1d1f"><circle cx="70" cy="96" r="3.2"/><circle cx="70" cy="108" r="3.2"/><circle cx="70" cy="140" r="3.6"/></g>'
+  + '<path d="M50 80q20 9 40 0l1 7q-21 9-42 0z" fill="#c2233f"/><path d="M80 84l5 22-8 1-3-21z" fill="#a51b33"/>'
+  + '<path d="M78 98l8-1M79 102l8-1" stroke="#f7d9d6" stroke-width="1.6"/>'
+  + '<g class="sz-head">'
+  + '<g stroke="#6b4529" stroke-width="2.4" stroke-linecap="round" fill="none"><path d="M70 30V16M70 22l-6-6M70 24l7-7M64 32l-5-9"/></g>'
+  + '<ellipse cx="70" cy="54" rx="25" ry="24" fill="#fff" stroke="#c9d7e6" stroke-width="2"/>'
+  + '<ellipse cx="54" cy="62" rx="5" ry="3" fill="#f7c7cf" opacity=".8"/><ellipse cx="88" cy="62" rx="5" ry="3" fill="#f7c7cf" opacity=".8"/>'
+  + '<ellipse cx="61" cy="49" rx="4.6" ry="5.6" fill="#fff" stroke="#2b1d1f" stroke-width="1.4"/>'
+  + '<ellipse cx="79" cy="49" rx="4.6" ry="5.6" fill="#fff" stroke="#2b1d1f" stroke-width="1.4"/>'
+  + '<g class="sz-pupils" fill="#2b1d1f"><circle cx="61" cy="50" r="2.6"/><circle cx="79" cy="50" r="2.6"/></g>'
+  + '<path class="sz-lids" d="M56 44q5-4 10 0M74 44q5-4 10 0" stroke="#2b1d1f" stroke-width="1.6" fill="none" stroke-linecap="round"/>'
+  + '<path d="M70 55l18 4-18 3z" fill="#f08a24"/>'
+  + '<path d="M60 66q10 8 20 0" stroke="#2b1d1f" stroke-width="2" fill="none" stroke-linecap="round"/>'
+  + '</g>'
+  + '<g class="sz-arm"><path d="M90 95L124 118" stroke="#6b4529" stroke-width="3.2" stroke-linecap="round"/>' + FINGERS
+  + '<g class="sz-sparkle" fill="#fff8d6"><path d="M142 106l1.4 3.2 3.2 1.4-3.2 1.4-1.4 3.2-1.4-3.2-3.2-1.4 3.2-1.4z"/>'
+  + '<path d="M141 126l1 2.2 2.2 1-2.2 1-1 2.2-1-2.2-2.2-1 2.2-1z"/></g></g></svg>';
 
 const CHAMPAGNE = '<svg viewBox="0 0 120 172" aria-hidden="true">'
   + '<ellipse cx="60" cy="164" rx="44" ry="7" fill="#000" opacity=".25"/>'
@@ -166,7 +195,8 @@ const BAG = '<svg viewBox="0 0 120 172" aria-hidden="true">'
 
 // ---------- the seasons ----------
 // fall: shapes over the page (`up` floats them upwards), garland: a string across the top of the
-// page, corner: a piece at the bottom right of the first screen, extra: more markup in that area.
+// page ('tinsel' is a CSS strip), corner: a piece at the bottom right of the first screen, extra: more
+// markup in that area, talk: the mascot says its lines on its own, 5 s each with 3 s between.
 
 const pick = (list, n) => Array.from({ length: n }, (_, i) => list[i % list.length]);
 
@@ -175,8 +205,10 @@ export const ART = {
     fall: { items: [leaf('#ff7a1a'), leaf('#c1440e'), leaf('#8a5cc0')], count: 6, size: [16, 26] } },
   blackfriday: { emoji: '🛍️', mascot: BAG, extra: SASH,
     fall: { items: [coin, coin, star('#ffd60a')], count: 10, size: [14, 24] } },
-  christmas: { emoji: '🎄', mascot: SNOWMAN, corner: TREE, garland: 'bulb',
-    fall: { items: [SNOW], count: 18, size: [10, 22] } },
+  // NailsByClemi's Christmas: tinsel garland, tree, big snowflakes, bows on the service cards (decor.css),
+  // and a snowman who talks on his own (`talk`) and admires his red nails.
+  christmas: { emoji: '🎄', mascot: SNOWMAN, corner: TREE, garland: 'tinsel', talk: true,
+    fall: { items: [SNOW], count: 24, size: [18, 44], spin: true } },
   newyear: { emoji: '🥂', mascot: CHAMPAGNE, fireworks: true,
     fall: { items: [confetti('#f5c542'), confetti('#ff4d6d'), confetti('#4cc9f0'), confetti('#b8f2e6'), star('#f5c542')], count: 18, size: [7, 14], spin: true } },
   valentine: { emoji: '💝', mascot: HEART, garland: 'heart',
@@ -190,7 +222,6 @@ export const ART = {
 };
 
 export const GARLAND = {
-  bulb: pick(['#e23b3b', '#f5c542', '#2f9a5f', '#4cc9f0'], 24),
   heart: pick(['#ff4d7a', '#ffb3c6', '#e0245e'], 18).map(heart),
   flag: pick(['#ffd166', '#cdb4db', '#a8dadc', '#ffafcc', '#b5e48c'], 22)
 };

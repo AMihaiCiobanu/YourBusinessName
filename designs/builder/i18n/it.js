@@ -76,7 +76,7 @@ export default {
     none: { name: 'Nessuno' },
     halloween: { name: 'Halloween', greet: 'Buon Halloween! Prenota il tuo appuntamento per la stagione da brivido.', mascot: 'Spaventapasseri di Halloween — toccalo per sentirlo', bubbles: 'Buu!|Ih ih ih!|Attento!' },
     blackfriday: { name: 'Black Friday', greet: 'È arrivato il Black Friday: prenota ora e cogli le offerte della settimana.', mascot: 'Borsa Black Friday — toccala per sentirla', bubbles: 'Cha-ching!|Offerte!|Non perderle!' },
-    christmas: { name: 'Natale', greet: 'Buon Natale! Concediti una coccola, o regalala a qualcuno di caro.', mascot: 'Pupazzo di neve — toccalo per sentirlo', bubbles: 'Oh oh oh!|Jingle bells!|Buon Natale!' },
+    christmas: { name: 'Natale', greet: 'Buon Natale! Concediti una coccola, o regalala a qualcuno di caro.', mascot: 'Pupazzo di neve con le unghie rosse — toccalo per sentirlo', bubbles: 'Guarda che unghie! 💅|Rosso Natale ❤️|Non si sciolgono nemmeno!|Buon Natale!' },
     newyear: { name: 'Capodanno', greet: 'Buon anno {year}! Inizia l\'anno al meglio.', mascot: 'Spumante di Capodanno — toccalo per sentirlo', bubbles: 'Cin cin!|Buon {year}!|Pop!' },
     valentine: { name: 'San Valentino', greet: 'Buon San Valentino! Coccola chi ami, o coccola te.', mascot: 'Cuore di San Valentino — toccalo per sentirlo', bubbles: 'Ti amo!|Smack!|Sii mia!' },
     spring: { name: 'Primavera', greet: 'È arrivata la primavera! Fiori freschi, look fresco.', mascot: 'Tulipani di primavera — toccali per sentirli', bubbles: 'Cip cip!|Ciao, primavera!|Si fiorisce!' },

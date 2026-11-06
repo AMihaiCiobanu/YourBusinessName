@@ -17,7 +17,7 @@ export const SKIN_META = {
 export const SEASON_META = {
   halloween: { accent: '#ff7a1a', bg: '#150f1f', bg2: '#1d1429', surface: '#251a35', text: '#f4ecff', dark: true },
   blackfriday: { accent: '#ffd60a', bg: '#0a0a0a', bg2: '#121212', surface: '#1a1a1a', text: '#fafafa', dark: true },
-  christmas: { accent: '#ef4444', bg: '#0f1f17', bg2: '#132a1f', surface: '#183326', text: '#f5f1e8', dark: true },
+  christmas: { accent: '#c2233f', bg: '#f3f7fb', bg2: '#e5eef7', surface: '#ffffff', text: '#1d2533', dark: false },
   newyear: { accent: '#f5c542', bg: '#0b1026', bg2: '#10173a', surface: '#161e47', text: '#f3f1ff', dark: true },
   valentine: { accent: '#e0245e', bg: '#fff3f6', bg2: '#ffe8ef', surface: '#ffffff', text: '#3a0f1f', dark: false },
   spring: { accent: '#e5486b', bg: '#fbfcf7', bg2: '#f0f6ea', surface: '#ffffff', text: '#1f2a1c', dark: false },

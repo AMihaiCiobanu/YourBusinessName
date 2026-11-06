@@ -76,7 +76,7 @@ export default {
     none: { name: 'None' },
     halloween: { name: 'Halloween', greet: 'Happy Halloween! Book your appointment for the spooky season.', mascot: 'Halloween scarecrow — tap to hear it', bubbles: 'Boo!|Hee hee hee!|Watch out!|Bhuuu!' },
     blackfriday: { name: 'Black Friday', greet: 'Black Friday is here: book now and catch this week\'s offers.', mascot: 'Black Friday shopping bag — tap to hear it', bubbles: 'Cha-ching!|Deals inside!|Don\'t miss it!' },
-    christmas: { name: 'Christmas', greet: 'Merry Christmas! Give yourself, or someone dear, a treat this season.', mascot: 'Christmas snowman — tap to hear it', bubbles: 'Ho ho ho!|Jingle bells!|Merry Christmas!' },
+    christmas: { name: 'Christmas', greet: 'Merry Christmas! Give yourself, or someone dear, a treat this season.', mascot: 'Snowman with red nails — tap to hear him', bubbles: "Look at these nails! 💅|Christmas red ❤️|They don't even melt!|Merry Christmas!" },
     newyear: { name: 'New Year', greet: 'Happy New Year {year}! Start the year looking your best.', mascot: 'New Year champagne — tap to hear it', bubbles: 'Cheers!|Happy {year}!|Pop!' },
     valentine: { name: 'Valentine\'s Day', greet: 'Happy Valentine\'s Day! Treat the one you love, or treat yourself.', mascot: 'Valentine\'s heart — tap to hear it', bubbles: 'Love you!|Mwah!|Be mine!' },
     spring: { name: 'Spring', greet: 'Spring is here! Fresh flowers, fresh look.', mascot: 'Spring tulips — tap to hear them', bubbles: 'Tweet tweet!|Hello, spring!|Bloom!' },

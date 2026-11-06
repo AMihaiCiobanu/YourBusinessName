@@ -76,7 +76,7 @@ export default {
     none: { name: 'Brak' },
     halloween: { name: 'Halloween', greet: 'Wesołego Halloween! Zarezerwuj wizytę na straszny sezon.', mascot: 'Strach na wróble — dotknij, by usłyszeć', bubbles: 'Buu!|Hi hi hi!|Uważaj!' },
     blackfriday: { name: 'Black Friday', greet: 'Nadszedł Black Friday: zarezerwuj teraz i złap oferty tygodnia.', mascot: 'Torba zakupowa Black Friday — dotknij, by usłyszeć', bubbles: 'Dzyń-dzyń!|Promocje!|Nie przegap!' },
-    christmas: { name: 'Boże Narodzenie', greet: 'Wesołych Świąt! Zrób przyjemność sobie albo komuś bliskiemu.', mascot: 'Bałwanek — dotknij, by usłyszeć', bubbles: 'Ho ho ho!|Dzwoneczki!|Wesołych Świąt!' },
+    christmas: { name: 'Boże Narodzenie', greet: 'Wesołych Świąt! Zrób przyjemność sobie albo komuś bliskiemu.', mascot: 'Bałwanek z czerwonymi paznokciami — dotknij, by usłyszeć', bubbles: 'Patrz, jakie paznokcie! 💅|Świąteczna czerwień ❤️|Nawet się nie topią!|Wesołych Świąt!' },
     newyear: { name: 'Nowy Rok', greet: 'Szczęśliwego Nowego Roku {year}! Zacznij rok w najlepszej formie.', mascot: 'Szampan noworoczny — dotknij, by usłyszeć', bubbles: 'Na zdrowie!|Szczęśliwego {year}!|Pyk!' },
     valentine: { name: 'Walentynki', greet: 'Szczęśliwych Walentynek! Rozpieść ukochaną osobę albo siebie.', mascot: 'Walentynkowe serce — dotknij, by usłyszeć', bubbles: 'Kocham cię!|Cmok!|Bądź moja!' },
     spring: { name: 'Wiosna', greet: 'Przyszła wiosna! Świeże kwiaty, świeży wygląd.', mascot: 'Wiosenne tulipany — dotknij, by usłyszeć', bubbles: 'Ćwir ćwir!|Witaj, wiosno!|Kwitniemy!' },
