@@ -452,9 +452,10 @@
         <div class="map">
           <h3>Find us</h3>
           <div class="map-frame">
-            <!-- Your page: replace .map-placeholder with the Google Maps embed, e.g.
-                 <iframe src="https://www.google.com/maps/embed?pb=..." title="Map to Your Business Name"
-                   loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe> -->
+            <!-- Your page: replace .map-placeholder with the drawn, click-to-load map from NailsByClemi/index.html
+                 (.map-consent with data-map-src = the Google Maps embed URL, the .mp-art SVG and the .mp-overlay button;
+                 styles in NailsByClemi/styles.css under "Map"). Google gets nothing until the visitor presses the button.
+                 It needs the client-legal.js loader at the end of <body> (see the footer note). -->
             <div class="map-placeholder">
               <svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.6"
                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -490,6 +491,11 @@
       <p>© <span id="year">2026</span> Your Business Name</p>
       <p class="muted small">Online booking by <a href="https://appointmentsapps.com/" target="_blank"
           rel="noopener">Appointments &amp; Reports</a></p>
+      <!-- Your page: privacy link + company details (shown once filled in AppointmentsWEB/legal/clients/<slug>.json):
+           <div class="client-legal" data-client-legal="<slug>">
+             <p class="muted small"><a href="https://appointmentsapps.com/legal/client/?c=<slug>">Privacy policy</a></p>
+           </div>
+           and before </body> the loader from NailsByClemi/index.html that adds /legal/client-legal.js. -->
     </div>
     <div class="container">
       <p class="footer-madeby">
