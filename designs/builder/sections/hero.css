@@ -16,6 +16,17 @@
 }
 .hero-gl { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; opacity: 0; transition: opacity 1.6s ease; pointer-events: none; }
 .hero-gl.is-on { opacity: 1; }
+/* Once the 3D particles are on, drop the static dot grid so there is one set of dots, not two. */
+.hero:has(.hero-gl.is-on) .hero-bg {
+  background:
+    radial-gradient(60% 50% at 75% 30%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%),
+    radial-gradient(40% 40% at 10% 90%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 70%);
+}
+:root[data-skin="bold"] .hero:has(.hero-gl.is-on) .hero-bg {
+  background:
+    radial-gradient(40% 40% at 85% 20%, color-mix(in srgb, var(--accent-3) 70%, transparent), transparent 70%),
+    radial-gradient(35% 40% at 70% 85%, color-mix(in srgb, var(--accent-2) 30%, transparent), transparent 70%);
+}
 
 .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; align-items: center; gap: clamp(32px, 5cqi, 72px); }
 .hero h1 { font-size: calc(clamp(2.6rem, 7.4cqi, 5.6rem) * var(--display-scale)); line-height: 0.98; }
