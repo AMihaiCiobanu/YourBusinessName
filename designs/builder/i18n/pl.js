@@ -202,7 +202,8 @@ export default {
     secondary: 'Zobacz ceny',
     scroll: 'Przewiń w dół',
     tilt: 'Włącz przechylanie 3D',
-    tiltOn: 'Przechylanie 3D jest włączone'
+    tiltOn: 'Przechylanie 3D jest włączone',
+    tiltDenied: 'Odmówiono dostępu do ruchu: zamknij kartę, otwórz stronę ponownie i dotknij „Zezwól”'
   },
 
   slider: {
@@ -434,6 +435,8 @@ export default {
 
   contactbar: {
     label: 'Szybki kontakt',
+    open: 'Otwarte',
+    closed: 'Zamknięte',
     call: 'Zadzwoń',
     whatsapp: 'WhatsApp',
     book: 'Rezerwuj',

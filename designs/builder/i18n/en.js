@@ -203,7 +203,8 @@ export default {
     secondary: 'See prices',
     scroll: 'Scroll down',
     tilt: 'Turn on 3D tilt',
-    tiltOn: '3D tilt is on'
+    tiltOn: '3D tilt is on',
+    tiltDenied: 'Motion access refused: close the tab, reopen the page and tap “Allow”'
   },
 
   slider: {
@@ -435,6 +436,8 @@ export default {
 
   contactbar: {
     label: 'Quick contact',
+    open: 'Open',
+    closed: 'Closed',
     call: 'Call',
     whatsapp: 'WhatsApp',
     book: 'Book',

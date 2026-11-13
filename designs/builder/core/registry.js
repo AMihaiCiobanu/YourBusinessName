@@ -152,7 +152,7 @@ export const NAV_GROUPS = ['services', 'prices', 'gallery', 'team', 'shop', 'rev
 
 // Bump when a section module changes what it exports, so a browser never mixes a cached old file
 // with a new one. Sections that import each other use the same ?v= (reviewbook → book, mapwide → map).
-const VERSION = 4;
+const VERSION = 5;
 const modules = new Map();
 export function loadSection(mod) {
   if (!modules.has(mod)) modules.set(mod, import(`../sections/${mod}.js?v=${VERSION}`).then(m => m.default));

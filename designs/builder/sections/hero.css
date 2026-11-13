@@ -44,6 +44,9 @@
 .hero-status::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #c2410c; }
 .hero-status.is-open::before { background: #16a34a; box-shadow: 0 0 0 4px rgba(22, 163, 74, 0.2); }
 .hero-tilt { margin: 16px 0 0 12px; min-height: 44px; padding: 8px 14px; border: 0; cursor: pointer; }
+/* On phones the seasonal mascot sits fixed at the bottom left, over this button's spot, and took the
+   tap. Right-aligned, the button stays clear of it. */
+@media (max-width: 700px) { .hero-tilt { display: flex; width: fit-content; margin: 16px 0 0 auto; } }
 
 .hero-visual { perspective: 1200px; }
 /* The first photo is the LCP on phones: it slides in but is never transparent. */
@@ -55,6 +58,9 @@
   transform: rotateY(calc(var(--sx) * 14deg - 8deg)) rotateX(calc(var(--sy) * -10deg + 4deg));
   transition: transform 0.6s var(--ease), opacity 0.9s var(--ease);
 }
+/* Once revealed, keep the lean: `[data-reveal].is-in { transform: none }` (styles.css) is more specific
+   than `.hero-stack` and froze the stack, so neither the pointer nor the phone's tilt moved it. */
+.hero-stack[data-reveal].is-in { transform: rotateY(calc(var(--sx) * 14deg - 8deg)) rotateX(calc(var(--sy) * -10deg + 4deg)); }
 .hero-card { position: absolute; margin: 0; overflow: hidden; border-radius: var(--radius-lg); box-shadow: var(--shadow); background: var(--surface-2); }
 .hero-card img { width: 100%; height: 100%; object-fit: cover; }
 .hero-card-1 { left: 14%; top: 4%; width: 62%; height: 80%; transform: translateZ(40px); }
@@ -80,9 +86,9 @@
   .hero-scroll { display: none; }
 }
 
-.reduce-motion .hero-stack { transform: none; transition: none; }
+.reduce-motion .hero-stack, .reduce-motion .hero-stack[data-reveal].is-in { transform: none; transition: none; }
 .reduce-motion .hero-scroll { animation: none; }
 @media (prefers-reduced-motion: reduce) {
-  .hero-stack { transform: none; transition: none; }
+  .hero-stack, .hero-stack[data-reveal].is-in { transform: none; transition: none; }
   .hero-scroll { animation: none; }
 }

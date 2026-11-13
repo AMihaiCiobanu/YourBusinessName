@@ -2,7 +2,7 @@
 // Directions in a card on top. Google Maps opens in a new tab, so nothing from Google loads here.
 
 import { h, icon } from '../core/dom.js';
-import { mapArt } from './map.js?v=4'; // same ?v= as VERSION in core/registry.js
+import { mapArt } from './map.js?v=5'; // same ?v= as VERSION in core/registry.js
 
 export default {
   render(ctx) {

@@ -202,7 +202,8 @@ export default {
     secondary: 'Voir les tarifs',
     scroll: 'Faire défiler',
     tilt: 'Activer l’inclinaison 3D',
-    tiltOn: 'L’inclinaison 3D est activée'
+    tiltOn: 'L’inclinaison 3D est activée',
+    tiltDenied: 'Mouvement refusé : fermez l’onglet, rouvrez la page et touchez « Autoriser »'
   },
 
   slider: {
@@ -434,6 +435,8 @@ export default {
 
   contactbar: {
     label: 'Contact rapide',
+    open: 'Ouvert',
+    closed: 'Fermé',
     call: 'Appeler',
     whatsapp: 'WhatsApp',
     book: 'Réserver',

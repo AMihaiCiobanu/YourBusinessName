@@ -203,7 +203,8 @@ export default {
     secondary: 'Vezi prețurile',
     scroll: 'Derulează',
     tilt: 'Pornește înclinarea 3D',
-    tiltOn: 'Înclinarea 3D e pornită'
+    tiltOn: 'Înclinarea 3D e pornită',
+    tiltDenied: 'Accesul la mișcare a fost refuzat: închide tab-ul, redeschide pagina și atinge „Permite”'
   },
 
   slider: {
@@ -435,6 +436,8 @@ export default {
 
   contactbar: {
     label: 'Contact rapid',
+    open: 'Deschis',
+    closed: 'Închis',
     call: 'Sună',
     whatsapp: 'WhatsApp',
     book: 'Programare',

@@ -202,7 +202,8 @@ export default {
     secondary: 'Ver preços',
     scroll: 'Deslizar para baixo',
     tilt: 'Ligar inclinação 3D',
-    tiltOn: 'A inclinação 3D está ligada'
+    tiltOn: 'A inclinação 3D está ligada',
+    tiltDenied: 'Acesso ao movimento recusado: feche o separador, volte a abrir a página e toque em «Permitir»'
   },
 
   slider: {
@@ -434,6 +435,8 @@ export default {
 
   contactbar: {
     label: 'Contacto rápido',
+    open: 'Aberto',
+    closed: 'Fechado',
     call: 'Ligar',
     whatsapp: 'WhatsApp',
     book: 'Marcar',

@@ -19,7 +19,9 @@ export default {
   update(el, ctx) {
     const node = el.querySelector('.cb-state');
     const state = ctx.data && openState(ctx.data, { open: ctx.t('hours.openNow'), closed: ctx.t('hours.closedNow') });
-    node.textContent = state ? (state.isOpen ? ctx.t('hours.openNow') : ctx.t('hours.closedNow')) : '';
+    // Short label in the bar (contactbar.open / .closed) where the language has one: "Ouvert maintenant" wraps on phones.
+    const short = key => { const v = ctx.t(`contactbar.${key}`); return v === `contactbar.${key}` ? '' : v; };
+    node.textContent = state ? (state.isOpen ? short('open') || ctx.t('hours.openNow') : short('closed') || ctx.t('hours.closedNow')) : '';
     node.classList.toggle('is-open', !!state?.isOpen);
   },
 

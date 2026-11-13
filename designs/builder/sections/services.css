@@ -27,7 +27,7 @@
   align-self: flex-start; display: inline-flex; align-items: center; min-height: 44px; padding: 0; margin-top: 4px;
   border: 0; background: none; color: var(--accent-text); font-weight: 700; text-decoration: none; cursor: pointer;
 }
-.svc-book::after { content: '→'; margin-left: 8px; transition: transform 0.2s; }
+.svc-book::after { content: '\2192'; margin-left: 8px; transition: transform 0.2s; }
 .svc-book:hover::after { transform: translateX(4px); }
 .svc-skel { min-height: 220px; gap: 16px; }
 .svc-more { margin-top: 28px; text-align: center; }

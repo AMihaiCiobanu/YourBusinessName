@@ -4,7 +4,7 @@
 import { h, icon, photo } from '../core/dom.js';
 import { altOf } from '../content/photos.js';
 import { bookButton } from '../../shared/live.js';
-import { makeBook, page } from './book.js?v=4'; // same ?v= as VERSION in core/registry.js
+import { makeBook, page } from './book.js?v=5'; // same ?v= as VERSION in core/registry.js
 import { localeOf } from '../core/i18n.js';
 
 function buildPages(ctx, size) {

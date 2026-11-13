@@ -22,11 +22,18 @@
 .cb-text { display: grid; line-height: 1.1; text-align: left; }
 .cb-state, .cb-online { font-size: 0.72rem; font-weight: 600; opacity: 0.85; }
 .cb-state:empty { display: none; }
-.cb-state.is-open::before { content: '● '; color: #16a34a; }
+.cb-state.is-open::before { content: '\25CF\00A0'; color: #16a34a; }
 .cb-online { display: inline-flex; align-items: center; gap: 5px; opacity: 1; }
 .cb-online::before {
   content: ''; width: 8px; height: 8px; border-radius: 50%; background: #22c55e;
   box-shadow: 0 0 0 2px color-mix(in srgb, #fff 70%, transparent);
 }
 @media (min-width: 1100px) { .cb-inner { max-width: 460px; } }
+/* Narrow phones: longer labels (French "Réserver", "WhatsApp") must fit the three buttons in one row. */
+.cb-inner { grid-template-columns: auto auto minmax(0, 1fr); }
+@media (max-width: 400px) {
+  .cb-inner { gap: 2px; padding: 5px; }
+  .cb-btn { gap: 6px; padding: 6px 8px; font-size: 0.94rem; }
+  .cb-btn svg { flex: none; }
+}
 .reduce-motion .cb { transition: none; }

@@ -202,7 +202,8 @@ export default {
     secondary: 'Vedi i prezzi',
     scroll: 'Scorri in basso',
     tilt: 'Attiva l’inclinazione 3D',
-    tiltOn: 'L’inclinazione 3D è attiva'
+    tiltOn: 'L’inclinazione 3D è attiva',
+    tiltDenied: 'Accesso al movimento negato: chiudi la scheda, riapri la pagina e tocca «Consenti»'
   },
 
   slider: {
@@ -434,6 +435,8 @@ export default {
 
   contactbar: {
     label: 'Contatto rapido',
+    open: 'Aperto',
+    closed: 'Chiuso',
     call: 'Chiama',
     whatsapp: 'WhatsApp',
     book: 'Prenota',

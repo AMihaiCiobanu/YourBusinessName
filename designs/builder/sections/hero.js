@@ -219,6 +219,7 @@ export default {
 
     let gl = null;
     let tiltBtn = null;
+    let stopStackTilt = () => {};
     let handle = 0;
     const idle = window.requestIdleCallback || (cb => setTimeout(cb, 300));
     const start = () => {
@@ -229,13 +230,24 @@ export default {
       if (gl && !finePointer() && typeof window.DeviceOrientationEvent?.requestPermission === 'function') {
         tiltBtn = h('button', { type: 'button', class: 'hero-tilt chip' }, icon('sparkle', 14), ctx.t('hero.tilt'));
         tiltBtn.addEventListener('click', async () => {
-          if (await askTiltPermission()) {
-            gl.stop();
-            gl = startGL(el);
-            if (gl) glBySection.set(el, gl);
-            tiltBtn.textContent = ctx.t('hero.tiltOn');
-            tiltBtn.disabled = true;
+          // requestPermission() must be the first await of the tap, or iOS ignores it.
+          const granted = await askTiltPermission();
+          if (!granted) {
+            // Refused now, or earlier in this tab (Safari then stops asking until the tab is reopened).
+            tiltBtn.textContent = ctx.t('hero.tiltDenied');
+            return;
           }
+          gl.stop();
+          gl = startGL(el);
+          if (gl) glBySection.set(el, gl);
+          // The photo stack follows the phone too, so the effect is easy to see.
+          stopStackTilt();
+          stopStackTilt = deviceTilt((x, y) => {
+            stack.style.setProperty('--sx', (x * 0.9).toFixed(3));
+            stack.style.setProperty('--sy', (y * 0.9).toFixed(3));
+          });
+          tiltBtn.textContent = ctx.t('hero.tiltOn');
+          tiltBtn.disabled = true;
         });
         el.querySelector('.hero-copy').appendChild(tiltBtn);
       }
@@ -254,6 +266,7 @@ export default {
       (window.cancelIdleCallback || clearTimeout)(handle);
       el.removeEventListener('pointermove', onMove);
       gl?.stop();
+      stopStackTilt();
       tiltBtn?.remove();
     };
   },
